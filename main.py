@@ -25,14 +25,11 @@ if __name__=="__main__":
     task_types=['binclass','multiclass','regression']
     dataset_sizes=['small']
     task_types=['binclass']
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(device)
     for dataset_size in dataset_sizes:
         for task_type in task_types:
             for dataset_name in os.listdir(f'./datasets/{dataset_size}_datasets/{task_type}'):
-                # print(dataset_name)
-                df=pd.read_csv(f'./datasets/{dataset_size}_datasets/{task_type}/{dataset_name}/{dataset_name}.csv')
-                # print(df)
-                # print()
-                # print()
                 parser = argparse.ArgumentParser()
                 parser.add_argument('--dataset', type=str, default=f"{dataset_name}")
                 parser.add_argument('--mixup', type=str, default=None,
@@ -46,6 +43,8 @@ if __name__=="__main__":
                 parser.add_argument('--epochs', type=int, default=200)
                 parser.add_argument('--compile', action='store_true')
                 args = parser.parse_args()
+                df=pd.read_csv(f'./datasets/{dataset_size}_datasets/{task_type}/{dataset_name}/{dataset_name}.csv')
 
-                device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-                print(device)
+                
+
+                

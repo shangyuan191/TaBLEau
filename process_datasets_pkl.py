@@ -7,8 +7,6 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from datasets import Dataset, DatasetDict
 from datasets import load_dataset
-# from huggingface_hub import login
-# login(token="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")
 if __name__=="__main__":
     
 
