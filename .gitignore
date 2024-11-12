@@ -1,3 +1,5 @@
 *.zip
 /datasets
-/DS
+/DS/all
+/DS/Competition_data
+/DS/*.zip
