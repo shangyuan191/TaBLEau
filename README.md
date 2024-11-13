@@ -25,5 +25,7 @@ https://huggingface.co/datasets/SkylerChuang/large_regression_datasets
 https://huggingface.co/datasets/jyansir/excelformer
 * **pytorch-frame**
 https://github.com/pyg-team/pytorch-frame
+* **TabPFN**
+https://github.com/automl/TabPFN
 
 
