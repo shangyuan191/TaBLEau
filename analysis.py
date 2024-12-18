@@ -100,47 +100,59 @@ def save_comparison_results_to_txt(train_val_test_split_ratio_str, comparison_re
         
         f.write("\n")
 
-def plot_comparison_bar_chart(comparison_results, dataset_counts, train_val_test_split_ratio_str):
+def plot_comparison_bar_chart_with_subplots(comparison_results, dataset_counts, train_val_test_split_ratio_str):
     """
-    根據不同的 train-val-test 分割比例繪製每個模型在各資料集類型上贏得資料集數量的長條圖。
+    在同一張圖中使用兩個子圖分別繪製 `best_val_metric` 和 `test_result` 的長條圖。
 
     :param comparison_results: 包含每個資料集類型的 `best_val_metric` 和 `test_result`
     :param dataset_counts: 每個資料集類型的總數
     :param train_val_test_split_ratio_str: 當前訓練、驗證、測試比例字串
     """
-    # 獲取所有資料集類型
     dataset_types = list(comparison_results["best_val_metric"].keys())
-    
-    # 計算每個模型的贏得次數
     model_names = list(comparison_results["best_val_metric"][dataset_types[0]].keys())
-    model_win_counts = {model_name: [0] * len(dataset_types) for model_name in model_names}
-    
+
+    # 計算每個模型的贏得次數
+    model_win_counts_val = {model_name: [0] * len(dataset_types) for model_name in model_names}
+    model_win_counts_test = {model_name: [0] * len(dataset_types) for model_name in model_names}
+
     for i, dataset_type in enumerate(dataset_types):
         for model_name in model_names:
-            model_win_counts[model_name][i] = comparison_results["test_result"][dataset_type].get(model_name, 0)
+            model_win_counts_val[model_name][i] = comparison_results["best_val_metric"][dataset_type].get(model_name, 0)
+            model_win_counts_test[model_name][i] = comparison_results["test_result"][dataset_type].get(model_name, 0)
 
     # 設定圖表大小
-    fig, ax = plt.subplots(figsize=(10, 6))
-    
-    # 設定每個模型的長條圖
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+    # 設定 bar width
     bar_width = 0.15
     index = np.arange(len(dataset_types))
-    
-    # 根據模型數量來調整位置
+
+    # 繪製 `best_val_metric` 長條圖
     for i, model_name in enumerate(model_names):
-        ax.bar(index + i * bar_width, model_win_counts[model_name], bar_width, label=model_name)
-    
-    # 設定標籤
-    ax.set_xlabel('Dataset Type', fontsize=12)
-    ax.set_ylabel('Number of Wins', fontsize=12)
-    ax.set_title(f'Model Performance Comparison by Dataset Type\n(split ratio: {train_val_test_split_ratio_str})', fontsize=14)
-    ax.set_xticks(index + (len(model_names) - 1) * bar_width / 2)
-    ax.set_xticklabels(dataset_types, rotation=45, ha='right', fontsize=10)
-    ax.legend()
+        ax1.bar(index + i * bar_width, model_win_counts_val[model_name], bar_width, label=model_name)
+
+    ax1.set_xlabel('Dataset Type', fontsize=12)
+    ax1.set_ylabel('Number of Wins', fontsize=12)
+    ax1.set_title(f'Best Val Metric Comparison\n(split ratio: {train_val_test_split_ratio_str})', fontsize=14)
+    ax1.set_xticks(index + (len(model_names) - 1) * bar_width / 2)
+    ax1.set_xticklabels(dataset_types, rotation=45, ha='right', fontsize=10)
+    ax1.legend()
+
+    # 繪製 `test_result` 長條圖
+    for i, model_name in enumerate(model_names):
+        ax2.bar(index + i * bar_width, model_win_counts_test[model_name], bar_width, label=model_name)
+
+    ax2.set_xlabel('Dataset Type', fontsize=12)
+    ax2.set_ylabel('Number of Wins', fontsize=12)
+    ax2.set_title(f'Test Result Comparison\n(split ratio: {train_val_test_split_ratio_str})', fontsize=14)
+    ax2.set_xticks(index + (len(model_names) - 1) * bar_width / 2)
+    ax2.set_xticklabels(dataset_types, rotation=45, ha='right', fontsize=10)
+    ax2.legend()
 
     # 顯示圖表
     plt.tight_layout()
     plt.show()
+
     plt.savefig(f'./result/comparison_results_{train_val_test_split_ratio_str}.png')
 
 if __name__ == '__main__':
@@ -162,4 +174,4 @@ if __name__ == '__main__':
         # 保存結果到 .txt 檔案
         save_comparison_results_to_txt(train_val_test_split_ratio_str, comparison_results, dataset_counts)
         # 繪製比較長條圖
-        plot_comparison_bar_chart(comparison_results, dataset_counts, train_val_test_split_ratio_str)
+        plot_comparison_bar_chart_with_subplots(comparison_results, dataset_counts, train_val_test_split_ratio_str)
