@@ -1,0 +1,76 @@
+Comparison for train_val_test_split_ratio: 0.64_0.16_0.2
+
+  Dataset Type: small+binclass (49 datasets)
+    Best Val Metric:
+      ExcelFormer: 42 best performances
+      GCN: 7 best performances
+    Test Result:
+      ExcelFormer: 45 best performances
+      GCN: 4 best performances
+  Dataset Type: small+regression (47 datasets)
+    Best Val Metric:
+      ExcelFormer: 44 best performances
+      GCN: 3 best performances
+    Test Result:
+      ExcelFormer: 44 best performances
+      GCN: 3 best performances
+  Dataset Type: large+binclass (6 datasets)
+    Best Val Metric:
+      ExcelFormer: 6 best performances
+      GCN: 0 best performances
+    Test Result:
+      ExcelFormer: 4 best performances
+      GCN: 2 best performances
+  Dataset Type: large+multiclass (4 datasets)
+    Best Val Metric:
+      ExcelFormer: 4 best performances
+      GCN: 0 best performances
+    Test Result:
+      ExcelFormer: 4 best performances
+      GCN: 0 best performances
+  Dataset Type: large+regression (11 datasets)
+    Best Val Metric:
+      ExcelFormer: 11 best performances
+      GCN: 0 best performances
+    Test Result:
+      ExcelFormer: 10 best performances
+      GCN: 1 best performances
+
+Comparison for train_val_test_split_ratio: 0.05_0.15_0.8
+
+  Dataset Type: small+binclass (49 datasets)
+    Best Val Metric:
+      ExcelFormer: 34 best performances
+      GCN: 15 best performances
+    Test Result:
+      ExcelFormer: 40 best performances
+      GCN: 9 best performances
+  Dataset Type: small+regression (47 datasets)
+    Best Val Metric:
+      ExcelFormer: 45 best performances
+      GCN: 2 best performances
+    Test Result:
+      ExcelFormer: 40 best performances
+      GCN: 7 best performances
+  Dataset Type: large+binclass (6 datasets)
+    Best Val Metric:
+      ExcelFormer: 6 best performances
+      GCN: 0 best performances
+    Test Result:
+      ExcelFormer: 6 best performances
+      GCN: 0 best performances
+  Dataset Type: large+multiclass (4 datasets)
+    Best Val Metric:
+      ExcelFormer: 4 best performances
+      GCN: 0 best performances
+    Test Result:
+      ExcelFormer: 4 best performances
+      GCN: 0 best performances
+  Dataset Type: large+regression (11 datasets)
+    Best Val Metric:
+      ExcelFormer: 11 best performances
+      GCN: 0 best performances
+    Test Result:
+      ExcelFormer: 11 best performances
+      GCN: 0 best performances
+
