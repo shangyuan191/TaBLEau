@@ -28,7 +28,7 @@ def col2stype(df):
         if col_name.startswith('C_feature'):
             col_to_stype[col_name] = torch_frame.categorical
             c_col_names.append(col_name)
-        else:
+        elif col_name.startswith('N_feature'):
             col_to_stype[col_name] = torch_frame.numerical
             n_col_names.append(col_name)
 
@@ -59,12 +59,13 @@ class Yandex(torch_frame.data.Dataset):
 
         return df_shuffled
 
-    def __init__(self, df, name: str,train_val_test_split_ratio:list, task_type:str) -> None:
+    def __init__(self, df, name: str,train_val_test_split_ratio:list, task_type:str,DS:bool) -> None:
         self.df=df
         self.dataset_name = name
         
         self.df, col_to_stype = col2stype(self.df)
-        self.df=self.train_val_test_split(self.df,train_val_test_split_ratio)
+        if not DS:
+            self.df=self.train_val_test_split(self.df,train_val_test_split_ratio)
         if task_type=="regression":
             col_to_stype[TARGET_COL] = torch_frame.numerical
         else:

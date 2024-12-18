@@ -587,7 +587,6 @@ class Dataset(ABC):
             # Mark the dataset has been materialized
             self._is_materialized = True
             return self
-
         # 1. Fill column statistics:
         for col, stype in self.col_to_stype.items():
             ser = self.df[col]
@@ -606,7 +605,7 @@ class Dataset(ABC):
                     ser = pd.Series(index=index, data=value).sort_index()
                     index, value = ser.index.tolist(), ser.values.tolist()
                     self._col_stats[col][StatType.COUNT] = (index, value)
-
+        # print(self._col_stats)
         # 2. Create the `TensorFrame`:
         self._to_tensor_frame_converter = self._get_tensorframe_converter()
         self._tensor_frame = self._to_tensor_frame_converter(self.df, device)
@@ -624,6 +623,15 @@ class Dataset(ABC):
         return self
 
     def _get_tensorframe_converter(self) -> DataFrameToTensorFrameConverter:
+        # print(f"col_to_stype: {self.col_to_stype}")
+        # print(f"col_stats: {self._col_stats}")
+        # print(f"target_col: {self.target_col}")
+        # print(f"col_to_sep: {self.col_to_sep}")
+        # print(f"col_to_text_embedder_cfg: {self.col_to_text_embedder_cfg}")
+        # print(f"col_to_text_tokenizer_cfg: {self.col_to_text_tokenizer_cfg}")
+        # print(f"col_to_image_embedder_cfg: {self.col_to_image_embedder_cfg}")
+        # print(f"col_to_time_format: {self.col_to_time_format}")
+
         return DataFrameToTensorFrameConverter(
             col_to_stype=self.col_to_stype,
             col_stats=self._col_stats,
@@ -656,6 +664,7 @@ class Dataset(ABC):
     @requires_post_materialization
     def tensor_frame(self) -> TensorFrame:
         r"""Returns the :class:`TensorFrame` of the dataset."""
+        # print(self._tensor_frame)
         return self._tensor_frame
 
     @property
