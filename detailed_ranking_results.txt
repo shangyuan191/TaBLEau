@@ -1,0 +1,220 @@
+
+Split Ratio: 0.8:0.2
+small+binclass+numerical:
+  KNN: 3.29
+  Decision Tree: 3.79
+  Random Forest: 3.11
+  XGBoost: 2.18
+  CatBoost: 2.64
+small+binclass+categorical:
+  KNN: 5.00
+  Decision Tree: 1.71
+  Random Forest: 2.14
+  XGBoost: 3.00
+  CatBoost: 3.14
+small+binclass+balanced:
+  KNN: 4.21
+  Decision Tree: 3.14
+  Random Forest: 2.50
+  XGBoost: 2.21
+  CatBoost: 2.93
+small+multiclass+numerical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+small+multiclass+categorical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+small+multiclass+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+small+regression+numerical:
+  KNN: 3.53
+  Decision Tree: 4.00
+  Random Forest: 2.06
+  XGBoost: 2.89
+  CatBoost: 2.53
+small+regression+categorical:
+  KNN: 3.80
+  Decision Tree: 4.60
+  Random Forest: 1.20
+  XGBoost: 3.00
+  CatBoost: 2.40
+small+regression+balanced:
+  KNN: 2.83
+  Decision Tree: 4.83
+  Random Forest: 1.83
+  XGBoost: 3.17
+  CatBoost: 2.33
+large+binclass+numerical:
+  KNN: 4.33
+  Decision Tree: 4.67
+  Random Forest: 2.50
+  XGBoost: 2.17
+  CatBoost: 1.33
+large+binclass+categorical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+binclass+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+multiclass+numerical:
+  KNN: 4.00
+  Decision Tree: 4.00
+  Random Forest: 2.25
+  XGBoost: 2.75
+  CatBoost: 2.00
+large+multiclass+categorical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+multiclass+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+regression+numerical:
+  KNN: 4.30
+  Decision Tree: 4.70
+  Random Forest: 2.30
+  XGBoost: 2.40
+  CatBoost: 1.30
+large+regression+categorical:
+  KNN: 2.00
+  Decision Tree: 5.00
+  Random Forest: 1.00
+  XGBoost: 3.00
+  CatBoost: 4.00
+large+regression+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+
+Split Ratio: 0.05:0.95
+small+binclass+numerical:
+  KNN: 3.29
+  Decision Tree: 3.43
+  Random Forest: 2.07
+  XGBoost: 3.50
+  CatBoost: 2.71
+small+binclass+categorical:
+  KNN: 4.14
+  Decision Tree: 2.57
+  Random Forest: 2.43
+  XGBoost: 3.29
+  CatBoost: 2.57
+small+binclass+balanced:
+  KNN: 3.29
+  Decision Tree: 2.93
+  Random Forest: 3.07
+  XGBoost: 3.29
+  CatBoost: 2.43
+small+multiclass+numerical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+small+multiclass+categorical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+small+multiclass+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+small+regression+numerical:
+  KNN: 3.58
+  Decision Tree: 3.69
+  Random Forest: 1.89
+  XGBoost: 3.36
+  CatBoost: 2.47
+small+regression+categorical:
+  KNN: 3.80
+  Decision Tree: 4.00
+  Random Forest: 1.80
+  XGBoost: 3.20
+  CatBoost: 2.20
+small+regression+balanced:
+  KNN: 2.50
+  Decision Tree: 4.17
+  Random Forest: 2.33
+  XGBoost: 3.83
+  CatBoost: 2.17
+large+binclass+numerical:
+  KNN: 4.50
+  Decision Tree: 4.33
+  Random Forest: 2.50
+  XGBoost: 2.50
+  CatBoost: 1.17
+large+binclass+categorical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+binclass+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+multiclass+numerical:
+  KNN: 4.25
+  Decision Tree: 4.75
+  Random Forest: 2.25
+  XGBoost: 2.50
+  CatBoost: 1.25
+large+multiclass+categorical:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+multiclass+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+large+regression+numerical:
+  KNN: 4.20
+  Decision Tree: 4.80
+  Random Forest: 2.00
+  XGBoost: 2.90
+  CatBoost: 1.10
+large+regression+categorical:
+  KNN: 5.00
+  Decision Tree: 4.00
+  Random Forest: 1.00
+  XGBoost: 2.00
+  CatBoost: 3.00
+large+regression+balanced:
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
