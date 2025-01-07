@@ -5,3 +5,4 @@
 /DS/*.zip
 /DS/catboost_info
 *.nohup
+/catboost_info

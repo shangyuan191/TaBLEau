@@ -1,0 +1,166 @@
+
+Split Ratio: 0.8:0.2
+small+binclass+numerical:
+  Linear Model: 3.79
+  KNN: 5.82
+  Decision Tree: 5.93
+  Random Forest: 3.04
+  XGBoost: 3.29
+  CatBoost: 2.71
+  SVM: 6.79
+  DNN: 4.64
+small+binclass+categorical:
+  Linear Model: 4.14
+  KNN: 5.86
+  Decision Tree: 5.71
+  Random Forest: 3.43
+  XGBoost: 3.14
+  CatBoost: 2.43
+  SVM: 7.14
+  DNN: 4.14
+small+binclass+balanced:
+  Linear Model: 2.93
+  KNN: 5.64
+  Decision Tree: 6.64
+  Random Forest: 3.00
+  XGBoost: 3.86
+  CatBoost: 3.07
+  SVM: 6.71
+  DNN: 4.14
+small+multiclass+numerical:
+  Linear Model: nan
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+  SVM: nan
+  DNN: nan
+small+multiclass+categorical:
+  Linear Model: nan
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+  SVM: nan
+  DNN: nan
+small+multiclass+balanced:
+  Linear Model: nan
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+  SVM: nan
+  DNN: nan
+small+regression+numerical:
+  Linear Model: 4.94
+  KNN: 5.06
+  Decision Tree: 5.75
+  Random Forest: 2.78
+  XGBoost: 3.72
+  CatBoost: 3.36
+  SVM: 5.69
+  DNN: 4.69
+small+regression+categorical:
+  Linear Model: 3.60
+  KNN: 5.60
+  Decision Tree: 6.80
+  Random Forest: 2.60
+  XGBoost: 4.80
+  CatBoost: 3.80
+  SVM: 4.20
+  DNN: 4.60
+small+regression+balanced:
+  Linear Model: 3.67
+  KNN: 4.50
+  Decision Tree: 6.33
+  Random Forest: 3.83
+  XGBoost: 4.67
+  CatBoost: 4.50
+  SVM: 4.50
+  DNN: 4.00
+
+Split Ratio: 0.05:0.95
+small+binclass+numerical:
+  Linear Model: 3.11
+  KNN: 4.82
+  Decision Tree: 6.93
+  Random Forest: 2.46
+  XGBoost: 5.04
+  CatBoost: 1.86
+  SVM: 6.14
+  DNN: 5.64
+small+binclass+categorical:
+  Linear Model: 3.14
+  KNN: 5.86
+  Decision Tree: 5.29
+  Random Forest: 2.86
+  XGBoost: 3.29
+  CatBoost: 2.29
+  SVM: 7.29
+  DNN: 6.00
+small+binclass+balanced:
+  Linear Model: 3.00
+  KNN: 6.14
+  Decision Tree: 5.07
+  Random Forest: 2.50
+  XGBoost: 5.21
+  CatBoost: 2.43
+  SVM: 6.29
+  DNN: 5.36
+small+multiclass+numerical:
+  Linear Model: nan
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+  SVM: nan
+  DNN: nan
+small+multiclass+categorical:
+  Linear Model: nan
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+  SVM: nan
+  DNN: nan
+small+multiclass+balanced:
+  Linear Model: nan
+  KNN: nan
+  Decision Tree: nan
+  Random Forest: nan
+  XGBoost: nan
+  CatBoost: nan
+  SVM: nan
+  DNN: nan
+small+regression+numerical:
+  Linear Model: 5.22
+  KNN: 5.06
+  Decision Tree: 5.22
+  Random Forest: 2.64
+  XGBoost: 4.61
+  CatBoost: 3.25
+  SVM: 5.14
+  DNN: 4.86
+small+regression+categorical:
+  Linear Model: 6.60
+  KNN: 5.20
+  Decision Tree: 4.80
+  Random Forest: 2.40
+  XGBoost: 4.60
+  CatBoost: 2.20
+  SVM: 6.40
+  DNN: 3.80
+small+regression+balanced:
+  Linear Model: 7.33
+  KNN: 3.17
+  Decision Tree: 5.83
+  Random Forest: 3.50
+  XGBoost: 5.33
+  CatBoost: 3.00
+  SVM: 5.33
+  DNN: 2.50
