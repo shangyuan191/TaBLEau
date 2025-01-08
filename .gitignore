@@ -4,5 +4,5 @@
 /DS/Competition_data
 /DS/*.zip
 /DS/catboost_info
-*.nohup
+nohup.out
 /catboost_info
