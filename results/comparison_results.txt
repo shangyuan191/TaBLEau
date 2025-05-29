@@ -1,0 +1,2920 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8879849910736084
+          Best test metric: 0.8283753395080566
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9249061346054077
+          Best test metric: 0.8619374632835388
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.47934919595718384
+          Best test metric: 0.4717772901058197
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8291614651679993
+          Best test metric: 0.6746758222579956
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.910513162612915
+          Best test metric: 0.8745232820510864
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9612014889717102
+          Best test metric: 0.8882532119750977
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6219806671142578
+          Best test metric: 0.6385542154312134
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.75
+          Best test metric: 0.6871013641357422
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.48248791694641113
+          Best test metric: 0.5850460529327393
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.4528985619544983
+          Best test metric: 0.4734230935573578
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6739130616188049
+          Best test metric: 0.6435152292251587
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6829710006713867
+          Best test metric: 0.7494684457778931
+dataset: openml_Diabetes_Data_Set
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5932486653327942
+          Best test metric: 0.6923788189888
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7152406573295593
+          Best test metric: 0.8224195241928101
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4060828983783722
+          Best test metric: 0.4765075743198395
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7820855379104614
+          Best test metric: 0.7641509771347046
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7987968325614929
+          Best test metric: 0.7844986915588379
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6921791434288025
+          Best test metric: 0.733444333076477
+dataset: kaggle_Penguins_Classified
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9854111671447754
+          Best test metric: 0.971137523651123
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7944296598434448
+          Best test metric: 0.7962648868560791
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5450928211212158
+          Best test metric: 0.5789474248886108
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6180371642112732
+          Best test metric: 0.6791170835494995
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.960212230682373
+          Best test metric: 0.8930390477180481
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9893898963928223
+          Best test metric: 1.0
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8704061508178711
+          Best test metric: 0.9332570433616638
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8046421408653259
+          Best test metric: 0.8470633029937744
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.43197935819625854
+          Best test metric: 0.3966437876224518
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6847195625305176
+          Best test metric: 0.7425628900527954
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8175370693206787
+          Best test metric: 0.9050343036651611
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8446163535118103
+          Best test metric: 0.9214339852333069
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7777777910232544
+          Best test metric: 0.2666666507720947
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5432099103927612
+          Best test metric: 0.6222222447395325
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.32098767161369324
+          Best test metric: 0.5111110806465149
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6790123581886292
+          Best test metric: 0.7037037014961243
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.790123462677002
+          Best test metric: 0.5333333611488342
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6543209552764893
+          Best test metric: 0.7481480836868286
+dataset: kaggle_Development_Index
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5422077775001526
+          Best test metric: 0.48275864124298096
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5551948547363281
+          Best test metric: 0.45689657330513
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3538960814476013
+          Best test metric: 0.5258620977401733
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8571428656578064
+          Best test metric: 0.7715517282485962
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7402597665786743
+          Best test metric: 0.6271551847457886
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6818181872367859
+          Best test metric: 0.7068965435028076
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.770343542098999
+          Best test metric: 0.5285714268684387
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8010849952697754
+          Best test metric: 0.5690475702285767
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5207957029342651
+          Best test metric: 0.8809523582458496
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.24593129754066467
+          Best test metric: 0.5595238208770752
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8444846272468567
+          Best test metric: 0.811904788017273
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5515370965003967
+          Best test metric: 0.6476190090179443
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8818272352218628
+          Best test metric: 0.8844594359397888
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9865938425064087
+          Best test metric: 0.9858107566833496
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5998014211654663
+          Best test metric: 0.5783783793449402
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.9811320900917053
+          Best test metric: 0.9847972989082336
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9513406157493591
+          Best test metric: 0.9604729413986206
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9865938425064087
+          Best test metric: 0.9871622323989868
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.444444477558136
+          Best test metric: 0.4533333480358124
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6111111044883728
+          Best test metric: 0.5466666221618652
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3611111044883728
+          Best test metric: 0.6666666865348816
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7222222089767456
+          Best test metric: 0.4399999976158142
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.25
+          Best test metric: 0.42666664719581604
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6666666865348816
+          Best test metric: 0.6933333277702332
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9818308353424072
+          Best test metric: 0.9854756593704224
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9582459926605225
+          Best test metric: 0.9637929797172546
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5296995043754578
+          Best test metric: 0.5216308832168579
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7433612942695618
+          Best test metric: 0.6476813554763794
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9795597791671753
+          Best test metric: 0.988484263420105
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9821802973747253
+          Best test metric: 0.9831932783126831
+dataset: openml_nki70.arff
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.658730149269104
+          Best test metric: 0.7467532157897949
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6746031641960144
+          Best test metric: 0.7792207598686218
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6428571343421936
+          Best test metric: 0.5194805264472961
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.3571428656578064
+          Best test metric: 0.5714285969734192
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5158730149269104
+          Best test metric: 0.5064935088157654
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.3095237910747528
+          Best test metric: 0.5
+dataset: openml_Pima_Indians_Diabetes
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.4953208565711975
+          Best test metric: 0.5516092777252197
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7627004981040955
+          Best test metric: 0.771550178527832
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5123662948608398
+          Best test metric: 0.4504254460334778
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7309492230415344
+          Best test metric: 0.7698853015899658
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8268716335296631
+          Best test metric: 0.7689604759216309
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7289438843727112
+          Best test metric: 0.6466888189315796
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5137254595756531
+          Best test metric: 0.8295739889144897
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9686274528503418
+          Best test metric: 0.9624060392379761
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3372548818588257
+          Best test metric: 0.3208020031452179
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.949874758720398
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: openml_hungarian
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9032258987426758
+          Best test metric: 0.7944862246513367
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8790322542190552
+          Best test metric: 0.864661693572998
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.47580647468566895
+          Best test metric: 0.4172932505607605
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6612902879714966
+          Best test metric: 0.8057644367218018
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8306452035903931
+          Best test metric: 0.8120300769805908
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9153225421905518
+          Best test metric: 0.7794486284255981
+dataset: UCI_HCV_data
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7820122241973877
+          Best test metric: 0.8061342835426331
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8788109421730042
+          Best test metric: 0.9704861640930176
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4085365831851959
+          Best test metric: 0.5572916269302368
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8170731663703918
+          Best test metric: 0.624421238899231
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8064024448394775
+          Best test metric: 0.7934027910232544
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8871951103210449
+          Best test metric: 0.9126157760620117
+dataset: openml_analcatdata_lawsuit
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.27350425720214844
+          Best test metric: 0.15384617447853088
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8974359035491943
+          Best test metric: 0.9999999403953552
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.1538461446762085
+          Best test metric: 0.3461538553237915
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6410256624221802
+          Best test metric: 0.3461538553237915
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8888888359069824
+          Best test metric: 0.990384578704834
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7094017267227173
+          Best test metric: 0.932692289352417
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.495275616645813
+          Best test metric: 0.47187498211860657
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6614173650741577
+          Best test metric: 0.6749999523162842
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4551181197166443
+          Best test metric: 0.4208333194255829
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.4937007427215576
+          Best test metric: 0.518750011920929
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.4102362096309662
+          Best test metric: 0.5338541269302368
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5425196886062622
+          Best test metric: 0.5296875238418579
+dataset: UCI_Audit_Data
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9683762788772583
+          Best test metric: 0.936842143535614
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.984586775302887
+          Best test metric: 0.9592752456665039
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5333510637283325
+          Best test metric: 0.4113891124725342
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8719106912612915
+          Best test metric: 0.7468507289886475
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9928247928619385
+          Best test metric: 0.9893010854721069
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9930906295776367
+          Best test metric: 0.9615185856819153
+dataset: UCI_User_Knowledge_Modeling
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.3068181872367859
+          Best test metric: 0.3055555522441864
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6553030014038086
+          Best test metric: 0.6323529481887817
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.469696968793869
+          Best test metric: 0.39215683937072754
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.810606062412262
+          Best test metric: 0.6699346303939819
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5681818127632141
+          Best test metric: 0.7075163125991821
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7878787517547607
+          Best test metric: 0.7205882668495178
+dataset: kaggle_Audit_Data
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.958809494972229
+          Best test metric: 0.9118205308914185
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9803348779678345
+          Best test metric: 0.957377016544342
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5764018297195435
+          Best test metric: 0.5898188352584839
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8929045796394348
+          Best test metric: 0.7154443860054016
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9856497049331665
+          Best test metric: 0.9773943424224854
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9835237860679626
+          Best test metric: 0.9789473414421082
+dataset: kaggle_chronic_kidney_disease
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9632034301757812
+          Best test metric: 0.9826666712760925
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9967532753944397
+          Best test metric: 0.9886666536331177
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6396104097366333
+          Best test metric: 0.49266669154167175
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.9285714030265808
+          Best test metric: 0.937999963760376
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.959956705570221
+          Best test metric: 0.9773333668708801
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9859307408332825
+          Best test metric: 0.996666669845581
+dataset: openml_tokyo1
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9674522876739502
+          Best test metric: 0.9653288722038269
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.968761682510376
+          Best test metric: 0.9361203908920288
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5271230936050415
+          Best test metric: 0.546934187412262
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.3340815305709839
+          Best test metric: 0.33979934453964233
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9652076363563538
+          Best test metric: 0.9542921185493469
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9683875441551208
+          Best test metric: 0.9754738211631775
+dataset: kaggle_Compositions_of_Glass
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7613636255264282
+          Best test metric: 0.7276785373687744
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9431818127632141
+          Best test metric: 0.8013392686843872
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5189393758773804
+          Best test metric: 0.5401785373687744
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.32954543828964233
+          Best test metric: 0.6160714030265808
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5606061220169067
+          Best test metric: 0.5870535373687744
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9204545021057129
+          Best test metric: 0.5625
+dataset: openml_Pokmon_Legendary_Data
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.4791666865348816
+          Best test metric: 0.6470319628715515
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8455460071563721
+          Best test metric: 0.9392694234848022
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5352011919021606
+          Best test metric: 0.6109589338302612
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.4403735399246216
+          Best test metric: 0.44703197479248047
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7061781883239746
+          Best test metric: 0.6410958766937256
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9224138259887695
+          Best test metric: 0.9525114297866821
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.41377007961273193
+          Best test metric: 0.5186829566955566
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8669785857200623
+          Best test metric: 0.7939326763153076
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3338903784751892
+          Best test metric: 0.39659637212753296
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8125
+          Best test metric: 0.778024435043335
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8392379283905029
+          Best test metric: 0.813540518283844
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8509358167648315
+          Best test metric: 0.8017017841339111
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8083332777023315
+          Best test metric: 0.8210701942443848
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8833333253860474
+          Best test metric: 0.8478260636329651
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.42500001192092896
+          Best test metric: 0.4882943034172058
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5638889074325562
+          Best test metric: 0.5484949946403503
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.819444477558136
+          Best test metric: 0.8461537957191467
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8472222685813904
+          Best test metric: 0.8461537957191467
+dataset: kaggle_fitbit_dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5609022378921509
+          Best test metric: 0.5111904740333557
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8834586143493652
+          Best test metric: 0.8611904382705688
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4804511070251465
+          Best test metric: 0.5219047665596008
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5383458733558655
+          Best test metric: 0.4740476608276367
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8781954646110535
+          Best test metric: 0.8669047355651855
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8631578683853149
+          Best test metric: 0.7892856597900391
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.827368438243866
+          Best test metric: 0.7799478769302368
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7442105412483215
+          Best test metric: 0.767578125
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4821052551269531
+          Best test metric: 0.5807291865348816
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.47578948736190796
+          Best test metric: 0.4420573115348816
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7231578826904297
+          Best test metric: 0.7884114980697632
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9021052718162537
+          Best test metric: 0.8750000596046448
+dataset: kaggle_Startup_Success_Prediction
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5758731365203857
+          Best test metric: 0.6669144630432129
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7037334442138672
+          Best test metric: 0.7699739933013916
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5108389854431152
+          Best test metric: 0.4921342432498932
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6860698461532593
+          Best test metric: 0.686733603477478
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7123645544052124
+          Best test metric: 0.8031710386276245
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6987153887748718
+          Best test metric: 0.710888147354126
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.870039701461792
+          Best test metric: 0.8169230818748474
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8611111044883728
+          Best test metric: 0.7788461446762085
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6904761791229248
+          Best test metric: 0.6407692432403564
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8247355222702026
+          Best test metric: 0.8915384411811829
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5436508059501648
+          Best test metric: 0.6065384149551392
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7982803583145142
+          Best test metric: 0.7749999761581421
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5521804690361023
+          Best test metric: 0.5437972545623779
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6518796682357788
+          Best test metric: 0.5768119096755981
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5052631497383118
+          Best test metric: 0.4548688232898712
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7809022665023804
+          Best test metric: 0.7055357694625854
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7775939702987671
+          Best test metric: 0.7975766658782959
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.669924795627594
+          Best test metric: 0.6439528465270996
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.84375
+          Best test metric: 0.7570806741714478
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8395833373069763
+          Best test metric: 0.8148148059844971
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5125000476837158
+          Best test metric: 0.5087146162986755
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7562500238418579
+          Best test metric: 0.6023964881896973
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6916667222976685
+          Best test metric: 0.7657952308654785
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7520833611488342
+          Best test metric: 0.6481481790542603
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.726015031337738
+          Best test metric: 0.6416184902191162
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7836090326309204
+          Best test metric: 0.7028679251670837
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5112782120704651
+          Best test metric: 0.5682525634765625
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6735338568687439
+          Best test metric: 0.6492885947227478
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7809022665023804
+          Best test metric: 0.7762338519096375
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7276691794395447
+          Best test metric: 0.6877501010894775
+dataset: openml_DiabeticMellitus
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9816091060638428
+          Best test metric: 0.9194444417953491
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6988505125045776
+          Best test metric: 0.644444465637207
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3931034207344055
+          Best test metric: 0.41111111640930176
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5724138021469116
+          Best test metric: 0.49513888359069824
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5701149106025696
+          Best test metric: 0.6291666030883789
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6160919666290283
+          Best test metric: 0.6416666507720947
+dataset: kaggle_Credit_Card_Approval
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7969349026679993
+          Best test metric: 0.7952998876571655
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8299808502197266
+          Best test metric: 0.7353123426437378
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6326628923416138
+          Best test metric: 0.63388991355896
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8223180174827576
+          Best test metric: 0.7789115905761719
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.844348669052124
+          Best test metric: 0.8330241441726685
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8788313865661621
+          Best test metric: 0.9208410978317261
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7148147821426392
+          Best test metric: 0.6766303777694702
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9148147702217102
+          Best test metric: 0.8736412525177002
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4425925612449646
+          Best test metric: 0.4211956560611725
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6555556058883667
+          Best test metric: 0.64673912525177
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6000000238418579
+          Best test metric: 0.61277174949646
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6407407522201538
+          Best test metric: 0.86277174949646
+dataset: kaggle_Automobiles
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9529411792755127
+          Best test metric: 0.9856459498405457
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9098039269447327
+          Best test metric: 0.8349282145500183
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3529411554336548
+          Best test metric: 0.6387559771537781
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8352941274642944
+          Best test metric: 0.9258373379707336
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8901960849761963
+          Best test metric: 0.9784688949584961
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9607843160629272
+          Best test metric: 0.9617224931716919
+dataset: UCI_Z_Alizadeh_Sani
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6925925612449646
+          Best test metric: 0.6834239363670349
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8240741491317749
+          Best test metric: 0.7894021272659302
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.46851852536201477
+          Best test metric: 0.36684781312942505
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7222222089767456
+          Best test metric: 0.5244565010070801
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.43703705072402954
+          Best test metric: 0.46059781312942505
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.664814829826355
+          Best test metric: 0.45108693838119507
+dataset: UCI_Absenteeism_at_work
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7556818723678589
+          Best test metric: 0.6177489161491394
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6666666865348816
+          Best test metric: 0.5893939733505249
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4590909481048584
+          Best test metric: 0.40454545617103577
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6568182110786438
+          Best test metric: 0.5989177227020264
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5102272629737854
+          Best test metric: 0.5679653882980347
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6071969866752625
+          Best test metric: 0.5610389709472656
+dataset: kaggle_Bigg_Boss_India
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7539682388305664
+          Best test metric: 0.730140209197998
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.523809552192688
+          Best test metric: 0.45093458890914917
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6468254327774048
+          Best test metric: 0.5514018535614014
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8214285373687744
+          Best test metric: 0.7254672646522522
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7420635223388672
+          Best test metric: 0.78387850522995
+dataset: openml_analcatdata_creditscore
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.75
+          Best test metric: 0.9450549483299255
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9791666865348816
+          Best test metric: 0.9999999403953552
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5
+          Best test metric: 0.49450546503067017
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6458333134651184
+          Best test metric: 0.4505494236946106
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8125
+          Best test metric: 0.4615384340286255
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8125
+          Best test metric: 0.8681318759918213
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6751126050949097
+          Best test metric: 0.6358884572982788
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6711711883544922
+          Best test metric: 0.6170150637626648
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5579954385757446
+          Best test metric: 0.5235191583633423
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6064189076423645
+          Best test metric: 0.49593496322631836
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5264639854431152
+          Best test metric: 0.6350173950195312
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5884009003639221
+          Best test metric: 0.6747967600822449
+dataset: UCI_Heart_failure_clinical_records
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8562500476837158
+          Best test metric: 0.8258145451545715
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6604167222976685
+          Best test metric: 0.6917293071746826
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4583333432674408
+          Best test metric: 0.5325814485549927
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.581250011920929
+          Best test metric: 0.45864662528038025
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7791666984558105
+          Best test metric: 0.8408521413803101
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6312500238418579
+          Best test metric: 0.6566416025161743
+dataset: kaggle_Store_Data_Performance
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.44897955656051636
+          Best test metric: 0.41333335638046265
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6836735010147095
+          Best test metric: 0.8666666746139526
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.40816327929496765
+          Best test metric: 0.25333333015441895
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8061224222183228
+          Best test metric: 0.41333335638046265
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5714285969734192
+          Best test metric: 0.6666666865348816
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.43877553939819336
+          Best test metric: 0.9333333969116211
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6314111351966858
+          Best test metric: 0.6833004355430603
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5519531965255737
+          Best test metric: 0.49637681245803833
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.43502524495124817
+          Best test metric: 0.5571475625038147
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5639117956161499
+          Best test metric: 0.6197298765182495
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6460270881652832
+          Best test metric: 0.689888060092926
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6122773885726929
+          Best test metric: 0.7025691270828247
+dataset: kaggle_Customer_Classification
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.376620888710022
+          Best test metric: 0.4883122742176056
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6191838383674622
+          Best test metric: 0.6598877906799316
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.39054158329963684
+          Best test metric: 0.5478026866912842
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5001906752586365
+          Best test metric: 0.5494389533996582
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.4384058117866516
+          Best test metric: 0.47791022062301636
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6119374632835388
+          Best test metric: 0.67122483253479
+dataset: openml_Heart_disease_classification
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8600000143051147
+          Best test metric: 0.8831018209457397
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7599999904632568
+          Best test metric: 0.8576388955116272
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5236363410949707
+          Best test metric: 0.5162036418914795
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8272727727890015
+          Best test metric: 0.8958333134651184
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8127272129058838
+          Best test metric: 0.8171296119689941
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8854544758796692
+          Best test metric: 0.8657407164573669
+dataset: kaggle_Campus_Recruitment
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6208333373069763
+          Best test metric: 0.8359375
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5916666388511658
+          Best test metric: 0.609375
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.46666663885116577
+          Best test metric: 0.40625
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5583332777023315
+          Best test metric: 0.6145833134651184
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.637499988079071
+          Best test metric: 0.5494791269302368
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7458332777023315
+          Best test metric: 0.8385416865348816
+dataset: openml_fishcatch
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6976413729492202
+          Best test metric: 0.8990986257434619
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9741736835252044
+          Best test metric: 1.1870221130091747
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8950085428565439
+          Best test metric: 1.1503733194859749
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.88352313421557
+          Best test metric: 1.8378040970349285
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.820915291336586
+          Best test metric: 1.0185909100215134
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.42078787641552345
+          Best test metric: 0.7306258904653169
+dataset: openml_wisconsin
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0796627190888628
+          Best test metric: 1.0475854313501944
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.786291116464164
+          Best test metric: 1.61708385485541
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.2306800297589877
+          Best test metric: 1.1527097476408419
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.8450735177193622
+          Best test metric: 2.584558217059187
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.064241664775873
+          Best test metric: 1.041375818974108
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.161455396753998
+          Best test metric: 1.0615730730259596
+dataset: openml_yacht_hydrodynamics
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.160364922146571
+          Best test metric: 0.766270462746137
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1970093096480217
+          Best test metric: 1.1696053970062363
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.1470438487311045
+          Best test metric: 0.9466740599587578
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.8897731866237173
+          Best test metric: 2.37887397831918
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.1678603514314359
+          Best test metric: 0.8312712587778829
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.995449620836839
+          Best test metric: 0.7539870065712927
+dataset: openml_cpu
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9799914471097355
+          Best test metric: 1.666395888584722
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.25393134831774
+          Best test metric: 1.7116506126837079
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.1959008159049975
+          Best test metric: 1.775457701973892
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.2430132634352165
+          Best test metric: 1.7139937742603166
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.052494453451805
+          Best test metric: 1.7122651266264475
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9143845406567119
+          Best test metric: 1.5535062970444198
+dataset: openml_disclosure_x_noise
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9801694557568853
+          Best test metric: 1.0065303601472397
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.512519801617094
+          Best test metric: 1.513187138866249
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.060859591919975
+          Best test metric: 1.038468786428975
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.3481579717389598
+          Best test metric: 1.3231479062209015
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9806650884638504
+          Best test metric: 0.9867287303815482
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9672460264083395
+          Best test metric: 1.0059922806422785
+dataset: openml_visualizing_environmental
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.1896994951032747
+          Best test metric: 1.0056895288564647
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.406141404091413
+          Best test metric: 1.1501013711119634
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.2877300427296896
+          Best test metric: 1.0506652427649976
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.4568516515745296
+          Best test metric: 1.0935424607784512
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.2214738777668446
+          Best test metric: 0.9142509005455817
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.2794135819409962
+          Best test metric: 1.0302291209737136
+dataset: openml_rmftsa_ladata
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9993793826695976
+          Best test metric: 0.8290785571749429
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9372510897491949
+          Best test metric: 0.9504336835371053
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0055913179113831
+          Best test metric: 0.857570348584299
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.0886741569722338
+          Best test metric: 0.8500878751434177
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9728182921955567
+          Best test metric: 0.8463832595911198
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7809224014074372
+          Best test metric: 0.7836209749795998
+dataset: openml_residential_building
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.6741667397199849
+          Best test metric: 1.835210972957017
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.7242241814842805
+          Best test metric: 1.7222942914889317
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8294084068762708
+          Best test metric: 1.1842219130487273
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.3506361151453685
+          Best test metric: 1.8429376784709528
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8046292774655065
+          Best test metric: 1.1987951568117468
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9214607536519298
+          Best test metric: 1.0976335516378088
+dataset: openml_lungcancer_shedden
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9700901544597252
+          Best test metric: 0.9696212665288783
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9638677131319013
+          Best test metric: 0.9781034290506729
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0736412576805097
+          Best test metric: 1.0413722130721332
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.3019150841412017
+          Best test metric: 1.3167226620529218
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9972170610627833
+          Best test metric: 0.9803327488898029
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9854130191748914
+          Best test metric: 0.9797693014596824
+dataset: openml_forest_fires
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.3204458703364684
+          Best test metric: 0.4174526986149474
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.321810869661381
+          Best test metric: 0.4149470687339792
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4366037521041186
+          Best test metric: 0.49545899279613115
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.41112393258623997
+          Best test metric: 0.5173457937796457
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.3254190769098157
+          Best test metric: 0.417865883120977
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.35196050790712813
+          Best test metric: 0.4544108332339939
+dataset: openml_boston_corrected
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7757153731819987
+          Best test metric: 0.7637505063993333
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.23984041940666
+          Best test metric: 1.133537481424469
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.108732977976224
+          Best test metric: 1.1188146306128375
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.0088170685624207
+          Best test metric: 0.9877552849317558
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0223063850366874
+          Best test metric: 0.969177397922485
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6719779667577249
+          Best test metric: 0.6743163178572987
+dataset: openml_liver_disorders
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7620021195169443
+          Best test metric: 1.1106792895648088
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.3342333180165744
+          Best test metric: 1.5898536475620968
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8874848203301146
+          Best test metric: 1.146272811995451
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.4474592931399592
+          Best test metric: 2.6254228523818015
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7696351111948116
+          Best test metric: 1.0721850199880578
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7823690029949945
+          Best test metric: 0.9575701072365301
+dataset: openml_disclosure_z
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0010485516224392
+          Best test metric: 0.9902415980690705
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.029788976366492
+          Best test metric: 1.041513692431608
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0391506645257411
+          Best test metric: 1.0177605697881336
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.6146394125110666
+          Best test metric: 1.6323656994897704
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9717899125806052
+          Best test metric: 0.9689597856347641
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.966799834275774
+          Best test metric: 0.9711676547222917
+dataset: openml_disclosure_x_tampered
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.008829416980092
+          Best test metric: 1.0672304650254862
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9663667589042728
+          Best test metric: 1.0049901669528898
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0084736156350382
+          Best test metric: 1.059404745218842
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.2186805020593168
+          Best test metric: 1.2254764583977023
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9555506561182031
+          Best test metric: 0.9846671140274171
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.0171078347507168
+          Best test metric: 1.0105120558135157
+dataset: openml_weather_ankara
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0424422746223407
+          Best test metric: 1.105871767374158
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8454027589569304
+          Best test metric: 0.8025103996767615
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.081145712613601
+          Best test metric: 1.1162257823474264
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5472835921742382
+          Best test metric: 0.536835090654859
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0059914511474735
+          Best test metric: 1.0627385600929606
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5614475099396783
+          Best test metric: 0.5529175849002361
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8864807279980248
+          Best test metric: 0.9447514153555984
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7517511269878417
+          Best test metric: 0.751058348330673
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0473953775676468
+          Best test metric: 1.0971227686645169
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.4598550305180251
+          Best test metric: 1.5040908502014732
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.982629803292395
+          Best test metric: 0.9789722161622094
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6272970189305722
+          Best test metric: 0.674719334461333
+dataset: openml_EgyptianSkulls
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9092105323484387
+          Best test metric: 0.8782150263133024
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.02191164843435
+          Best test metric: 0.9916529379356501
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0432615404951056
+          Best test metric: 1.0167692341163537
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.740926927990809
+          Best test metric: 1.6251858825006582
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9435500432071713
+          Best test metric: 0.9167154725404509
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8551328513458758
+          Best test metric: 0.8610040656247442
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9734817127455702
+          Best test metric: 0.8810319752557422
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0812484719149866
+          Best test metric: 0.8805807142310496
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.3116661783740158
+          Best test metric: 1.0322347620816121
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.43895039943060304
+          Best test metric: 0.5281043607301684
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.10085528241862
+          Best test metric: 0.9395861620694792
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5030140926309423
+          Best test metric: 0.6370274550152024
+dataset: openml_autoPrice
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7095379730423569
+          Best test metric: 0.6309721524083229
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9531838445790336
+          Best test metric: 0.8177666896398629
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9800641262229971
+          Best test metric: 0.8562100825785607
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.3969581067241936
+          Best test metric: 1.2136719869730848
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8962524379979044
+          Best test metric: 0.8669840599825492
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7136205829130188
+          Best test metric: 0.738361778106024
+dataset: openml_ELE_1
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.3702118039513758
+          Best test metric: 1.104821976350158
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.5019495533676244
+          Best test metric: 1.1053068224389286
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.2824828566507818
+          Best test metric: 0.9028219962091029
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.8952183057708498
+          Best test metric: 1.682530184470779
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.001080287118228
+          Best test metric: 0.5996942366897022
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9295323987816814
+          Best test metric: 0.5749110246316879
+dataset: openml_machine_cpu
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0737639973164417
+          Best test metric: 1.8235197831574657
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9971635048231846
+          Best test metric: 1.5336886858012724
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9222554860250471
+          Best test metric: 1.607371815009714
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.1539506677275377
+          Best test metric: 2.6107387976197414
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8177265278600159
+          Best test metric: 1.613894588455288
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8772281478851882
+          Best test metric: 1.6152423457141605
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8667587044946948
+          Best test metric: 0.8877763532821543
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8980261151078403
+          Best test metric: 0.9092397045153612
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0323945831721315
+          Best test metric: 1.0246395012123841
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.9513279592923182
+          Best test metric: 0.9046851821896077
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9335175487113156
+          Best test metric: 0.9023160063206521
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.47999091539627414
+          Best test metric: 0.5330701110149795
+dataset: openml_disclosure_x_bias
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9876083978479767
+          Best test metric: 0.9869296817234334
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1091234163659711
+          Best test metric: 1.073218139712244
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0175672885661904
+          Best test metric: 1.0854671200517216
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.9723323604475125
+          Best test metric: 0.9825718729166483
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9714987121432137
+          Best test metric: 0.9616533109959478
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.0111655707650202
+          Best test metric: 0.9904367815627608
+dataset: openml_Boston_house_price_data
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8932714795173299
+          Best test metric: 0.7910797846640963
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0171250050181295
+          Best test metric: 0.9363487804746098
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.1827900490085168
+          Best test metric: 1.080501425160073
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.0658590848335576
+          Best test metric: 0.9472975578038232
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.075344647007657
+          Best test metric: 0.9388985057453662
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8499255063568195
+          Best test metric: 0.7776328081365355
+dataset: openml_bodyfat
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.1715650530054944
+          Best test metric: 0.9971784183730614
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1124852597406667
+          Best test metric: 0.9167243151888365
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.1095059814498185
+          Best test metric: 0.9720373980878527
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7519436922348701
+          Best test metric: 0.8450803159318757
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.1041745539449497
+          Best test metric: 0.9436277398754248
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.688428208837786
+          Best test metric: 0.633701853343426
+dataset: openml_Fish_market
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.3613578103549158
+          Best test metric: 0.7371179205192412
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0862269393176276
+          Best test metric: 0.9651553928691954
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.3918254257301537
+          Best test metric: 0.7480601018229291
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.3675941952303536
+          Best test metric: 1.1114333493476405
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.3213139184163132
+          Best test metric: 0.7288383607639373
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9802402366827154
+          Best test metric: 0.967341414177511
+dataset: openml_auto_price
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7356164867909997
+          Best test metric: 0.669671103472116
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7610111177461949
+          Best test metric: 0.624536342299456
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9864436015902517
+          Best test metric: 0.8459111898196904
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.1824352776555769
+          Best test metric: 1.1488917483936325
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9072712044465073
+          Best test metric: 0.8625874212437977
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6326440893178846
+          Best test metric: 0.5006036095210551
+dataset: openml_DEE
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8365790855180049
+          Best test metric: 0.8444036142059567
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0599144161510492
+          Best test metric: 1.1195945684571764
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9743281935435439
+          Best test metric: 1.0296597791074826
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.6271461106749507
+          Best test metric: 1.616332855697082
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9214783477909507
+          Best test metric: 0.9407253414635681
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.48434926549167256
+          Best test metric: 0.5703507240758998
+dataset: openml_pm10
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9273983638014355
+          Best test metric: 0.9784766701503276
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0412811455985733
+          Best test metric: 1.1376426586360386
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.09424743239982
+          Best test metric: 1.0456617926436476
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.0093943874516766
+          Best test metric: 1.1155639268416222
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9360514894591706
+          Best test metric: 0.9885338923983009
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8599089957480822
+          Best test metric: 0.9342024666196044
+dataset: openml_meta
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.418682832850461
+          Best test metric: 0.32109697159313516
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.438404130633558
+          Best test metric: 0.4449017621485392
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.5037840161871943
+          Best test metric: 0.36238097341403264
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.4102124232043467
+          Best test metric: 0.4420191805052407
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.4019838684231447
+          Best test metric: 0.19593222527347484
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.3799553789305492
+          Best test metric: 0.15084984879170035
+dataset: openml_Forest_Fire_Area
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.3958962687436261
+          Best test metric: 0.4489651005346293
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.3760249317316481
+          Best test metric: 0.5037189401654272
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6989084333031348
+          Best test metric: 0.800927795398991
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8402574451778385
+          Best test metric: 0.9194100286266669
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.3207101563253221
+          Best test metric: 0.4154971836857653
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.3980488845430061
+          Best test metric: 0.47949611871976316
+dataset: openml_HappinessRank_2015
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8520422817560493
+          Best test metric: 0.9981368709233311
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6888427842535829
+          Best test metric: 0.7693006295796005
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.100308888588428
+          Best test metric: 1.2527216369152574
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.5090730763987206
+          Best test metric: 1.4142442449459687
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0070257738673292
+          Best test metric: 1.1477423919279337
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.43823322094177675
+          Best test metric: 0.6246069148851988
+dataset: openml_boston
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8480599843843315
+          Best test metric: 0.759005796686787
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9025071891963277
+          Best test metric: 0.8554439105603813
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0677294783320497
+          Best test metric: 0.9693280003146039
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.0862528939861558
+          Best test metric: 0.9623046701569475
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0766063443184937
+          Best test metric: 0.9405104304398944
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7973483680503154
+          Best test metric: 0.7536224463541839
+dataset: openml_echoMonths
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0220165726238066
+          Best test metric: 1.0419028332338658
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.5274655813032385
+          Best test metric: 1.2184276643616807
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.926974240145738
+          Best test metric: 0.9053281502100126
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.505494386447765
+          Best test metric: 1.1801893164821682
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.053622350778348
+          Best test metric: 1.0791849095534434
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8848988346425412
+          Best test metric: 0.9452515259301381
+dataset: openml_strikes
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7771376523489225
+          Best test metric: 1.2857301120692255
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.6221428475419237
+          Best test metric: 1.9083395589979586
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9499783714241635
+          Best test metric: 1.3771210263740197
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.4554003877090664
+          Best test metric: 1.7614592976476315
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.802738941485928
+          Best test metric: 1.3036836428410334
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.712212226709591
+          Best test metric: 1.2650005071435446
+dataset: openml_no2
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.244794161912447
+          Best test metric: 1.2425722689881853
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9726644921623834
+          Best test metric: 0.9540309352757406
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.086135297366673
+          Best test metric: 1.0209955099606771
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.6892611920608895
+          Best test metric: 2.635604600400003
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0066840189476123
+          Best test metric: 1.0268243557310972
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8843064621965858
+          Best test metric: 0.9065870118796914
+dataset: openml_pharynx
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0251570371959975
+          Best test metric: 1.0364932081530902
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1151733381734759
+          Best test metric: 1.340841872451047
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.1872958961559188
+          Best test metric: 1.2405547922096651
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.2308643210758183
+          Best test metric: 2.6300201550135673
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0646197547331013
+          Best test metric: 1.117307589818949
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9836839339139961
+          Best test metric: 1.0536775627896298
+dataset: openml_The_Office_Dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9796468625926249
+          Best test metric: 0.9003091969772069
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8994541884096026
+          Best test metric: 0.9768050235962777
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9404049055056728
+          Best test metric: 1.0823216238027744
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.031304696153613
+          Best test metric: 2.1440420235458233
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9342973045273492
+          Best test metric: 1.0247485666555824
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8534090861643852
+          Best test metric: 0.9330235739261646
+dataset: openml_analcatdata_vineyard
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0948652303838826
+          Best test metric: 0.9883314278269556
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2572388377411894
+          Best test metric: 1.172804451154274
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0504915199609308
+          Best test metric: 0.9910645625835193
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.069877591840972
+          Best test metric: 1.0180225536680985
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0260599912501345
+          Best test metric: 0.918168618378152
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9236206079694305
+          Best test metric: 0.839615404890583
+dataset: openml_lowbwt
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9730386250504904
+          Best test metric: 1.1260749661406169
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8317949559474522
+          Best test metric: 1.2572136632219941
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9217930773525798
+          Best test metric: 1.1207638032375065
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 3.144715790635082
+          Best test metric: 2.75083442513083
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8647911710530178
+          Best test metric: 1.1086584113997509
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9279669540395602
+          Best test metric: 1.0598909657559483
+dataset: openml_cps_85_wages
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.250989760508663
+          Best test metric: 1.0980137687368745
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2638516187703737
+          Best test metric: 1.0579626588162958
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.3502074488443825
+          Best test metric: 1.1760524297626611
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.2664799098738015
+          Best test metric: 1.068041599024307
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.2509171935622023
+          Best test metric: 1.0650123736956665
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.17005229344024
+          Best test metric: 0.9926758713166308
+dataset: openml_cleveland
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7573404316547119
+          Best test metric: 0.8529577112191103
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0735778561357903
+          Best test metric: 1.2517915761331115
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.014539813780027
+          Best test metric: 1.2358516118315641
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.7456834901744505
+          Best test metric: 2.8775426153214
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9472654676928832
+          Best test metric: 1.0622989239880882
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8850253568130964
+          Best test metric: 0.9042283561569376
+dataset: openml_cloud
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.69998404110019
+          Best test metric: 1.0569064498724774
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9131517029603987
+          Best test metric: 1.0940211913551283
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8740530339350018
+          Best test metric: 1.1102862309516444
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 3.1021909293290957
+          Best test metric: 3.0003253442461344
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6564684685865245
+          Best test metric: 0.9855250649112217
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5949213870792304
+          Best test metric: 0.7262394915163547
+dataset: openml_fruitfly
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.0407595435792407
+          Best test metric: 1.0870997843454677
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0782240670064247
+          Best test metric: 1.290953387954742
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.2350273340111544
+          Best test metric: 1.2399551197359324
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.822850304258479
+          Best test metric: 2.179780582094877
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0527333558596064
+          Best test metric: 1.0720354121429996
+  模型: trompt
+    GNN階段: none
+          Best val metric: 1.0606670276450216
+          Best test metric: 1.053204376670445
+dataset: openml_analcatdata_homerun
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.1997968541491497
+          Best test metric: 1.8372294324075824
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1126538031055238
+          Best test metric: 1.1990632692622385
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.002413222060259
+          Best test metric: 1.2877327273496633
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8849796937240046
+          Best test metric: 1.178384983912717
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8015808579274173
+          Best test metric: 1.2728448436513489
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9665219002604203
+          Best test metric: 1.222391947006118
+dataset: openml_cholesterol
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8842510217364672
+          Best test metric: 0.9456492052932423
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.10096989917752
+          Best test metric: 1.0920919657607033
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8269867181599349
+          Best test metric: 0.9235099260615669
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 2.35554213275124
+          Best test metric: 2.2911744253761124
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8073124339396116
+          Best test metric: 0.9231204009667923
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8111349523283237
+          Best test metric: 0.9183172011011371
+dataset: openml_Reading_Hydro
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 1.7034398059203029
+          Best test metric: 1.571810411222134
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8520445552915442
+          Best test metric: 0.8742525791307978
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0577353625437689
+          Best test metric: 1.0550385632630823
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.4530397615761632
+          Best test metric: 1.4848181615144198
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.983859214682256
+          Best test metric: 0.9217811472042684
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.2903112810189368
+          Best test metric: 0.3592731289980572
+dataset: road_safety
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7822794914245605
+          Best test metric: 0.7821706533432007
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8033458590507507
+          Best test metric: 0.8019888401031494
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.68636155128479
+          Best test metric: 0.6712489128112793
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8528416156768799
+          Best test metric: 0.8499981164932251
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.848969578742981
+          Best test metric: 0.8464572429656982
+dataset: higgs_small
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6603469848632812
+          Best test metric: 0.6526059508323669
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7451866269111633
+          Best test metric: 0.7371698617935181
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5334157943725586
+          Best test metric: 0.5319015383720398
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7024407386779785
+          Best test metric: 0.6932107210159302
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7292236685752869
+          Best test metric: 0.7230467796325684
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7584422826766968
+          Best test metric: 0.7513129115104675
+dataset: bank_marketing
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.768437385559082
+          Best test metric: 0.7953485250473022
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8433603048324585
+          Best test metric: 0.8641893267631531
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5651209354400635
+          Best test metric: 0.556490957736969
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8291652202606201
+          Best test metric: 0.8506320714950562
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8319200277328491
+          Best test metric: 0.853710412979126
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8323789238929749
+          Best test metric: 0.8585292100906372
+dataset: MagicTelescope
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8150901198387146
+          Best test metric: 0.7904155254364014
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.870046079158783
+          Best test metric: 0.8375111818313599
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6267730593681335
+          Best test metric: 0.6243479251861572
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.878360390663147
+          Best test metric: 0.8498772382736206
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.9006817936897278
+          Best test metric: 0.8768184781074524
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9159922003746033
+          Best test metric: 0.8948770761489868
+dataset: credit
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7439333200454712
+          Best test metric: 0.7179321050643921
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7855059504508972
+          Best test metric: 0.7756549119949341
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.7217668294906616
+          Best test metric: 0.7060763835906982
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.8588027954101562
+          Best test metric: 0.8470121026039124
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8581177592277527
+          Best test metric: 0.8462194800376892
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8560435771942139
+          Best test metric: 0.846849799156189
+dataset: binarized_pol
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8507170677185059
+          Best test metric: 0.8551265001296997
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9765552282333374
+          Best test metric: 0.976004958152771
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6177456378936768
+          Best test metric: 0.6126314401626587
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6764863729476929
+          Best test metric: 0.645321249961853
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8874884843826294
+          Best test metric: 0.8812367916107178
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.958476185798645
+          Best test metric: 0.9557267427444458
+dataset: helena
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.29891669750213623
+          Best test metric: 0.2930981516838074
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.2977662682533264
+          Best test metric: 0.2952454090118408
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.15127983689308167
+          Best test metric: 0.15260736644268036
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.2720736265182495
+          Best test metric: 0.2640337347984314
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.2552967071533203
+          Best test metric: 0.2585122585296631
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.30792829394340515
+          Best test metric: 0.3049846589565277
+dataset: jannis
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6407404541969299
+          Best test metric: 0.6471607089042664
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6805254817008972
+          Best test metric: 0.6883621215820312
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5337762236595154
+          Best test metric: 0.542724072933197
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6485780477523804
+          Best test metric: 0.660894513130188
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6473837494850159
+          Best test metric: 0.6515793800354004
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.6616406440734863
+          Best test metric: 0.6703290343284607
+dataset: eye
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.48084619641304016
+          Best test metric: 0.4894881248474121
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5025728940963745
+          Best test metric: 0.5095977783203125
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.3624928593635559
+          Best test metric: 0.35923218727111816
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.46312177181243896
+          Best test metric: 0.47166362404823303
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.4814179539680481
+          Best test metric: 0.4890310764312744
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.4911378026008606
+          Best test metric: 0.4798903167247772
+dataset: Brazilian_houses
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9159068549348545
+          Best test metric: 0.9111431158041334
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.17318114954732708
+          Best test metric: 0.1872280552798794
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8257844345623242
+          Best test metric: 0.8110104992888918
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.3036099722980394
+          Best test metric: 0.30954387323249705
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.20370562721126576
+          Best test metric: 0.2085508770406139
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.17578784082560472
+          Best test metric: 0.1824825729090385
+dataset: medical_charges
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7726807793869043
+          Best test metric: 0.7793294569962784
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.1448998069412579
+          Best test metric: 0.1479235019302232
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5911839902777457
+          Best test metric: 0.592481387244387
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.1519406009504349
+          Best test metric: 0.1554397855547685
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.14820123994037646
+          Best test metric: 0.15158691455400553
+dataset: nyc_taxi_green_dec_2016
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8024272470384486
+          Best test metric: 0.7960350247062512
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7868667114887818
+          Best test metric: 0.7809315604678201
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8998120946229442
+          Best test metric: 0.8936462021955257
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7350707309451162
+          Best test metric: 0.7313166710219772
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7848055231747719
+          Best test metric: 0.7793288451403539
+dataset: Ailerons
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6100026102088364
+          Best test metric: 0.5584272656733044
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.4450148541403743
+          Best test metric: 0.43656690752320787
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9055035904508253
+          Best test metric: 0.8414218713413588
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.48808339497246317
+          Best test metric: 0.476696636521021
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.6905709733155745
+          Best test metric: 0.638489606787648
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.5663265303711524
+          Best test metric: 0.5226189205141799
+dataset: california
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6302291745819754
+          Best test metric: 0.615554024143682
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5392746715127833
+          Best test metric: 0.5268265625215779
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9206011424757626
+          Best test metric: 0.9083133425539703
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.5833388368029063
+          Best test metric: 0.5774947932863221
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5409970056517933
+          Best test metric: 0.5312635476124005
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.539240683256265
+          Best test metric: 0.53110392750132
+dataset: sulfur
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.9951140728453465
+          Best test metric: 0.992385153719823
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7612512180713248
+          Best test metric: 0.6810773254430446
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.1109556837780095
+          Best test metric: 1.1305721886796605
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.9609829961659756
+          Best test metric: 0.8689076314941575
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8351396692840749
+          Best test metric: 0.76488685057852
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8732001662888939
+          Best test metric: 0.8157512099443839
+dataset: pol
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7364469073181252
+          Best test metric: 0.7294254297966121
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.30926893708849174
+          Best test metric: 0.3273662468365255
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9933287897475441
+          Best test metric: 0.9694568147449981
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 1.012660998036196
+          Best test metric: 1.0027828833419812
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.784027084760995
+          Best test metric: 0.7774339556471784
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7270278260941332
+          Best test metric: 0.7184928765843073
+dataset: diamonds
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.5772363689328176
+          Best test metric: 0.5843930297762918
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.25794491113026713
+          Best test metric: 0.2572239457839494
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5747009899304787
+          Best test metric: 0.566502161784479
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.2886965729468081
+          Best test metric: 0.2869040345269604
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.2710519818936321
+          Best test metric: 0.26764257726804114
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.2474996808921799
+          Best test metric: 0.2473344710025902
+dataset: house_sales
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.6217693037756777
+          Best test metric: 0.6108153267383889
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.4195194711576714
+          Best test metric: 0.41880853016162645
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.7871634036469081
+          Best test metric: 0.7893035444959381
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7309780283468668
+          Best test metric: 0.7256120597480661
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.48896194313915375
+          Best test metric: 0.4951657905273407
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.42925013043840987
+          Best test metric: 0.425312466617894
+dataset: house
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7801003962486072
+          Best test metric: 0.7734494449194016
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7233060647362926
+          Best test metric: 0.7202536569255558
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9306684816141475
+          Best test metric: 0.9269750117480205
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7731979846966565
+          Best test metric: 0.7464041738179802
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.7840705691150813
+          Best test metric: 0.7505470903097896
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7316496172839642
+          Best test metric: 0.7190401072291713
+dataset: SGEMM_GPU_kernel_performance
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8520687243476932
+          Best test metric: 0.8499385152345478
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.02816377221479033
+          Best test metric: 0.027950336585892875
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9993784880443058
+          Best test metric: 0.9934946295867125
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.058267479719460516
+          Best test metric: 0.057894978616951275
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.025439662072171115
+          Best test metric: 0.025237038441541404

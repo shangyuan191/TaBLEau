@@ -234,7 +234,28 @@ class ExcelFormer(Module):
                 :obj:`True`, return the mixed-up targets of size
                 [batch_size, num_classes] as well.
         """
+        # print(f"tf.col_names_dict")
+        # print(f"len of col_names_dict.keys():{len(tf.col_names_dict.keys())}")
+        # print(tf.col_names_dict.keys())
+        # for key in tf.col_names_dict.keys():
+        #     print(f"key:{key}")
+        #     print("type of key:",type(key))
+        #     print(f"type of train_tensor_frame.col_names_dict[{key}]:{type(tf.col_names_dict[key])}")
+        #     print(f"len of train_tensor_frame.col_names_dict[{key}]:{len(tf.col_names_dict[key])}")
+        #     print(f"train_tensor_frame.col_names_dict[{key}]:{tf.col_names_dict[key]}")
+        # print(f"feat_dict")
+        # print(f"len of feat_dict.keys():{len(tf.feat_dict.keys())}")
+        # print(tf.feat_dict.keys())
+        # for key in tf.feat_dict.keys():
+        #     print(f"key:{key}")
+        #     print("type of key:",type(key))
+        #     print(f"type of tf.feat_dict[{key}]:{type(tf.feat_dict[key])}")
+        #     print(f"len of tf.feat_dict[{key}]:{len(tf.feat_dict[key])}")
+        #     print(f"shape of tf.feat_dict[{key}]:{tf.feat_dict[key].shape}")
+
+        # print(f"y.shape:{tf.y.shape}")
         x, _ = self.excelformer_encoder(tf)
+        # print(f"x.shape: {x.shape}")
         # FEAT-MIX or HIDDEN-MIX is compatible with `torch.compile`
         if mixup_encoded:
             assert tf.y is not None
@@ -246,6 +267,11 @@ class ExcelFormer(Module):
                 mixup_type=self.mixup,
                 mi_scores=getattr(tf, 'mi_scores', None),
             )
+            # print(f"type(x): {type(x)}")
+            # print(f"x.shape: {x.shape}")
+            # print(f"type(y_mixedup): {type(y_mixedup)}")
+            # print(f"y_mixedup.shape: {y_mixedup.shape}\n\n")
+        # print(f"len of excelformer_convs:{len(self.excelformer_convs)}")
         for excelformer_conv in self.excelformer_convs:
             x = excelformer_conv(x)
         out = self.excelformer_decoder(x)

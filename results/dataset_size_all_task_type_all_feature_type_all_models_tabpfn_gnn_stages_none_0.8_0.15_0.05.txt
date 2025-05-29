@@ -1,0 +1,596 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9345730543136597
+          Best test metric: 0.9818181395530701
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7631745934486389
+          Best test metric: 0.8835979104042053
+dataset: openml_Diabetes_Data_Set
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8111841678619385
+          Best test metric: 0.8771429061889648
+dataset: kaggle_Penguins_Classified
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9957386255264282
+          Best test metric: 0.9999999403953552
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8125
+          Best test metric: 0.8888888359069824
+dataset: kaggle_Development_Index
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9999999403953552
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9768339991569519
+          Best test metric: 1.0
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.999421238899231
+          Best test metric: 1.0
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.923076868057251
+          Best test metric: 1.0
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9990835189819336
+          Best test metric: 1.0
+dataset: openml_nki70.arff
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9523809552192688
+          Best test metric: 0.6666666865348816
+dataset: openml_Pima_Indians_Diabetes
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8111841678619385
+          Best test metric: 0.8771429061889648
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9999999403953552
+          Best test metric: 1.0
+dataset: openml_hungarian
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9590517282485962
+          Best test metric: 1.0
+dataset: UCI_HCV_data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9979424476623535
+          Best test metric: 1.0
+dataset: openml_analcatdata_lawsuit
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9819819927215576
+          Best test metric: 1.0
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6942148804664612
+          Best test metric: 0.5583333373069763
+dataset: UCI_Audit_Data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: UCI_User_Knowledge_Modeling
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9319525957107544
+          Best test metric: 1.0
+dataset: kaggle_Audit_Data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_chronic_kidney_disease
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9999999403953552
+dataset: openml_tokyo1
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9778428673744202
+          Best test metric: 0.9411764740943909
+dataset: kaggle_Compositions_of_Glass
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9444444179534912
+          Best test metric: 0.9642857313156128
+dataset: openml_Pokmon_Legendary_Data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9972727298736572
+          Best test metric: 1.0
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8138157725334167
+          Best test metric: 0.8942856788635254
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9043209552764893
+          Best test metric: 0.9722222089767456
+dataset: kaggle_fitbit_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8679966330528259
+          Best test metric: 0.9461538791656494
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9999999403953552
+dataset: kaggle_Startup_Success_Prediction
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.822902500629425
+          Best test metric: 0.7509803771972656
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8463541269302368
+          Best test metric: 0.6478404998779297
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.853909432888031
+          Best test metric: 0.7592592239379883
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8463541269302368
+          Best test metric: 0.6478404998779297
+dataset: openml_DiabeticMellitus
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9999999403953552
+          Best test metric: 1.0
+dataset: kaggle_Credit_Card_Approval
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9137566089630127
+          Best test metric: 0.9722222089767456
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Automobiles
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9600000381469727
+          Best test metric: 0.9666666388511658
+dataset: UCI_Z_Alizadeh_Sani
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9510489702224731
+          Best test metric: 0.9454545974731445
+dataset: UCI_Absenteeism_at_work
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8006048202514648
+          Best test metric: 0.8148148059844971
+dataset: kaggle_Bigg_Boss_India
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9975000023841858
+          Best test metric: 1.0
+dataset: openml_analcatdata_creditscore
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6443965435028076
+          Best test metric: 0.6238095164299011
+dataset: UCI_Heart_failure_clinical_records
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9009217023849487
+          Best test metric: 0.9800000190734863
+dataset: kaggle_Store_Data_Performance
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8222222328186035
+          Best test metric: 0.5
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8103864789009094
+          Best test metric: 0.8505434989929199
+dataset: kaggle_Customer_Classification
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7477954030036926
+          Best test metric: 0.5535714626312256
+dataset: openml_Heart_disease_classification
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.908730149269104
+          Best test metric: 0.8571428656578064
+dataset: kaggle_Campus_Recruitment
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9739130735397339
+          Best test metric: 1.0
+dataset: openml_fishcatch
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8639083931824402
+          Best test metric: 0.7929724707304758
+dataset: openml_wisconsin
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9227719873099556
+          Best test metric: 0.8831176230520029
+dataset: openml_yacht_hydrodynamics
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.794305811044106
+          Best test metric: 1.1350300098434576
+dataset: openml_cpu
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.6531632647926262
+          Best test metric: 0.36669023810106083
+dataset: openml_disclosure_x_noise
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.913868516732293
+          Best test metric: 0.8584976225782833
+dataset: openml_visualizing_environmental
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.053216261262893
+          Best test metric: 1.4103244247963604
+dataset: openml_rmftsa_ladata
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8993626019628667
+          Best test metric: 1.1242884398936472
+dataset: openml_residential_building
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.358550863263625
+          Best test metric: 0.7688092945460939
+dataset: openml_lungcancer_shedden
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.1338285427793222
+          Best test metric: 0.8777015737627464
+dataset: openml_forest_fires
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.43591906805962516
+          Best test metric: 0.7460494103163421
+dataset: openml_boston_corrected
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9862530065957233
+          Best test metric: 1.0881725884142683
+dataset: openml_liver_disorders
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8116847496511899
+          Best test metric: 1.3489869113482276
+dataset: openml_disclosure_z
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9360732984656719
+          Best test metric: 0.8163022791899716
+dataset: openml_disclosure_x_tampered
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8918751091211863
+          Best test metric: 0.8770918024942395
+dataset: openml_weather_ankara
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0872578998172544
+          Best test metric: 0.9110915981182919
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0177361480962164
+          Best test metric: 1.0252952894669063
+dataset: openml_EgyptianSkulls
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.935361202665855
+          Best test metric: 1.0145974463095506
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9623563262915441
+          Best test metric: 1.1057613780785818
+dataset: openml_autoPrice
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9190502208212405
+          Best test metric: 1.389537471756024
+dataset: openml_ELE_1
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.2558947805868912
+          Best test metric: 0.9282932565680238
+dataset: openml_machine_cpu
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.4488445117524618
+          Best test metric: 0.665666774101548
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9721081886324119
+          Best test metric: 1.004581684336396
+dataset: openml_disclosure_x_bias
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8914882090650488
+          Best test metric: 0.8360366405985866
+dataset: openml_Boston_house_price_data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9648084132098141
+          Best test metric: 1.2027992203797788
+dataset: openml_bodyfat
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7817593630653009
+          Best test metric: 0.7970808174770259
+dataset: openml_Fish_market
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8211759473489004
+          Best test metric: 1.2029528804375924
+dataset: openml_auto_price
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9190502208212405
+          Best test metric: 1.389537471756024
+dataset: openml_DEE
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9747641216956535
+          Best test metric: 0.9268096812840314
+dataset: openml_pm10
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9990370107196676
+          Best test metric: 0.9006275849897573
+dataset: openml_meta
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.1345905327519811
+          Best test metric: 0.13944657948837527
+dataset: openml_Forest_Fire_Area
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.43591906805962516
+          Best test metric: 0.7460494103163421
+dataset: openml_HappinessRank_2015
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.2575245877207448
+          Best test metric: 0.8269059907925704
+dataset: openml_boston
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9648084132098141
+          Best test metric: 1.2027992203797788
+dataset: openml_echoMonths
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9959922589227209
+          Best test metric: 1.0830385773041022
+dataset: openml_strikes
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9350655099797254
+          Best test metric: 2.8780415244324433
+dataset: openml_no2
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9901266246310846
+          Best test metric: 0.7325242441481172
+dataset: openml_pharynx
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9268769809652858
+          Best test metric: 0.9813541502865349
+dataset: openml_The_Office_Dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7746426219797874
+          Best test metric: 0.9121710615516294
+dataset: openml_analcatdata_vineyard
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0335173102130166
+          Best test metric: 1.0034477879161081
+dataset: openml_lowbwt
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9384712592222199
+          Best test metric: 1.220683154133512
+dataset: openml_cps_85_wages
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0261518286934959
+          Best test metric: 0.8275245793083346
+dataset: openml_cleveland
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0039716172366915
+          Best test metric: 0.943701135241905
+dataset: openml_cloud
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6158349390830586
+          Best test metric: 0.6148640077930241
+dataset: openml_fruitfly
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0698680093944462
+          Best test metric: 1.0817164434804851
+dataset: openml_analcatdata_homerun
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0022305407558336
+          Best test metric: 1.2239053701209854
+dataset: openml_cholesterol
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.1401541273597342
+          Best test metric: 1.0294828590718754
+dataset: openml_Reading_Hydro
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0059685212702947
+          Best test metric: 1.0197084353300168
+dataset: road_safety
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: higgs_small
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: bank_marketing
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8921974897384644
+          Best test metric: 0.8851629495620728
+dataset: MagicTelescope
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9477096796035767
+          Best test metric: 0.9474841356277466
+dataset: credit
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8570889234542847
+          Best test metric: 0.8519894480705261
+dataset: binarized_pol
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9993599057197571
+          Best test metric: 0.9996334314346313
+dataset: helena
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Number of classes 100 exceeds the maximal number of classes supported by TabPFN. Consider using a strategy to reduce the number of classes. For code see https://github.com/PriorLabs/tabpfn-extensions/blob/main/src/tabpfn_extensions/many_class/many_class_classifier.py
+dataset: jannis
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: eye
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7848872542381287
+          Best test metric: 0.8135283589363098
+dataset: Brazilian_houses
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.012129534539374
+          Best test metric: 0.9698324308968626
+dataset: medical_charges
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0006488244903495
+          Best test metric: 1.0100196504097667
+dataset: nyc_taxi_green_dec_2016
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9996477042955682
+          Best test metric: 0.9992305954744788
+dataset: Ailerons
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0158303273328366
+          Best test metric: 1.0593747569396155
+dataset: california
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0091106127589056
+          Best test metric: 0.9735475921831482
+dataset: sulfur
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0848249595714696
+          Best test metric: 0.7350099537623074
+dataset: pol
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0021475144186696
+          Best test metric: 0.991298728024188
+dataset: diamonds
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9998262075562506
+          Best test metric: 1.0023553646898378
+dataset: house_sales
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9890460044606186
+          Best test metric: 1.0328700893580367
+dataset: house
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.025772459598248
+          Best test metric: 1.124065063660291
+dataset: SGEMM_GPU_kernel_performance
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9997907061902442
+          Best test metric: 1.0011682838497582

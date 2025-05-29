@@ -124,13 +124,13 @@ class XGBoost(GBDT):
         }
         if self.params["booster"] == "gbtree" or self.params[
                 "booster"] == "dart":
-            self.params["max_depth"] = trial.suggest_int("max_depth", 3, 11)
-            self.params["min_child_weight"] = trial.suggest_float(
-                "min_child_weight", 1e-8, 1e5, log=True)
-            self.params["subsample"] = trial.suggest_float(
-                "subsample", 0.5, 1.0)
-            self.params["colsample_bytree"] = trial.suggest_float(
-                "colsample_bytree", 0.5, 1.0)
+            # 建議縮小 search space
+            self.params["tree_method"] = "hist"
+            self.params["device"] = "cuda"
+            self.params["max_depth"] = trial.suggest_int("max_depth", 3, 6)
+            self.params["min_child_weight"] = trial.suggest_float("min_child_weight", 1, 5)
+            self.params["subsample"] = trial.suggest_float("subsample", 0.7, 1.0)
+            self.params["colsample_bytree"] = trial.suggest_float("colsample_bytree", 0.7, 1.0)
             self.params["colsample_bylevel"] = trial.suggest_float(
                 "colsample_bylevel", 0.5, 1.0)
             self.params["gamma"] = (0.0 if not trial.suggest_categorical(
@@ -203,8 +203,8 @@ class XGBoost(GBDT):
         tf_train: TensorFrame,
         tf_val: TensorFrame,
         num_trials: int,
-        num_boost_round: int = 2000,
-        early_stopping_rounds: int = 50,
+        num_boost_round: int = 200,
+        early_stopping_rounds: int = 20,
     ):
         import optuna
         import xgboost

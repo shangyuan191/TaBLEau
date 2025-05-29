@@ -137,23 +137,22 @@ class CatBoost(GBDT):
         """
         import catboost
 
+        # 根據任務類型決定 boosting_type search space
+        if self.task_type == TaskType.MULTICLASS_CLASSIFICATION:
+            boosting_types = ["Plain"]  # 多分類+GPU 只能用 Plain
+        else:
+            boosting_types = ["Ordered", "Plain"]
         self.params = {
-            "iterations":
-            num_boost_round,
-            "depth":
-            trial.suggest_int("depth", 3, 11),
-            "boosting_type":
-            trial.suggest_categorical("boosting_type", ["Ordered", "Plain"]),
-            "bagging_temperature":
-            trial.suggest_float("bagging_temperature", 0, 1),
-            "colsample_bylevel":
-            trial.suggest_float("colsample_bylevel", 0.01, 0.1),
-            "leaf_estimation_iterations":
-            trial.suggest_int("leaf_estimation_iterations", 1, 11),
-            "l2_leaf_reg":
-            trial.suggest_float("l2_leaf_reg", 1, 11, log=True),
-            "eta":
-            trial.suggest_float("eta", 1e-6, 1.0, log=True),
+            "iterations": num_boost_round,
+            "depth": trial.suggest_int("depth", 3, 6),
+            "boosting_type": trial.suggest_categorical("boosting_type", boosting_types),
+            "bagging_temperature": trial.suggest_float("bagging_temperature", 0, 1),
+            # "colsample_bylevel": trial.suggest_float("colsample_bylevel", 0.7, 1.0),
+            "leaf_estimation_iterations": trial.suggest_int("leaf_estimation_iterations", 1, 5),
+            "l2_leaf_reg": trial.suggest_float("l2_leaf_reg", 1, 5, log=True),
+            "eta": trial.suggest_float("eta", 0.05, 0.2),
+            "task_type": "GPU",
+            "devices": "0",
         }
         if self.task_type == TaskType.REGRESSION:
             if self.metric == Metric.RMSE:
@@ -190,7 +189,7 @@ class CatBoost(GBDT):
         tf_train: TensorFrame,
         tf_val: TensorFrame,
         num_trials: int,
-        num_boost_round=2000,
+        num_boost_round=200,  # 減少最大樹數
     ):
         import catboost
         import optuna

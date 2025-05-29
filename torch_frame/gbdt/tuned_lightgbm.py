@@ -120,29 +120,22 @@ class LightGBM(GBDT):
             float: Best objective value. Mean absolute error for
             regression task and accuracy for classification task.
         """
+        import sys
+        sys.path = [p for p in sys.path if "models/comparison" not in p]
         import lightgbm
 
         self.params = {
-            "verbosity":
-            -1,
-            "bagging_freq":
-            1,
-            "max_depth":
-            trial.suggest_int("max_depth", 3, 11),
-            "learning_rate":
-            trial.suggest_float("learning_rate", 1e-3, 0.1, log=True),
-            "num_leaves":
-            trial.suggest_int("num_leaves", 2, 2**10),
-            "subsample":
-            trial.suggest_float("subsample", 0.05, 1.0),
-            "colsample_bytree":
-            trial.suggest_float("colsample_bytree", 0.05, 1.0),
-            'lambda_l1':
-            trial.suggest_float('lambda_l1', 1e-9, 10.0, log=True),
-            'lambda_l2':
-            trial.suggest_float('lambda_l2', 1e-9, 10.0, log=True),
-            "min_data_in_leaf":
-            trial.suggest_int("min_data_in_leaf", 1, 100),
+            "verbosity": -1,
+            "bagging_freq": 1,
+            "max_depth": trial.suggest_int("max_depth", 3, 6),  # 縮小 search space
+            "learning_rate": trial.suggest_float("learning_rate", 0.05, 0.2),  # 縮小範圍
+            "num_leaves": trial.suggest_int("num_leaves", 8, 64),  # 合理範圍
+            "subsample": trial.suggest_float("subsample", 0.7, 1.0),
+            "colsample_bytree": trial.suggest_float("colsample_bytree", 0.7, 1.0),
+            'lambda_l1': trial.suggest_float('lambda_l1', 1e-3, 10.0, log=True),
+            'lambda_l2': trial.suggest_float('lambda_l2', 1e-3, 10.0, log=True),
+            "min_data_in_leaf": trial.suggest_int("min_data_in_leaf", 1, 20),
+            "device_type": "cpu",  # 強制用 GPU
         }
 
         if self.task_type == TaskType.REGRESSION:
@@ -169,7 +162,7 @@ class LightGBM(GBDT):
 
         boost = lightgbm.train(
             self.params, train_data, num_boost_round=num_boost_round,
-            categorical_feature=cat_features, valid_sets=[eval_data],
+            valid_sets=[eval_data],
             callbacks=[
                 lightgbm.early_stopping(stopping_rounds=50, verbose=False),
                 lightgbm.log_evaluation(period=2000)
@@ -184,8 +177,10 @@ class LightGBM(GBDT):
         tf_train: TensorFrame,
         tf_val: TensorFrame,
         num_trials: int,
-        num_boost_round=2000,
+        num_boost_round=200,  # 減少最大樹數
     ):
+        import sys
+        sys.path = [p for p in sys.path if "models/comparison" not in p]
         import lightgbm
         import optuna
 
@@ -223,6 +218,8 @@ class LightGBM(GBDT):
         return torch.from_numpy(pred).to(device)
 
     def _load(self, path: str) -> None:
+        import sys
+        sys.path = [p for p in sys.path if "models/comparison" not in p]
         import lightgbm
 
         self.model = lightgbm.Booster(model_file=path)

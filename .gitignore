@@ -6,3 +6,4 @@
 /DS/catboost_info
 nohup.out
 /catboost_info
+./experiment.log
