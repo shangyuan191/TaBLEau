@@ -136,6 +136,7 @@ class LightGBM(GBDT):
             'lambda_l2': trial.suggest_float('lambda_l2', 1e-3, 10.0, log=True),
             "min_data_in_leaf": trial.suggest_int("min_data_in_leaf", 1, 20),
             "device_type": "cpu",  # 強制用 GPU
+            "feature_pre_filter": False,  # <--- 加這行
         }
 
         if self.task_type == TaskType.REGRESSION:

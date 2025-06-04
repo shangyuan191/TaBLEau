@@ -148,17 +148,13 @@ def main(train_df, val_df, test_df, dataset_results, config):
         dataset = Yandex(train_df, val_df, test_df, name=dataset_name, task_type=task_type_str)
         dataset.materialize()
         
+        # 直接根據split_col取得train/val/test
+        tf_train = dataset.tensor_frame[dataset.df['split_col'] == 0]
+        tf_val = dataset.tensor_frame[dataset.df['split_col'] == 1]
+        tf_test = dataset.tensor_frame[dataset.df['split_col'] == 2]
+
         # 確定任務類型
         is_classification = dataset.task_type.is_classification
-        
-        # 數據集分割和處理
-        dataset = dataset.shuffle()
-        # 使用train_val_test_split_ratio進行分割
-        train_val_sum = train_val_test_split_ratio[0] + train_val_test_split_ratio[1]
-        train_split = train_val_test_split_ratio[0] / train_val_sum
-        
-        train_val_dataset, test_dataset = dataset[:train_val_sum], dataset[train_val_sum:]
-        train_dataset, val_dataset = train_val_dataset[:train_split], train_val_dataset[train_split:]
         
         # 設置適當的評估指標和類別數
         num_classes = None
@@ -192,8 +188,8 @@ def main(train_df, val_df, test_df, dataset_results, config):
         # 調優CatBoost模型
         print(f"Tuning CatBoost with {num_trials} trials...")
         gbdt.tune(
-            tf_train=train_dataset.tensor_frame,
-            tf_val=val_dataset.tensor_frame, 
+            tf_train=tf_train,
+            tf_val=tf_val, 
             num_trials=num_trials
         )
         
@@ -201,16 +197,16 @@ def main(train_df, val_df, test_df, dataset_results, config):
         print("Evaluating model...")
         
         # 對訓練集評估
-        train_pred = gbdt.predict(tf_test=train_dataset.tensor_frame)
-        train_score = gbdt.compute_metric(train_dataset.tensor_frame.y, train_pred)
+        train_pred = gbdt.predict(tf_test=tf_train)
+        train_score = gbdt.compute_metric(tf_train.y, train_pred)
         
         # 對驗證集評估
-        val_pred = gbdt.predict(tf_test=val_dataset.tensor_frame)
-        val_score = gbdt.compute_metric(val_dataset.tensor_frame.y, val_pred)
+        val_pred = gbdt.predict(tf_test=tf_val)
+        val_score = gbdt.compute_metric(tf_val.y, val_pred)
         
         # 對測試集評估
-        test_pred = gbdt.predict(tf_test=test_dataset.tensor_frame)
-        test_score = gbdt.compute_metric(test_dataset.tensor_frame.y, test_pred)
+        test_pred = gbdt.predict(tf_test=tf_test)
+        test_score = gbdt.compute_metric(tf_test.y, test_pred)
         
         print(f"Train {metric_name}: {train_score:.4f}")
         print(f"Val {metric_name}: {val_score:.4f}")

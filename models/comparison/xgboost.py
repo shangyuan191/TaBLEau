@@ -157,7 +157,7 @@ def main(train_df, val_df, test_df, dataset_results, config):
         tf_train = dataset.tensor_frame[dataset.df['split_col'] == 0]
         tf_val = dataset.tensor_frame[dataset.df['split_col'] == 1]
         tf_test = dataset.tensor_frame[dataset.df['split_col'] == 2]
-        
+
         # 確定任務類型
         is_classification = dataset.task_type.is_classification
         
@@ -189,20 +189,20 @@ def main(train_df, val_df, test_df, dataset_results, config):
             num_classes=num_classes,
             metric=metric,
         )
-        # 設定超參數搜尋空間
-        search_space = {
-            'max_depth': (3, 6),
-            'learning_rate': (0.05, 0.2),
-            'min_child_weight': (1, 5),
-            'subsample': (0.7, 1.0),
-            'colsample_bytree': (0.7, 1.0),
-        }
+        # # 設定超參數搜尋空間
+        # search_space = {
+        #     'max_depth': (3, 6),
+        #     'learning_rate': (0.05, 0.2),
+        #     'min_child_weight': (1, 5),
+        #     'subsample': (0.7, 1.0),
+        #     'colsample_bytree': (0.7, 1.0),
+        # }
         # 調優XGBoost模型（只傳支援的參數）
         print(f"Tuning XGBoost with {num_trials} trials...")
         gbdt.tune(
             tf_train=tf_train,
             tf_val=tf_val, 
-            num_trials=num_trials
+            num_trials=num_trials,
         )
         
         # 進行預測和評估
