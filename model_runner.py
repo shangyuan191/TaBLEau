@@ -142,7 +142,7 @@ class ModelRunner:
         
         return module
     
-    def run_model(self, model_name, train_df, val_df, test_df, dataset_results, config, model_type):
+    def run_model(self, model_name, train_df, val_df, test_df, dataset_results, config, model_type, gnn_stage):
         """
         運行指定的模型
         
@@ -173,7 +173,7 @@ class ModelRunner:
             
             # 呼叫模型的main函數，傳入三份split
             if hasattr(module, 'main'):
-                results = module.main(train_df, val_df, test_df, dataset_results, config)
+                results = module.main(train_df, val_df, test_df, dataset_results, config, gnn_stage)
             elif hasattr(module, 'run_experiment'):
                 results = module.run_experiment(train_df, val_df, test_df, config)
             else:

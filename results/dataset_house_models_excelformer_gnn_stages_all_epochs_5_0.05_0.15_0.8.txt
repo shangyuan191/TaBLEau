@@ -1,0 +1,20 @@
+dataset: house
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8181665962782851
+          Best test metric: 0.8178413955079122
+    GNN階段: start
+          Best val metric: 0.7411854454351092
+          Best test metric: 0.7705479987317188
+    GNN階段: materialize
+          Best val metric: 0.7535907698004267
+          Best test metric: 0.7821136278786173
+    GNN階段: encoding
+          Best val metric: 0.8003011985853725
+          Best test metric: 0.8079649465954962
+    GNN階段: columnwise
+          Best val metric: 0.8325329910935394
+          Best test metric: 0.83140411382414
+    GNN階段: decoding
+          Best val metric: 0.7130609154701233
+          Best test metric: 0.7015803456306458

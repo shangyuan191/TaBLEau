@@ -1,0 +1,2782 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8465277552604675
+          Best test metric: 0.8180660009384155
+    GNN階段: start
+          Best val metric: 0.8569444417953491
+          Best test metric: 0.8644802570343018
+    GNN階段: materialize
+          Best val metric: 0.8201388120651245
+          Best test metric: 0.7894827127456665
+    GNN階段: encoding
+          Best val metric: 0.8527777791023254
+          Best test metric: 0.8378074169158936
+    GNN階段: columnwise
+          Best val metric: 0.8784722089767456
+          Best test metric: 0.8564220666885376
+    GNN階段: decoding
+          Best val metric: 0.777430534362793
+          Best test metric: 0.35066622495651245
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6748387217521667
+          Best test metric: 0.6929541230201721
+    GNN階段: start
+          Best val metric: 0.5483871102333069
+          Best test metric: 0.6074134111404419
+    GNN階段: materialize
+          Best val metric: 0.7180644869804382
+          Best test metric: 0.7179866433143616
+    GNN階段: encoding
+          Best val metric: 0.6793547868728638
+          Best test metric: 0.6978172063827515
+    GNN階段: columnwise
+          Best val metric: 0.70322585105896
+          Best test metric: 0.7335171103477478
+    GNN階段: decoding
+          Best val metric: 0.42516130208969116
+          Best test metric: 0.4939827620983124
+dataset: openml_Diabetes_Data_Set
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6976666450500488
+          Best test metric: 0.6631860733032227
+    GNN階段: start
+          Best val metric: 0.8396666646003723
+          Best test metric: 0.760319709777832
+    GNN階段: materialize
+          Best val metric: 0.5479999780654907
+          Best test metric: 0.5498778820037842
+    GNN階段: encoding
+          Best val metric: 0.8176666498184204
+          Best test metric: 0.7411744594573975
+    GNN階段: columnwise
+          Best val metric: 0.8236666917800903
+          Best test metric: 0.7510697841644287
+    GNN階段: decoding
+          Best val metric: 0.429666668176651
+          Best test metric: 0.5383488535881042
+dataset: kaggle_Penguins_Classified
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9326018691062927
+          Best test metric: 0.9565680027008057
+    GNN階段: start
+          Best val metric: 0.9514106512069702
+          Best test metric: 0.9727219343185425
+    GNN階段: materialize
+          Best val metric: 0.9576802253723145
+          Best test metric: 0.9371141195297241
+    GNN階段: encoding
+          Best val metric: 0.869905948638916
+          Best test metric: 0.9027038812637329
+    GNN階段: columnwise
+          Best val metric: 0.8354231715202332
+          Best test metric: 0.8586864471435547
+    GNN階段: decoding
+          Best val metric: 0.45454543828964233
+          Best test metric: 0.40597718954086304
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7613636255264282
+          Best test metric: 0.7451342344284058
+    GNN階段: start
+          Best val metric: 0.8330965638160706
+          Best test metric: 0.840091347694397
+    GNN階段: materialize
+          Best val metric: 0.8103693127632141
+          Best test metric: 0.850309431552887
+    GNN階段: encoding
+          Best val metric: 0.8188920021057129
+          Best test metric: 0.7801427245140076
+    GNN階段: columnwise
+          Best val metric: 0.8828125
+          Best test metric: 0.855474591255188
+    GNN階段: decoding
+          Best val metric: 0.5163352489471436
+          Best test metric: 0.216014564037323
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5874999761581421
+          Best test metric: 0.6190476417541504
+    GNN階段: start
+          Best val metric: 0.36250001192092896
+          Best test metric: 0.5590569376945496
+    GNN階段: materialize
+          Best val metric: 0.8499999642372131
+          Best test metric: 0.6963118314743042
+    GNN階段: encoding
+          Best val metric: 0.6124999523162842
+          Best test metric: 0.7282912731170654
+    GNN階段: columnwise
+          Best val metric: 0.75
+          Best test metric: 0.7077497243881226
+    GNN階段: decoding
+          Best val metric: 0.44999998807907104
+          Best test metric: 0.4327731132507324
+dataset: kaggle_Development_Index
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6071428060531616
+          Best test metric: 0.481586754322052
+    GNN階段: start
+          Best val metric: 0.5892857313156128
+          Best test metric: 0.7014472484588623
+    GNN階段: materialize
+          Best val metric: 0.6178571581840515
+          Best test metric: 0.5403153300285339
+    GNN階段: encoding
+          Best val metric: 0.6321429014205933
+          Best test metric: 0.5229357481002808
+    GNN階段: columnwise
+          Best val metric: 0.6714285612106323
+          Best test metric: 0.5027781128883362
+    GNN階段: decoding
+          Best val metric: 0.7535713911056519
+          Best test metric: 0.515635073184967
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.44015443325042725
+          Best test metric: 0.4247690737247467
+    GNN階段: start
+          Best val metric: 0.7683397531509399
+          Best test metric: 0.7874785661697388
+    GNN階段: materialize
+          Best val metric: 0.7972972393035889
+          Best test metric: 0.7099555134773254
+    GNN階段: encoding
+          Best val metric: 0.8301158547401428
+          Best test metric: 0.49599725008010864
+    GNN階段: columnwise
+          Best val metric: 0.7779922485351562
+          Best test metric: 0.6810810565948486
+    GNN階段: decoding
+          Best val metric: 0.45559847354888916
+          Best test metric: 0.4367772936820984
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9150943160057068
+          Best test metric: 0.9051830172538757
+    GNN階段: start
+          Best val metric: 0.9976415634155273
+          Best test metric: 0.9803372621536255
+    GNN階段: materialize
+          Best val metric: 0.994693398475647
+          Best test metric: 0.9800698757171631
+    GNN階段: encoding
+          Best val metric: 0.9799528121948242
+          Best test metric: 0.9708967804908752
+    GNN階段: columnwise
+          Best val metric: 0.9374999403953552
+          Best test metric: 0.9035582542419434
+    GNN階段: decoding
+          Best val metric: 0.5625
+          Best test metric: 0.4344508647918701
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.615384578704834
+          Best test metric: 0.43560606241226196
+    GNN階段: start
+          Best val metric: 0.3461538553237915
+          Best test metric: 0.4179292917251587
+    GNN階段: materialize
+          Best val metric: 0.307692289352417
+          Best test metric: 0.5037878751754761
+    GNN階段: encoding
+          Best val metric: 0.615384578704834
+          Best test metric: 0.4734848737716675
+    GNN階段: columnwise
+          Best val metric: 0.615384578704834
+          Best test metric: 0.4949495196342468
+    GNN階段: decoding
+          Best val metric: 0.7692307233810425
+          Best test metric: 0.35732322931289673
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.912206768989563
+          Best test metric: 0.9096389412879944
+    GNN階段: start
+          Best val metric: 0.9754399061203003
+          Best test metric: 0.9835622310638428
+    GNN階段: materialize
+          Best val metric: 0.9737903475761414
+          Best test metric: 0.9721727967262268
+    GNN階段: encoding
+          Best val metric: 0.7881231307983398
+          Best test metric: 0.8729851245880127
+    GNN階段: columnwise
+          Best val metric: 0.9173387289047241
+          Best test metric: 0.920032262802124
+    GNN階段: decoding
+          Best val metric: 0.8814148902893066
+          Best test metric: 0.5892456769943237
+dataset: openml_nki70.arff
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7551020383834839
+          Best test metric: 0.631701648235321
+    GNN階段: start
+          Best val metric: 0.3163265585899353
+          Best test metric: 0.38677990436553955
+    GNN階段: materialize
+          Best val metric: 0.6377551555633545
+          Best test metric: 0.4512154757976532
+    GNN階段: encoding
+          Best val metric: 0.6530612111091614
+          Best test metric: 0.6563436985015869
+    GNN階段: columnwise
+          Best val metric: 0.8061224222183228
+          Best test metric: 0.6406926512718201
+    GNN階段: decoding
+          Best val metric: 0.5204081535339355
+          Best test metric: 0.5367965698242188
+dataset: openml_Pima_Indians_Diabetes
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7856667041778564
+          Best test metric: 0.7247558236122131
+    GNN階段: start
+          Best val metric: 0.7903333306312561
+          Best test metric: 0.7161220908164978
+    GNN階段: materialize
+          Best val metric: 0.6923333406448364
+          Best test metric: 0.6641685962677002
+    GNN階段: encoding
+          Best val metric: 0.6403332948684692
+          Best test metric: 0.666837215423584
+    GNN階段: columnwise
+          Best val metric: 0.7986667156219482
+          Best test metric: 0.7123023271560669
+    GNN階段: decoding
+          Best val metric: 0.5363333225250244
+          Best test metric: 0.47575002908706665
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9377777576446533
+          Best test metric: 0.9382812976837158
+    GNN階段: start
+          Best val metric: 0.90666663646698
+          Best test metric: 0.9709375500679016
+    GNN階段: materialize
+          Best val metric: 0.9466666579246521
+          Best test metric: 0.9504687786102295
+    GNN階段: encoding
+          Best val metric: 0.9688888192176819
+          Best test metric: 0.9693750143051147
+    GNN階段: columnwise
+          Best val metric: 0.9999999403953552
+          Best test metric: 0.9996874928474426
+    GNN階段: decoding
+          Best val metric: 0.3422222137451172
+          Best test metric: 0.5054687261581421
+dataset: openml_hungarian
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8705357313156128
+          Best test metric: 0.8208804130554199
+    GNN階段: start
+          Best val metric: 0.9263392686843872
+          Best test metric: 0.7620958089828491
+    GNN階段: materialize
+          Best val metric: 0.7276785969734192
+          Best test metric: 0.7000778913497925
+    GNN階段: encoding
+          Best val metric: 0.9129464626312256
+          Best test metric: 0.846825122833252
+    GNN階段: columnwise
+          Best val metric: 0.328125
+          Best test metric: 0.4217374324798584
+    GNN階段: decoding
+          Best val metric: 0.4955357313156128
+          Best test metric: 0.42162054777145386
+dataset: UCI_HCV_data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8981481790542603
+          Best test metric: 0.9041115045547485
+    GNN階段: start
+          Best val metric: 0.8744856119155884
+          Best test metric: 0.8564873933792114
+    GNN階段: materialize
+          Best val metric: 0.758230447769165
+          Best test metric: 0.8232323527336121
+    GNN階段: encoding
+          Best val metric: 0.8312757611274719
+          Best test metric: 0.7630175352096558
+    GNN階段: columnwise
+          Best val metric: 0.7788065671920776
+          Best test metric: 0.7432422637939453
+    GNN階段: decoding
+          Best val metric: 0.38683128356933594
+          Best test metric: 0.4227486252784729
+dataset: openml_analcatdata_lawsuit
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5185185074806213
+          Best test metric: 0.6125211715698242
+    GNN階段: start
+          Best val metric: 0.6203703880310059
+          Best test metric: 0.60406094789505
+    GNN階段: materialize
+          Best val metric: 0.40740740299224854
+          Best test metric: 0.47005075216293335
+    GNN階段: encoding
+          Best val metric: 0.12037037312984467
+          Best test metric: 0.20406092703342438
+    GNN階段: columnwise
+          Best val metric: 0.9444444179534912
+          Best test metric: 0.9539762735366821
+    GNN階段: decoding
+          Best val metric: 0.6296296119689941
+          Best test metric: 0.6857868432998657
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6508264541625977
+          Best test metric: 0.48082494735717773
+    GNN階段: start
+          Best val metric: 0.5030991435050964
+          Best test metric: 0.49229463934898376
+    GNN階段: materialize
+          Best val metric: 0.6322314143180847
+          Best test metric: 0.533012866973877
+    GNN階段: encoding
+          Best val metric: 0.6188016533851624
+          Best test metric: 0.5908030271530151
+    GNN階段: columnwise
+          Best val metric: 0.6900826692581177
+          Best test metric: 0.5433868169784546
+    GNN階段: decoding
+          Best val metric: 0.6425619721412659
+          Best test metric: 0.5431040525436401
+dataset: UCI_Audit_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9675443768501282
+          Best test metric: 0.9770079255104065
+    GNN階段: start
+          Best val metric: 0.9669320583343506
+          Best test metric: 0.9665554761886597
+    GNN階段: materialize
+          Best val metric: 0.9479485750198364
+          Best test metric: 0.9522709250450134
+    GNN階段: encoding
+          Best val metric: 0.96417635679245
+          Best test metric: 0.9698439240455627
+    GNN階段: columnwise
+          Best val metric: 0.960808277130127
+          Best test metric: 0.9765404462814331
+    GNN階段: decoding
+          Best val metric: 0.9733619689941406
+          Best test metric: 0.6436654925346375
+dataset: UCI_User_Knowledge_Modeling
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.4911242723464966
+          Best test metric: 0.5066280364990234
+    GNN階段: start
+          Best val metric: 0.6272189617156982
+          Best test metric: 0.5062655210494995
+    GNN階段: materialize
+          Best val metric: 0.3994082808494568
+          Best test metric: 0.4769573211669922
+    GNN階段: encoding
+          Best val metric: 0.591715931892395
+          Best test metric: 0.5489850640296936
+    GNN階段: columnwise
+          Best val metric: 0.5295857787132263
+          Best test metric: 0.48208367824554443
+    GNN階段: decoding
+          Best val metric: 0.4704141914844513
+          Best test metric: 0.44816693663597107
+dataset: kaggle_Audit_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9687691330909729
+          Best test metric: 0.9687676429748535
+    GNN階段: start
+          Best val metric: 0.9834660291671753
+          Best test metric: 0.9844109416007996
+    GNN階段: materialize
+          Best val metric: 0.9840783476829529
+          Best test metric: 0.9749749898910522
+    GNN階段: encoding
+          Best val metric: 0.9360072612762451
+          Best test metric: 0.946645200252533
+    GNN階段: columnwise
+          Best val metric: 0.9559093713760376
+          Best test metric: 0.9639953374862671
+    GNN階段: decoding
+          Best val metric: 0.5226577520370483
+          Best test metric: 0.3840174674987793
+dataset: kaggle_chronic_kidney_disease
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9712918996810913
+          Best test metric: 0.9718749523162842
+    GNN階段: start
+          Best val metric: 0.9234449863433838
+          Best test metric: 0.9596250057220459
+    GNN階段: materialize
+          Best val metric: 0.9222487807273865
+          Best test metric: 0.950041651725769
+    GNN階段: encoding
+          Best val metric: 0.8923445343971252
+          Best test metric: 0.9041249752044678
+    GNN階段: columnwise
+          Best val metric: 0.9282296895980835
+          Best test metric: 0.9612083435058594
+    GNN階段: decoding
+          Best val metric: 0.5251196026802063
+          Best test metric: 0.3856875002384186
+dataset: openml_tokyo1
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9385451674461365
+          Best test metric: 0.9330034255981445
+    GNN階段: start
+          Best val metric: 0.9600752592086792
+          Best test metric: 0.9636195302009583
+    GNN階段: materialize
+          Best val metric: 0.9211956858634949
+          Best test metric: 0.9217760562896729
+    GNN階段: encoding
+          Best val metric: 0.9525501728057861
+          Best test metric: 0.9694942235946655
+    GNN階段: columnwise
+          Best val metric: 0.9343645572662354
+          Best test metric: 0.9382678270339966
+    GNN階段: decoding
+          Best val metric: 0.5594691038131714
+          Best test metric: 0.5772092342376709
+dataset: kaggle_Compositions_of_Glass
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.49783551692962646
+          Best test metric: 0.5149903893470764
+    GNN階段: start
+          Best val metric: 0.5108225345611572
+          Best test metric: 0.5903854966163635
+    GNN階段: materialize
+          Best val metric: 0.45021647214889526
+          Best test metric: 0.5231871604919434
+    GNN階段: encoding
+          Best val metric: 0.58441561460495
+          Best test metric: 0.6214739084243774
+    GNN階段: columnwise
+          Best val metric: 0.5584415197372437
+          Best test metric: 0.5739182233810425
+    GNN階段: decoding
+          Best val metric: 0.3030303120613098
+          Best test metric: 0.4228326678276062
+dataset: openml_Pokmon_Legendary_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.940000057220459
+          Best test metric: 0.879304051399231
+    GNN階段: start
+          Best val metric: 0.8636363744735718
+          Best test metric: 0.8807997703552246
+    GNN階段: materialize
+          Best val metric: 0.892727255821228
+          Best test metric: 0.918498158454895
+    GNN階段: encoding
+          Best val metric: 0.835454523563385
+          Best test metric: 0.8782051205635071
+    GNN階段: columnwise
+          Best val metric: 0.8536363840103149
+          Best test metric: 0.5992368459701538
+    GNN階段: decoding
+          Best val metric: 0.35363635420799255
+          Best test metric: 0.4823412597179413
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7566666603088379
+          Best test metric: 0.7374767065048218
+    GNN階段: start
+          Best val metric: 0.5913333296775818
+          Best test metric: 0.6239243745803833
+    GNN階段: materialize
+          Best val metric: 0.7743332982063293
+          Best test metric: 0.747261643409729
+    GNN階段: encoding
+          Best val metric: 0.8199999928474426
+          Best test metric: 0.77104651927948
+    GNN階段: columnwise
+          Best val metric: 0.690333366394043
+          Best test metric: 0.7330697774887085
+    GNN階段: decoding
+          Best val metric: 0.4566666781902313
+          Best test metric: 0.5159593224525452
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8672839403152466
+          Best test metric: 0.8585069179534912
+    GNN階段: start
+          Best val metric: 0.799382746219635
+          Best test metric: 0.831271767616272
+    GNN階段: materialize
+          Best val metric: 0.8395061492919922
+          Best test metric: 0.8654513359069824
+    GNN階段: encoding
+          Best val metric: 0.8302469253540039
+          Best test metric: 0.8655598759651184
+    GNN階段: columnwise
+          Best val metric: 0.854938268661499
+          Best test metric: 0.8662109375
+    GNN階段: decoding
+          Best val metric: 0.8117283582687378
+          Best test metric: 0.6541883945465088
+dataset: kaggle_fitbit_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8752136826515198
+          Best test metric: 0.7831756472587585
+    GNN階段: start
+          Best val metric: 0.7888888716697693
+          Best test metric: 0.6809815764427185
+    GNN階段: materialize
+          Best val metric: 0.8504273295402527
+          Best test metric: 0.7504004240036011
+    GNN階段: encoding
+          Best val metric: 0.8094017505645752
+          Best test metric: 0.7356371879577637
+    GNN階段: columnwise
+          Best val metric: 0.8717948198318481
+          Best test metric: 0.7723110318183899
+    GNN階段: decoding
+          Best val metric: 0.519658088684082
+          Best test metric: 0.40924474596977234
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8187500238418579
+          Best test metric: 0.7429698705673218
+    GNN階段: start
+          Best val metric: 0.8762499690055847
+          Best test metric: 0.9047759771347046
+    GNN階段: materialize
+          Best val metric: 0.5674999952316284
+          Best test metric: 0.6301932334899902
+    GNN階段: encoding
+          Best val metric: 0.6387499570846558
+          Best test metric: 0.6325743794441223
+    GNN階段: columnwise
+          Best val metric: 0.8800000548362732
+          Best test metric: 0.8273313045501709
+    GNN階段: decoding
+          Best val metric: 0.44999998807907104
+          Best test metric: 0.48158562183380127
+dataset: kaggle_Startup_Success_Prediction
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6243980526924133
+          Best test metric: 0.7257170081138611
+    GNN階段: start
+          Best val metric: 0.7248337864875793
+          Best test metric: 0.7716459035873413
+    GNN階段: materialize
+          Best val metric: 0.672896146774292
+          Best test metric: 0.6611920595169067
+    GNN階段: encoding
+          Best val metric: 0.6253153085708618
+          Best test metric: 0.7100626826286316
+    GNN階段: columnwise
+          Best val metric: 0.5679889917373657
+          Best test metric: 0.6987046599388123
+    GNN階段: decoding
+          Best val metric: 0.45413896441459656
+          Best test metric: 0.4678497612476349
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8895833492279053
+          Best test metric: 0.9043700695037842
+    GNN階段: start
+          Best val metric: 0.8725694417953491
+          Best test metric: 0.8867919445037842
+    GNN階段: materialize
+          Best val metric: 0.8392361402511597
+          Best test metric: 0.8329589366912842
+    GNN階段: encoding
+          Best val metric: 0.7736111283302307
+          Best test metric: 0.8377196788787842
+    GNN階段: columnwise
+          Best val metric: 0.8138889074325562
+          Best test metric: 0.8468017578125
+    GNN階段: decoding
+          Best val metric: 0.5277777910232544
+          Best test metric: 0.4767822027206421
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7642577886581421
+          Best test metric: 0.7351239919662476
+    GNN階段: start
+          Best val metric: 0.7558593153953552
+          Best test metric: 0.6545988321304321
+    GNN階段: materialize
+          Best val metric: 0.6041015386581421
+          Best test metric: 0.5895028114318848
+    GNN階段: encoding
+          Best val metric: 0.697070300579071
+          Best test metric: 0.6878299117088318
+    GNN階段: columnwise
+          Best val metric: 0.7306640148162842
+          Best test metric: 0.7137963175773621
+    GNN階段: decoding
+          Best val metric: 0.5994141101837158
+          Best test metric: 0.4889829456806183
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7386831045150757
+          Best test metric: 0.6657775044441223
+    GNN階段: start
+          Best val metric: 0.6810699701309204
+          Best test metric: 0.7410064339637756
+    GNN階段: materialize
+          Best val metric: 0.7973251342773438
+          Best test metric: 0.5765625834465027
+    GNN階段: encoding
+          Best val metric: 0.5987654328346252
+          Best test metric: 0.6010381579399109
+    GNN階段: columnwise
+          Best val metric: 0.7201646566390991
+          Best test metric: 0.7197750806808472
+    GNN階段: decoding
+          Best val metric: 0.2674897015094757
+          Best test metric: 0.5281162261962891
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7736327648162842
+          Best test metric: 0.7283990979194641
+    GNN階段: start
+          Best val metric: 0.723828136920929
+          Best test metric: 0.6493135094642639
+    GNN階段: materialize
+          Best val metric: 0.5484374761581421
+          Best test metric: 0.5939416289329529
+    GNN階段: encoding
+          Best val metric: 0.7923827767372131
+          Best test metric: 0.678239107131958
+    GNN階段: columnwise
+          Best val metric: 0.49199217557907104
+          Best test metric: 0.5486003756523132
+    GNN階段: decoding
+          Best val metric: 0.547656238079071
+          Best test metric: 0.4949413537979126
+dataset: openml_DiabeticMellitus
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.45185184478759766
+          Best test metric: 0.5379747152328491
+    GNN階段: start
+          Best val metric: 0.6864197254180908
+          Best test metric: 0.7871077060699463
+    GNN階段: materialize
+          Best val metric: 0.6654320955276489
+          Best test metric: 0.5428298711776733
+    GNN階段: encoding
+          Best val metric: 0.5308642387390137
+          Best test metric: 0.5359805822372437
+    GNN階段: columnwise
+          Best val metric: 0.40740740299224854
+          Best test metric: 0.5516732931137085
+    GNN階段: decoding
+          Best val metric: 0.4641975164413452
+          Best test metric: 0.5745187997817993
+dataset: kaggle_Credit_Card_Approval
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8867725133895874
+          Best test metric: 0.8359838724136353
+    GNN階段: start
+          Best val metric: 0.7243386507034302
+          Best test metric: 0.7373111248016357
+    GNN階段: materialize
+          Best val metric: 0.6888889074325562
+          Best test metric: 0.6731239557266235
+    GNN階段: encoding
+          Best val metric: 0.7259259223937988
+          Best test metric: 0.6863391399383545
+    GNN階段: columnwise
+          Best val metric: 0.7941799163818359
+          Best test metric: 0.724189817905426
+    GNN階段: decoding
+          Best val metric: 0.40211641788482666
+          Best test metric: 0.26532071828842163
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6875
+          Best test metric: 0.7409579157829285
+    GNN階段: start
+          Best val metric: 0.6382211446762085
+          Best test metric: 0.7257225513458252
+    GNN階段: materialize
+          Best val metric: 0.8149038553237915
+          Best test metric: 0.7440958023071289
+    GNN階段: encoding
+          Best val metric: 0.5697115063667297
+          Best test metric: 0.5567299723625183
+    GNN階段: columnwise
+          Best val metric: 0.6634615063667297
+          Best test metric: 0.6655656099319458
+    GNN階段: decoding
+          Best val metric: 0.46153849363327026
+          Best test metric: 0.48402148485183716
+dataset: kaggle_Automobiles
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9822221994400024
+          Best test metric: 0.9217639565467834
+    GNN階段: start
+          Best val metric: 0.8711111545562744
+          Best test metric: 0.8780506253242493
+    GNN階段: materialize
+          Best val metric: 0.7688888907432556
+          Best test metric: 0.8585881590843201
+    GNN階段: encoding
+          Best val metric: 0.8177777528762817
+          Best test metric: 0.7138554453849792
+    GNN階段: columnwise
+          Best val metric: 0.8666666746139526
+          Best test metric: 0.9444701671600342
+    GNN階段: decoding
+          Best val metric: 0.9022222757339478
+          Best test metric: 0.7709298729896545
+dataset: UCI_Z_Alizadeh_Sani
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6418269872665405
+          Best test metric: 0.6784476041793823
+    GNN階段: start
+          Best val metric: 0.6862980723381042
+          Best test metric: 0.6998348236083984
+    GNN階段: materialize
+          Best val metric: 0.7620192766189575
+          Best test metric: 0.7725433707237244
+    GNN階段: encoding
+          Best val metric: 0.5216346383094788
+          Best test metric: 0.6810899972915649
+    GNN階段: columnwise
+          Best val metric: 0.5552884936332703
+          Best test metric: 0.48744842410087585
+    GNN階段: decoding
+          Best val metric: 0.411057710647583
+          Best test metric: 0.46601980924606323
+dataset: UCI_Absenteeism_at_work
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6137096881866455
+          Best test metric: 0.5807667374610901
+    GNN階段: start
+          Best val metric: 0.5288306474685669
+          Best test metric: 0.5260902643203735
+    GNN階段: materialize
+          Best val metric: 0.539919376373291
+          Best test metric: 0.5229226350784302
+    GNN階段: encoding
+          Best val metric: 0.6891129016876221
+          Best test metric: 0.6419197916984558
+    GNN階段: columnwise
+          Best val metric: 0.5754032135009766
+          Best test metric: 0.5799394845962524
+    GNN階段: decoding
+          Best val metric: 0.44536292552948
+          Best test metric: 0.42615532875061035
+dataset: kaggle_Bigg_Boss_India
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5199999809265137
+          Best test metric: 0.8066200017929077
+    GNN階段: start
+          Best val metric: 0.6949999928474426
+          Best test metric: 0.7016316652297974
+    GNN階段: materialize
+          Best val metric: 0.5499999523162842
+          Best test metric: 0.7041491270065308
+    GNN階段: encoding
+          Best val metric: 0.3449999988079071
+          Best test metric: 0.5255943536758423
+    GNN階段: columnwise
+          Best val metric: 0.9775000214576721
+          Best test metric: 0.9875057935714722
+    GNN階段: decoding
+          Best val metric: 0.6399999856948853
+          Best test metric: 0.5433100461959839
+dataset: openml_analcatdata_creditscore
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7272727489471436
+          Best test metric: 0.7711598873138428
+    GNN階段: start
+          Best val metric: 0.8636363744735718
+          Best test metric: 0.7993730306625366
+    GNN階段: materialize
+          Best val metric: 0.6590908765792847
+          Best test metric: 0.7735109925270081
+    GNN階段: encoding
+          Best val metric: 1.0
+          Best test metric: 0.8134796023368835
+    GNN階段: columnwise
+          Best val metric: 0.5681818127632141
+          Best test metric: 0.6285266280174255
+    GNN階段: decoding
+          Best val metric: 0.34090909361839294
+          Best test metric: 0.6018808484077454
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5955117344856262
+          Best test metric: 0.609217643737793
+    GNN階段: start
+          Best val metric: 0.5500820875167847
+          Best test metric: 0.6213786602020264
+    GNN階段: materialize
+          Best val metric: 0.5949643850326538
+          Best test metric: 0.6263928413391113
+    GNN階段: encoding
+          Best val metric: 0.6973179578781128
+          Best test metric: 0.6596480011940002
+    GNN階段: columnwise
+          Best val metric: 0.5396825075149536
+          Best test metric: 0.5698724389076233
+    GNN階段: decoding
+          Best val metric: 0.5035577416419983
+          Best test metric: 0.413029283285141
+dataset: UCI_Heart_failure_clinical_records
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7834101319313049
+          Best test metric: 0.6236953139305115
+    GNN階段: start
+          Best val metric: 0.7649769186973572
+          Best test metric: 0.8143972158432007
+    GNN階段: materialize
+          Best val metric: 0.6474654674530029
+          Best test metric: 0.6879531145095825
+    GNN階段: encoding
+          Best val metric: 0.6774193644523621
+          Best test metric: 0.5482431650161743
+    GNN階段: columnwise
+          Best val metric: 0.6981566548347473
+          Best test metric: 0.6208270192146301
+    GNN階段: decoding
+          Best val metric: 0.5460829734802246
+          Best test metric: 0.41749662160873413
+dataset: kaggle_Store_Data_Performance
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8777778148651123
+          Best test metric: 0.5213675498962402
+    GNN階段: start
+          Best val metric: 0.6888889074325562
+          Best test metric: 0.6145299077033997
+    GNN階段: materialize
+          Best val metric: 0.7555555105209351
+          Best test metric: 0.528205156326294
+    GNN階段: encoding
+          Best val metric: 0.6888889074325562
+          Best test metric: 0.46880340576171875
+    GNN階段: columnwise
+          Best val metric: 0.8777778148651123
+          Best test metric: 0.4581196904182434
+    GNN階段: decoding
+          Best val metric: 0.6666666269302368
+          Best test metric: 0.5482906103134155
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.626207709312439
+          Best test metric: 0.6303180456161499
+    GNN階段: start
+          Best val metric: 0.6909722685813904
+          Best test metric: 0.7176195383071899
+    GNN階段: materialize
+          Best val metric: 0.7048611640930176
+          Best test metric: 0.6329185962677002
+    GNN階段: encoding
+          Best val metric: 0.70652174949646
+          Best test metric: 0.6532300710678101
+    GNN階段: columnwise
+          Best val metric: 0.5990338325500488
+          Best test metric: 0.5884532928466797
+    GNN階段: decoding
+          Best val metric: 0.46497583389282227
+          Best test metric: 0.52698814868927
+dataset: kaggle_Customer_Classification
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6479277014732361
+          Best test metric: 0.5531594753265381
+    GNN階段: start
+          Best val metric: 0.5079365372657776
+          Best test metric: 0.5026125907897949
+    GNN階段: materialize
+          Best val metric: 0.5578703880310059
+          Best test metric: 0.5065816640853882
+    GNN階段: encoding
+          Best val metric: 0.5934743881225586
+          Best test metric: 0.5015419721603394
+    GNN階段: columnwise
+          Best val metric: 0.586860716342926
+          Best test metric: 0.47966766357421875
+    GNN階段: decoding
+          Best val metric: 0.44466492533683777
+          Best test metric: 0.4967845380306244
+dataset: openml_Heart_disease_classification
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9007936716079712
+          Best test metric: 0.8475304245948792
+    GNN階段: start
+          Best val metric: 0.9047619104385376
+          Best test metric: 0.7960271835327148
+    GNN階段: materialize
+          Best val metric: 0.7440476417541504
+          Best test metric: 0.728203296661377
+    GNN階段: encoding
+          Best val metric: 0.8492063283920288
+          Best test metric: 0.8289906978607178
+    GNN階段: columnwise
+          Best val metric: 0.9166666269302368
+          Best test metric: 0.8524696230888367
+    GNN階段: decoding
+          Best val metric: 0.6111111044883728
+          Best test metric: 0.44595563411712646
+dataset: kaggle_Campus_Recruitment
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.52173912525177
+          Best test metric: 0.5230696201324463
+    GNN階段: start
+          Best val metric: 0.4956521689891815
+          Best test metric: 0.5302887558937073
+    GNN階段: materialize
+          Best val metric: 0.5173913240432739
+          Best test metric: 0.4751255512237549
+    GNN階段: encoding
+          Best val metric: 0.647826075553894
+          Best test metric: 0.5783113241195679
+    GNN階段: columnwise
+          Best val metric: 0.48695653676986694
+          Best test metric: 0.43314501643180847
+    GNN階段: decoding
+          Best val metric: 0.313043475151062
+          Best test metric: 0.5245605707168579
+dataset: openml_fishcatch
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.3885559377010848
+          Best test metric: 1.2669828219043349
+    GNN階段: start
+          Best val metric: 1.2643990406988523
+          Best test metric: 1.1881915638602174
+    GNN階段: materialize
+          Best val metric: 1.4821903414842785
+          Best test metric: 1.382058924284157
+    GNN階段: encoding
+          Best val metric: 1.3806792361588174
+          Best test metric: 1.2884690276846915
+    GNN階段: columnwise
+          Best val metric: 1.7332071719961697
+          Best test metric: 1.656573066152407
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([168]) and torch.Size([24]).
+dataset: openml_wisconsin
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.732057552456255
+          Best test metric: 1.6162985602191822
+    GNN階段: start
+          Best val metric: 1.2022510178010963
+          Best test metric: 1.035311705234636
+    GNN階段: materialize
+          Best val metric: 1.6531878540550944
+          Best test metric: 1.5363056257837564
+    GNN階段: encoding
+          Best val metric: 2.966105357299465
+          Best test metric: 2.9059088722112727
+    GNN階段: columnwise
+          Best val metric: 1.6481183362297365
+          Best test metric: 1.5489842840029115
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([928]) and torch.Size([29]).
+dataset: openml_yacht_hydrodynamics
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.82461035948405
+          Best test metric: 0.8978161861079781
+    GNN階段: start
+          Best val metric: 1.0268867549583305
+          Best test metric: 1.3170637079353824
+    GNN階段: materialize
+          Best val metric: 1.1459160977152427
+          Best test metric: 1.1125667487704571
+    GNN階段: encoding
+          Best val metric: 1.6860961019248422
+          Best test metric: 1.5997316642100312
+    GNN階段: columnwise
+          Best val metric: 0.8647585350446955
+          Best test metric: 1.120367579256708
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([276]) and torch.Size([46]).
+dataset: openml_cpu
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.9410717558963904
+          Best test metric: 0.887750336438832
+    GNN階段: start
+          Best val metric: 2.01935710930935
+          Best test metric: 1.3918413136400811
+    GNN階段: materialize
+          Best val metric: 1.9675012897259412
+          Best test metric: 1.0794213282942118
+    GNN階段: encoding
+          Best val metric: 3.7973476790717955
+          Best test metric: 3.117053189168649
+    GNN階段: columnwise
+          Best val metric: 2.1912208519502285
+          Best test metric: 1.1439797696979122
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([217]) and torch.Size([31]).
+dataset: openml_disclosure_x_noise
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0612295633601607
+          Best test metric: 1.0099222146664657
+    GNN階段: start
+          Best val metric: 1.553288199065086
+          Best test metric: 1.399693016046487
+    GNN階段: materialize
+          Best val metric: 1.7914137402996344
+          Best test metric: 1.8100570789842259
+    GNN階段: encoding
+          Best val metric: 2.3053767838421804
+          Best test metric: 2.3344043816654114
+    GNN階段: columnwise
+          Best val metric: 1.2163562742341716
+          Best test metric: 1.18451642120624
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([297]) and torch.Size([99]).
+dataset: openml_visualizing_environmental
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.774752696365047
+          Best test metric: 1.6189198084545957
+    GNN階段: start
+          Best val metric: 1.1659790748989074
+          Best test metric: 1.108324870218266
+    GNN階段: materialize
+          Best val metric: 0.9904772819829174
+          Best test metric: 1.0494859504322696
+    GNN階段: encoding
+          Best val metric: 1.2013531803907767
+          Best test metric: 1.135667819788864
+    GNN階段: columnwise
+          Best val metric: 1.873379324804374
+          Best test metric: 1.7340007756285378
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([51]) and torch.Size([17]).
+dataset: openml_rmftsa_ladata
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2718404573065987
+          Best test metric: 1.580701179403272
+    GNN階段: start
+          Best val metric: 1.0508539678094033
+          Best test metric: 1.3727600318960351
+    GNN階段: materialize
+          Best val metric: 1.0597222988272512
+          Best test metric: 1.3761145236267713
+    GNN階段: encoding
+          Best val metric: 3.281925676804898
+          Best test metric: 3.5338504634754377
+    GNN階段: columnwise
+          Best val metric: 1.530286446852607
+          Best test metric: 1.8576132498266147
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([760]) and torch.Size([76]).
+dataset: openml_residential_building
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.8252117713443299
+          Best test metric: 1.6151860332519994
+    GNN階段: start
+          Best val metric: 1.5792872615184772
+          Best test metric: 1.6821369143269105
+    GNN階段: materialize
+          Best val metric: 1.6507047275295492
+          Best test metric: 1.755613248248642
+    GNN階段: encoding
+          Best val metric: 3.322243378131349
+          Best test metric: 3.4649922404677134
+    GNN階段: columnwise
+          Best val metric: 2.070246742211883
+          Best test metric: 1.8784590286039125
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([6048]) and torch.Size([56]).
+dataset: openml_lungcancer_shedden
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.59430303515124
+          Best test metric: 1.5948019856676188
+    GNN階段: start
+          Best val metric: 1.6624071367758622
+          Best test metric: 1.638393301126636
+    GNN階段: materialize
+          Best val metric: 1.3652111919219272
+          Best test metric: 1.4378270316265362
+    GNN階段: encoding
+          Best val metric: 2.2052083006582377
+          Best test metric: 2.1911171571163686
+    GNN階段: columnwise
+          Best val metric: 1.8207983588286716
+          Best test metric: 1.825910482211626
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([1518]) and torch.Size([66]).
+dataset: openml_forest_fires
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.4348141789636278
+          Best test metric: 1.448248196343106
+    GNN階段: start
+          Best val metric: 0.9851739154293649
+          Best test metric: 1.6250903031126835
+    GNN階段: materialize
+          Best val metric: 0.5799278552715588
+          Best test metric: 1.528581824795724
+    GNN階段: encoding
+          Best val metric: 2.3982696971531796
+          Best test metric: 2.917304723066996
+    GNN階段: columnwise
+          Best val metric: 1.0031382075595972
+          Best test metric: 1.6149138163668681
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([936]) and torch.Size([78]).
+dataset: openml_boston_corrected
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8411129963767042
+          Best test metric: 0.8407515831126209
+    GNN階段: start
+          Best val metric: 1.1061381008645368
+          Best test metric: 1.0534681830723065
+    GNN階段: materialize
+          Best val metric: 1.2153088332552733
+          Best test metric: 1.3095986678248943
+    GNN階段: encoding
+          Best val metric: 0.9792827408892419
+          Best test metric: 0.9677291536640711
+    GNN階段: columnwise
+          Best val metric: 1.7705869914727597
+          Best test metric: 1.67904175166735
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([1444]) and torch.Size([76]).
+dataset: openml_liver_disorders
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.4809352170077787
+          Best test metric: 1.408216627164703
+    GNN階段: start
+          Best val metric: 1.1439444955018852
+          Best test metric: 0.9413160542060767
+    GNN階段: materialize
+          Best val metric: 1.2077745044254076
+          Best test metric: 1.0858197045416307
+    GNN階段: encoding
+          Best val metric: 1.7336610579006009
+          Best test metric: 1.6512906661935118
+    GNN階段: columnwise
+          Best val metric: 1.3425524498551937
+          Best test metric: 1.0900763806870652
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([260]) and torch.Size([52]).
+dataset: openml_disclosure_z
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.3297947877304135
+          Best test metric: 1.3354015055890327
+    GNN階段: start
+          Best val metric: 1.0837195270482414
+          Best test metric: 1.0492329020621567
+    GNN階段: materialize
+          Best val metric: 1.083319547761112
+          Best test metric: 1.0520755213582798
+    GNN階段: encoding
+          Best val metric: 1.3283141057638315
+          Best test metric: 1.3360657212144988
+    GNN階段: columnwise
+          Best val metric: 1.3312467351165995
+          Best test metric: 1.3324843276571186
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([297]) and torch.Size([99]).
+dataset: openml_disclosure_x_tampered
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.117302575220254
+          Best test metric: 1.074356347721578
+    GNN階段: start
+          Best val metric: 1.0718492488158933
+          Best test metric: 0.9639466165050781
+    GNN階段: materialize
+          Best val metric: 1.1366196422041595
+          Best test metric: 1.032558016220821
+    GNN階段: encoding
+          Best val metric: 1.9665849073301278
+          Best test metric: 1.9808118775002386
+    GNN階段: columnwise
+          Best val metric: 1.2573299548564543
+          Best test metric: 1.2290856232299896
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([297]) and torch.Size([99]).
+dataset: openml_weather_ankara
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9836938408668404
+          Best test metric: 1.0734086189660341
+    GNN階段: start
+          Best val metric: 1.0590144373708394
+          Best test metric: 1.1132967763788468
+    GNN階段: materialize
+          Best val metric: 1.0285401430840528
+          Best test metric: 0.8156634515343788
+    GNN階段: encoding
+          Best val metric: 3.283913975089569
+          Best test metric: 2.984861963297701
+    GNN階段: columnwise
+          Best val metric: 1.847082133546258
+          Best test metric: 1.5735281288389205
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([432]) and torch.Size([48]).
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9298386010226297
+          Best test metric: 0.8772413633937328
+    GNN階段: start
+          Best val metric: 0.9985611219690893
+          Best test metric: 0.9591199852802257
+    GNN階段: materialize
+          Best val metric: 0.8755649037401331
+          Best test metric: 0.8493980407958118
+    GNN階段: encoding
+          Best val metric: 1.4790887767360528
+          Best test metric: 1.4448247963045906
+    GNN階段: columnwise
+          Best val metric: 0.711983006282593
+          Best test metric: 0.6540520736730869
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([260]) and torch.Size([52]).
+dataset: openml_EgyptianSkulls
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2746134284162822
+          Best test metric: 1.2012916071074091
+    GNN階段: start
+          Best val metric: 1.4866063262400435
+          Best test metric: 1.3607949043138152
+    GNN階段: materialize
+          Best val metric: 1.72770245923848
+          Best test metric: 1.5988829736833605
+    GNN階段: encoding
+          Best val metric: 4.108985563325715
+          Best test metric: 3.953133926079967
+    GNN階段: columnwise
+          Best val metric: 3.0656902279073024
+          Best test metric: 2.9012347190812804
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([92]) and torch.Size([23]).
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7990825592972409
+          Best test metric: 0.791242213821068
+    GNN階段: start
+          Best val metric: 0.9285696987251266
+          Best test metric: 1.048388568401487
+    GNN階段: materialize
+          Best val metric: 0.8215423810199634
+          Best test metric: 0.9074067592798746
+    GNN階段: encoding
+          Best val metric: 0.9855729035014622
+          Best test metric: 1.1199789851635373
+    GNN階段: columnwise
+          Best val metric: 1.3059491664404623
+          Best test metric: 1.4020588194851897
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([260]) and torch.Size([52]).
+dataset: openml_autoPrice
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9735188163972572
+          Best test metric: 1.047966231784892
+    GNN階段: start
+          Best val metric: 1.3439560222157432
+          Best test metric: 1.311751288350663
+    GNN階段: materialize
+          Best val metric: 1.2459193858065818
+          Best test metric: 1.2116175557030535
+    GNN階段: encoding
+          Best val metric: 1.9038531759735762
+          Best test metric: 1.855082582141874
+    GNN階段: columnwise
+          Best val metric: 1.374717336557639
+          Best test metric: 1.415557239923385
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([360]) and torch.Size([24]).
+dataset: openml_ELE_1
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6005989631542894
+          Best test metric: 0.8926045687241231
+    GNN階段: start
+          Best val metric: 0.8449602630684495
+          Best test metric: 1.1773580326259427
+    GNN階段: materialize
+          Best val metric: 0.97620940882348
+          Best test metric: 1.276342577065839
+    GNN階段: encoding
+          Best val metric: 2.6783394050015
+          Best test metric: 2.869375116725912
+    GNN階段: columnwise
+          Best val metric: 0.9781747250821089
+          Best test metric: 1.2847074055318468
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([150]) and torch.Size([75]).
+dataset: openml_machine_cpu
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.9511622828647792
+          Best test metric: 1.1135687205944904
+    GNN階段: start
+          Best val metric: 1.9033044664673555
+          Best test metric: 0.9385571876848534
+    GNN階段: materialize
+          Best val metric: 1.8311643196346223
+          Best test metric: 0.8585603494022268
+    GNN階段: encoding
+          Best val metric: 3.036318287746994
+          Best test metric: 2.377176793027826
+    GNN階段: columnwise
+          Best val metric: 2.0001718924087823
+          Best test metric: 1.437047306596155
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([186]) and torch.Size([31]).
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9223766578362679
+          Best test metric: 1.0415009875464554
+    GNN階段: start
+          Best val metric: 1.129761421454837
+          Best test metric: 1.1290922968586046
+    GNN階段: materialize
+          Best val metric: 1.0233125683192617
+          Best test metric: 1.1896954870494478
+    GNN階段: encoding
+          Best val metric: 1.2852905110547235
+          Best test metric: 1.2831621090910892
+    GNN階段: columnwise
+          Best val metric: 1.1750436795009138
+          Best test metric: 1.1512567080489733
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([260]) and torch.Size([52]).
+dataset: openml_disclosure_x_bias
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.202193754381689
+          Best test metric: 1.1162424959141959
+    GNN階段: start
+          Best val metric: 1.0783681180749198
+          Best test metric: 1.0528657792271947
+    GNN階段: materialize
+          Best val metric: 1.39474071137063
+          Best test metric: 1.3300494892550023
+    GNN階段: encoding
+          Best val metric: 2.7338006860598076
+          Best test metric: 2.676327303002043
+    GNN階段: columnwise
+          Best val metric: 1.9180655212229387
+          Best test metric: 1.8531415941804514
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([297]) and torch.Size([99]).
+dataset: openml_Boston_house_price_data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1445286981860152
+          Best test metric: 1.1966114839742688
+    GNN階段: start
+          Best val metric: 1.0634924236757681
+          Best test metric: 1.1560768822641894
+    GNN階段: materialize
+          Best val metric: 1.2573493910556641
+          Best test metric: 1.2942103391616055
+    GNN階段: encoding
+          Best val metric: 1.3628583541815036
+          Best test metric: 1.4161132778827754
+    GNN階段: columnwise
+          Best val metric: 0.7964511192754079
+          Best test metric: 0.8780433318148687
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([988]) and torch.Size([76]).
+dataset: openml_bodyfat
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2311234927176433
+          Best test metric: 1.146090594224284
+    GNN階段: start
+          Best val metric: 1.3842623593765713
+          Best test metric: 1.2979787702484764
+    GNN階段: materialize
+          Best val metric: 1.1073467895242177
+          Best test metric: 1.0438357974669026
+    GNN階段: encoding
+          Best val metric: 3.129105884217336
+          Best test metric: 3.0348657496012947
+    GNN階段: columnwise
+          Best val metric: 1.8341703960421805
+          Best test metric: 1.7286605860383386
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([532]) and torch.Size([38]).
+dataset: openml_Fish_market
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8514571168419648
+          Best test metric: 0.879151644887244
+    GNN階段: start
+          Best val metric: 0.5245117153408496
+          Best test metric: 1.0474225220899105
+    GNN階段: materialize
+          Best val metric: 1.0635026800698468
+          Best test metric: 1.5334674583044503
+    GNN階段: encoding
+          Best val metric: 1.560237161508656
+          Best test metric: 2.168568351240109
+    GNN階段: columnwise
+          Best val metric: 0.860254288715646
+          Best test metric: 1.4573294408600233
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([144]) and torch.Size([24]).
+dataset: openml_auto_price
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6914911379670369
+          Best test metric: 0.7256853695250822
+    GNN階段: start
+          Best val metric: 1.484015571846711
+          Best test metric: 1.3965446832612538
+    GNN階段: materialize
+          Best val metric: 1.0108931424109746
+          Best test metric: 1.0551940266780668
+    GNN階段: encoding
+          Best val metric: 2.1529818106599206
+          Best test metric: 2.143433003023922
+    GNN階段: columnwise
+          Best val metric: 1.4232627887054101
+          Best test metric: 1.4289258585356674
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([360]) and torch.Size([24]).
+dataset: openml_DEE
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.3221777206344147
+          Best test metric: 1.3090628622914657
+    GNN階段: start
+          Best val metric: 1.5520635343308629
+          Best test metric: 1.5071012568688975
+    GNN階段: materialize
+          Best val metric: 1.0861494008529422
+          Best test metric: 1.0380004388260695
+    GNN階段: encoding
+          Best val metric: 1.2840941426028527
+          Best test metric: 1.2430010836344114
+    GNN階段: columnwise
+          Best val metric: 1.0621560605932885
+          Best test metric: 1.0387629600662056
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([330]) and torch.Size([55]).
+dataset: openml_pm10
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.151398299996435
+          Best test metric: 1.182149478019577
+    GNN階段: start
+          Best val metric: 1.1103988543448187
+          Best test metric: 1.1023031680114455
+    GNN階段: materialize
+          Best val metric: 1.301370206735204
+          Best test metric: 1.3580894091279208
+    GNN階段: encoding
+          Best val metric: 2.992724497444183
+          Best test metric: 3.1003855434749523
+    GNN階段: columnwise
+          Best val metric: 1.544040510510898
+          Best test metric: 1.6369046126196327
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([525]) and torch.Size([75]).
+dataset: openml_meta
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7161872204467856
+          Best test metric: 1.2132521135180914
+    GNN階段: start
+          Best val metric: 0.951157838063776
+          Best test metric: 1.2266815030627796
+    GNN階段: materialize
+          Best val metric: 1.4930361586303873
+          Best test metric: 1.5140505606197288
+    GNN階段: encoding
+          Best val metric: 1.3961251603805336
+          Best test metric: 1.5996546849504691
+    GNN階段: columnwise
+          Best val metric: 1.4517330763408323
+          Best test metric: 1.791467174986286
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([1659]) and torch.Size([79]).
+dataset: openml_Forest_Fire_Area
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.240769494623948
+          Best test metric: 1.945247419256801
+    GNN階段: start
+          Best val metric: 1.0024902212945515
+          Best test metric: 1.6332445804979585
+    GNN階段: materialize
+          Best val metric: 0.8364763394924026
+          Best test metric: 1.6542104002634743
+    GNN階段: encoding
+          Best val metric: 0.9964198457586837
+          Best test metric: 1.8017972450800144
+    GNN階段: columnwise
+          Best val metric: 1.4448476507794905
+          Best test metric: 2.1142512720020084
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([936]) and torch.Size([78]).
+dataset: openml_HappinessRank_2015
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2544733589204962
+          Best test metric: 1.2453806878809737
+    GNN階段: start
+          Best val metric: 1.4349324059599715
+          Best test metric: 1.4374478372148831
+    GNN階段: materialize
+          Best val metric: 1.2019789054815884
+          Best test metric: 1.264204711836121
+    GNN階段: encoding
+          Best val metric: 3.619226527751432
+          Best test metric: 3.6645229025942374
+    GNN階段: columnwise
+          Best val metric: 1.9374072144964039
+          Best test metric: 1.9786218462162235
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([216]) and torch.Size([24]).
+dataset: openml_boston
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0968935342728026
+          Best test metric: 1.1582423906280122
+    GNN階段: start
+          Best val metric: 1.376910399727767
+          Best test metric: 1.4799877180414671
+    GNN階段: materialize
+          Best val metric: 1.5124714872336682
+          Best test metric: 1.5561641408989606
+    GNN階段: encoding
+          Best val metric: 1.838452114557448
+          Best test metric: 1.8840507139722151
+    GNN階段: columnwise
+          Best val metric: 1.4749703679098636
+          Best test metric: 1.5349477378820344
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([988]) and torch.Size([76]).
+dataset: openml_echoMonths
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 2.0074616953234545
+          Best test metric: 1.917584102929799
+    GNN階段: start
+          Best val metric: 1.8334915425209826
+          Best test metric: 1.838586981397748
+    GNN階段: materialize
+          Best val metric: 1.565930225216105
+          Best test metric: 1.4844071234188552
+    GNN階段: encoding
+          Best val metric: 2.382440256528531
+          Best test metric: 2.327392975080771
+    GNN階段: columnwise
+          Best val metric: 2.4358883934136304
+          Best test metric: 2.3419697421731125
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([180]) and torch.Size([20]).
+dataset: openml_strikes
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.8935642566803077
+          Best test metric: 1.644216910650045
+    GNN階段: start
+          Best val metric: 1.9379228930256085
+          Best test metric: 1.6984456726270643
+    GNN階段: materialize
+          Best val metric: 1.861890229633146
+          Best test metric: 1.618424168495179
+    GNN階段: encoding
+          Best val metric: 1.8826149484664816
+          Best test metric: 1.6282895610916788
+    GNN階段: columnwise
+          Best val metric: 2.3574838701264733
+          Best test metric: 2.1305993303457424
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([564]) and torch.Size([94]).
+dataset: openml_no2
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.141084186671107
+          Best test metric: 1.0437918854492498
+    GNN階段: start
+          Best val metric: 1.1810793718092902
+          Best test metric: 1.0837770005924856
+    GNN階段: materialize
+          Best val metric: 1.227497594796056
+          Best test metric: 1.1142597917276735
+    GNN階段: encoding
+          Best val metric: 2.441975714835367
+          Best test metric: 2.3147141450255044
+    GNN階段: columnwise
+          Best val metric: 1.4532707715494946
+          Best test metric: 1.3470147859120092
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([525]) and torch.Size([75]).
+dataset: openml_pharynx
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.4778411818568713
+          Best test metric: 1.652053338540611
+    GNN階段: start
+          Best val metric: 1.3558816857949012
+          Best test metric: 1.4496529229545394
+    GNN階段: materialize
+          Best val metric: 1.7172598187505625
+          Best test metric: 1.936133795170076
+    GNN階段: encoding
+          Best val metric: 2.5082133795696873
+          Best test metric: 2.729338710885216
+    GNN階段: columnwise
+          Best val metric: 1.5093207845171819
+          Best test metric: 1.6928207438385978
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([300]) and torch.Size([30]).
+dataset: openml_The_Office_Dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.326642499293039
+          Best test metric: 1.0995699128409697
+    GNN階段: start
+          Best val metric: 1.615411935477437
+          Best test metric: 1.3789362053143435
+    GNN階段: materialize
+          Best val metric: 1.1500855642082919
+          Best test metric: 1.1410298086379862
+    GNN階段: encoding
+          Best val metric: 1.110925960346707
+          Best test metric: 1.1336522114228544
+    GNN階段: columnwise
+          Best val metric: 1.5430969185048915
+          Best test metric: 1.655004644934829
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([280]) and torch.Size([28]).
+dataset: openml_analcatdata_vineyard
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.5252806639753533
+          Best test metric: 1.5967355327580912
+    GNN階段: start
+          Best val metric: 1.0699254470771138
+          Best test metric: 1.1403324326800912
+    GNN階段: materialize
+          Best val metric: 1.1130809402956072
+          Best test metric: 1.187706828928014
+    GNN階段: encoding
+          Best val metric: 1.375722651882733
+          Best test metric: 1.4506738971192255
+    GNN階段: columnwise
+          Best val metric: 1.7050103767280615
+          Best test metric: 1.7770755104289282
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([210]) and torch.Size([70]).
+dataset: openml_lowbwt
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.4638907218807422
+          Best test metric: 1.3093428560012317
+    GNN階段: start
+          Best val metric: 1.3804544721209366
+          Best test metric: 1.1599165543599712
+    GNN階段: materialize
+          Best val metric: 1.300148062343831
+          Best test metric: 1.0770196638835834
+    GNN階段: encoding
+          Best val metric: 2.217465310841447
+          Best test metric: 2.1656941896865742
+    GNN階段: columnwise
+          Best val metric: 1.780735276122397
+          Best test metric: 1.6380344101222375
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([252]) and torch.Size([28]).
+dataset: openml_cps_85_wages
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2655992387575206
+          Best test metric: 1.193334700958349
+    GNN階段: start
+          Best val metric: 1.087044679756984
+          Best test metric: 1.0954863797990348
+    GNN階段: materialize
+          Best val metric: 1.7144765960484345
+          Best test metric: 1.6376546218903285
+    GNN階段: encoding
+          Best val metric: 1.151189089809144
+          Best test metric: 1.1497239673053699
+    GNN階段: columnwise
+          Best val metric: 1.530460543413344
+          Best test metric: 1.4543680596278237
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([800]) and torch.Size([80]).
+dataset: openml_cleveland
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.4250336659787983
+          Best test metric: 1.221045899140037
+    GNN階段: start
+          Best val metric: 1.202494914545738
+          Best test metric: 0.9972842712691274
+    GNN階段: materialize
+          Best val metric: 1.5411725756031145
+          Best test metric: 1.29152942769266
+    GNN階段: encoding
+          Best val metric: 1.6979818819155512
+          Best test metric: 1.421322725795601
+    GNN階段: columnwise
+          Best val metric: 1.1675648580992608
+          Best test metric: 1.2832603499892343
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([585]) and torch.Size([45]).
+dataset: openml_cloud
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.3152110846337766
+          Best test metric: 1.1699700194373106
+    GNN階段: start
+          Best val metric: 1.5054956533723365
+          Best test metric: 1.4245412790912593
+    GNN階段: materialize
+          Best val metric: 1.115397800423278
+          Best test metric: 1.0872686995150134
+    GNN階段: encoding
+          Best val metric: 2.210473972432223
+          Best test metric: 2.078728839080697
+    GNN階段: columnwise
+          Best val metric: 1.759702488722431
+          Best test metric: 1.6347441130650404
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([80]) and torch.Size([16]).
+dataset: openml_fruitfly
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2054404235003755
+          Best test metric: 1.0838079635448623
+    GNN階段: start
+          Best val metric: 1.6213556652591135
+          Best test metric: 1.2207038574216553
+    GNN階段: materialize
+          Best val metric: 1.5562264957721252
+          Best test metric: 1.095348389128726
+    GNN階段: encoding
+          Best val metric: 2.041279490083247
+          Best test metric: 1.6032856672951266
+    GNN階段: columnwise
+          Best val metric: 1.7711801151980626
+          Best test metric: 1.3012818527354033
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([76]) and torch.Size([19]).
+dataset: openml_analcatdata_homerun
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.7458135392820247
+          Best test metric: 1.5566989021448838
+    GNN階段: start
+          Best val metric: 1.5662676590565607
+          Best test metric: 1.4570113684394645
+    GNN階段: materialize
+          Best val metric: 1.6230995362480027
+          Best test metric: 1.5815369387138054
+    GNN階段: encoding
+          Best val metric: 2.3476033387275286
+          Best test metric: 2.1580767426231118
+    GNN階段: columnwise
+          Best val metric: 1.7323609763949346
+          Best test metric: 1.8037096156769656
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([624]) and torch.Size([24]).
+dataset: openml_cholesterol
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1916171028037987
+          Best test metric: 1.3423921688824412
+    GNN階段: start
+          Best val metric: 1.0887370626248094
+          Best test metric: 1.2193993037004878
+    GNN階段: materialize
+          Best val metric: 1.2158658061267702
+          Best test metric: 1.359792447942002
+    GNN階段: encoding
+          Best val metric: 2.863229124003269
+          Best test metric: 2.890789790224652
+    GNN階段: columnwise
+          Best val metric: 1.581202386433243
+          Best test metric: 1.6918514802197697
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([585]) and torch.Size([45]).
+dataset: openml_Reading_Hydro
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0806532806349511
+          Best test metric: 1.1924790851990172
+    GNN階段: start
+          Best val metric: 0.8748854494044466
+          Best test metric: 0.8887645631179131
+    GNN階段: materialize
+          Best val metric: 1.232192512364633
+          Best test metric: 1.382625631863538
+    GNN階段: encoding
+          Best val metric: 1.3900520344469676
+          Best test metric: 1.5391325184342504
+    GNN階段: columnwise
+          Best val metric: 0.8037885440702945
+          Best test metric: 0.8056467135324293
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Predictions and targets are expected to have the same shape, but got torch.Size([3900]) and torch.Size([150]).
+dataset: road_safety
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7768030762672424
+          Best test metric: 0.7752601504325867
+    GNN階段: start
+          Best val metric: 0.7514621019363403
+          Best test metric: 0.7498960494995117
+    GNN階段: materialize
+          Best val metric: 0.7108030319213867
+          Best test metric: 0.7053535580635071
+    GNN階段: encoding
+          Best val metric: 0.6447494029998779
+          Best test metric: 0.6470834016799927
+    GNN階段: columnwise
+          Best val metric: 0.696323573589325
+          Best test metric: 0.6979081034660339
+    GNN階段: decoding
+          Best val metric: 0.5588792562484741
+          Best test metric: 0.4793611764907837
+dataset: higgs_small
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6132618188858032
+          Best test metric: 0.6081762313842773
+    GNN階段: start
+          Best val metric: 0.6633915901184082
+          Best test metric: 0.6574752330780029
+    GNN階段: materialize
+          Best val metric: 0.6625010371208191
+          Best test metric: 0.6511520743370056
+    GNN階段: encoding
+          Best val metric: 0.5837668776512146
+          Best test metric: 0.5778276324272156
+    GNN階段: columnwise
+          Best val metric: 0.6281653642654419
+          Best test metric: 0.6248611807823181
+    GNN階段: decoding
+          Best val metric: 0.5923916101455688
+          Best test metric: 0.5883033871650696
+dataset: bank_marketing
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7013270854949951
+          Best test metric: 0.6919914484024048
+    GNN階段: start
+          Best val metric: 0.7305539846420288
+          Best test metric: 0.7403599619865417
+    GNN階段: materialize
+          Best val metric: 0.7643597722053528
+          Best test metric: 0.783527135848999
+    GNN階段: encoding
+          Best val metric: 0.7716225981712341
+          Best test metric: 0.7733625173568726
+    GNN階段: columnwise
+          Best val metric: 0.6731182336807251
+          Best test metric: 0.6598120927810669
+    GNN階段: decoding
+          Best val metric: 0.5304363369941711
+          Best test metric: 0.5222257971763611
+dataset: MagicTelescope
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6715123653411865
+          Best test metric: 0.6685805320739746
+    GNN階段: start
+          Best val metric: 0.8292398452758789
+          Best test metric: 0.8405438661575317
+    GNN階段: materialize
+          Best val metric: 0.6946247816085815
+          Best test metric: 0.6962364315986633
+    GNN階段: encoding
+          Best val metric: 0.5928995609283447
+          Best test metric: 0.5984247326850891
+    GNN階段: columnwise
+          Best val metric: 0.6720346212387085
+          Best test metric: 0.6715602874755859
+    GNN階段: decoding
+          Best val metric: 0.8053399324417114
+          Best test metric: 0.758549690246582
+dataset: credit
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7499315738677979
+          Best test metric: 0.7609330415725708
+    GNN階段: start
+          Best val metric: 0.7545635104179382
+          Best test metric: 0.7618244886398315
+    GNN階段: materialize
+          Best val metric: 0.8061271905899048
+          Best test metric: 0.8066293001174927
+    GNN階段: encoding
+          Best val metric: 0.761792778968811
+          Best test metric: 0.7674380540847778
+    GNN階段: columnwise
+          Best val metric: 0.8172475099563599
+          Best test metric: 0.8216627240180969
+    GNN階段: decoding
+          Best val metric: 0.5047076940536499
+          Best test metric: 0.4206254482269287
+dataset: binarized_pol
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6953439712524414
+          Best test metric: 0.7172936201095581
+    GNN階段: start
+          Best val metric: 0.7728139162063599
+          Best test metric: 0.7652691602706909
+    GNN階段: materialize
+          Best val metric: 0.8586865067481995
+          Best test metric: 0.8531239032745361
+    GNN階段: encoding
+          Best val metric: 0.6539863348007202
+          Best test metric: 0.6644396781921387
+    GNN階段: columnwise
+          Best val metric: 0.6316651105880737
+          Best test metric: 0.6399704217910767
+    GNN階段: decoding
+          Best val metric: 0.5168150663375854
+          Best test metric: 0.5066415071487427
+dataset: helena
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.14437627792358398
+          Best test metric: 0.1434514969587326
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: jannis
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: eye
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: Brazilian_houses
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: medical_charges
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: nyc_taxi_green_dec_2016
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: Ailerons
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: california
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: sulfur
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: pol
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: diamonds
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: house_sales
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: house
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+dataset: SGEMM_GPU_kernel_performance
+  模型: excelformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

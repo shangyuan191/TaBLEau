@@ -1,0 +1,20 @@
+dataset: eye
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.4783668518066406
+          Best test metric: 0.4753686189651489
+    GNN階段: start
+          Best val metric: 0.45216330885887146
+          Best test metric: 0.43216368556022644
+    GNN階段: materialize
+          Best val metric: 0.3991468548774719
+          Best test metric: 0.3971882462501526
+    GNN階段: encoding
+          Best val metric: 0.45155394077301025
+          Best test metric: 0.4477083086967468
+    GNN階段: columnwise
+          Best val metric: 0.45947593450546265
+          Best test metric: 0.44667962193489075
+    GNN階段: decoding
+          Best val metric: 0.44728824496269226
+          Best test metric: 0.4367356300354004

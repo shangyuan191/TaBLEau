@@ -382,172 +382,47 @@ class GhostBatchNorm1d(torch.nn.Module):
     def reset_parameters(self) -> None:
         self.bn.reset_parameters()
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--dataset', type=str, default="ForestCoverType",
-#                     choices=["ForestCoverType", "KDDCensusIncome"])
-# parser.add_argument('--channels', type=int, default=128)
-# parser.add_argument('--gamma', type=int, default=1.2)
-# parser.add_argument('--num_layers', type=int, default=6)
-# parser.add_argument('--batch_size', type=int, default=4096)
-# parser.add_argument('--lr', type=float, default=0.005)
-# parser.add_argument('--epochs', type=int, default=50)
-# parser.add_argument('--seed', type=int, default=0)
-# parser.add_argument('--compile', action='store_true')
-# args = parser.parse_args()
-
-# torch.manual_seed(args.seed)
-# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# # Prepare datasets
-# path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data',
-#                 args.dataset)
-# if args.dataset == "ForestCoverType":
-#     dataset = ForestCoverType(root=path)
-# elif args.dataset == "KDDCensusIncome":
-#     dataset = KDDCensusIncome(root=path)
-# else:
-#     raise ValueError(f"Unsupported dataset called {args.dataset}")
-
-# dataset.materialize()
-# assert dataset.task_type.is_classification
-# dataset = dataset.shuffle()
-# # Split ratio is set to 80% / 10% / 10% (no clear mentioning of split in the
-# # original TabNet paper)
-# train_dataset, val_dataset, test_dataset = dataset[:0.8], dataset[
-#     0.8:0.9], dataset[0.9:]
-
-# # Set up data loaders
-# train_tensor_frame = train_dataset.tensor_frame
-# val_tensor_frame = val_dataset.tensor_frame
-# test_tensor_frame = test_dataset.tensor_frame
-# train_loader = DataLoader(train_tensor_frame, batch_size=args.batch_size,
-#                           shuffle=True)
-# val_loader = DataLoader(val_tensor_frame, batch_size=args.batch_size)
-# test_loader = DataLoader(test_tensor_frame, batch_size=args.batch_size)
-
-# # Set up model and optimizer
-# model = TabNet(
-#     out_channels=dataset.num_classes,
-#     num_layers=args.num_layers,
-#     split_attn_channels=args.channels,
-#     split_feat_channels=args.channels,
-#     gamma=args.gamma,
-#     col_stats=dataset.col_stats,
-#     col_names_dict=train_tensor_frame.col_names_dict,
-# ).to(device)
-# model = torch.compile(model, dynamic=True) if args.compile else model
-# optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-# lr_scheduler = ExponentialLR(optimizer, gamma=0.95)
 
 
-# def train(epoch: int) -> float:
-#     model.train()
-#     loss_accum = total_count = 0
-
-#     for tf in tqdm(train_loader, desc=f'Epoch: {epoch}'):
-#         tf = tf.to(device)
-#         pred = model(tf)
-#         loss = F.cross_entropy(pred, tf.y)
-#         optimizer.zero_grad()
-#         loss.backward()
-#         loss_accum += float(loss) * len(tf.y)
-#         total_count += len(tf.y)
-#         optimizer.step()
-#     return loss_accum / total_count
-
-
-# @torch.no_grad()
-# def test(loader: DataLoader) -> float:
-#     model.eval()
-#     accum = total_count = 0
-
-#     for tf in loader:
-#         tf = tf.to(device)
-#         pred = model(tf)
-#         pred_class = pred.argmax(dim=-1)
-#         accum += float((tf.y == pred_class).sum())
-#         total_count += len(tf.y)
-
-#     return accum / total_count
-
-
-# best_val_acc = 0
-# best_test_acc = 0
-# for epoch in range(1, args.epochs + 1):
-#     train_loss = train(epoch)
-#     train_acc = test(train_loader)
-#     val_acc = test(val_loader)
-#     test_acc = test(test_loader)
-#     if best_val_acc < val_acc:
-#         best_val_acc = val_acc
-#         best_test_acc = test_acc
-#     print(f'Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.4f}, '
-#           f'Val Acc: {val_acc:.4f}, Test Acc: {test_acc:.4f}')
-#     lr_scheduler.step()
-
-# print(f'Best Val Acc: {best_val_acc:.4f}, Best Test Acc: {best_test_acc:.4f}')
-
-
-def start_fn(df, dataset_results, config):
-    return df
+def start_fn(train_df, val_df, test_df):
+    return train_df, val_df, test_df
 
 
 
-
-def materialize_fn(df, dataset_results, config):
+def materialize_fn(train_df, val_df, test_df, dataset_results, config):
     """
-    階段1: Materialization - 將原始表格數據轉換為張量格式
-    
-    輸入:
-    - df: 輸入數據框
-    - dataset_results: 數據集信息
-    - config: 配置參數
-    
-    輸出:
-    - 包含資料集和張量框架的字典，可直接傳給encoding_fn或自定義GNN
+    階段1: Materialization - 將已切分的 train/val/test DataFrame 合併並轉換為張量格式
     """
     print("Executing materialize_fn")
-    print(f"Input DataFrame shape: {df.shape}")
-    
-    # 獲取配置參數
+    print(f"Train shape: {train_df.shape}, Val shape: {val_df.shape}, Test shape: {test_df.shape}")
+
     dataset_name = dataset_results['dataset']
-    dataset_size = dataset_results['info']['size']
     task_type = dataset_results['info']['task_type']
-    train_val_test_split_ratio = config['train_val_test_split_ratio']
-    
-    # 設備設置
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"Using device: {device}")
-    
-    # 數據集加載和物化
-    dataset = Yandex(df=df, name=dataset_name, 
-                     train_val_test_split_ratio=train_val_test_split_ratio, 
-                     task_type=task_type, DS=False)
+
+    # 數據集包裝（直接合併三份 DataFrame，標記 split_col）
+    dataset = Yandex(train_df, val_df, test_df, name=dataset_name, task_type=task_type)
     dataset.materialize()
     is_classification = dataset.task_type.is_classification
-    
-    # 數據集分割
-    train_dataset, val_dataset, test_dataset = dataset.split()
-    train_tensor_frame = train_dataset.tensor_frame
-    val_tensor_frame = val_dataset.tensor_frame
-    test_tensor_frame = test_dataset.tensor_frame
-    
-    # 創建數據加載器
+
+    # 根據 split_col 取得三份 tensor_frame
+    train_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 0]
+    val_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 1]
+    test_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 2]
+
     batch_size = config.get('batch_size', 4096)  # TabNet通常使用較大的批次
-    print(f"Batch size: {batch_size}")
-    
     train_loader = DataLoader(train_tensor_frame, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_tensor_frame, batch_size=batch_size)
     test_loader = DataLoader(test_tensor_frame, batch_size=batch_size)
-    
-    # 確定輸出通道數
+
     if is_classification:
         out_channels = dataset.num_classes
     else:
         out_channels = 1
-    
+
     is_binary_class = is_classification and out_channels == 2
-    
+
     # 設置評估指標
     if is_binary_class:
         from torchmetrics import AUROC
@@ -561,15 +436,11 @@ def materialize_fn(df, dataset_results, config):
         from torchmetrics import MeanSquaredError
         metric_computer = MeanSquaredError()
         metric = 'RMSE'
-    
+
     metric_computer = metric_computer.to(device)
-    
-    # 返回所有需要的信息 - 這些都是encoding_fn的輸入
+
     return {
         'dataset': dataset,
-        'train_dataset': train_dataset,
-        'val_dataset': val_dataset,
-        'test_dataset': test_dataset,
         'train_tensor_frame': train_tensor_frame,
         'val_tensor_frame': val_tensor_frame,
         'test_tensor_frame': test_tensor_frame,
@@ -1008,36 +879,28 @@ def decoding_fn(columnwise_outputs, config):
         'lin': lin,
         'forward': forward  # 返回完整模型的前向函數
     }
-def main(df, dataset_results, config):
+def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     """
     主函數：按順序調用四個階段函數
-    
-    可用於在階段間插入GNN模型
     """
     print("TabNet - 四階段執行")
-    
+    print(f"gnn_stage: {gnn_stage}")
     try:
         # 階段0: 開始
-        df = start_fn(df, dataset_results, config)
+        train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
         # 階段1: Materialization
-        material_outputs = materialize_fn(df, dataset_results, config)
-        
+        material_outputs = materialize_fn(train_df, val_df, test_df, dataset_results, config)
         # 階段2: Encoding
         encoding_outputs = encoding_fn(material_outputs, config)
-        
         # 這裡可以插入GNN處理編碼後的數據
         # encoding_outputs = gnn_process(encoding_outputs, config)
-        
         # 階段3: Column-wise Interaction
         columnwise_outputs = columnwise_fn(encoding_outputs, config)
-        
         # 這裡可以插入GNN處理列間交互後的數據
         # columnwise_outputs = gnn_process(columnwise_outputs, config)
-        
         # 階段4: Decoding
         results = decoding_fn(columnwise_outputs, config)
     except Exception as e:
-        # 返回一個基本值的結果
         is_classification = dataset_results['info']['task_type'] == 'classification'
         results = {
             'train_losses': [],
@@ -1048,5 +911,4 @@ def main(df, dataset_results, config):
             'best_test_metric': float('-inf') if is_classification else float('inf'),
             'error': str(e),
         }
-    
     return results

@@ -1,0 +1,20 @@
+dataset: kaggle_Audit_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.98469078540802
+          Best test metric: 0.9814649820327759
+    GNN階段: start
+          Best val metric: 0.9816288948059082
+          Best test metric: 0.9762251377105713
+    GNN階段: materialize
+          Best val metric: 0.9862216711044312
+          Best test metric: 0.9726214408874512
+    GNN階段: encoding
+          Best val metric: 0.9681567549705505
+          Best test metric: 0.969659149646759
+    GNN階段: columnwise
+          Best val metric: 0.9837722182273865
+          Best test metric: 0.9741270542144775
+    GNN階段: decoding
+          Best val metric: 0.930189847946167
+          Best test metric: 0.9307844638824463

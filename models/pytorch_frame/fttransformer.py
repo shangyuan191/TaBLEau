@@ -52,212 +52,42 @@ from torch_frame.nn import (
     ResNet,
 )
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--dataset', type=str, default='adult')
-# parser.add_argument('--numerical_encoder_type', type=str, default='linear',
-#                     choices=['linear', 'linearbucket', 'linearperiodic'])
-# parser.add_argument('--model_type', type=str, default='fttransformer',
-#                     choices=['fttransformer'])
-# parser.add_argument('--channels', type=int, default=256)
-# parser.add_argument('--num_layers', type=int, default=4)
-# parser.add_argument('--batch_size', type=int, default=512)
-# parser.add_argument('--lr', type=float, default=0.0001)
-# parser.add_argument('--epochs', type=int, default=100)
-# parser.add_argument('--seed', type=int, default=0)
-# parser.add_argument('--compile', action='store_true')
-# args = parser.parse_args()
-
-# torch.manual_seed(args.seed)
-# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# # Prepare datasets
-# path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data',
-#                 args.dataset)
-# dataset = Yandex(root=path, name=args.dataset)
-# dataset.materialize()
-# is_classification = dataset.task_type.is_classification
-
-# train_dataset, val_dataset, test_dataset = dataset.split()
-
-# # Set up data loaders
-# train_tensor_frame = train_dataset.tensor_frame
-# val_tensor_frame = val_dataset.tensor_frame
-# test_tensor_frame = test_dataset.tensor_frame
-# train_loader = DataLoader(train_tensor_frame, batch_size=args.batch_size,
-#                           shuffle=True)
-# val_loader = DataLoader(val_tensor_frame, batch_size=args.batch_size)
-# test_loader = DataLoader(test_tensor_frame, batch_size=args.batch_size)
-
-# if args.numerical_encoder_type == 'linear':
-#     numerical_encoder = LinearEncoder()
-# elif args.numerical_encoder_type == 'linearbucket':
-#     numerical_encoder = LinearBucketEncoder()
-# elif args.numerical_encoder_type == 'linearperiodic':
-#     numerical_encoder = LinearPeriodicEncoder()
-# else:
-#     raise ValueError(
-#         f'Unsupported encoder type: {args.numerical_encoder_type}')
-
-# stype_encoder_dict = {
-#     stype.categorical: EmbeddingEncoder(),
-#     stype.numerical: numerical_encoder,
-# }
-
-# if is_classification:
-#     output_channels = dataset.num_classes
-# else:
-#     output_channels = 1
-
-# if args.model_type == 'fttransformer':
-#     model = FTTransformer(
-#         channels=args.channels,
-#         out_channels=output_channels,
-#         num_layers=args.num_layers,
-#         col_stats=dataset.col_stats,
-#         col_names_dict=train_tensor_frame.col_names_dict,
-#         stype_encoder_dict=stype_encoder_dict,
-#     ).to(device)
-# elif args.model_type == 'resnet':
-#     model = ResNet(
-#         channels=args.channels,
-#         out_channels=output_channels,
-#         num_layers=args.num_layers,
-#         col_stats=dataset.col_stats,
-#         col_names_dict=train_tensor_frame.col_names_dict,
-#     ).to(device)
-# else:
-#     raise ValueError(f'Unsupported model type: {args.model_type}')
-
-# model = torch.compile(model, dynamic=True) if args.compile else model
-# optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr)
 
 
-# def train(epoch: int) -> float:
-#     model.train()
-#     loss_accum = total_count = 0
+def start_fn(train_df, val_df, test_df):
+    return train_df, val_df, test_df
 
-#     for tf in tqdm(train_loader, desc=f'Epoch: {epoch}'):
-#         tf = tf.to(device)
-#         pred = model(tf)
-#         if is_classification:
-#             loss = F.cross_entropy(pred, tf.y)
-#         else:
-#             loss = F.mse_loss(pred.view(-1), tf.y.view(-1))
-#         optimizer.zero_grad()
-#         loss.backward()
-#         loss_accum += float(loss) * len(tf.y)
-#         total_count += len(tf.y)
-#         optimizer.step()
-#     return loss_accum / total_count
-
-
-# @torch.no_grad()
-# def test(loader: DataLoader) -> float:
-#     model.eval()
-#     accum = total_count = 0
-
-#     for tf in loader:
-#         tf = tf.to(device)
-#         pred = model(tf)
-#         if is_classification:
-#             pred_class = pred.argmax(dim=-1)
-#             accum += float((tf.y == pred_class).sum())
-#         else:
-#             accum += float(
-#                 F.mse_loss(pred.view(-1), tf.y.view(-1), reduction='sum'))
-#         total_count += len(tf.y)
-
-#     if is_classification:
-#         accuracy = accum / total_count
-#         return accuracy
-#     else:
-#         rmse = (accum / total_count)**0.5
-#         return rmse
-
-
-# if is_classification:
-#     metric = 'Acc'
-#     best_val_metric = 0
-#     best_test_metric = 0
-# else:
-#     metric = 'RMSE'
-#     best_val_metric = float('inf')
-#     best_test_metric = float('inf')
-
-# for epoch in range(1, args.epochs + 1):
-#     train_loss = train(epoch)
-#     train_metric = test(train_loader)
-#     val_metric = test(val_loader)
-#     test_metric = test(test_loader)
-
-#     if is_classification and val_metric > best_val_metric:
-#         best_val_metric = val_metric
-#         best_test_metric = test_metric
-#     elif not is_classification and val_metric < best_val_metric:
-#         best_val_metric = val_metric
-#         best_test_metric = test_metric
-
-#     print(f'Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
-#           f'Val {metric}: {val_metric:.4f}, Test {metric}: {test_metric:.4f}')
-
-# print(f'Best Val {metric}: {best_val_metric:.4f}, '
-#       f'Best Test {metric}: {best_test_metric:.4f}')
-
-
-def start_fn(df, dataset_results, config):
-    return df
-
-
-def materialize_fn(df, dataset_results, config):
+def materialize_fn(train_df, val_df, test_df, dataset_results, config):
     """
-    階段1: Materialization - 將原始表格數據轉換為張量格式
-    
-    輸入:
-    - df: 輸入數據框
-    - dataset_results: 數據集信息
-    - config: 配置參數
-    
-    輸出:
-    - 包含資料集和張量框架的字典，可直接傳給encoding_fn或自定義GNN
+    階段1: Materialization - 將已切分的 train/val/test DataFrame 合併並轉換為張量格式
     """
     print("Executing materialize_fn")
-    print(f"Input DataFrame shape: {df.shape}")
-    # 獲取配置參數
-    dataset_name = dataset_results['dataset']
-    dataset_size = dataset_results['info']['size']
-    task_type = dataset_results['info']['task_type']
-    train_val_test_split_ratio = config['train_val_test_split_ratio']
-    numerical_encoder_type='linear'
-    model_type='fttransformer'
-    channels=256
-    num_layers=4
+    print(f"Train shape: {train_df.shape}, Val shape: {val_df.shape}, Test shape: {test_df.shape}")
 
-    # 設備設置
+    dataset_name = dataset_results['dataset']
+    task_type = dataset_results['info']['task_type']
+    numerical_encoder_type = 'linear'
+    model_type = 'fttransformer'
+    channels = config.get('channels', 256)
+    num_layers = config.get('num_layers', 4)
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    # 數據集加載和物化
-    dataset = Yandex(df=df, name=dataset_name, 
-                     train_val_test_split_ratio=train_val_test_split_ratio, 
-                     task_type=task_type, DS=False)
+
+    # 數據集包裝（直接合併三份 DataFrame，標記 split_col）
+    dataset = Yandex(train_df, val_df, test_df, name=dataset_name, task_type=task_type)
     dataset.materialize()
     is_classification = dataset.task_type.is_classification
 
-    train_dataset, val_dataset, test_dataset = dataset.split()
+    # 根據 split_col 取得三份 tensor_frame
+    train_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 0]
+    val_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 1]
+    test_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 2]
 
-    # Set up data loaders
-    train_tensor_frame = train_dataset.tensor_frame
-    val_tensor_frame = val_dataset.tensor_frame
-    test_tensor_frame = test_dataset.tensor_frame
-    print(f"Train TensorFrame shape: {train_tensor_frame.feat_dict[stype.numerical].shape}")
-    print(f"Val TensorFrame shape: {val_tensor_frame.feat_dict[stype.numerical].shape}")
-    print(f"Test TensorFrame shape: {test_tensor_frame.feat_dict[stype.numerical].shape}")
-
-    # 創建數據加載器
     batch_size = config.get('batch_size', 512)
-    print(f"Batch size: {batch_size}")
-    train_loader = DataLoader(train_tensor_frame, batch_size=batch_size,
-                            shuffle=True)
+    train_loader = DataLoader(train_tensor_frame, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_tensor_frame, batch_size=batch_size)
     test_loader = DataLoader(test_tensor_frame, batch_size=batch_size)
+
     if numerical_encoder_type == 'linear':
         numerical_encoder = LinearEncoder()
     elif numerical_encoder_type == 'linearbucket':
@@ -265,8 +95,7 @@ def materialize_fn(df, dataset_results, config):
     elif numerical_encoder_type == 'linearperiodic':
         numerical_encoder = LinearPeriodicEncoder()
     else:
-        raise ValueError(
-            f'Unsupported encoder type: {numerical_encoder_type}')
+        raise ValueError(f'Unsupported encoder type: {numerical_encoder_type}')
 
     stype_encoder_dict = {
         stype.categorical: EmbeddingEncoder(),
@@ -279,7 +108,6 @@ def materialize_fn(df, dataset_results, config):
         output_channels = 1
 
     is_binary_class = is_classification and output_channels == 2
-    # 設置評估指標
     if is_binary_class:
         metric_computer = AUROC(task='binary')
         metric = 'AUC'
@@ -289,14 +117,10 @@ def materialize_fn(df, dataset_results, config):
     else:
         metric_computer = MeanSquaredError()
         metric = 'RMSE'
-    
+
     metric_computer = metric_computer.to(device)
-    # 返回所有需要的信息 - 這些都是encoding_fn的輸入
     return {
         'dataset': dataset,
-        'train_dataset': train_dataset,
-        'val_dataset': val_dataset,
-        'test_dataset': test_dataset,
         'train_tensor_frame': train_tensor_frame,
         'val_tensor_frame': val_tensor_frame,
         'test_tensor_frame': test_tensor_frame,
@@ -310,8 +134,11 @@ def materialize_fn(df, dataset_results, config):
         'is_binary_class': is_binary_class,
         'out_channels': output_channels,
         'stype_encoder_dict': stype_encoder_dict,
-        'device': device
+        'device': device,
+        'channels': channels,
+        'num_layers': num_layers,
     }
+
 
 def encoding_fn(material_outputs, config):
     """
@@ -684,35 +511,30 @@ def decoding_fn(columnwise_outputs, config):
         'decoder': decoder,
         'model_forward': model_forward  # 返回完整模型的前向傳播函數
     }
-def main(df, dataset_results, config):
+def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     """
     主函數：按順序調用四個階段函數
     
     可用於在階段間插入GNN模型
     """
     print("FTTransformer - 四階段執行")
+    print(f"gnn_stage: {gnn_stage}")
     try:
         # 階段0: 開始
-        df = start_fn(df, dataset_results, config)
-        # 階段1: Materialization
-        material_outputs = materialize_fn(df, dataset_results, config)
-        
+        train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
+                # 階段1: Materialization
+        material_outputs = materialize_fn(train_df, val_df, test_df, dataset_results, config)
         # 階段2: Encoding
         encoding_outputs = encoding_fn(material_outputs, config)
-        
         # 這裡可以插入GNN處理編碼後的數據
         # encoding_outputs = gnn_process(encoding_outputs, config)
-        
         # 階段3: Column-wise Interaction
         columnwise_outputs = columnwise_fn(encoding_outputs, config)
-        
         # 這裡可以插入GNN處理列間交互後的數據
         # columnwise_outputs = gnn_process(columnwise_outputs, config)
-        
         # 階段4: Decoding
         results = decoding_fn(columnwise_outputs, config)
     except Exception as e:
-        # 返回一個基本值的結果
         is_classification = dataset_results['info']['task_type'] == 'classification'
         results = {
             'train_losses': [],
@@ -723,5 +545,4 @@ def main(df, dataset_results, config):
             'best_test_metric': float('-inf') if is_classification else float('inf'),
             'error': str(e),
         }
-    
     return results

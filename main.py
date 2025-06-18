@@ -19,7 +19,6 @@ import seaborn as sns
 # 首先，在導入模型之前適配官方模型
 from gnn_injection import adapt_official_models
 patcher = adapt_official_models()
-
 # 導入自定義模塊
 from utils.data_utils import DatasetLoader
 from model_runner import ModelRunner
@@ -84,7 +83,7 @@ def parse_args():
                         help='GNN Dropout比率')
     
     # 訓練相關參數
-    parser.add_argument('--epochs', type=int, default=1,
+    parser.add_argument('--epochs', type=int, default=200,
                         help='訓練輪數')
     parser.add_argument('--batch_size', type=int, default=256,
                         help='批次大小')
@@ -307,16 +306,17 @@ def run_experiment(args):
                 for gnn_stage in gnn_stages_to_test:
                     logger.info(f"測試 {model_name} 模型的 {gnn_stage} 階段")
                     print("\n")
-                    # 注入 GNN
-                    if gnn_stage != 'none':
-                        gnn_injector.inject(model_name, gnn_stage, gnn_config)
+                    # # 注入 GNN
+                    # if gnn_stage != 'none':
+                    #     gnn_injector.inject(model_name, gnn_stage, gnn_config)
                     
                     # 運行模型
                     try:
-                        result = model_runner.run_model(model_name, train_df, val_df, test_df, dataset_results, experiment_config, model_type)
+                        result = model_runner.run_model(model_name, train_df, val_df, test_df, dataset_results, experiment_config, model_type, gnn_stage)
                         model_results[gnn_stage] = result
                     except Exception as e:
                         logger.error(f"運行 {model_name} 模型的 {gnn_stage} 階段時出錯: {str(e)}")
+                        # print(f"運行 {model_name} 模型的 {gnn_stage} 階段時出錯: {str(e)}")
                         model_results[gnn_stage] = {'error': str(e)}
             
             dataset_results['models'][model_name] = model_results
@@ -338,19 +338,19 @@ def run_experiment(args):
     split_str = f"{args.train_ratio}_{args.val_ratio}_{args.test_ratio}"
     results_file_name = f"{cmd_str}_{split_str}.txt"
     print(f"results_file_name: {results_file_name}")
-    # with open(f'./results/{results_file_name}', 'w') as f:
-    #     for result in all_results:
-    #         f.write(f"dataset: {result['dataset']}\n")
-    #         for model_name, model_results in result['models'].items():
-    #             f.write(f"  模型: {model_name}\n")
-    #             for gnn_stage, res in model_results.items():
-    #                 f.write(f"    GNN階段: {gnn_stage}\n")
-    #                 if 'best_val_metric' in res:
-    #                     f.write(f"          Best val metric: {res['best_val_metric']}\n")
-    #                 if 'best_test_metric' in res:
-    #                     f.write(f"          Best test metric: {res['best_test_metric']}\n")
-    #                 if 'error' in res:
-    #                     f.write(f"          錯誤: {res['error']}\n")
+    with open(f'./results/{results_file_name}', 'w') as f:
+        for result in all_results:
+            f.write(f"dataset: {result['dataset']}\n")
+            for model_name, model_results in result['models'].items():
+                f.write(f"  模型: {model_name}\n")
+                for gnn_stage, res in model_results.items():
+                    f.write(f"    GNN階段: {gnn_stage}\n")
+                    if 'best_val_metric' in res:
+                        f.write(f"          Best val metric: {res['best_val_metric']}\n")
+                    if 'best_test_metric' in res:
+                        f.write(f"          Best test metric: {res['best_test_metric']}\n")
+                    if 'error' in res:
+                        f.write(f"          錯誤: {res['error']}\n")
     
     # # 計算排名和分析實驗結果
     # analysis_results = analyze_results(all_results, dataset_loader)
