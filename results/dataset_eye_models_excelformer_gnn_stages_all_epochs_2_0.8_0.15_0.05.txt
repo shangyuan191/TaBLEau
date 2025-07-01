@@ -1,0 +1,38 @@
+dataset: eye
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5252894759178162
+          Best test metric: 0.5228519439697266
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 89.99 秒
+    GNN階段: start
+          Best val metric: 0.4795856177806854
+          Best test metric: 0.4734917879104614
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 53.88 秒
+    GNN階段: materialize
+          Best val metric: 0.4832419157028198
+          Best test metric: 0.46069470047950745
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 33.54 秒
+    GNN階段: encoding
+          Best val metric: 0.5112736225128174
+          Best test metric: 0.5210237503051758
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 9.09 秒
+    GNN階段: columnwise
+          Best val metric: 0.542961597442627
+          Best test metric: 0.5648994445800781
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 9.04 秒
+    GNN階段: decoding
+          Best val metric: 0.4972577691078186
+          Best test metric: 0.5393053293228149
+          早停輪數: 0
+          GNN早停輪數: 103
+          耗時: 171.50 秒

@@ -1,0 +1,20 @@
+dataset: credit
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7080601453781128
+          Best test metric: 0.7051705121994019
+    GNN階段: start
+          Best val metric: 0.8390688896179199
+          Best test metric: 0.8413934707641602
+    GNN階段: materialize
+          Best val metric: 0.8085780739784241
+          Best test metric: 0.8056559562683105
+    GNN階段: encoding
+          Best val metric: 0.7748688459396362
+          Best test metric: 0.7790066599845886
+    GNN階段: columnwise
+          Best val metric: 0.7951051592826843
+          Best test metric: 0.7913362979888916
+    GNN階段: decoding
+          Best val metric: 0.818793773651123
+          Best test metric: 0.8179842829704285

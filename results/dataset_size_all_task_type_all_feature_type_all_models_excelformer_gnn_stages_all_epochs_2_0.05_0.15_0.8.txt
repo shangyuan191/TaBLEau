@@ -1,0 +1,2322 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8465277552604675
+          Best test metric: 0.8229401707649231
+    GNN階段: start
+          Best val metric: 0.8604166507720947
+          Best test metric: 0.8417385220527649
+    GNN階段: materialize
+          Best val metric: 0.863194465637207
+          Best test metric: 0.8422774076461792
+    GNN階段: encoding
+          Best val metric: 0.8854166865348816
+          Best test metric: 0.8664642572402954
+    GNN階段: columnwise
+          Best val metric: 0.9097222089767456
+          Best test metric: 0.8866464495658875
+    GNN階段: decoding
+          Best val metric: 0.5868055820465088
+          Best test metric: 0.6902860403060913
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6025806665420532
+          Best test metric: 0.6101922988891602
+    GNN階段: start
+          Best val metric: 0.699354887008667
+          Best test metric: 0.7247769832611084
+    GNN階段: materialize
+          Best val metric: 0.6277419328689575
+          Best test metric: 0.7206647396087646
+    GNN階段: encoding
+          Best val metric: 0.6974194049835205
+          Best test metric: 0.7215835452079773
+    GNN階段: columnwise
+          Best val metric: 0.6916128993034363
+          Best test metric: 0.6760118007659912
+    GNN階段: decoding
+          Best val metric: 0.5432258248329163
+          Best test metric: 0.4579579830169678
+dataset: openml_Diabetes_Data_Set
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8573333024978638
+          Best test metric: 0.7807674407958984
+    GNN階段: start
+          Best val metric: 0.6860000491142273
+          Best test metric: 0.7143546342849731
+    GNN階段: materialize
+          Best val metric: 0.7280000448226929
+          Best test metric: 0.7024011611938477
+    GNN階段: encoding
+          Best val metric: 0.8003333210945129
+          Best test metric: 0.7681046724319458
+    GNN階段: columnwise
+          Best val metric: 0.7453333139419556
+          Best test metric: 0.7465116381645203
+    GNN階段: decoding
+          Best val metric: 0.43833333253860474
+          Best test metric: 0.4795348644256592
+dataset: kaggle_Penguins_Classified
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.968652069568634
+          Best test metric: 0.9862678050994873
+    GNN階段: start
+          Best val metric: 0.8354232311248779
+          Best test metric: 0.8896369934082031
+    GNN階段: materialize
+          Best val metric: 0.7836990356445312
+          Best test metric: 0.8301841616630554
+    GNN階段: encoding
+          Best val metric: 0.8181818127632141
+          Best test metric: 0.8212156891822815
+    GNN階段: columnwise
+          Best val metric: 0.91379314661026
+          Best test metric: 0.9477326273918152
+    GNN階段: decoding
+          Best val metric: 0.876175582408905
+          Best test metric: 0.8734298944473267
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8927556872367859
+          Best test metric: 0.8706457614898682
+    GNN階段: start
+          Best val metric: 0.8877841234207153
+          Best test metric: 0.861301064491272
+    GNN階段: materialize
+          Best val metric: 0.8380681872367859
+          Best test metric: 0.8480262756347656
+    GNN階段: encoding
+          Best val metric: 0.8970170617103577
+          Best test metric: 0.8564976453781128
+    GNN階段: columnwise
+          Best val metric: 0.8217328786849976
+          Best test metric: 0.818943977355957
+    GNN階段: decoding
+          Best val metric: 0.47372156381607056
+          Best test metric: 0.5936720371246338
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6375000476837158
+          Best test metric: 0.6699346303939819
+    GNN階段: start
+          Best val metric: 0.4625000059604645
+          Best test metric: 0.6888421773910522
+    GNN階段: materialize
+          Best val metric: 0.5
+          Best test metric: 0.6533613204956055
+    GNN階段: encoding
+          Best val metric: 0.5
+          Best test metric: 0.5130718946456909
+    GNN階段: columnwise
+          Best val metric: 0.862500011920929
+          Best test metric: 0.7292250394821167
+    GNN階段: decoding
+          Best val metric: 0.5375000238418579
+          Best test metric: 0.6022409200668335
+dataset: kaggle_Development_Index
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6678571105003357
+          Best test metric: 0.5238403081893921
+    GNN階段: start
+          Best val metric: 0.6285714507102966
+          Best test metric: 0.49030882120132446
+    GNN階段: materialize
+          Best val metric: 0.6785714030265808
+          Best test metric: 0.5571132898330688
+    GNN階段: encoding
+          Best val metric: 0.5857142806053162
+          Best test metric: 0.5038118362426758
+    GNN階段: columnwise
+          Best val metric: 0.6428571343421936
+          Best test metric: 0.4715079069137573
+    GNN階段: decoding
+          Best val metric: 0.550000011920929
+          Best test metric: 0.5458715558052063
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8648648858070374
+          Best test metric: 0.6661648750305176
+    GNN階段: start
+          Best val metric: 0.816602349281311
+          Best test metric: 0.7178925275802612
+    GNN階段: materialize
+          Best val metric: 0.5559844970703125
+          Best test metric: 0.6222374439239502
+    GNN階段: encoding
+          Best val metric: 0.7664092779159546
+          Best test metric: 0.6099897623062134
+    GNN階段: columnwise
+          Best val metric: 0.6911196708679199
+          Best test metric: 0.5857679843902588
+    GNN階段: decoding
+          Best val metric: 0.4864865243434906
+          Best test metric: 0.5300033688545227
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9540094137191772
+          Best test metric: 0.9541752338409424
+    GNN階段: start
+          Best val metric: 0.9958726167678833
+          Best test metric: 0.9626491069793701
+    GNN階段: materialize
+          Best val metric: 0.9935141801834106
+          Best test metric: 0.9828671216964722
+    GNN階段: encoding
+          Best val metric: 0.9829009771347046
+          Best test metric: 0.9705677032470703
+    GNN階段: columnwise
+          Best val metric: 0.9257075190544128
+          Best test metric: 0.9382558465003967
+    GNN階段: decoding
+          Best val metric: 0.5972877144813538
+          Best test metric: 0.6432744264602661
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.615384578704834
+          Best test metric: 0.46969693899154663
+    GNN階段: start
+          Best val metric: 0.5769230723381042
+          Best test metric: 0.49116161465644836
+    GNN階段: materialize
+          Best val metric: 0.5769230723381042
+          Best test metric: 0.39267677068710327
+    GNN階段: encoding
+          Best val metric: 0.7307692170143127
+          Best test metric: 0.3623737394809723
+    GNN階段: columnwise
+          Best val metric: 0.615384578704834
+          Best test metric: 0.3989899158477783
+    GNN階段: decoding
+          Best val metric: 0.5
+          Best test metric: 0.5688130855560303
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9024926424026489
+          Best test metric: 0.9487298130989075
+    GNN階段: start
+          Best val metric: 0.9587609767913818
+          Best test metric: 0.941982626914978
+    GNN階段: materialize
+          Best val metric: 0.966275691986084
+          Best test metric: 0.94041907787323
+    GNN階段: encoding
+          Best val metric: 0.938049852848053
+          Best test metric: 0.9600451588630676
+    GNN階段: columnwise
+          Best val metric: 0.8825147151947021
+          Best test metric: 0.8759896755218506
+    GNN階段: decoding
+          Best val metric: 0.5465542078018188
+          Best test metric: 0.558581531047821
+dataset: openml_nki70.arff
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.43877553939819336
+          Best test metric: 0.3976024091243744
+    GNN階段: start
+          Best val metric: 0.7551020383834839
+          Best test metric: 0.5682650804519653
+    GNN階段: materialize
+          Best val metric: 0.7908163070678711
+          Best test metric: 0.6150516271591187
+    GNN階段: encoding
+          Best val metric: 0.6632652878761292
+          Best test metric: 0.5850815773010254
+    GNN階段: columnwise
+          Best val metric: 0.5714285969734192
+          Best test metric: 0.4652014970779419
+    GNN階段: decoding
+          Best val metric: 0.4285714328289032
+          Best test metric: 0.5026640295982361
+dataset: openml_Pima_Indians_Diabetes
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7790000438690186
+          Best test metric: 0.762825608253479
+    GNN階段: start
+          Best val metric: 0.652999997138977
+          Best test metric: 0.6053429841995239
+    GNN階段: materialize
+          Best val metric: 0.7583333253860474
+          Best test metric: 0.6864476799964905
+    GNN階段: encoding
+          Best val metric: 0.6520000100135803
+          Best test metric: 0.6500116586685181
+    GNN階段: columnwise
+          Best val metric: 0.7360000014305115
+          Best test metric: 0.7506860494613647
+    GNN階段: decoding
+          Best val metric: 0.48416668176651
+          Best test metric: 0.4768023192882538
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9111111164093018
+          Best test metric: 0.9489061832427979
+    GNN階段: start
+          Best val metric: 0.6177778244018555
+          Best test metric: 0.6376562118530273
+    GNN階段: materialize
+          Best val metric: 0.8711110949516296
+          Best test metric: 0.9378125071525574
+    GNN階段: encoding
+          Best val metric: 0.9777777791023254
+          Best test metric: 0.9553124904632568
+    GNN階段: columnwise
+          Best val metric: 0.9244444370269775
+          Best test metric: 0.9517186880111694
+    GNN階段: decoding
+          Best val metric: 0.9644445180892944
+          Best test metric: 0.9037500023841858
+dataset: openml_hungarian
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9129464626312256
+          Best test metric: 0.831943929195404
+    GNN階段: start
+          Best val metric: 0.8816964626312256
+          Best test metric: 0.853019118309021
+    GNN階段: materialize
+          Best val metric: 0.4910714328289032
+          Best test metric: 0.5373198390007019
+    GNN階段: encoding
+          Best val metric: 0.8995535969734192
+          Best test metric: 0.8509544134140015
+    GNN階段: columnwise
+          Best val metric: 0.8928571939468384
+          Best test metric: 0.8188546895980835
+    GNN階段: decoding
+          Best val metric: 0.6272321939468384
+          Best test metric: 0.5791585445404053
+dataset: UCI_HCV_data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7253086566925049
+          Best test metric: 0.7671077251434326
+    GNN階段: start
+          Best val metric: 0.8641975522041321
+          Best test metric: 0.8649168014526367
+    GNN階段: materialize
+          Best val metric: 0.9351851940155029
+          Best test metric: 0.8728837966918945
+    GNN階段: encoding
+          Best val metric: 0.741769552230835
+          Best test metric: 0.7637999653816223
+    GNN階段: columnwise
+          Best val metric: 0.8518518805503845
+          Best test metric: 0.7883055806159973
+    GNN階段: decoding
+          Best val metric: 0.4542180895805359
+          Best test metric: 0.5853784680366516
+dataset: openml_analcatdata_lawsuit
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9259259700775146
+          Best test metric: 0.9475464820861816
+    GNN階段: start
+          Best val metric: 0.4629629850387573
+          Best test metric: 0.5925549864768982
+    GNN階段: materialize
+          Best val metric: 0.6296296715736389
+          Best test metric: 0.5326565504074097
+    GNN階段: encoding
+          Best val metric: 0.7777777910232544
+          Best test metric: 0.8805414438247681
+    GNN階段: columnwise
+          Best val metric: 0.7592592835426331
+          Best test metric: 0.8747884631156921
+    GNN階段: decoding
+          Best val metric: 0.42592594027519226
+          Best test metric: 0.4952622950077057
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6208677887916565
+          Best test metric: 0.5327123999595642
+    GNN階段: start
+          Best val metric: 0.75
+          Best test metric: 0.5276049375534058
+    GNN階段: materialize
+          Best val metric: 0.5723140239715576
+          Best test metric: 0.5600876808166504
+    GNN階段: encoding
+          Best val metric: 0.6508264541625977
+          Best test metric: 0.5537431240081787
+    GNN階段: columnwise
+          Best val metric: 0.6735537052154541
+          Best test metric: 0.6013890504837036
+    GNN階段: decoding
+          Best val metric: 0.5955578088760376
+          Best test metric: 0.48206207156181335
+dataset: UCI_Audit_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9231475591659546
+          Best test metric: 0.9440796375274658
+    GNN階段: start
+          Best val metric: 0.9537659883499146
+          Best test metric: 0.959875226020813
+    GNN階段: materialize
+          Best val metric: 0.9601958990097046
+          Best test metric: 0.9609840512275696
+    GNN階段: encoding
+          Best val metric: 0.9816288948059082
+          Best test metric: 0.9276536703109741
+    GNN階段: columnwise
+          Best val metric: 0.9583588242530823
+          Best test metric: 0.9652671813964844
+    GNN階段: decoding
+          Best val metric: 0.877526044845581
+          Best test metric: 0.8464473485946655
+dataset: UCI_User_Knowledge_Modeling
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.38165679574012756
+          Best test metric: 0.43185582756996155
+    GNN階段: start
+          Best val metric: 0.4585798680782318
+          Best test metric: 0.4590409994125366
+    GNN階段: materialize
+          Best val metric: 0.6272189021110535
+          Best test metric: 0.5571147799491882
+    GNN階段: encoding
+          Best val metric: 0.6745561957359314
+          Best test metric: 0.633492112159729
+    GNN階段: columnwise
+          Best val metric: 0.6213017702102661
+          Best test metric: 0.541114330291748
+    GNN階段: decoding
+          Best val metric: 0.639053225517273
+          Best test metric: 0.5366611480712891
+dataset: kaggle_Audit_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9696877002716064
+          Best test metric: 0.9724094867706299
+    GNN階段: start
+          Best val metric: 0.9837722182273865
+          Best test metric: 0.9705124497413635
+    GNN階段: materialize
+          Best val metric: 0.9589712619781494
+          Best test metric: 0.9706646203994751
+    GNN階段: encoding
+          Best val metric: 0.9938763380050659
+          Best test metric: 0.9798017144203186
+    GNN階段: columnwise
+          Best val metric: 0.9712185859680176
+          Best test metric: 0.9680502414703369
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 79.15 GiB of which 10.56 MiB is free. Process 70248 has 3.54 GiB memory in use. Including non-PyTorch memory, this process has 3.24 GiB memory in use. Process 76627 has 72.34 GiB memory in use. Of the allocated memory 2.54 GiB is allocated by PyTorch, and 208.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+dataset: kaggle_chronic_kidney_disease
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9904306530952454
+          Best test metric: 0.9914166927337646
+    GNN階段: start
+          Best val metric: 0.9629186391830444
+          Best test metric: 0.9558333158493042
+    GNN階段: materialize
+          Best val metric: 0.9282296895980835
+          Best test metric: 0.9537916779518127
+    GNN階段: encoding
+          Best val metric: 0.8947368264198303
+          Best test metric: 0.9313750267028809
+    GNN階段: columnwise
+          Best val metric: 0.9856459498405457
+          Best test metric: 0.9819583892822266
+    GNN階段: decoding
+          Best val metric: 0.6638755798339844
+          Best test metric: 0.6806249618530273
+dataset: openml_tokyo1
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9659280776977539
+          Best test metric: 0.964443027973175
+    GNN階段: start
+          Best val metric: 0.965300977230072
+          Best test metric: 0.957024335861206
+    GNN階段: materialize
+          Best val metric: 0.972199022769928
+          Best test metric: 0.9626930952072144
+    GNN階段: encoding
+          Best val metric: 0.9364548921585083
+          Best test metric: 0.9600608944892883
+    GNN階段: columnwise
+          Best val metric: 0.9558947086334229
+          Best test metric: 0.9568551182746887
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 79.15 GiB of which 18.56 MiB is free. Process 70248 has 3.76 GiB memory in use. Including non-PyTorch memory, this process has 3.01 GiB memory in use. Process 76627 has 72.34 GiB memory in use. Of the allocated memory 2.34 GiB is allocated by PyTorch, and 169.21 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+dataset: kaggle_Compositions_of_Glass
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.31168830394744873
+          Best test metric: 0.33805936574935913
+    GNN階段: start
+          Best val metric: 0.6753246784210205
+          Best test metric: 0.6191847920417786
+    GNN階段: materialize
+          Best val metric: 0.6926407217979431
+          Best test metric: 0.6211047172546387
+    GNN階段: encoding
+          Best val metric: 0.6017315983772278
+          Best test metric: 0.433170884847641
+    GNN階段: columnwise
+          Best val metric: 0.2770562767982483
+          Best test metric: 0.45045045018196106
+    GNN階段: decoding
+          Best val metric: 0.6839827299118042
+          Best test metric: 0.5124058127403259
+dataset: openml_Pokmon_Legendary_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.860909104347229
+          Best test metric: 0.8557997941970825
+    GNN階段: start
+          Best val metric: 0.8463636636734009
+          Best test metric: 0.7872099876403809
+    GNN階段: materialize
+          Best val metric: 0.800000011920929
+          Best test metric: 0.8394078016281128
+    GNN階段: encoding
+          Best val metric: 0.9727272987365723
+          Best test metric: 0.879517674446106
+    GNN階段: columnwise
+          Best val metric: 0.8772727251052856
+          Best test metric: 0.8418803215026855
+    GNN階段: decoding
+          Best val metric: 0.5618181824684143
+          Best test metric: 0.48949939012527466
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7730000019073486
+          Best test metric: 0.7769128084182739
+    GNN階段: start
+          Best val metric: 0.8033333420753479
+          Best test metric: 0.7951220273971558
+    GNN階段: materialize
+          Best val metric: 0.8389999866485596
+          Best test metric: 0.7903895378112793
+    GNN階段: encoding
+          Best val metric: 0.7453333139419556
+          Best test metric: 0.7631918787956238
+    GNN階段: columnwise
+          Best val metric: 0.8403333425521851
+          Best test metric: 0.804337203502655
+    GNN階段: decoding
+          Best val metric: 0.7609999775886536
+          Best test metric: 0.6898720860481262
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8240740895271301
+          Best test metric: 0.8610025644302368
+    GNN階段: start
+          Best val metric: 0.790123462677002
+          Best test metric: 0.8659939765930176
+    GNN階段: materialize
+          Best val metric: 0.8240740299224854
+          Best test metric: 0.864366352558136
+    GNN階段: encoding
+          Best val metric: 0.8179012537002563
+          Best test metric: 0.8572048544883728
+    GNN階段: columnwise
+          Best val metric: 0.8271604180335999
+          Best test metric: 0.8644748330116272
+    GNN階段: decoding
+          Best val metric: 0.7407407760620117
+          Best test metric: 0.8270399570465088
+dataset: kaggle_fitbit_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8709401488304138
+          Best test metric: 0.7754994034767151
+    GNN階段: start
+          Best val metric: 0.8307692408561707
+          Best test metric: 0.7604491114616394
+    GNN階段: materialize
+          Best val metric: 0.8700854778289795
+          Best test metric: 0.792000412940979
+    GNN階段: encoding
+          Best val metric: 0.851282000541687
+          Best test metric: 0.7559158802032471
+    GNN階段: columnwise
+          Best val metric: 0.8769230842590332
+          Best test metric: 0.7913052439689636
+    GNN階段: decoding
+          Best val metric: 0.6102564334869385
+          Best test metric: 0.5502583980560303
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7662500143051147
+          Best test metric: 0.6416001319885254
+    GNN階段: start
+          Best val metric: 0.7087500095367432
+          Best test metric: 0.7746961116790771
+    GNN階段: materialize
+          Best val metric: 0.6549999713897705
+          Best test metric: 0.6193985939025879
+    GNN階段: encoding
+          Best val metric: 0.6637499928474426
+          Best test metric: 0.5957456827163696
+    GNN階段: columnwise
+          Best val metric: 0.752500057220459
+          Best test metric: 0.7105405926704407
+    GNN階段: decoding
+          Best val metric: 0.6462500095367432
+          Best test metric: 0.5211130380630493
+dataset: kaggle_Startup_Success_Prediction
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6762210726737976
+          Best test metric: 0.7363936901092529
+    GNN階段: start
+          Best val metric: 0.591148853302002
+          Best test metric: 0.6683980226516724
+    GNN階段: materialize
+          Best val metric: 0.6107544302940369
+          Best test metric: 0.6247655153274536
+    GNN階段: encoding
+          Best val metric: 0.6030727028846741
+          Best test metric: 0.7373154759407043
+    GNN階段: columnwise
+          Best val metric: 0.6528319120407104
+          Best test metric: 0.7318488359451294
+    GNN階段: decoding
+          Best val metric: 0.6152258515357971
+          Best test metric: 0.6793912649154663
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9395833015441895
+          Best test metric: 0.9406493902206421
+    GNN階段: start
+          Best val metric: 0.8024305105209351
+          Best test metric: 0.8274169564247131
+    GNN階段: materialize
+          Best val metric: 0.6927083134651184
+          Best test metric: 0.703723132610321
+    GNN階段: encoding
+          Best val metric: 0.8708333373069763
+          Best test metric: 0.9085693359375
+    GNN階段: columnwise
+          Best val metric: 0.9055555462837219
+          Best test metric: 0.9084228277206421
+    GNN階段: decoding
+          Best val metric: 0.5493055582046509
+          Best test metric: 0.45778805017471313
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5962890982627869
+          Best test metric: 0.5892229080200195
+    GNN階段: start
+          Best val metric: 0.768359363079071
+          Best test metric: 0.7029591798782349
+    GNN階段: materialize
+          Best val metric: 0.4701171815395355
+          Best test metric: 0.5528992414474487
+    GNN階段: encoding
+          Best val metric: 0.5802733898162842
+          Best test metric: 0.5951880216598511
+    GNN階段: columnwise
+          Best val metric: 0.802929699420929
+          Best test metric: 0.7608904242515564
+    GNN階段: decoding
+          Best val metric: 0.4925781190395355
+          Best test metric: 0.5621567964553833
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7674896717071533
+          Best test metric: 0.7416192293167114
+    GNN階段: start
+          Best val metric: 0.7427983283996582
+          Best test metric: 0.7224063873291016
+    GNN階段: materialize
+          Best val metric: 0.7273662686347961
+          Best test metric: 0.5317208766937256
+    GNN階段: encoding
+          Best val metric: 0.6316872239112854
+          Best test metric: 0.6636147499084473
+    GNN階段: columnwise
+          Best val metric: 0.7283951044082642
+          Best test metric: 0.6960564851760864
+    GNN階段: decoding
+          Best val metric: 0.7469136118888855
+          Best test metric: 0.46626052260398865
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.663867175579071
+          Best test metric: 0.6807651519775391
+    GNN階段: start
+          Best val metric: 0.38945311307907104
+          Best test metric: 0.4758930802345276
+    GNN階段: materialize
+          Best val metric: 0.506054699420929
+          Best test metric: 0.5978272557258606
+    GNN階段: encoding
+          Best val metric: 0.6044921875
+          Best test metric: 0.653632402420044
+    GNN階段: columnwise
+          Best val metric: 0.7138671875
+          Best test metric: 0.7219541072845459
+    GNN階段: decoding
+          Best val metric: 0.5390625
+          Best test metric: 0.5222140550613403
+dataset: openml_DiabeticMellitus
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5382716059684753
+          Best test metric: 0.5312987565994263
+    GNN階段: start
+          Best val metric: 0.6987653970718384
+          Best test metric: 0.6096323728561401
+    GNN階段: materialize
+          Best val metric: 0.5049382448196411
+          Best test metric: 0.4978325068950653
+    GNN階段: encoding
+          Best val metric: 0.31604936718940735
+          Best test metric: 0.6111496686935425
+    GNN階段: columnwise
+          Best val metric: 0.6271604299545288
+          Best test metric: 0.6833709478378296
+    GNN階段: decoding
+          Best val metric: 0.5234568119049072
+          Best test metric: 0.5998786091804504
+dataset: kaggle_Credit_Card_Approval
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7328042387962341
+          Best test metric: 0.7039062976837158
+    GNN階段: start
+          Best val metric: 0.8222222328186035
+          Best test metric: 0.8066208362579346
+    GNN階段: materialize
+          Best val metric: 0.8047619462013245
+          Best test metric: 0.7687984704971313
+    GNN階段: encoding
+          Best val metric: 0.720634937286377
+          Best test metric: 0.7649258971214294
+    GNN階段: columnwise
+          Best val metric: 0.8550264835357666
+          Best test metric: 0.8259831666946411
+    GNN階段: decoding
+          Best val metric: 0.8066138029098511
+          Best test metric: 0.7335889935493469
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9182692766189575
+          Best test metric: 0.9464079141616821
+    GNN階段: start
+          Best val metric: 0.787259578704834
+          Best test metric: 0.8763418197631836
+    GNN階段: materialize
+          Best val metric: 0.6730769276618958
+          Best test metric: 0.6336911916732788
+    GNN階段: encoding
+          Best val metric: 0.75
+          Best test metric: 0.7579686045646667
+    GNN階段: columnwise
+          Best val metric: 0.807692289352417
+          Best test metric: 0.7823286652565002
+    GNN階段: decoding
+          Best val metric: 0.4350961744785309
+          Best test metric: 0.5705202221870422
+dataset: kaggle_Automobiles
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9688888788223267
+          Best test metric: 0.9304139018058777
+    GNN階段: start
+          Best val metric: 0.897777795791626
+          Best test metric: 0.8729532957077026
+    GNN階段: materialize
+          Best val metric: 0.6177777647972107
+          Best test metric: 0.7121562957763672
+    GNN階段: encoding
+          Best val metric: 0.8488888740539551
+          Best test metric: 0.7932499051094055
+    GNN階段: columnwise
+          Best val metric: 0.9733333587646484
+          Best test metric: 0.8822212219238281
+    GNN階段: decoding
+          Best val metric: 0.5155555605888367
+          Best test metric: 0.5454124212265015
+dataset: UCI_Z_Alizadeh_Sani
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7259615063667297
+          Best test metric: 0.7528488636016846
+    GNN階段: start
+          Best val metric: 0.7163461446762085
+          Best test metric: 0.7623451948165894
+    GNN階段: materialize
+          Best val metric: 0.6490384936332703
+          Best test metric: 0.5838150978088379
+    GNN階段: encoding
+          Best val metric: 0.526442289352417
+          Best test metric: 0.5523533821105957
+    GNN階段: columnwise
+          Best val metric: 0.8004807829856873
+          Best test metric: 0.7508670687675476
+    GNN階段: decoding
+          Best val metric: 0.4062500298023224
+          Best test metric: 0.5729562044143677
+dataset: UCI_Absenteeism_at_work
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6116935014724731
+          Best test metric: 0.6086529493331909
+    GNN階段: start
+          Best val metric: 0.6457661390304565
+          Best test metric: 0.5878372192382812
+    GNN階段: materialize
+          Best val metric: 0.6169354915618896
+          Best test metric: 0.5351688861846924
+    GNN階段: encoding
+          Best val metric: 0.6036290526390076
+          Best test metric: 0.5778112411499023
+    GNN階段: columnwise
+          Best val metric: 0.6439516544342041
+          Best test metric: 0.6126760840415955
+    GNN階段: decoding
+          Best val metric: 0.40745967626571655
+          Best test metric: 0.5167571306228638
+dataset: kaggle_Bigg_Boss_India
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8350000381469727
+          Best test metric: 0.9144988059997559
+    GNN階段: start
+          Best val metric: 0.6525000333786011
+          Best test metric: 0.7707226276397705
+    GNN階段: materialize
+          Best val metric: 0.6499999761581421
+          Best test metric: 0.7007925510406494
+    GNN階段: encoding
+          Best val metric: 0.6850000023841858
+          Best test metric: 0.8298368453979492
+    GNN階段: columnwise
+          Best val metric: 0.39750000834465027
+          Best test metric: 0.6832634210586548
+    GNN階段: decoding
+          Best val metric: 0.4975000023841858
+          Best test metric: 0.6282051205635071
+dataset: openml_analcatdata_creditscore
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6590908765792847
+          Best test metric: 0.5909091234207153
+    GNN階段: start
+          Best val metric: 0.8636363744735718
+          Best test metric: 0.92476487159729
+    GNN階段: materialize
+          Best val metric: 0.9545454978942871
+          Best test metric: 0.8985109329223633
+    GNN階段: encoding
+          Best val metric: 1.0
+          Best test metric: 0.9271159768104553
+    GNN階段: columnwise
+          Best val metric: 0.5681818127632141
+          Best test metric: 0.4318181574344635
+    GNN階段: decoding
+          Best val metric: 0.15909090638160706
+          Best test metric: 0.5097962617874146
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7186644673347473
+          Best test metric: 0.703930675983429
+    GNN階段: start
+          Best val metric: 0.5385878086090088
+          Best test metric: 0.49035578966140747
+    GNN階段: materialize
+          Best val metric: 0.619594931602478
+          Best test metric: 0.6210328340530396
+    GNN階段: encoding
+          Best val metric: 0.6283524632453918
+          Best test metric: 0.6691769957542419
+    GNN階段: columnwise
+          Best val metric: 0.6458675265312195
+          Best test metric: 0.6338469386100769
+    GNN階段: decoding
+          Best val metric: 0.5736179351806641
+          Best test metric: 0.5259068012237549
+dataset: UCI_Heart_failure_clinical_records
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.695852518081665
+          Best test metric: 0.5689586400985718
+    GNN階段: start
+          Best val metric: 0.4930875897407532
+          Best test metric: 0.392199844121933
+    GNN階段: materialize
+          Best val metric: 0.6682027578353882
+          Best test metric: 0.5474862456321716
+    GNN階段: encoding
+          Best val metric: 0.52073734998703
+          Best test metric: 0.4872121810913086
+    GNN階段: columnwise
+          Best val metric: 0.6152073740959167
+          Best test metric: 0.6421799659729004
+    GNN階段: decoding
+          Best val metric: 0.5691244602203369
+          Best test metric: 0.5252171158790588
+dataset: kaggle_Store_Data_Performance
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6111111044883728
+          Best test metric: 0.452136754989624
+    GNN階段: start
+          Best val metric: 0.3999999761581421
+          Best test metric: 0.46068376302719116
+    GNN階段: materialize
+          Best val metric: 0.5888888835906982
+          Best test metric: 0.6576923131942749
+    GNN階段: encoding
+          Best val metric: 0.5555555820465088
+          Best test metric: 0.41111111640930176
+    GNN階段: columnwise
+          Best val metric: 0.644444465637207
+          Best test metric: 0.42991453409194946
+    GNN階段: decoding
+          Best val metric: 0.41111111640930176
+          Best test metric: 0.46773505210876465
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5628018975257874
+          Best test metric: 0.6025656461715698
+    GNN階段: start
+          Best val metric: 0.5822765827178955
+          Best test metric: 0.596706211566925
+    GNN階段: materialize
+          Best val metric: 0.6254528760910034
+          Best test metric: 0.5480214357376099
+    GNN階段: encoding
+          Best val metric: 0.6068840622901917
+          Best test metric: 0.6496900320053101
+    GNN階段: columnwise
+          Best val metric: 0.6739130020141602
+          Best test metric: 0.5923912525177002
+    GNN階段: decoding
+          Best val metric: 0.550422728061676
+          Best test metric: 0.522943913936615
+dataset: kaggle_Customer_Classification
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5130070447921753
+          Best test metric: 0.480571985244751
+    GNN階段: start
+          Best val metric: 0.5963404178619385
+          Best test metric: 0.5298434495925903
+    GNN階段: materialize
+          Best val metric: 0.5210537910461426
+          Best test metric: 0.49578356742858887
+    GNN階段: encoding
+          Best val metric: 0.5888447761535645
+          Best test metric: 0.5235053300857544
+    GNN階段: columnwise
+          Best val metric: 0.5720899105072021
+          Best test metric: 0.541495680809021
+    GNN階段: decoding
+          Best val metric: 0.4268077611923218
+          Best test metric: 0.5173527002334595
+dataset: openml_Heart_disease_classification
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7103174924850464
+          Best test metric: 0.6577666401863098
+    GNN階段: start
+          Best val metric: 0.8690476417541504
+          Best test metric: 0.8130637407302856
+    GNN階段: materialize
+          Best val metric: 0.7579364776611328
+          Best test metric: 0.7506083846092224
+    GNN階段: encoding
+          Best val metric: 0.75
+          Best test metric: 0.8068003058433533
+    GNN階段: columnwise
+          Best val metric: 0.8115079402923584
+          Best test metric: 0.8066571950912476
+    GNN階段: decoding
+          Best val metric: 0.4146825671195984
+          Best test metric: 0.5089834928512573
+dataset: kaggle_Campus_Recruitment
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6608695983886719
+          Best test metric: 0.5921218395233154
+    GNN階段: start
+          Best val metric: 0.7956521511077881
+          Best test metric: 0.5513182878494263
+    GNN階段: materialize
+          Best val metric: 0.40869563817977905
+          Best test metric: 0.4435812830924988
+    GNN階段: encoding
+          Best val metric: 0.4739130735397339
+          Best test metric: 0.4621782898902893
+    GNN階段: columnwise
+          Best val metric: 0.791304349899292
+          Best test metric: 0.805555522441864
+    GNN階段: decoding
+          Best val metric: 0.7173912525177002
+          Best test metric: 0.45982423424720764
+dataset: openml_fishcatch
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9670391049037549
+          Best test metric: 0.8180675487002588
+    GNN階段: start
+          Best val metric: 1.0698800431507158
+          Best test metric: 0.9262834305592633
+    GNN階段: materialize
+          Best val metric: 1.001330444304679
+          Best test metric: 0.8422960894331176
+    GNN階段: encoding
+          Best val metric: 1.5437253231902566
+          Best test metric: 1.4247799218204047
+    GNN階段: columnwise
+          Best val metric: 1.0112560495542213
+          Best test metric: 0.8453913724138231
+    GNN階段: decoding
+          Best val metric: 1.221373438835144
+          Best test metric: 0.970099925994873
+dataset: openml_wisconsin
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.262991815082913
+          Best test metric: 1.0954691319158234
+    GNN階段: start
+          Best val metric: 1.4242955658453476
+          Best test metric: 1.2051959358881135
+    GNN階段: materialize
+          Best val metric: 1.1834179335337287
+          Best test metric: 1.0422582599461736
+    GNN階段: encoding
+          Best val metric: 1.1969428319608597
+          Best test metric: 1.0495388812295547
+    GNN階段: columnwise
+          Best val metric: 1.3016247463110675
+          Best test metric: 1.169390269454523
+    GNN階段: decoding
+          Best val metric: 1.2654510736465454
+          Best test metric: 1.1383434534072876
+dataset: openml_yacht_hydrodynamics
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8292296976704137
+          Best test metric: 1.097414526337369
+    GNN階段: start
+          Best val metric: 0.8867329667753999
+          Best test metric: 0.9820454598721141
+    GNN階段: materialize
+          Best val metric: 1.2274019321028005
+          Best test metric: 1.5863598040489495
+    GNN階段: encoding
+          Best val metric: 0.9122956635035595
+          Best test metric: 1.0184138228972905
+    GNN階段: columnwise
+          Best val metric: 0.766163305882514
+          Best test metric: 0.9441619365592733
+    GNN階段: decoding
+          Best val metric: 0.6307687163352966
+          Best test metric: 0.9804798364639282
+dataset: openml_cpu
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.8110978852837705
+          Best test metric: 1.2836072683057838
+    GNN階段: start
+          Best val metric: 1.788401519077503
+          Best test metric: 0.7994058101106011
+    GNN階段: materialize
+          Best val metric: 1.8303737014925336
+          Best test metric: 0.7778044059335341
+    GNN階段: encoding
+          Best val metric: 1.896476140578963
+          Best test metric: 1.02672265137538
+    GNN階段: columnwise
+          Best val metric: 1.68476731185068
+          Best test metric: 0.7736504772069673
+    GNN階段: decoding
+          Best val metric: 3.8912510871887207
+          Best test metric: 0.9138345122337341
+dataset: openml_disclosure_x_noise
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0278623599110612
+          Best test metric: 1.1562561344293298
+    GNN階段: start
+          Best val metric: 1.1976416838892996
+          Best test metric: 1.1200958489378487
+    GNN階段: materialize
+          Best val metric: 1.30959798511963
+          Best test metric: 1.231611320807576
+    GNN階段: encoding
+          Best val metric: 1.145562914525505
+          Best test metric: 1.0787713697843007
+    GNN階段: columnwise
+          Best val metric: 1.0436291836010383
+          Best test metric: 0.9675631482317008
+    GNN階段: decoding
+          Best val metric: 1.084736943244934
+          Best test metric: 0.944404661655426
+dataset: openml_visualizing_environmental
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9744705376514009
+          Best test metric: 1.035696615575756
+    GNN階段: start
+          Best val metric: 1.4266439257945445
+          Best test metric: 1.5431637411403285
+    GNN階段: materialize
+          Best val metric: 1.1037867390273746
+          Best test metric: 1.183242342813114
+    GNN階段: encoding
+          Best val metric: 1.765719318402561
+          Best test metric: 1.620643277372311
+    GNN階段: columnwise
+          Best val metric: 0.9551369740584656
+          Best test metric: 0.9868918139503282
+    GNN階段: decoding
+          Best val metric: 1.0287307500839233
+          Best test metric: 1.2298063039779663
+dataset: openml_rmftsa_ladata
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8216439477153846
+          Best test metric: 1.0114909029639712
+    GNN階段: start
+          Best val metric: 0.8559363841968407
+          Best test metric: 1.0317859412981858
+    GNN階段: materialize
+          Best val metric: 0.8986915892506585
+          Best test metric: 1.2109499038553233
+    GNN階段: encoding
+          Best val metric: 1.8079545475470598
+          Best test metric: 2.119632674369635
+    GNN階段: columnwise
+          Best val metric: 0.8254796367839331
+          Best test metric: 1.0195822867411637
+    GNN階段: decoding
+          Best val metric: 0.7323089241981506
+          Best test metric: 1.5315853357315063
+dataset: openml_residential_building
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9765309137958242
+          Best test metric: 0.8833989921195301
+    GNN階段: start
+          Best val metric: 1.2473469713339818
+          Best test metric: 1.1826943987362086
+    GNN階段: materialize
+          Best val metric: 1.181740446051675
+          Best test metric: 1.0774530168632266
+    GNN階段: encoding
+          Best val metric: 1.2849286466299352
+          Best test metric: 1.3146753902616584
+    GNN階段: columnwise
+          Best val metric: 1.032471020640543
+          Best test metric: 0.9895256561068176
+    GNN階段: decoding
+          Best val metric: 1.2101472616195679
+          Best test metric: 0.8714461326599121
+dataset: openml_lungcancer_shedden
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9410853491922313
+          Best test metric: 0.9909053538150964
+    GNN階段: start
+          Best val metric: 0.9706143313654889
+          Best test metric: 1.0354476230734604
+    GNN階段: materialize
+          Best val metric: 0.9456134978992263
+          Best test metric: 0.9865410905314778
+    GNN階段: encoding
+          Best val metric: 1.4521182274513953
+          Best test metric: 1.4643173696173288
+    GNN階段: columnwise
+          Best val metric: 0.9805021850234784
+          Best test metric: 1.0391517543462028
+    GNN階段: decoding
+          Best val metric: 0.8629541397094727
+          Best test metric: 1.104004144668579
+dataset: openml_forest_fires
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7915724313431463
+          Best test metric: 1.5087283816681116
+    GNN階段: start
+          Best val metric: 0.3838535477914915
+          Best test metric: 1.4184134130288002
+    GNN階段: materialize
+          Best val metric: 0.7018413694618115
+          Best test metric: 1.491331963664827
+    GNN階段: encoding
+          Best val metric: 0.3544044701366974
+          Best test metric: 1.4511124815665826
+    GNN階段: columnwise
+          Best val metric: 0.3110730733471346
+          Best test metric: 1.419023358062054
+    GNN階段: decoding
+          Best val metric: 0.0608612559735775
+          Best test metric: 1.9935129880905151
+dataset: openml_boston_corrected
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8252109864681911
+          Best test metric: 1.0346340949799573
+    GNN階段: start
+          Best val metric: 0.7355839132990426
+          Best test metric: 0.7411114169771033
+    GNN階段: materialize
+          Best val metric: 0.7677795301228149
+          Best test metric: 0.7652265329236622
+    GNN階段: encoding
+          Best val metric: 0.8062651270548837
+          Best test metric: 0.846604745401519
+    GNN階段: columnwise
+          Best val metric: 0.7183941084413084
+          Best test metric: 0.7855454424480349
+    GNN階段: decoding
+          Best val metric: 0.875887393951416
+          Best test metric: 0.9597104787826538
+dataset: openml_liver_disorders
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.122920817059058
+          Best test metric: 1.411914901743703
+    GNN階段: start
+          Best val metric: 1.235284687388245
+          Best test metric: 0.9596043464810267
+    GNN階段: materialize
+          Best val metric: 1.1960588007828523
+          Best test metric: 1.1729694088087548
+    GNN階段: encoding
+          Best val metric: 1.243603457151646
+          Best test metric: 1.0645097909945642
+    GNN階段: columnwise
+          Best val metric: 1.087747670614124
+          Best test metric: 0.8699432438939569
+    GNN階段: decoding
+          Best val metric: 1.3802663087844849
+          Best test metric: 0.8633288145065308
+dataset: openml_disclosure_z
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.2679141029902796
+          Best test metric: 1.2046323968973536
+    GNN階段: start
+          Best val metric: 1.3929847669295696
+          Best test metric: 1.6329685118396466
+    GNN階段: materialize
+          Best val metric: 1.0774094791845819
+          Best test metric: 1.0250901717553886
+    GNN階段: encoding
+          Best val metric: 1.018901235670186
+          Best test metric: 0.9792615898601493
+    GNN階段: columnwise
+          Best val metric: 1.0298877735477834
+          Best test metric: 0.9750054114753984
+    GNN階段: decoding
+          Best val metric: 1.0629162788391113
+          Best test metric: 0.9628326296806335
+dataset: openml_disclosure_x_tampered
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1995769549764803
+          Best test metric: 1.125614898907435
+    GNN階段: start
+          Best val metric: 1.1581417279751782
+          Best test metric: 1.0941345083929854
+    GNN階段: materialize
+          Best val metric: 1.4195379816545464
+          Best test metric: 1.3587829791491186
+    GNN階段: encoding
+          Best val metric: 1.1720767546865896
+          Best test metric: 1.0865314423689485
+    GNN階段: columnwise
+          Best val metric: 1.4691766159894926
+          Best test metric: 1.3961059911326799
+    GNN階段: decoding
+          Best val metric: 1.0850248336791992
+          Best test metric: 0.9479533433914185
+dataset: openml_weather_ankara
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0047135724945802
+          Best test metric: 0.7946148778664666
+    GNN階段: start
+          Best val metric: 0.8451428043863716
+          Best test metric: 0.8361616458033684
+    GNN階段: materialize
+          Best val metric: 0.7912257162770008
+          Best test metric: 0.8775144280228357
+    GNN階段: encoding
+          Best val metric: 1.0383508869869236
+          Best test metric: 2.2056731510068
+    GNN階段: columnwise
+          Best val metric: 0.9795537683938338
+          Best test metric: 1.1930478652471375
+    GNN階段: decoding
+          Best val metric: 1.0710560083389282
+          Best test metric: 0.9242002964019775
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8290834818060359
+          Best test metric: 0.778707448675503
+    GNN階段: start
+          Best val metric: 0.6881059663723196
+          Best test metric: 0.6510515720885456
+    GNN階段: materialize
+          Best val metric: 0.6924223680052217
+          Best test metric: 0.6744021417142588
+    GNN階段: encoding
+          Best val metric: 0.9992194109356016
+          Best test metric: 0.9642807402810477
+    GNN階段: columnwise
+          Best val metric: 0.9106261059735349
+          Best test metric: 1.1672310939752049
+    GNN階段: decoding
+          Best val metric: 0.6710662841796875
+          Best test metric: 0.6255249381065369
+dataset: openml_EgyptianSkulls
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0114932600618016
+          Best test metric: 1.0465544024678455
+    GNN階段: start
+          Best val metric: 1.0186671545125716
+          Best test metric: 1.0080417106263753
+    GNN階段: materialize
+          Best val metric: 1.1499475425697607
+          Best test metric: 1.2761936434596004
+    GNN階段: encoding
+          Best val metric: 1.225512741760354
+          Best test metric: 1.1344264142283584
+    GNN階段: columnwise
+          Best val metric: 1.0328269230330387
+          Best test metric: 1.0233854906684388
+    GNN階段: decoding
+          Best val metric: 1.043487787246704
+          Best test metric: 1.0733972787857056
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6031820122055428
+          Best test metric: 0.6656462688361244
+    GNN階段: start
+          Best val metric: 1.0106247690892944
+          Best test metric: 1.0928357254016878
+    GNN階段: materialize
+          Best val metric: 0.7628382354733283
+          Best test metric: 0.7098349101250678
+    GNN階段: encoding
+          Best val metric: 2.2377095982076507
+          Best test metric: 2.960995957897124
+    GNN階段: columnwise
+          Best val metric: 0.898698752192939
+          Best test metric: 0.8720219546384658
+    GNN階段: decoding
+          Best val metric: 0.8821353316307068
+          Best test metric: 0.9935406446456909
+dataset: openml_autoPrice
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7857037812930338
+          Best test metric: 0.8124905365612869
+    GNN階段: start
+          Best val metric: 0.7596899156677177
+          Best test metric: 0.8008138138267478
+    GNN階段: materialize
+          Best val metric: 0.7240704282706053
+          Best test metric: 0.7611641454279722
+    GNN階段: encoding
+          Best val metric: 0.957430417642571
+          Best test metric: 0.9889050049456773
+    GNN階段: columnwise
+          Best val metric: 0.8442611205859972
+          Best test metric: 0.842385460230069
+    GNN階段: decoding
+          Best val metric: 0.8271142840385437
+          Best test metric: 1.041170358657837
+dataset: openml_ELE_1
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8483591285885773
+          Best test metric: 1.0896116713758615
+    GNN階段: start
+          Best val metric: 0.8344066542432327
+          Best test metric: 1.9849176941342386
+    GNN階段: materialize
+          Best val metric: 0.7251535516124414
+          Best test metric: 1.2691100375457174
+    GNN階段: encoding
+          Best val metric: 0.8545112302565616
+          Best test metric: 1.654635740340538
+    GNN階段: columnwise
+          Best val metric: 0.8874045253494698
+          Best test metric: 1.1638480891469045
+    GNN階段: decoding
+          Best val metric: 0.6422075629234314
+          Best test metric: 1.270614743232727
+dataset: openml_machine_cpu
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.737057441499552
+          Best test metric: 0.7994910662797851
+    GNN階段: start
+          Best val metric: 1.5992701803117568
+          Best test metric: 1.0932962293744957
+    GNN階段: materialize
+          Best val metric: 1.550032273848688
+          Best test metric: 0.7737085272130875
+    GNN階段: encoding
+          Best val metric: 2.0072076383646813
+          Best test metric: 1.04643097755866
+    GNN階段: columnwise
+          Best val metric: 1.6053341254525961
+          Best test metric: 0.6674565364674467
+    GNN階段: decoding
+          Best val metric: 3.6566171646118164
+          Best test metric: 0.8431071043014526
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8670742888913037
+          Best test metric: 0.91768788038159
+    GNN階段: start
+          Best val metric: 0.5870887382164672
+          Best test metric: 0.6680153501440146
+    GNN階段: materialize
+          Best val metric: 0.8674228108389079
+          Best test metric: 1.009365806892032
+    GNN階段: encoding
+          Best val metric: 1.1262806914251329
+          Best test metric: 1.1938816057928494
+    GNN階段: columnwise
+          Best val metric: 0.787660429522885
+          Best test metric: 1.0906469195330142
+    GNN階段: decoding
+          Best val metric: 0.791318953037262
+          Best test metric: 0.9758111834526062
+dataset: openml_disclosure_x_bias
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0908035372653986
+          Best test metric: 1.043879250844039
+    GNN階段: start
+          Best val metric: 1.1330398331463898
+          Best test metric: 1.0937113073861946
+    GNN階段: materialize
+          Best val metric: 1.1651300233311732
+          Best test metric: 1.2586105373974994
+    GNN階段: encoding
+          Best val metric: 1.094226351957648
+          Best test metric: 1.0321267187070264
+    GNN階段: columnwise
+          Best val metric: 1.0046426766038803
+          Best test metric: 0.9702455297876758
+    GNN階段: decoding
+          Best val metric: 1.0461806058883667
+          Best test metric: 0.9796243906021118
+dataset: openml_Boston_house_price_data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7570303980898321
+          Best test metric: 0.8081234656228636
+    GNN階段: start
+          Best val metric: 0.6803785954173128
+          Best test metric: 0.7901359658997348
+    GNN階段: materialize
+          Best val metric: 0.7096754336958595
+          Best test metric: 0.8072642208889373
+    GNN階段: encoding
+          Best val metric: 1.2796547425564033
+          Best test metric: 1.3347273582485821
+    GNN階段: columnwise
+          Best val metric: 0.9434655803028139
+          Best test metric: 1.0125803574121808
+    GNN階段: decoding
+          Best val metric: 0.7176187634468079
+          Best test metric: 1.0297183990478516
+dataset: openml_bodyfat
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8460042298529105
+          Best test metric: 0.7339404017343879
+    GNN階段: start
+          Best val metric: 0.8759293049086344
+          Best test metric: 0.8028161594282223
+    GNN階段: materialize
+          Best val metric: 0.8014200407445529
+          Best test metric: 0.7324154052448626
+    GNN階段: encoding
+          Best val metric: 1.2111963303114808
+          Best test metric: 1.121637192707798
+    GNN階段: columnwise
+          Best val metric: 0.9879476112229115
+          Best test metric: 0.8859604941853969
+    GNN階段: decoding
+          Best val metric: 1.0933282375335693
+          Best test metric: 0.9206192493438721
+dataset: openml_Fish_market
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6217242944877149
+          Best test metric: 1.0257033098394845
+    GNN階段: start
+          Best val metric: 0.4256637306068557
+          Best test metric: 0.7154557156963589
+    GNN階段: materialize
+          Best val metric: 0.6942094990871401
+          Best test metric: 1.1268812450843106
+    GNN階段: encoding
+          Best val metric: 0.4681705708343763
+          Best test metric: 0.9146064378836734
+    GNN階段: columnwise
+          Best val metric: 0.3832544189404905
+          Best test metric: 0.7681862167162702
+    GNN階段: decoding
+          Best val metric: 0.47483348846435547
+          Best test metric: 1.0364978313446045
+dataset: openml_auto_price
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6874228564243571
+          Best test metric: 0.7394338017844292
+    GNN階段: start
+          Best val metric: 0.7987470888851886
+          Best test metric: 0.8138324375849454
+    GNN階段: materialize
+          Best val metric: 0.5705321163445256
+          Best test metric: 0.6404998936262198
+    GNN階段: encoding
+          Best val metric: 0.8392961357942217
+          Best test metric: 0.8588498678537421
+    GNN階段: columnwise
+          Best val metric: 0.7555871123225048
+          Best test metric: 0.7945830351721116
+    GNN階段: decoding
+          Best val metric: 0.8315722346305847
+          Best test metric: 1.0365227460861206
+dataset: openml_DEE
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7791855811476938
+          Best test metric: 0.7497939383036113
+    GNN階段: start
+          Best val metric: 1.051750785216194
+          Best test metric: 1.043077441777593
+    GNN階段: materialize
+          Best val metric: 0.9222040074214429
+          Best test metric: 0.8488426519731663
+    GNN階段: encoding
+          Best val metric: 0.9601582414623494
+          Best test metric: 0.9221987721482365
+    GNN階段: columnwise
+          Best val metric: 0.8552067673390432
+          Best test metric: 0.8035404956252928
+    GNN階段: decoding
+          Best val metric: 1.1250340938568115
+          Best test metric: 1.0201821327209473
+dataset: openml_pm10
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0149280210632936
+          Best test metric: 0.948238290293549
+    GNN階段: start
+          Best val metric: 1.191917434841135
+          Best test metric: 1.098827673691251
+    GNN階段: materialize
+          Best val metric: 1.1014305739166337
+          Best test metric: 1.0208423121050978
+    GNN階段: encoding
+          Best val metric: 1.090779166269491
+          Best test metric: 1.0945482883039364
+    GNN階段: columnwise
+          Best val metric: 0.9515356664522839
+          Best test metric: 0.9589243013480208
+    GNN階段: decoding
+          Best val metric: 1.0509483814239502
+          Best test metric: 1.0094959735870361
+dataset: openml_meta
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.14463101629537764
+          Best test metric: 0.8860335202129996
+    GNN階段: start
+          Best val metric: 0.17989854236463387
+          Best test metric: 0.8984074794895289
+    GNN階段: materialize
+          Best val metric: 0.224291136484537
+          Best test metric: 0.9064083947503372
+    GNN階段: encoding
+          Best val metric: 0.8188290943641919
+          Best test metric: 1.2501868585158578
+    GNN階段: columnwise
+          Best val metric: 0.35489140249803774
+          Best test metric: 0.9259074966044781
+    GNN階段: decoding
+          Best val metric: 0.009744590148329735
+          Best test metric: 0.8255541920661926
+dataset: openml_Forest_Fire_Area
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.48236591771342047
+          Best test metric: 1.4122886702175665
+    GNN階段: start
+          Best val metric: 0.39744597835648837
+          Best test metric: 1.4175616223701009
+    GNN階段: materialize
+          Best val metric: 0.499521533202168
+          Best test metric: 1.4372336928775726
+    GNN階段: encoding
+          Best val metric: 0.35179899526385366
+          Best test metric: 1.4635897138679819
+    GNN階段: columnwise
+          Best val metric: 0.3165023916667891
+          Best test metric: 1.4068327226222075
+    GNN階段: decoding
+          Best val metric: 0.06294756382703781
+          Best test metric: 1.9877965450286865
+dataset: openml_HappinessRank_2015
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0908859356135032
+          Best test metric: 1.0911755371906287
+    GNN階段: start
+          Best val metric: 0.813451246804181
+          Best test metric: 0.7302607275812506
+    GNN階段: materialize
+          Best val metric: 0.7623791692707013
+          Best test metric: 0.7375626472761985
+    GNN階段: encoding
+          Best val metric: 1.6256609086203322
+          Best test metric: 1.615760579129598
+    GNN階段: columnwise
+          Best val metric: 1.0600919924710406
+          Best test metric: 1.0219853122909903
+    GNN階段: decoding
+          Best val metric: 1.1506826877593994
+          Best test metric: 1.453033208847046
+dataset: openml_boston
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7960508984534009
+          Best test metric: 0.858467663435335
+    GNN階段: start
+          Best val metric: 0.7761563764617273
+          Best test metric: 0.8905750059852935
+    GNN階段: materialize
+          Best val metric: 0.7823448901266236
+          Best test metric: 0.8578602706309472
+    GNN階段: encoding
+          Best val metric: 1.7286918248602743
+          Best test metric: 1.763524519297527
+    GNN階段: columnwise
+          Best val metric: 0.7925305588663825
+          Best test metric: 0.8814181566440101
+    GNN階段: decoding
+          Best val metric: 0.7153587341308594
+          Best test metric: 1.104251503944397
+dataset: openml_echoMonths
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0370709255871466
+          Best test metric: 0.9460492061394927
+    GNN階段: start
+          Best val metric: 1.2615138971180897
+          Best test metric: 1.2252485684812815
+    GNN階段: materialize
+          Best val metric: 1.1070918915264303
+          Best test metric: 1.021401513205252
+    GNN階段: encoding
+          Best val metric: 1.3647540424913869
+          Best test metric: 1.2264266212181902
+    GNN階段: columnwise
+          Best val metric: 1.221714717567074
+          Best test metric: 1.1204986587850023
+    GNN階段: decoding
+          Best val metric: 1.3509998321533203
+          Best test metric: 1.5950266122817993
+dataset: openml_strikes
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.4318229694479074
+          Best test metric: 1.1934471784840002
+    GNN階段: start
+          Best val metric: 1.429677994493247
+          Best test metric: 1.2249759204599848
+    GNN階段: materialize
+          Best val metric: 1.472032004889564
+          Best test metric: 1.2387110208023706
+    GNN階段: encoding
+          Best val metric: 1.9926629789315529
+          Best test metric: 1.7439225114922616
+    GNN階段: columnwise
+          Best val metric: 1.4725880897998798
+          Best test metric: 1.2163310376228655
+    GNN階段: decoding
+          Best val metric: 2.2248079776763916
+          Best test metric: 1.6539720296859741
+dataset: openml_no2
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1870867863546066
+          Best test metric: 1.1106899688557599
+    GNN階段: start
+          Best val metric: 0.9551637763249945
+          Best test metric: 0.9197853456814976
+    GNN階段: materialize
+          Best val metric: 1.0745881711198393
+          Best test metric: 1.7378530596434876
+    GNN階段: encoding
+          Best val metric: 1.1860536500848167
+          Best test metric: 1.093826509252052
+    GNN階段: columnwise
+          Best val metric: 0.9235135081035961
+          Best test metric: 0.8989894001095046
+    GNN階段: decoding
+          Best val metric: 1.1352760791778564
+          Best test metric: 1.0272537469863892
+dataset: openml_pharynx
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.043855668618094
+          Best test metric: 1.0939364683055606
+    GNN階段: start
+          Best val metric: 1.0901199592409927
+          Best test metric: 1.096434649898389
+    GNN階段: materialize
+          Best val metric: 1.091337376840084
+          Best test metric: 1.4566166264794094
+    GNN階段: encoding
+          Best val metric: 1.1842397808900773
+          Best test metric: 1.3169988096575038
+    GNN階段: columnwise
+          Best val metric: 0.9617296690828434
+          Best test metric: 1.0634123867767766
+    GNN階段: decoding
+          Best val metric: 1.0703470706939697
+          Best test metric: 1.8009291887283325
+dataset: openml_The_Office_Dataset
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9861038104012416
+          Best test metric: 0.8818471238281183
+    GNN階段: start
+          Best val metric: 1.0584084887114429
+          Best test metric: 0.90608539401808
+    GNN階段: materialize
+          Best val metric: 0.9618819952717232
+          Best test metric: 0.8576756408133936
+    GNN階段: encoding
+          Best val metric: 1.088452507395294
+          Best test metric: 0.958167542062429
+    GNN階段: columnwise
+          Best val metric: 1.0913040058628394
+          Best test metric: 0.9077729878058634
+    GNN階段: decoding
+          Best val metric: 1.1500024795532227
+          Best test metric: 0.9313886165618896
+dataset: openml_analcatdata_vineyard
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.3037927723321006
+          Best test metric: 1.3164580020862873
+    GNN階段: start
+          Best val metric: 0.9848707857919337
+          Best test metric: 1.018486042580643
+    GNN階段: materialize
+          Best val metric: 1.0211488015731223
+          Best test metric: 1.076011299573851
+    GNN階段: encoding
+          Best val metric: 0.9694761815443049
+          Best test metric: 1.0271830269878912
+    GNN階段: columnwise
+          Best val metric: 0.973352757373325
+          Best test metric: 1.0279122291863978
+    GNN階段: decoding
+          Best val metric: 0.9379045963287354
+          Best test metric: 1.5365846157073975
+dataset: openml_lowbwt
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1688390952845427
+          Best test metric: 1.0605491230696709
+    GNN階段: start
+          Best val metric: 1.2166349202199116
+          Best test metric: 1.031859882227819
+    GNN階段: materialize
+          Best val metric: 1.2375747157188912
+          Best test metric: 0.9418889308068823
+    GNN階段: encoding
+          Best val metric: 1.1788205630722068
+          Best test metric: 1.023601198572558
+    GNN階段: columnwise
+          Best val metric: 1.180333345980044
+          Best test metric: 0.9158504638134223
+    GNN階段: decoding
+          Best val metric: 1.4320144653320312
+          Best test metric: 0.8928893208503723
+dataset: openml_cps_85_wages
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0741032208827594
+          Best test metric: 1.121646332880036
+    GNN階段: start
+          Best val metric: 1.122434711299261
+          Best test metric: 1.317839705159498
+    GNN階段: materialize
+          Best val metric: 1.0672565465794697
+          Best test metric: 1.026907998853269
+    GNN階段: encoding
+          Best val metric: 1.108195954367856
+          Best test metric: 1.0473061428178763
+    GNN階段: columnwise
+          Best val metric: 1.062065933422231
+          Best test metric: 1.0082329752662553
+    GNN階段: decoding
+          Best val metric: 1.1094682216644287
+          Best test metric: 1.065416693687439
+dataset: openml_cleveland
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9789558379818052
+          Best test metric: 0.8670169903257486
+    GNN階段: start
+          Best val metric: 1.004152972707065
+          Best test metric: 0.8594230985185954
+    GNN階段: materialize
+          Best val metric: 1.078993737542873
+          Best test metric: 0.8770609833927072
+    GNN階段: encoding
+          Best val metric: 1.0524684591392324
+          Best test metric: 0.9074124740133316
+    GNN階段: columnwise
+          Best val metric: 0.9436631750120592
+          Best test metric: 0.8307366126672487
+    GNN階段: decoding
+          Best val metric: 1.1901792287826538
+          Best test metric: 0.909355103969574
+dataset: openml_cloud
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.0289361600359097
+          Best test metric: 0.893065338384408
+    GNN階段: start
+          Best val metric: 0.9550017968006107
+          Best test metric: 0.8567176307616644
+    GNN階段: materialize
+          Best val metric: 1.004544244641541
+          Best test metric: 0.8922525893216814
+    GNN階段: encoding
+          Best val metric: 2.100326685245278
+          Best test metric: 1.9637369788968653
+    GNN階段: columnwise
+          Best val metric: 1.024361986376694
+          Best test metric: 0.8752182960684781
+    GNN階段: decoding
+          Best val metric: 1.2699862718582153
+          Best test metric: 1.2092169523239136
+dataset: openml_fruitfly
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.391794976964658
+          Best test metric: 1.4393469513824169
+    GNN階段: start
+          Best val metric: 1.1722744578785385
+          Best test metric: 0.9498564850169491
+    GNN階段: materialize
+          Best val metric: 1.2931853052516766
+          Best test metric: 1.1980205601407
+    GNN階段: encoding
+          Best val metric: 1.5902119428101495
+          Best test metric: 1.1503818168367697
+    GNN階段: columnwise
+          Best val metric: 1.2226824285367608
+          Best test metric: 0.9063859377227239
+    GNN階段: decoding
+          Best val metric: 1.4367291927337646
+          Best test metric: 0.902830958366394
+dataset: openml_analcatdata_homerun
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.271326105020902
+          Best test metric: 1.1699803103722004
+    GNN階段: start
+          Best val metric: 1.3167526740138806
+          Best test metric: 1.2232650362451472
+    GNN階段: materialize
+          Best val metric: 1.3193159235997014
+          Best test metric: 1.158135191805153
+    GNN階段: encoding
+          Best val metric: 1.3013627410771489
+          Best test metric: 1.3249668045204206
+    GNN階段: columnwise
+          Best val metric: 1.240305644713449
+          Best test metric: 1.2159207099612201
+    GNN階段: decoding
+          Best val metric: 1.563362956047058
+          Best test metric: 1.3487248420715332
+dataset: openml_cholesterol
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.926647055050184
+          Best test metric: 1.095658299690271
+    GNN階段: start
+          Best val metric: 1.1015534096200716
+          Best test metric: 1.357484577295077
+    GNN階段: materialize
+          Best val metric: 0.9263337816347362
+          Best test metric: 1.1374139396893221
+    GNN階段: encoding
+          Best val metric: 1.4788646210515928
+          Best test metric: 1.5944110023205054
+    GNN階段: columnwise
+          Best val metric: 0.895382804839784
+          Best test metric: 1.0690581496528486
+    GNN階段: decoding
+          Best val metric: 0.7797317504882812
+          Best test metric: 1.133318305015564
+dataset: openml_Reading_Hydro
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7273221710314749
+          Best test metric: 0.7812889470882816
+    GNN階段: start
+          Best val metric: 0.8229263804059597
+          Best test metric: 0.9043242613103852
+    GNN階段: materialize
+          Best val metric: 0.7929077500807342
+          Best test metric: 0.8508645093127388
+    GNN階段: encoding
+          Best val metric: 0.7947670975700257
+          Best test metric: 0.8485520020387861
+    GNN階段: columnwise
+          Best val metric: 0.7479644809694309
+          Best test metric: 0.8210059368532215
+    GNN階段: decoding
+          Best val metric: 0.828360378742218
+          Best test metric: 1.0330195426940918
+dataset: road_safety
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5829493999481201
+          Best test metric: 0.5146887302398682
+    GNN階段: start
+          Best val metric: 0.7566280364990234
+          Best test metric: 0.7582168579101562
+    GNN階段: materialize
+          Best val metric: 0.7230986952781677
+          Best test metric: 0.7242010235786438
+    GNN階段: encoding
+          Best val metric: 0.7934044599533081
+          Best test metric: 0.7918256521224976
+    GNN階段: columnwise
+          Best val metric: 0.795377254486084
+          Best test metric: 0.7945069074630737
+    GNN階段: decoding
+          Best val metric: 0.7906540632247925
+          Best test metric: 0.7849963307380676
+dataset: higgs_small
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.733716607093811
+          Best test metric: 0.7235577702522278
+    GNN階段: start
+          Best val metric: 0.6843245029449463
+          Best test metric: 0.6754424571990967
+    GNN階段: materialize
+          Best val metric: 0.6853383183479309
+          Best test metric: 0.6734943389892578
+    GNN階段: encoding
+          Best val metric: 0.6671127676963806
+          Best test metric: 0.6582202911376953
+    GNN階段: columnwise
+          Best val metric: 0.7222889065742493
+          Best test metric: 0.7112396955490112
+    GNN階段: decoding
+          Best val metric: 0.6907275915145874
+          Best test metric: 0.6812645792961121
+dataset: bank_marketing
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7568634748458862
+          Best test metric: 0.7506237626075745
+    GNN階段: start
+          Best val metric: 0.8064836859703064
+          Best test metric: 0.8156470060348511
+    GNN階段: materialize
+          Best val metric: 0.7907453775405884
+          Best test metric: 0.7788586616516113
+    GNN階段: encoding
+          Best val metric: 0.74842369556427
+          Best test metric: 0.719205915927887
+    GNN階段: columnwise
+          Best val metric: 0.6113688945770264
+          Best test metric: 0.5722005367279053
+    GNN階段: decoding
+          Best val metric: 0.7777300477027893
+          Best test metric: 0.7890938520431519
+dataset: MagicTelescope
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7504364252090454
+          Best test metric: 0.7531288862228394
+    GNN階段: start
+          Best val metric: 0.5201119780540466
+          Best test metric: 0.5318202972412109
+    GNN階段: materialize
+          Best val metric: 0.5576517581939697
+          Best test metric: 0.5574939250946045
+    GNN階段: encoding
+          Best val metric: 0.6364214420318604
+          Best test metric: 0.6425880193710327
+    GNN階段: columnwise
+          Best val metric: 0.8365997672080994
+          Best test metric: 0.8320300579071045
+    GNN階段: decoding
+          Best val metric: 0.7153370380401611
+          Best test metric: 0.7196016311645508
+dataset: credit
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8119046688079834
+          Best test metric: 0.8194606304168701
+    GNN階段: start
+          Best val metric: 0.7955827713012695
+          Best test metric: 0.7959871292114258
+    GNN階段: materialize
+          Best val metric: 0.7899370193481445
+          Best test metric: 0.7937972545623779
+    GNN階段: encoding
+          Best val metric: 0.7804490923881531
+          Best test metric: 0.781722903251648
+    GNN階段: columnwise
+          Best val metric: 0.7982500791549683
+          Best test metric: 0.7904284000396729
+    GNN階段: decoding
+          Best val metric: 0.8217706680297852
+          Best test metric: 0.8200967311859131
+dataset: binarized_pol
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7160378694534302
+          Best test metric: 0.7331016659736633
+    GNN階段: start
+          Best val metric: 0.7266712188720703
+          Best test metric: 0.7254482507705688
+    GNN階段: materialize
+          Best val metric: 0.7110284566879272
+          Best test metric: 0.7118757963180542
+    GNN階段: encoding
+          Best val metric: 0.7349566221237183
+          Best test metric: 0.7285831570625305
+    GNN階段: columnwise
+          Best val metric: 0.5871546268463135
+          Best test metric: 0.6126610636711121
+    GNN階段: decoding
+          Best val metric: 0.5278928875923157
+          Best test metric: 0.544310986995697
+dataset: helena
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.18047034740447998
+          Best test metric: 0.18055102229118347
+    GNN階段: start
+          Best val metric: 0.18936605751514435
+          Best test metric: 0.19046340882778168
+    GNN階段: materialize
+          Best val metric: 0.17525562644004822
+          Best test metric: 0.18080027401447296
+    GNN階段: encoding
+          Best val metric: 0.1840490847826004
+          Best test metric: 0.18304350972175598
+    GNN階段: columnwise
+          Best val metric: 0.18701431155204773
+          Best test metric: 0.19195888936519623
+    GNN階段: decoding
+          Best val metric: 0.2480572611093521
+          Best test metric: 0.2453170269727707
+dataset: jannis
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6287420392036438
+          Best test metric: 0.6236732602119446
+    GNN階段: start
+          Best val metric: 0.6148089170455933
+          Best test metric: 0.6098944544792175
+    GNN階段: materialize
+          Best val metric: 0.6184713244438171
+          Best test metric: 0.6119396090507507
+    GNN階段: encoding
+          Best val metric: 0.6152070164680481
+          Best test metric: 0.6097601056098938
+    GNN階段: columnwise
+          Best val metric: 0.6293789744377136
+          Best test metric: 0.6272411346435547
+    GNN階段: decoding
+          Best val metric: 0.6289808750152588
+          Best test metric: 0.6246137022972107
+dataset: eye
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.44424131512641907
+          Best test metric: 0.4383358061313629
+    GNN階段: start
+          Best val metric: 0.37903717160224915
+          Best test metric: 0.38747286796569824
+    GNN階段: materialize
+          Best val metric: 0.4101157784461975
+          Best test metric: 0.41216138005256653
+    GNN階段: encoding
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.37935763597488403
+    GNN階段: columnwise
+          Best val metric: 0.44606947898864746
+          Best test metric: 0.441764771938324
+    GNN階段: decoding
+          Best val metric: 0.39244362711906433
+          Best test metric: 0.39021602272987366
+dataset: Brazilian_houses
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.4240157068251571
+          Best test metric: 0.4180071091207082
+    GNN階段: start
+          Best val metric: 0.5309438384218292
+          Best test metric: 0.5182712735908483
+    GNN階段: materialize
+          Best val metric: 0.7905765774942408
+          Best test metric: 0.7998718680648187
+    GNN階段: encoding
+          Best val metric: 0.7493284318213271
+          Best test metric: 0.7575956211231415
+    GNN階段: columnwise
+          Best val metric: 0.5275829761563972
+          Best test metric: 0.5264797055045439
+    GNN階段: decoding
+          Best val metric: 0.5277519226074219
+          Best test metric: 0.5566701889038086
+dataset: medical_charges
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.1514107118604591
+          Best test metric: 0.1532320084158133
+    GNN階段: start
+          Best val metric: 0.20826162157053765
+          Best test metric: 0.20942699050205554
+    GNN階段: materialize
+          Best val metric: 0.20263639702828848
+          Best test metric: 0.2039124283274778
+    GNN階段: encoding
+          Best val metric: 0.1549906344526068
+          Best test metric: 0.15660563170811903
+    GNN階段: columnwise
+          Best val metric: 0.1438388801067753
+          Best test metric: 0.14557895585318748
+    GNN階段: decoding
+          Best val metric: 0.05515381693840027
+          Best test metric: 0.055449049919843674
+dataset: nyc_taxi_green_dec_2016
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7772647299930574
+          Best test metric: 0.7846891997336782
+    GNN階段: start
+          Best val metric: 0.7889279921299566
+          Best test metric: 0.7963108983249424
+    GNN階段: materialize
+          Best val metric: 0.7870631807842777
+          Best test metric: 0.7964840846414304
+    GNN階段: encoding
+          Best val metric: 0.7790444713454379
+          Best test metric: 0.8006471847331267
+    GNN階段: columnwise
+          Best val metric: 0.7783805795117027
+          Best test metric: 0.7848989340238492
+    GNN階段: decoding
+          Best val metric: 0.6857386827468872
+          Best test metric: 0.6959887742996216
+dataset: Ailerons
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7325084991092202
+          Best test metric: 0.7452520046034415
+    GNN階段: start
+          Best val metric: 0.7753233604177896
+          Best test metric: 0.7797048165456714
+    GNN階段: materialize
+          Best val metric: 0.7667014281712728
+          Best test metric: 0.7715235832970938
+    GNN階段: encoding
+          Best val metric: 0.8015085034838504
+          Best test metric: 0.80951877333306
+    GNN階段: columnwise
+          Best val metric: 0.7491192812320213
+          Best test metric: 0.7680097536023992
+    GNN階段: decoding
+          Best val metric: 0.6123377084732056
+          Best test metric: 0.6396445035934448
+dataset: california
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6904712108767618
+          Best test metric: 0.7168175800877541
+    GNN階段: start
+          Best val metric: 0.7943630269226517
+          Best test metric: 0.7936914467428456
+    GNN階段: materialize
+          Best val metric: 0.6937246945207793
+          Best test metric: 0.7109488182424523
+    GNN階段: encoding
+          Best val metric: 0.833293834385962
+          Best test metric: 0.8588398047164589
+    GNN階段: columnwise
+          Best val metric: 0.7271682101298962
+          Best test metric: 0.7419116662082708
+    GNN階段: decoding
+          Best val metric: 0.773074209690094
+          Best test metric: 0.8239580392837524
+dataset: sulfur
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 1.1394304264751507
+          Best test metric: 1.002790075463301
+    GNN階段: start
+          Best val metric: 1.0970838690231373
+          Best test metric: 0.9213220263291988
+    GNN階段: materialize
+          Best val metric: 0.974606103069799
+          Best test metric: 0.8208824720697567
+    GNN階段: encoding
+          Best val metric: 1.0459227714949033
+          Best test metric: 0.8796448041674084
+    GNN階段: columnwise
+          Best val metric: 0.9974311377482987
+          Best test metric: 0.8426908627189545
+    GNN階段: decoding
+          Best val metric: 1.1066497564315796
+          Best test metric: 0.7779852747917175
+dataset: pol
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9458283522274477
+          Best test metric: 0.9561439604962003
+    GNN階段: start
+          Best val metric: 1.0203113713630638
+          Best test metric: 1.0175902499540042
+    GNN階段: materialize
+          Best val metric: 0.9803410481122685
+          Best test metric: 0.9789460048533811
+    GNN階段: encoding
+          Best val metric: 0.9667522998128426
+          Best test metric: 0.9686604119991763
+    GNN階段: columnwise
+          Best val metric: 0.9510045775875949
+          Best test metric: 0.9541567549267046
+    GNN階段: decoding
+          Best val metric: 0.8950420022010803
+          Best test metric: 0.914739727973938
+dataset: diamonds
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.29854498021287224
+          Best test metric: 0.30049416849631705
+    GNN階段: start
+          Best val metric: 0.277072142193361
+          Best test metric: 0.2778576937926382
+    GNN階段: materialize
+          Best val metric: 0.2989396155320588
+          Best test metric: 0.29732946695330337
+    GNN階段: encoding
+          Best val metric: 0.26641299667093743
+          Best test metric: 0.26771978818875364
+    GNN階段: columnwise
+          Best val metric: 0.27097127989840797
+          Best test metric: 0.27099181850600795
+    GNN階段: decoding
+          Best val metric: 0.10533713549375534
+          Best test metric: 0.10529757291078568
+dataset: house_sales
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.5533981650884888
+          Best test metric: 0.5426136474845409
+    GNN階段: start
+          Best val metric: 0.6432381808206602
+          Best test metric: 0.6437560534887038
+    GNN階段: materialize
+          Best val metric: 0.6240636964804651
+          Best test metric: 0.6273491342581907
+    GNN階段: encoding
+          Best val metric: 0.9427952629741545
+          Best test metric: 1.1232685434257115
+    GNN階段: columnwise
+          Best val metric: 0.6065654052161676
+          Best test metric: 0.598370219101383
+    GNN階段: decoding
+          Best val metric: 0.4589204490184784
+          Best test metric: 0.45720550417900085
+dataset: house
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.8990742293021344
+          Best test metric: 0.917529256598487
+    GNN階段: start
+          Best val metric: 0.9012508627243251
+          Best test metric: 0.8911610044477014
+    GNN階段: materialize
+          Best val metric: 0.8952817808410185
+          Best test metric: 0.8868114406184965
+    GNN階段: encoding
+          Best val metric: 0.8748702906789642
+          Best test metric: 0.8759810873912014
+    GNN階段: columnwise
+          Best val metric: 0.8948375061041124
+          Best test metric: 0.8890888619159995
+    GNN階段: decoding
+          Best val metric: 0.8149327039718628
+          Best test metric: 0.795437753200531
+dataset: SGEMM_GPU_kernel_performance
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.03988451759539968
+          Best test metric: 0.039714574149004526
+    GNN階段: start
+          Best val metric: 0.07058482283750228
+          Best test metric: 0.07012408562627617
+    GNN階段: materialize
+          Best val metric: 0.0647856774020229
+          Best test metric: 0.06475476283153335
+    GNN階段: encoding
+          Best val metric: 0.03855402484283747
+          Best test metric: 0.0385103315334159
+    GNN階段: columnwise
+          Best val metric: 0.053722811600152555
+          Best test metric: 0.05352097209613844
+    GNN階段: decoding
+          Best val metric: 0.09083212912082672
+          Best test metric: 0.09037817269563675

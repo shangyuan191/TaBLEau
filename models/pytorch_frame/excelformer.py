@@ -17,7 +17,8 @@ higgs_small: 80.75 (79.27) mixup: hidden
 """
 import argparse
 import os.path as osp
-
+import os
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 import matplotlib.pyplot as plt
 import torch
 import torch.nn.functional as F
@@ -108,7 +109,7 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
         print(f"Detected num_classes: {num_classes}")
     else:
         num_classes = 1
-# label 處理
+    # label 處理
     if task_type == 'binclass':
         y = torch.tensor(y, dtype=torch.float32, device=device)
     elif task_type == 'multiclass':
@@ -132,26 +133,32 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     val_mask[n_train:n_train+n_val] = True
     test_mask[n_train+n_val:] = True
 
+    patience = config.get('gnn_patience', 10)
+    best_loss = float('inf')
+    early_stop_counter = 0
     # 建立並訓練GNN
     gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
     optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
     gnn.train()
+    gnn_early_stop_epochs = 0
     for epoch in range(gnn_epochs):
         optimizer.zero_grad()
         out = gnn(x, edge_index)
-        if task_type == 'binclass':
-            loss = torch.nn.functional.binary_cross_entropy_with_logits(
-                out[train_mask][:, 0], y[train_mask])
-        elif task_type == 'multiclass':
-            loss = torch.nn.functional.cross_entropy(
-                out[train_mask], y[train_mask])
-        else:
-            loss = torch.nn.functional.mse_loss(
-                out[train_mask][:, 0], y[train_mask])
+        loss = torch.nn.functional.mse_loss(out, x)
         loss.backward()
         optimizer.step()
+        # Early stopping check
+        if loss.item() < best_loss:
+            best_loss = loss.item()
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
         if (epoch+1) % 10 == 0:
             print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
+        if early_stop_counter >= patience:
+            print(f"GNN Early stopping at epoch {epoch+1}")
+            gnn_early_stop_epochs = epoch + 1
+            break
     gnn.eval()
     with torch.no_grad():
         final_emb = gnn(x, edge_index).cpu().numpy()
@@ -194,7 +201,7 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     
 
     # 若需要將 num_classes 傳遞到下游，可 return
-    return train_df_gnn, val_df_gnn, test_df_gnn
+    return train_df_gnn, val_df_gnn, test_df_gnn, gnn_early_stop_epochs
 
 
 
@@ -286,27 +293,49 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
     train_mask[:n_train] = True
     val_mask[n_train:n_train+n_val] = True
     test_mask[n_train+n_val:] = True
+    patience = config.get('gnn_patience', 10)
+    best_loss = float('inf')
+    early_stop_counter = 0
 
     # 建立並訓練GNN
     gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
     optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
+    gnn_early_stop_epochs = 0
     gnn.train()
     for epoch in range(gnn_epochs):
         optimizer.zero_grad()
         out = gnn(x, edge_index)
-        if task_type == 'binclass':
-            loss = torch.nn.functional.binary_cross_entropy_with_logits(
-                out[train_mask][:, 0], y[train_mask])
-        elif task_type == 'multiclass':
-            loss = torch.nn.functional.cross_entropy(
-                out[train_mask], y[train_mask])
-        else:
-            loss = torch.nn.functional.mse_loss(
-                out[train_mask][:, 0], y[train_mask])
+        # if task_type == 'binclass':
+        #     loss = torch.nn.functional.binary_cross_entropy_with_logits(
+        #         out[train_mask][:, 0], y[train_mask])
+        # elif task_type == 'multiclass':
+        #     print("gnn_after_materialize_fn: multiclass classification")
+        #     print(f"out[train_mask].shape: {out[train_mask].shape}")
+        #     print(f"y[train_mask].shape: {y[train_mask].shape}")
+        #     print(f"y[train_mask] dtype: {y[train_mask].dtype}, min: {y[train_mask].min()}, max: {y[train_mask].max()}")
+        #     assert y[train_mask].dtype == torch.long
+        #     assert y[train_mask].min() >= 0 and y[train_mask].max() < num_classes
+        #     assert len(y[train_mask].shape) == 1
+        #     loss = torch.nn.functional.cross_entropy(
+        #         out[train_mask], y[train_mask])
+        # else:
+        #     loss = torch.nn.functional.mse_loss(
+        #         out[train_mask][:, 0], y[train_mask])
+        loss = torch.nn.functional.mse_loss(out, x)
         loss.backward()
         optimizer.step()
+        # Early stopping check
+        if loss.item() < best_loss:
+            best_loss = loss.item()
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
         if (epoch+1) % 10 == 0:
             print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
+        if early_stop_counter >= patience:
+            gnn_early_stop_epochs = epoch + 1
+            print(f"GNN Early stopping at epoch {epoch+1}")
+            break
     gnn.eval()
     with torch.no_grad():
         final_emb = gnn(x, edge_index).cpu().numpy()
@@ -357,7 +386,7 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
 
     return (train_loader, val_loader, test_loader,
             col_stats, mutual_info_sort,
-            dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame)
+            dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs)
 
 # 取得所有 row 的 embedding
 def get_all_embeddings_and_targets(loader, encoder, convs):
@@ -423,7 +452,6 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
     gnn_epochs = config.get('gnn_epochs', 200)
     in_dim = x.shape[1]
     out_dim = 1 if (task_type == 'regression' or task_type=="binclass") else num_classes
-    # 建立並訓練GNN
     gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
     optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
     gnn.train()
@@ -433,7 +461,12 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
     is_binary_class = task_type == 'binclass'
     is_classification = task_type in ['binclass', 'multiclass']
     metric_computer = metric_computer.to(device)
-    for epoch in range(gnn_epochs):
+    best_epoch = 0
+    early_stop_counter = 0
+    patience = config.get('gnn_patience', 10)
+    early_stop_epoch = 0
+    best_val_metric = -float('inf') if is_classification else float('inf')
+    for epoch in tqdm(range(gnn_epochs),desc="GNN Training"):
         optimizer.zero_grad()
         out = gnn(x, edge_index)
         if task_type == 'binclass':
@@ -447,7 +480,6 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
                 out[train_mask][:, 0], y[train_mask])
         loss.backward()
         optimizer.step()
-        # 每個epoch都計算val_metric
         gnn.eval()
         with torch.no_grad():
             out_val = gnn(x, edge_index)
@@ -460,9 +492,14 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
             else:
                 val_metric = metric_computer(out_val[val_idx].view(-1), y[val_idx].view(-1))
             val_metric = val_metric.item() if hasattr(val_metric, 'item') else float(val_metric)
-            if (is_classification and val_metric > best_val) or (not is_classification and val_metric < best_val):
-                best_val = val_metric
+            improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+            print(f"epoch {epoch+1}/{gnn_epochs}, val_metric: {val_metric:.4f}, best_val_metric: {best_val_metric:.4f}, improved: {improved}, task_type: {task_type}")
+            if improved:
                 best_val_metric = val_metric
+                best_epoch = epoch + 1
+                early_stop_counter = 0
+            else:
+                early_stop_counter += 1
             # test_metric 仍用 test set
             test_idx = torch.arange(n_train+n_val, N)
             if is_binary_class:
@@ -473,10 +510,11 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
             else:
                 test_metric = metric_computer(out_val[test_idx].view(-1), y[test_idx].view(-1))
             test_metric = test_metric.item() if hasattr(test_metric, 'item') else float(test_metric)
-    return best_val_metric, test_metric
-
-
-
+        if early_stop_counter >= patience:
+            early_stop_epoch = epoch + 1
+            print(f"GNN Early stopping at epoch {early_stop_epoch}")
+            break
+    return best_val_metric, test_metric, early_stop_epoch
 def feature_mixup(
     x: Tensor,
     y: Tensor,
@@ -681,6 +719,7 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
     beta = config.get('beta', 0.5)
     num_layers = config.get('num_layers', 5)
     num_heads = config.get('num_heads', 4)
+    patience = config.get('patience', 10)
     
     # 新增：引入必要的GNN模組（以PyG為例）
     from torch_geometric.nn import GCNConv
@@ -845,13 +884,15 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
     else:
         best_val_metric = float('inf')
         best_test_metric = float('inf')
-    
+    best_epoch = 0
+    early_stop_counter = 0
     train_losses = []
     train_metrics = []
     val_metrics = []
     # test_metrics = []  # 不再每個epoch計算test
 
     epochs = config.get('epochs', 200)
+    early_stop_epochs = 0
     for epoch in range(1, epochs + 1):
         train_loss = train(epoch)
         train_metric = test(train_loader)
@@ -862,6 +903,13 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
         train_metrics.append(train_metric)
         val_metrics.append(val_metric)
         # test_metrics.append(test_metric)
+        improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+        if improved:
+            best_val_metric = val_metric
+            best_epoch = epoch
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
 
         if is_classification and val_metric > best_val_metric:
             best_val_metric = val_metric
@@ -872,13 +920,17 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
               f'Val {metric}: {val_metric:.4f}')
 
         lr_scheduler.step()
+        if early_stop_counter >= patience:
+            early_stop_epochs = epoch
+            print(f"Early stopping at epoch {epoch}")
+            break
 
     # 決定最終 metric 輸出
     final_metric = None
     test_metric = None
     if gnn_stage == 'decoding':
         # 確保gnn在gnn_decoding_eval作用域可見
-        best_val_metric, test_metric = gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, convs)
+        best_val_metric, test_metric, gnn_early_stop_epochs = gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, convs)
         final_metric = best_val_metric
     else:
         final_metric = best_val_metric
@@ -903,6 +955,8 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
         'is_binary_class': is_binary_class,
         'metric_computer': metric_computer,
         'metric': metric,
+        'early_stop_epochs': early_stop_epochs,
+        'gnn_early_stop_epochs': 0 if gnn_stage != 'decoding' else gnn_early_stop_epochs,
     }
 
 
@@ -913,20 +967,27 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     print("ExcelFormer - 五階段執行")
     print(f"gnn_stage: {gnn_stage}")
     task_type = dataset_results['info']['task_type']
+    # df = pd.concat([train_df, val_df, test_df], axis=0, ignore_index=True)
+    # class_count_dict = df['target'].value_counts().to_dict()
+    # # 按 key 排序
+    # class_count_dict_sorted = dict(sorted(class_count_dict.items()))
+    # print("各類別數量統計（dict，已排序）：", class_count_dict_sorted)
+
+    # print("總共有幾個類別：", df['target'].nunique())
     # 獲取配置參數
     try:
         train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
         
         if gnn_stage=='start':
             # 在 start_fn 和 materialize_fn 之間插入 GNN
-            train_df, val_df, test_df = gnn_after_start_fn(train_df, val_df, test_df, config, task_type)
+            train_df, val_df, test_df, gnn_early_stop_epochs = gnn_after_start_fn(train_df, val_df, test_df, config, task_type)
         material_outputs = materialize_fn(train_df, val_df, test_df, dataset_results, config)
         if gnn_stage == 'materialize':
             # 在 materialize_fn 和 encoding_fn 之間插入 GNN
             train_tensor_frame = material_outputs['train_tensor_frame']
             val_tensor_frame = material_outputs['val_tensor_frame']
             test_tensor_frame = material_outputs['test_tensor_frame']
-            (train_loader, val_loader, test_loader,col_stats, mutual_info_sort, dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame) = gnn_after_materialize_fn(
+            (train_loader, val_loader, test_loader,col_stats, mutual_info_sort, dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs) = gnn_after_materialize_fn(
                 train_tensor_frame, val_tensor_frame, test_tensor_frame, config, dataset_results['dataset'], task_type)
             material_outputs.update({
                 'train_loader': train_loader,
@@ -939,6 +1000,7 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
                 'val_tensor_frame': val_tensor_frame,
                 'test_tensor_frame': test_tensor_frame,
             })
+            material_outputs['gnn_early_stop_epochs'] = gnn_early_stop_epochs
 
         results=excelformer_core_fn(material_outputs, config, task_type, gnn_stage=gnn_stage)
     
