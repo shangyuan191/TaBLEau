@@ -126,26 +126,32 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     val_mask[n_train:n_train+n_val] = True
     test_mask[n_train+n_val:] = True
 
+    patience = config.get('gnn_patience', 10)
+    best_loss = float('inf')
+    early_stop_counter = 0
     # 建立並訓練GNN
     gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
     optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
     gnn.train()
+    gnn_early_stop_epochs = 0
     for epoch in range(gnn_epochs):
         optimizer.zero_grad()
         out = gnn(x, edge_index)
-        if task_type == 'binclass':
-            loss = torch.nn.functional.binary_cross_entropy_with_logits(
-                out[train_mask][:, 0], y[train_mask])
-        elif task_type == 'multiclass':
-            loss = torch.nn.functional.cross_entropy(
-                out[train_mask], y[train_mask])
-        else:
-            loss = torch.nn.functional.mse_loss(
-                out[train_mask][:, 0], y[train_mask])
+        loss = torch.nn.functional.mse_loss(out, x)
         loss.backward()
         optimizer.step()
+        # Early stopping check
+        if loss.item() < best_loss:
+            best_loss = loss.item()
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
         if (epoch+1) % 10 == 0:
             print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
+        if early_stop_counter >= patience:
+            print(f"GNN Early stopping at epoch {epoch+1}")
+            gnn_early_stop_epochs = epoch + 1
+            break
     gnn.eval()
     with torch.no_grad():
         final_emb = gnn(x, edge_index).cpu().numpy()
@@ -188,7 +194,7 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     
 
     # 若需要將 num_classes 傳遞到下游，可 return
-    return train_df_gnn, val_df_gnn, test_df_gnn
+    return train_df_gnn, val_df_gnn, test_df_gnn, gnn_early_stop_epochs
 def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_frame, config, dataset_name, task_type):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     k = config.get('gnn_knn', 5)
@@ -245,6 +251,9 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
     train_mask[:n_train] = True
     val_mask[n_train:n_train+n_val] = True
     test_mask[n_train+n_val:] = True
+    patience = config.get('gnn_patience', 10)
+    best_loss = float('inf')
+    early_stop_counter = 0
 
     # 建立並訓練GNN
     gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
@@ -253,19 +262,21 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
     for epoch in range(gnn_epochs):
         optimizer.zero_grad()
         out = gnn(x, edge_index)
-        if task_type == 'binclass':
-            loss = torch.nn.functional.binary_cross_entropy_with_logits(
-                out[train_mask][:, 0], y[train_mask])
-        elif task_type == 'multiclass':
-            loss = torch.nn.functional.cross_entropy(
-                out[train_mask], y[train_mask])
-        else:
-            loss = torch.nn.functional.mse_loss(
-                out[train_mask][:, 0], y[train_mask])
+        loss = torch.nn.functional.mse_loss(out, x)
         loss.backward()
         optimizer.step()
+        # Early stopping check
+        if loss.item() < best_loss:
+            best_loss = loss.item()
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
         if (epoch+1) % 10 == 0:
             print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
+        if early_stop_counter >= patience:
+            gnn_early_stop_epochs = epoch + 1
+            print(f"GNN Early stopping at epoch {epoch+1}")
+            break
     gnn.eval()
     with torch.no_grad():
         final_emb = gnn(x, edge_index).cpu().numpy()
