@@ -305,22 +305,6 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
     for epoch in range(gnn_epochs):
         optimizer.zero_grad()
         out = gnn(x, edge_index)
-        # if task_type == 'binclass':
-        #     loss = torch.nn.functional.binary_cross_entropy_with_logits(
-        #         out[train_mask][:, 0], y[train_mask])
-        # elif task_type == 'multiclass':
-        #     print("gnn_after_materialize_fn: multiclass classification")
-        #     print(f"out[train_mask].shape: {out[train_mask].shape}")
-        #     print(f"y[train_mask].shape: {y[train_mask].shape}")
-        #     print(f"y[train_mask] dtype: {y[train_mask].dtype}, min: {y[train_mask].min()}, max: {y[train_mask].max()}")
-        #     assert y[train_mask].dtype == torch.long
-        #     assert y[train_mask].min() >= 0 and y[train_mask].max() < num_classes
-        #     assert len(y[train_mask].shape) == 1
-        #     loss = torch.nn.functional.cross_entropy(
-        #         out[train_mask], y[train_mask])
-        # else:
-        #     loss = torch.nn.functional.mse_loss(
-        #         out[train_mask][:, 0], y[train_mask])
         loss = torch.nn.functional.mse_loss(out, x)
         loss.backward()
         optimizer.step()
