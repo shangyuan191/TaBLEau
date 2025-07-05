@@ -1,0 +1,5 @@
+dataset: credit
+  模型: fttransformer
+    GNN階段: none
+          錯誤: cannot access local variable 'results' where it is not associated with a value
+          耗時: 24.25 秒

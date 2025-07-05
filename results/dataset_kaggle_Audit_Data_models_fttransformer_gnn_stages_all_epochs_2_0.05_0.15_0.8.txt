@@ -1,0 +1,38 @@
+dataset: kaggle_Audit_Data
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.7495406866073608
+          Best test metric: 0.7235726118087769
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 2.53 秒
+    GNN階段: start
+          Best val metric: 0.9788732528686523
+          Best test metric: 0.972197413444519
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.17 秒
+    GNN階段: materialize
+          Best val metric: 0.9767299294471741
+          Best test metric: 0.9784591197967529
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.18 秒
+    GNN階段: encoding
+          Best val metric: 0.7969993352890015
+          Best test metric: 0.7752859592437744
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.35 秒
+    GNN階段: columnwise
+          Best val metric: 0.7743417024612427
+          Best test metric: 0.6416271924972534
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.33 秒
+    GNN階段: decoding
+          Best val metric: 0.6200245022773743
+          Best test metric: 0.48919427394866943
+          早停輪數: 0
+          GNN早停輪數: 12
+          耗時: 0.65 秒

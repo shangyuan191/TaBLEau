@@ -1,0 +1,38 @@
+dataset: house
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.6321499263970066
+          Best test metric: 0.7411350618510352
+          早停輪數: 25
+          GNN早停輪數: 0
+          耗時: 37.29 秒
+    GNN階段: start
+          Best val metric: 0.7331494189242072
+          Best test metric: 0.7402306307494149
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 36.37 秒
+    GNN階段: materialize
+          Best val metric: 0.7462352199145099
+          Best test metric: 0.8294400623849084
+          早停輪數: 34
+          GNN早停輪數: 0
+          耗時: 52.71 秒
+    GNN階段: encoding
+          Best val metric: 0.6574751226628636
+          Best test metric: 0.7412918710059903
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 43.22 秒
+    GNN階段: columnwise
+          Best val metric: 0.6293560102111383
+          Best test metric: 0.8965104043211098
+          早停輪數: 33
+          GNN早停輪數: 0
+          耗時: 44.77 秒
+    GNN階段: decoding
+          Best val metric: 1.0191280841827393
+          Best test metric: 1.222261667251587
+          早停輪數: 23
+          GNN早停輪數: 135
+          耗時: 33.70 秒

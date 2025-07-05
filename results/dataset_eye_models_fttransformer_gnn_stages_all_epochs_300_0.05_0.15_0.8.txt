@@ -1,0 +1,38 @@
+dataset: eye
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.47166362404823303
+          Best test metric: 0.46771058440208435
+          早停輪數: 24
+          GNN早停輪數: 0
+          耗時: 7.36 秒
+    GNN階段: start
+          Best val metric: 0.47653868794441223
+          Best test metric: 0.4407360851764679
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 7.35 秒
+    GNN階段: materialize
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.389758825302124
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 9.20 秒
+    GNN階段: encoding
+          Best val metric: 0.4881170094013214
+          Best test metric: 0.4685106873512268
+          早停輪數: 28
+          GNN早停輪數: 0
+          耗時: 7.27 秒
+    GNN階段: columnwise
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.389758825302124
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 4.66 秒
+    GNN階段: decoding
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.389758825302124
+          早停輪數: 14
+          GNN早停輪數: 11
+          耗時: 5.68 秒

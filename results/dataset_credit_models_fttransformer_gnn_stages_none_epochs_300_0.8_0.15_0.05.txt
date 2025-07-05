@@ -1,0 +1,7 @@
+dataset: credit
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: cannot access local variable 'e' where it is not associated with a value
+          耗時: 88.28 秒
