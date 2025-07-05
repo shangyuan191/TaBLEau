@@ -536,7 +536,135 @@ class ResNet(Module):
         out = self.decoder(x)
         return out
 
+# 取得所有 row 的 embedding
+def get_all_embeddings_and_targets(loader, encoder, backbone):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    all_embeds, all_targets = [], []
+    for tf in loader:
+        tf = tf.to(device)
+        x, _ = encoder(tf)
+        # Flattening the encoder output
+        x = x.view(x.size(0), math.prod(x.shape[1:]))
 
+        x = backbone(x)
+        # x_pooled = x.mean(dim=2)  # (batch_size, num_cols)
+        all_embeds.append(x.detach().cpu())
+        all_targets.append(tf.y.detach().cpu())
+    return torch.cat(all_embeds, dim=0), torch.cat(all_targets, dim=0)
+def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, backbone):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    train_emb, train_y = get_all_embeddings_and_targets(train_loader, encoder, backbone)
+    val_emb, val_y = get_all_embeddings_and_targets(val_loader, encoder, backbone)
+    test_emb, test_y = get_all_embeddings_and_targets(test_loader, encoder, backbone)
+    # 合併
+    all_emb = torch.cat([train_emb, val_emb, test_emb], dim=0)  # (total_rows, num_cols)
+    all_y = torch.cat([train_y, val_y, test_y], dim=0)
+    print(f"all_emb shape: {all_emb.shape}, all_y shape: {all_y.shape}")
+    # 合併成 DataFrame
+    all_df = pd.DataFrame(all_emb.numpy())
+    all_df['target'] = all_y.numpy()
+    print(f"all_df shape: {all_df.shape}")
+    print(f"all_df head:\n{all_df.head()}")
+    print(f"all_df columns: {all_df.columns}")
+    feature_cols = [c for c in all_df.columns if c != 'target']
+    x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
+    y = all_df['target'].values
+    k=5
+            # 自動計算 num_classes
+    if task_type in ['binclass', 'multiclass']:
+        num_classes = len(pd.unique(y))
+        print(f"Detected num_classes: {num_classes}")
+    else:
+        num_classes = 1
+    # label 處理
+    if task_type == 'binclass':
+        y = torch.tensor(y, dtype=torch.float32, device=device)
+    elif task_type == 'multiclass':
+        y = torch.tensor(y, dtype=torch.long, device=device)
+    else:  # regression
+        y = torch.tensor(y, dtype=torch.float32, device=device)
+    # 建圖
+    print(f"x shape: {x.shape}, y shape: {y.shape}")
+    edge_index = knn_graph(x, k).to(device)
+    # mask
+    n_train = len(train_emb)
+    n_val = len(val_emb)
+    n_test = len(test_emb)
+    print(f"n_train: {n_train}, n_val: {n_val}, n_test: {n_test}")
+    N = n_train + n_val + n_test
+    train_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    val_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    test_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    train_mask[:n_train] = True
+    val_mask[n_train:n_train+n_val] = True
+    test_mask[n_train+n_val:] = True
+    hidden_dim = config.get('hidden_dim', 64)
+    gnn_epochs = config.get('gnn_epochs', 200)
+    in_dim = x.shape[1]
+    out_dim = 1 if (task_type == 'regression' or task_type=="binclass") else num_classes
+    gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
+    optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
+    gnn.train()
+    best_val_metric = None
+    best_test_metric = None
+    best_val = -float('inf') if (task_type=="binclass" or task_type=="multiclass") else float('inf')
+    is_binary_class = task_type == 'binclass'
+    is_classification = task_type in ['binclass', 'multiclass']
+    metric_computer = metric_computer.to(device)
+    best_epoch = 0
+    early_stop_counter = 0
+    patience = config.get('gnn_patience', 10)
+    early_stop_epoch = 0
+    best_val_metric = -float('inf') if is_classification else float('inf')
+    for epoch in tqdm(range(gnn_epochs),desc="GNN Training"):
+        optimizer.zero_grad()
+        out = gnn(x, edge_index)
+        if task_type == 'binclass':
+            loss = torch.nn.functional.binary_cross_entropy_with_logits(
+                out[train_mask][:, 0], y[train_mask])
+        elif task_type == 'multiclass':
+            loss = torch.nn.functional.cross_entropy(
+                out[train_mask], y[train_mask])
+        else:
+            loss = torch.nn.functional.mse_loss(
+                out[train_mask][:, 0], y[train_mask])
+        loss.backward()
+        optimizer.step()
+        gnn.eval()
+        with torch.no_grad():
+            out_val = gnn(x, edge_index)
+            val_idx = torch.arange(n_train, n_train+n_val)
+            if is_binary_class:
+                val_metric = metric_computer(out_val[val_idx, 0], y[val_idx])
+            elif is_classification:
+                pred_class = out_val[val_idx].argmax(dim=-1)
+                val_metric = metric_computer(pred_class, y[val_idx])
+            else:
+                val_metric = metric_computer(out_val[val_idx].view(-1), y[val_idx].view(-1))
+            val_metric = val_metric.item() if hasattr(val_metric, 'item') else float(val_metric)
+            improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+            print(f"epoch {epoch+1}/{gnn_epochs}, val_metric: {val_metric:.4f}, best_val_metric: {best_val_metric:.4f}, improved: {improved}, task_type: {task_type}")
+            if improved:
+                best_val_metric = val_metric
+                best_epoch = epoch + 1
+                early_stop_counter = 0
+            else:
+                early_stop_counter += 1
+            # test_metric 仍用 test set
+            test_idx = torch.arange(n_train+n_val, N)
+            if is_binary_class:
+                test_metric = metric_computer(out_val[test_idx, 0], y[test_idx])
+            elif is_classification:
+                pred_class = out_val[test_idx].argmax(dim=-1)
+                test_metric = metric_computer(pred_class, y[test_idx])
+            else:
+                test_metric = metric_computer(out_val[test_idx].view(-1), y[test_idx].view(-1))
+            test_metric = test_metric.item() if hasattr(test_metric, 'item') else float(test_metric)
+        if early_stop_counter >= patience:
+            early_stop_epoch = epoch + 1
+            print(f"GNN Early stopping at epoch {early_stop_epoch}")
+            break
+    return best_val_metric, test_metric, early_stop_epoch
 
 def start_fn(train_df, val_df, test_df):
     return train_df, val_df, test_df
@@ -640,7 +768,19 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
     # 獲取模型參數
     channels = config.get('channels', 256)
     print(f"Encoding with channels: {channels}")
-    
+    patience = config.get('patience', 10)
+
+    # 新增：引入必要的GNN模組（以PyG為例）
+    from torch_geometric.nn import GCNConv
+    import torch.nn as nn
+    class SimpleGCN_INTERNAL(nn.Module):
+        def __init__(self, in_channels, out_channels):
+            super().__init__()
+            self.conv1 = GCNConv(in_channels, out_channels)
+        def forward(self, x, edge_index):
+            x = self.conv1(x, edge_index)
+            return x
+    gnn = SimpleGCN_INTERNAL(channels, channels).to(device)
     # 創建ResNet的編碼器部分
     encoder = StypeWiseFeatureEncoder(
         out_channels=channels,
@@ -686,62 +826,49 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
     # 實現完整的ResNet前向傳播函數
     def model_forward(tf):
         x, _ = encoder(tf)
-        batch_size, num_cols, embed_dim = x.shape
-        x = x.reshape(batch_size, -1)  # 展平
+        batch_size, num_cols, channels_ = x.shape
+        # print(f"Input shape after encoder: {x.shape}, batch_size: {batch_size}, num_cols: {num_cols}, channels_: {channels_}")
+        if gnn_stage == 'encoding':
+            x_reshape = x.view(-1, channels_)
+            row = torch.arange(num_cols).repeat(num_cols, 1).view(-1)
+            col = torch.arange(num_cols).repeat(1, num_cols).view(-1)
+            edge_index_single = torch.stack([row, col], dim=0)
+            edge_index = []
+            for i in range(batch_size):
+                offset = i * num_cols
+                edge_index.append(edge_index_single + offset)
+            edge_index = torch.cat(edge_index, dim=1).to(x.device)
+            x = gnn(x_reshape, edge_index).view(batch_size, num_cols, channels_)
+            # print(f"Input shape after GNN(after encoding): {x.shape}")
+        # print(f"Input shape after encoder: {x.shape}")
+        # Flattening the encoder output
+        x = x.view(x.size(0), math.prod(x.shape[1:]))
+        # print(f"Input shape after flattening: {x.shape}")
         x = backbone(x)
+        # print(f"Input shape after backbone: {x.shape}")
+        if gnn_stage == 'columnwise':
+            k = 5
+            x_np = x.detach().cpu().numpy()
+            from sklearn.neighbors import NearestNeighbors
+            nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
+            _, indices = nbrs.kneighbors(x_np)
+            edge_index = []
+            for i in range(batch_size):
+                for j in indices[i][1:]:
+                    edge_index.append([i, j])
+            edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().to(x.device)
+            x = gnn(x, edge_index)  # gnn 輸入 [batch, channels], edge_index
         out = decoder(x)
         return out
     
     # 設置優化器
-    lr = config.get('lr', 0.0001)
-    all_params = list(encoder.parameters()) + list(backbone.parameters()) + list(decoder.parameters())
+    lr = config.get('lr', 0.001)
+    all_params = list(encoder.parameters()) + list(gnn.parameters()) + [p for bb in backbone for p in bb.parameters()] + list(decoder.parameters())
     optimizer = torch.optim.AdamW(all_params, lr=lr)
     
-    # 創建數據集
-    class EmbeddingDataset:
-        def __init__(self, embeddings, labels):
-            self.embeddings = embeddings
-            self.labels = labels
-        
-        def __len__(self):
-            return len(self.labels)
-        
-        def __getitem__(self, idx):
-            return self.embeddings[idx], self.labels[idx]
-    
-    # 創建數據加載器
-    batch_size = config.get('batch_size', 512)
-    train_embed_dataset = EmbeddingDataset(train_backbone_outputs.to(device), train_labels.to(device))
-    val_embed_dataset = EmbeddingDataset(val_backbone_outputs.to(device), val_labels.to(device))
-    test_embed_dataset = EmbeddingDataset(test_backbone_outputs.to(device), test_labels.to(device))
-    
-    train_embed_loader = torch.utils.data.DataLoader(train_embed_dataset, batch_size=batch_size, shuffle=True)
-    val_embed_loader = torch.utils.data.DataLoader(val_embed_dataset, batch_size=batch_size)
-    test_embed_loader = torch.utils.data.DataLoader(test_embed_dataset, batch_size=batch_size)
-    
-    # 定義訓練函數 - 使用預處理後的嵌入進行快速訓練
-    def train_on_embeddings(epoch):
-        decoder.train()
-        loss_accum = total_count = 0
-        
-        for embeddings, labels in tqdm(train_embed_loader, desc=f'Epoch: {epoch}'):
-            out = decoder(embeddings)
-            
-            if is_classification:
-                loss = F.cross_entropy(out, labels)
-            else:
-                loss = F.mse_loss(out.view(-1), labels.view(-1))
-            
-            optimizer.zero_grad()
-            loss.backward()
-            loss_accum += float(loss) * len(labels)
-            total_count += len(labels)
-            optimizer.step()
-        
-        return loss_accum / total_count
     
     # 定義完整模型的訓練函數
-    def train_full_model(epoch):
+    def train(epoch):
         encoder.train()
         backbone.train()
         decoder.train()
@@ -765,31 +892,10 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         
         return loss_accum / total_count
     
-    # 定義測試函數 - 使用預處理後的嵌入進行快速評估
-    @torch.no_grad()
-    def test_on_embeddings(loader):
-        decoder.eval()
-        metric_computer.reset()
-        
-        for embeddings, labels in loader:
-            pred = decoder(embeddings)
-            
-            if is_binary_class:
-                metric_computer.update(pred[:, 1], labels)
-            elif is_classification:
-                pred_class = pred.argmax(dim=-1)
-                metric_computer.update(pred_class, labels)
-            else:
-                metric_computer.update(pred.view(-1), labels.view(-1))
-        
-        if is_classification:
-            return metric_computer.compute().item()
-        else:
-            return metric_computer.compute().item()**0.5
     
     # 定義完整模型的測試函數
     @torch.no_grad()
-    def test_full_model(loader):
+    def test(loader):
         encoder.eval()
         backbone.eval()
         decoder.eval()
@@ -825,42 +931,75 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
     train_losses = []
     train_metrics = []
     val_metrics = []
-    test_metrics = []
+    best_epoch = 0
+    early_stop_counter = 0
     
     # 訓練循環
-    epochs = config.get('epochs', 100)
-    use_embeddings = config.get('use_embeddings', True)  # 是否使用預處理嵌入訓練
-    
+    epochs = config.get('epochs', 200)
+    early_stop_epochs = 0
     for epoch in range(1, epochs + 1):
-        # 使用預處理嵌入或完整模型訓練
-        if use_embeddings:
-            train_loss = train_on_embeddings(epoch)
-            train_metric = test_on_embeddings(train_embed_loader)
-            val_metric = test_on_embeddings(val_embed_loader)
-            test_metric = test_on_embeddings(test_embed_loader)
-        else:
-            train_loss = train_full_model(epoch)
-            train_metric = test_full_model(train_loader)
-            val_metric = test_full_model(val_loader)
-            test_metric = test_full_model(test_loader)
+        train_loss = train(epoch)
+        train_metric = test(train_loader)
+        val_metric = test(val_loader)
         
         train_losses.append(train_loss)
         train_metrics.append(train_metric)
         val_metrics.append(val_metric)
-        test_metrics.append(test_metric)
-        
+        improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+        if improved:
+            best_val_metric = val_metric
+            best_epoch = epoch
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
+
         if is_classification and val_metric > best_val_metric:
             best_val_metric = val_metric
-            best_test_metric = test_metric
         elif not is_classification and val_metric < best_val_metric:
             best_val_metric = val_metric
-            best_test_metric = test_metric
         
         print(f'Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
-              f'Val {metric}: {val_metric:.4f}, Test {metric}: {test_metric:.4f}')
-    
-    print(f'Best Val {metric}: {best_val_metric:.4f}, '
-          f'Best Test {metric}: {best_test_metric:.4f}')
+f'Val {metric}: {val_metric:.4f}')
+
+        if early_stop_counter >= patience:
+            early_stop_epochs = epoch
+            print(f"Early stopping at epoch {epoch}")
+            break
+    # 決定最終 metric 輸出
+    final_metric = None
+    test_metric = None
+    if gnn_stage == 'decoding':
+        # 確保gnn在gnn_decoding_eval作用域可見
+        best_val_metric, test_metric, gnn_early_stop_epochs = gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, backbone)
+        final_metric = best_val_metric
+    else:
+        final_metric = best_val_metric
+        print(f'Best Val {metric}: {final_metric:.4f}')
+        test_metric = test(test_loader)
+
+    # 返回訓練結果
+    return {
+        'train_losses': train_losses,
+        'train_metrics': train_metrics,
+        'val_metrics': val_metrics,
+        'best_val_metric': best_val_metric,
+        'final_metric': final_metric,
+        'best_test_metric': test_metric,
+        'encoder': encoder,
+        'backbone': backbone,
+        'decoder': decoder,
+        'model_forward': model_forward,
+        'train_loader': train_loader,
+        'val_loader': val_loader,
+        'test_loader': test_loader,
+        'is_classification': is_classification,
+        'is_binary_class': is_binary_class,
+        'metric_computer': metric_computer,
+        'metric': metric,
+        'early_stop_epochs': early_stop_epochs,
+        'gnn_early_stop_epochs': 0 if gnn_stage != 'decoding' else gnn_early_stop_epochs,
+    }
+
 def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     """
     主函數：按順序調用四個階段函數
@@ -895,16 +1034,7 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             })
             material_outputs['gnn_early_stop_epochs'] = gnn_early_stop_epochs
         results=resnet_core_fn(material_outputs, config, task_type, gnn_stage=gnn_stage)
-        # # 階段2: Encoding
-        # encoding_outputs = encoding_fn(material_outputs, config)
-        # # 這裡可以插入GNN處理編碼後的數據
-        # # encoding_outputs = gnn_process(encoding_outputs, config)
-        # # 階段3: Column-wise Interaction
-        # columnwise_outputs = columnwise_fn(encoding_outputs, config)
-        # # 這裡可以插入GNN處理列間交互後的數據
-        # # columnwise_outputs = gnn_process(columnwise_outputs, config)
-        # # 階段4: Decoding
-        # results = decoding_fn(columnwise_outputs, config)
+
     except Exception as e:
         is_classification = dataset_results['info']['task_type'] == 'classification'
         results = {
@@ -917,3 +1047,18 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             'error': str(e),
         }
     return results
+
+
+
+
+
+#  small+binclass
+#  python main.py --dataset kaggle_Audit_Data --models resnet --gnn_stages all --epochs 2
+#  large+multiclass
+#  python main.py --dataset eye --models resnet --gnn_stages all --epochs 2
+#  large+regression
+#  python main.py --dataset house --models resnet --gnn_stages all --epochs 2
+#  large+binclass
+#  python main.py --dataset credit --models resnet --gnn_stages all --epochs 2
+#  small+regression
+#  python main.py --dataset openml_The_Office_Dataset --models resnet --gnn_stages all --epochs 2

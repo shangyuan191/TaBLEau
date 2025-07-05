@@ -1,0 +1,38 @@
+dataset: kaggle_Audit_Data
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8551745414733887
+          Best test metric: 0.691057562828064
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 2.67 秒
+    GNN階段: start
+          Best val metric: 0.9874464273452759
+          Best test metric: 0.972230076789856
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.28 秒
+    GNN階段: materialize
+          Best val metric: 0.9739742875099182
+          Best test metric: 0.9754207134246826
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.29 秒
+    GNN階段: encoding
+          Best val metric: 0.893141508102417
+          Best test metric: 0.7435643672943115
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.36 秒
+    GNN階段: columnwise
+          Best val metric: 0.8741580247879028
+          Best test metric: 0.8584869503974915
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.74 秒
+    GNN階段: decoding
+          Best val metric: 0.9262094497680664
+          Best test metric: 0.832804262638092
+          早停輪數: 0
+          GNN早停輪數: 13
+          耗時: 0.85 秒

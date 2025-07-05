@@ -1,0 +1,38 @@
+dataset: eye
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.5076172947883606
+          Best test metric: 0.4870270788669586
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 6.44 秒
+    GNN階段: start
+          Best val metric: 0.4838513135910034
+          Best test metric: 0.45308035612106323
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 6.42 秒
+    GNN階段: materialize
+          Best val metric: 0.4808043837547302
+          Best test metric: 0.45445194840431213
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 9.58 秒
+    GNN階段: encoding
+          Best val metric: 0.505179762840271
+          Best test metric: 0.48336952924728394
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 5.63 秒
+    GNN階段: columnwise
+          Best val metric: 0.513711154460907
+          Best test metric: 0.47948336601257324
+          早停輪數: 39
+          GNN早停輪數: 0
+          耗時: 17.41 秒
+    GNN階段: decoding
+          Best val metric: 0.5045703649520874
+          Best test metric: 0.4997142553329468
+          早停輪數: 35
+          GNN早停輪數: 28
+          耗時: 6.42 秒

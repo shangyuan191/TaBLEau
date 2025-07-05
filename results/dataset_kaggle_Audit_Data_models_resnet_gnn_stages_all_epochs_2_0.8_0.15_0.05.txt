@@ -1,0 +1,36 @@
+dataset: kaggle_Audit_Data
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.9164114594459534
+          Best test metric: 0.9944444298744202
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 2.70 秒
+    GNN階段: start
+          Best val metric: 0.9693815112113953
+          Best test metric: 0.9305555820465088
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.30 秒
+    GNN階段: materialize
+          Best val metric: 0.9733619093894958
+          Best test metric: 0.9944444894790649
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.42 秒
+    GNN階段: encoding
+          Best val metric: 0.9121249914169312
+          Best test metric: 0.8722222447395325
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.42 秒
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: shape '[256, 24, 256]' is invalid for input of size 65536
+          耗時: 0.30 秒
+    GNN階段: decoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Dimension out of range (expected to be in range of [-2, 1], but got 2)
+          耗時: 0.37 秒

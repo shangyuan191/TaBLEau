@@ -1,0 +1,38 @@
+dataset: house
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.6419272561424492
+          Best test metric: 0.689569890236027
+          早停輪數: 32
+          GNN早停輪數: 0
+          耗時: 9.03 秒
+    GNN階段: start
+          Best val metric: 0.7218231760553911
+          Best test metric: 0.7809337738912958
+          早停輪數: 35
+          GNN早停輪數: 0
+          耗時: 10.05 秒
+    GNN階段: materialize
+          Best val metric: 0.7125665215341207
+          Best test metric: 0.8155616150996727
+          早停輪數: 33
+          GNN早停輪數: 0
+          耗時: 13.50 秒
+    GNN階段: encoding
+          Best val metric: 0.6324863770868666
+          Best test metric: 0.6947236514412561
+          早停輪數: 43
+          GNN早停輪數: 0
+          耗時: 11.03 秒
+    GNN階段: columnwise
+          Best val metric: 0.6472625428461927
+          Best test metric: 0.7150738872017824
+          早停輪數: 76
+          GNN早停輪數: 0
+          耗時: 112.99 秒
+    GNN階段: decoding
+          Best val metric: 1.5082117319107056
+          Best test metric: 2.074326992034912
+          早停輪數: 32
+          GNN早停輪數: 20
+          耗時: 9.06 秒
