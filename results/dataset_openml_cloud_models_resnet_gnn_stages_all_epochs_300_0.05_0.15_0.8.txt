@@ -1,0 +1,38 @@
+dataset: openml_cloud
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.548948959120411
+          Best test metric: 1.8693568185364038
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 2.22 秒
+    GNN階段: start
+          Best val metric: 0.6704212473975008
+          Best test metric: 0.8257830270623581
+          早停輪數: 13
+          GNN早停輪數: 0
+          耗時: 0.68 秒
+    GNN階段: materialize
+          Best val metric: 0.7678550628304428
+          Best test metric: 0.7234158209895492
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.74 秒
+    GNN階段: encoding
+          Best val metric: 1.166470284055271
+          Best test metric: 1.5964349308295664
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 0.24 秒
+    GNN階段: columnwise
+          Best val metric: 1.1278289617836403
+          Best test metric: 1.1528304284620634
+          早停輪數: 15
+          GNN早停輪數: 0
+          耗時: 2.78 秒
+    GNN階段: decoding
+          Best val metric: 1.1722829341888428
+          Best test metric: 1.3056175708770752
+          早停輪數: 12
+          GNN早停輪數: 25
+          耗時: 0.50 秒

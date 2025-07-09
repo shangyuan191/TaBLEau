@@ -1,0 +1,38 @@
+dataset: openml_analcatdata_creditscore
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.25
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 2.47 秒
+    GNN階段: start
+          Best val metric: 0.9318182468414307
+          Best test metric: 0.75
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 0.96 秒
+    GNN階段: materialize
+          Best val metric: 1.0
+          Best test metric: 1.0
+          早停輪數: 18
+          GNN早停輪數: 0
+          耗時: 0.88 秒
+    GNN階段: encoding
+          Best val metric: 1.0
+          Best test metric: 1.0
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 0.27 秒
+    GNN階段: columnwise
+          Best val metric: 1.0
+          Best test metric: 1.0
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 2.95 秒
+    GNN階段: decoding
+          Best val metric: 0.7954545617103577
+          Best test metric: 0.5
+          早停輪數: 15
+          GNN早停輪數: 24
+          耗時: 0.61 秒

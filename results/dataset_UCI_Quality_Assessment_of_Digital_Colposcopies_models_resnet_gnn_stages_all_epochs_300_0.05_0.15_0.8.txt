@@ -1,0 +1,38 @@
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.615384578704834
+          Best test metric: 0.4179292917251587
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 2.18 秒
+    GNN階段: start
+          Best val metric: 0.6538461446762085
+          Best test metric: 0.405303031206131
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 1.75 秒
+    GNN階段: materialize
+          Best val metric: 0.6538461446762085
+          Best test metric: 0.4747474491596222
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 0.99 秒
+    GNN階段: encoding
+          Best val metric: 0.5769230127334595
+          Best test metric: 0.42297977209091187
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 0.59 秒
+    GNN階段: columnwise
+          Best val metric: 0.5769230723381042
+          Best test metric: 0.3263888955116272
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 1.02 秒
+    GNN階段: decoding
+          Best val metric: 0.5
+          Best test metric: 0.3996211886405945
+          早停輪數: 14
+          GNN早停輪數: 13
+          耗時: 0.66 秒

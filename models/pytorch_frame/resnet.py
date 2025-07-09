@@ -847,17 +847,19 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         x = backbone(x)
         # print(f"Input shape after backbone: {x.shape}")
         if gnn_stage == 'columnwise':
-            k = 5
-            x_np = x.detach().cpu().numpy()
-            from sklearn.neighbors import NearestNeighbors
-            nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
-            _, indices = nbrs.kneighbors(x_np)
-            edge_index = []
-            for i in range(batch_size):
-                for j in indices[i][1:]:
-                    edge_index.append([i, j])
-            edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().to(x.device)
-            x = gnn(x, edge_index)  # gnn 輸入 [batch, channels], edge_index
+            k = min(5, batch_size - 1)
+            if k > 0 and batch_size > 1:
+                x_np = x.detach().cpu().numpy()
+                from sklearn.neighbors import NearestNeighbors
+                nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
+                _, indices = nbrs.kneighbors(x_np)
+                edge_index = []
+                for i in range(batch_size):
+                    for j in indices[i][1:]:
+                        edge_index.append([i, j])
+                if len(edge_index) > 0:
+                    edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().to(x.device)
+                    x = gnn(x, edge_index)
         out = decoder(x)
         return out
     

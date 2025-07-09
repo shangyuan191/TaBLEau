@@ -1,0 +1,38 @@
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.8374999761581421
+          Best test metric: 0.6974790096282959
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 1.90 秒
+    GNN階段: start
+          Best val metric: 0.7749999761581421
+          Best test metric: 0.6830065250396729
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 1.19 秒
+    GNN階段: materialize
+          Best val metric: 0.6625000238418579
+          Best test metric: 0.6855742335319519
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 0.82 秒
+    GNN階段: encoding
+          Best val metric: 0.7250000238418579
+          Best test metric: 0.6433239579200745
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.30 秒
+    GNN階段: columnwise
+          Best val metric: 0.3687500059604645
+          Best test metric: 0.5179738998413086
+          早停輪數: 18
+          GNN早停輪數: 0
+          耗時: 3.17 秒
+    GNN階段: decoding
+          Best val metric: 0.6749999523162842
+          Best test metric: 0.6472922563552856
+          早停輪數: 20
+          GNN早停輪數: 11
+          耗時: 0.62 秒

@@ -1,0 +1,38 @@
+dataset: openml_weather_ankara
+  模型: resnet
+    GNN階段: none
+          Best val metric: 0.4309086008043048
+          Best test metric: 0.5491998574275466
+          早停輪數: 20
+          GNN早停輪數: 0
+          耗時: 1.87 秒
+    GNN階段: start
+          Best val metric: 0.5036396829676
+          Best test metric: 0.5072829199421371
+          早停輪數: 15
+          GNN早停輪數: 0
+          耗時: 1.27 秒
+    GNN階段: materialize
+          Best val metric: 0.40544391401664837
+          Best test metric: 0.41588017224098667
+          早停輪數: 38
+          GNN早停輪數: 0
+          耗時: 0.98 秒
+    GNN階段: encoding
+          Best val metric: 0.3929866164830873
+          Best test metric: 0.4091563798552694
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 0.38 秒
+    GNN階段: columnwise
+          Best val metric: 0.5102921028989836
+          Best test metric: 0.5165209067250284
+          早停輪數: 18
+          GNN早停輪數: 0
+          耗時: 3.25 秒
+    GNN階段: decoding
+          Best val metric: 1.091901183128357
+          Best test metric: 0.9613141417503357
+          早停輪數: 14
+          GNN早停輪數: 28
+          耗時: 0.65 秒

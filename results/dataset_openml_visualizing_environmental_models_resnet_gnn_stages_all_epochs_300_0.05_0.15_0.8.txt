@@ -1,0 +1,38 @@
+dataset: openml_visualizing_environmental
+  模型: resnet
+    GNN階段: none
+          Best val metric: 1.0823243773543825
+          Best test metric: 1.053818464758786
+          早停輪數: 24
+          GNN早停輪數: 0
+          耗時: 1.84 秒
+    GNN階段: start
+          Best val metric: 0.9299283396891893
+          Best test metric: 1.0606578115536787
+          早停輪數: 13
+          GNN早停輪數: 0
+          耗時: 1.23 秒
+    GNN階段: materialize
+          Best val metric: 0.9863489432073549
+          Best test metric: 1.2142643666194055
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 0.65 秒
+    GNN階段: encoding
+          Best val metric: 1.0593383535162548
+          Best test metric: 1.104695187640385
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.21 秒
+    GNN階段: columnwise
+          Best val metric: 0.9976550861731233
+          Best test metric: 1.0825563113959198
+          早停輪數: 15
+          GNN早停輪數: 0
+          耗時: 2.74 秒
+    GNN階段: decoding
+          Best val metric: 1.4604110717773438
+          Best test metric: 2.8484551906585693
+          早停輪數: 14
+          GNN早停輪數: 20
+          耗時: 0.47 秒
