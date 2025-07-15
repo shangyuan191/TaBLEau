@@ -63,11 +63,11 @@ def parse_args():
                         help='GNN插入階段列表 (用空格分隔多個階段名稱)')
     
     # 實驗相關參數
-    parser.add_argument('--train_ratio', type=float, default=0.80,
+    parser.add_argument('--train_ratio', type=float, default=0.05,
                         help='訓練集比例')
     parser.add_argument('--val_ratio', type=float, default=0.15,
                         help='驗證集比例')
-    parser.add_argument('--test_ratio', type=float, default=0.05,
+    parser.add_argument('--test_ratio', type=float, default=0.80,
                         help='測試集比例')
     parser.add_argument('--few_shot', action='store_true',
                         help='是否使用few-shot學習設置')
@@ -338,25 +338,25 @@ def run_experiment(args):
     split_str = f"{args.train_ratio}_{args.val_ratio}_{args.test_ratio}"
     results_file_name = f"{cmd_str}_{split_str}.txt"
     print(f"results_file_name: {results_file_name}")
-    with open(f'./results/{results_file_name}', 'w') as f:
-        for result in all_results:
-            f.write(f"dataset: {result['dataset']}\n")
-            for model_name, model_results in result['models'].items():
-                f.write(f"  模型: {model_name}\n")
-                for gnn_stage, res in model_results.items():
-                    f.write(f"    GNN階段: {gnn_stage}\n")
-                    if 'best_val_metric' in res:
-                        f.write(f"          Best val metric: {res['best_val_metric']}\n")
-                    if 'best_test_metric' in res:
-                        f.write(f"          Best test metric: {res['best_test_metric']}\n")
-                    if 'early_stop_epochs' in res:
-                        f.write(f"          早停輪數: {res['early_stop_epochs']}\n")
-                    if 'gnn_early_stop_epochs' in res:
-                        f.write(f"          GNN早停輪數: {res['gnn_early_stop_epochs']}\n")
-                    if 'error' in res:
-                        f.write(f"          錯誤: {res['error']}\n")
-                    if 'elapsed_time' in res:
-                        f.write(f"          耗時: {res['elapsed_time']:.2f} 秒\n")
+    # with open(f'./results/{results_file_name}', 'w') as f:
+    #     for result in all_results:
+    #         f.write(f"dataset: {result['dataset']}\n")
+    #         for model_name, model_results in result['models'].items():
+    #             f.write(f"  模型: {model_name}\n")
+    #             for gnn_stage, res in model_results.items():
+    #                 f.write(f"    GNN階段: {gnn_stage}\n")
+    #                 if 'best_val_metric' in res:
+    #                     f.write(f"          Best val metric: {res['best_val_metric']}\n")
+    #                 if 'best_test_metric' in res:
+    #                     f.write(f"          Best test metric: {res['best_test_metric']}\n")
+    #                 if 'early_stop_epochs' in res:
+    #                     f.write(f"          早停輪數: {res['early_stop_epochs']}\n")
+    #                 if 'gnn_early_stop_epochs' in res:
+    #                     f.write(f"          GNN早停輪數: {res['gnn_early_stop_epochs']}\n")
+    #                 if 'error' in res:
+    #                     f.write(f"          錯誤: {res['error']}\n")
+    #                 if 'elapsed_time' in res:
+    #                     f.write(f"          耗時: {res['elapsed_time']:.2f} 秒\n")
     
     # # 計算排名和分析實驗結果
     # analysis_results = analyze_results(all_results, dataset_loader)

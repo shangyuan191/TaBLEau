@@ -1,0 +1,38 @@
+dataset: house
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.5819404582441194
+          Best test metric: 0.5750591848846062
+          早停輪數: 52
+          GNN早停輪數: 0
+          耗時: 94.83 秒
+    GNN階段: start
+          Best val metric: 0.7163837292042351
+          Best test metric: 0.7170472500367376
+          早停輪數: 31
+          GNN早停輪數: 0
+          耗時: 68.40 秒
+    GNN階段: materialize
+          Best val metric: 0.718993974824896
+          Best test metric: 0.7396190571999933
+          早停輪數: 35
+          GNN早停輪數: 0
+          耗時: 82.84 秒
+    GNN階段: encoding
+          Best val metric: 1.025767288054883
+          Best test metric: 1.1240750324991875
+          早停輪數: 13
+          GNN早停輪數: 0
+          耗時: 227.87 秒
+    GNN階段: columnwise
+          Best val metric: 1.025715106304598
+          Best test metric: 1.1241846838926601
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 1312.78 秒
+    GNN階段: decoding
+          Best val metric: 0.396651029586792
+          Best test metric: 0.3797173798084259
+          早停輪數: 42
+          GNN早停輪數: 30
+          耗時: 88.11 秒

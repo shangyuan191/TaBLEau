@@ -1,0 +1,38 @@
+dataset: credit
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.8565267324447632
+          Best test metric: 0.848692774772644
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 24.70 秒
+    GNN階段: start
+          Best val metric: 0.8538228273391724
+          Best test metric: 0.8443030118942261
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 22.21 秒
+    GNN階段: materialize
+          Best val metric: 0.8530876636505127
+          Best test metric: 0.8439137935638428
+          早停輪數: 17
+          GNN早停輪數: 0
+          耗時: 28.15 秒
+    GNN階段: encoding
+          Best val metric: 0.5048928260803223
+          Best test metric: 0.4827270209789276
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 277.68 秒
+    GNN階段: columnwise
+          Best val metric: 0.527457594871521
+          Best test metric: 0.5069509744644165
+          早停輪數: 41
+          GNN早停輪數: 0
+          耗時: 2781.79 秒
+    GNN階段: decoding
+          Best val metric: 0.8479901552200317
+          Best test metric: 0.850850522518158
+          早停輪數: 19
+          GNN早停輪數: 22
+          耗時: 25.00 秒

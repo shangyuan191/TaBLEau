@@ -3,66 +3,200 @@ from __future__ import annotations
 import math
 from typing import Any
 
+import torch
 from torch import Tensor
 from torch.nn import (
+    SELU,
     BatchNorm1d,
-    Dropout,
+    Embedding,
     LayerNorm,
     Linear,
     Module,
-    ReLU,
+    ModuleList,
     Sequential,
 )
 
 import torch_frame
 from torch_frame import TensorFrame, stype
 from torch_frame.data.stats import StatType
-from torch_frame.nn.encoder.stype_encoder import (
-    EmbeddingEncoder,
-    LinearEncoder,
-    StypeEncoder,
-)
-from torch_frame.nn.encoder.stypewise_encoder import StypeWiseFeatureEncoder
+from torch_frame.nn.conv import TabTransformerConv
+from torch_frame.nn.encoder.stype_encoder import EmbeddingEncoder, StackEncoder
+from torch_frame.typing import NAStrategy
 
-"""Reported (reproduced) results of FT-Transformer
-https://arxiv.org/abs/2106.11959.
 
-adult 85.9 (85.5)
-helena 39.1 (39.2)
-jannis 73.2 (72.2)
-california_housing 0.459 (0.537)
---------
-Reported (reproduced) results of ResNet
-https://arxiv.org/abs/2106.11959
+"""Reported (reproduced, xgboost) results of of TabTransformer model based on
+Table 1 of original paper https://arxiv.org/abs/2012.06678.
 
-adult 85.7 (85.4)
-helena 39.6 (39.1)
-jannis 72.8 (72.5)
-california_housing 0.486 (0.523)
+adult: 73.8 (88.86)
+bank-marketing: 93.4 (90.83, 81.00)
+dota2: 63.3 (52.44, 53.75)
 """
+
 import argparse
 import os.path as osp
 
 import torch
 import torch.nn.functional as F
+from sklearn.metrics import roc_auc_score
+from torch.optim.lr_scheduler import ExponentialLR
 from tqdm import tqdm
-from torchmetrics import AUROC, Accuracy, MeanSquaredError
-from torch_frame import stype
+
 from torch_frame.data import DataLoader
-from torch_frame.datasets import Yandex
-from torch_frame.nn import (
-    EmbeddingEncoder,
-    FTTransformer,
-    LinearBucketEncoder,
-    LinearEncoder,
-    LinearPeriodicEncoder,
-    ResNet,
-)
+from torch_frame.datasets import AdultCensusIncome, BankMarketing, Dota2
+from torch_frame.nn import TabTransformer
+from torch_frame.datasets.yandex import Yandex
+class TabTransformer(Module):
+    r"""The Tab-Transformer model introduced in the
+    `"TabTransformer: Tabular Data Modeling Using Contextual Embeddings"
+    <https://arxiv.org/abs/2012.06678>`_ paper.
+
+    The model pads a column positional embedding in categorical feature
+    embeddings and executes multi-layer column-interaction modeling exclusively
+    on the categorical features. For numerical features, the model simply
+    applies layer normalization on input features. The model utilizes an
+    MLP(Multilayer Perceptron) for decoding.
+
+    .. note::
+
+        For an example of using TabTransformer, see `examples/tabtransformer.py
+        <https://github.com/pyg-team/pytorch-frame/blob/master/examples/
+        tabtransformer.py>`_.
+
+    Args:
+        channels (int): Input channel dimensionality.
+        out_channels (int): Output channels dimensionality.
+        num_layers (int): Number of convolution layers.
+        num_heads (int): Number of heads in the self-attention layer.
+        encoder_pad_size (int): Size of positional encoding padding to the
+            categorical embeddings.
+        col_stats(Dict[str,Dict[:class:`torch_frame.data.stats.StatType`,Any]]):
+             A dictionary that maps column name into stats.
+             Available as :obj:`dataset.col_stats`.
+        col_names_dict (Dict[:class:`torch_frame.stype`, List[str]]): A
+            dictionary that maps stype to a list of column names. The column
+            names are sorted based on the ordering that appear in
+            :obj:`tensor_frame.feat_dict`. Available as
+            :obj:`tensor_frame.col_names_dict`.
+    """
+    def __init__(
+        self,
+        channels: int,
+        out_channels: int,
+        num_layers: int,
+        num_heads: int,
+        encoder_pad_size: int,
+        attn_dropout: float,
+        ffn_dropout: float,
+        col_stats: dict[str, dict[StatType, Any]],
+        col_names_dict: dict[torch_frame.stype, list[str]],
+    ) -> None:
+        super().__init__()
+        if num_layers <= 0:
+            raise ValueError(
+                f"num_layers must be a positive integer (got {num_layers})")
+        self.col_names_dict = col_names_dict
+        categorical_col_len = 0
+        numerical_col_len = 0
+        if stype.categorical in self.col_names_dict:
+            categorical_stats_list = [
+                col_stats[col_name]
+                for col_name in self.col_names_dict[stype.categorical]
+            ]
+            categorical_col_len = len(self.col_names_dict[stype.categorical])
+            self.cat_encoder = EmbeddingEncoder(
+                out_channels=channels - encoder_pad_size,
+                stats_list=categorical_stats_list,
+                stype=stype.categorical,
+                na_strategy=NAStrategy.MOST_FREQUENT,
+            )
+            # Use the categorical embedding with EmbeddingEncoder and
+            # added contextual padding to the end of each feature.
+            self.pad_embedding = Embedding(categorical_col_len,
+                                           encoder_pad_size)
+            # Apply transformer convolution only over categorical columns
+            self.tab_transformer_convs = ModuleList([
+                TabTransformerConv(channels=channels, num_heads=num_heads,
+                                   attn_dropout=attn_dropout,
+                                   ffn_dropout=ffn_dropout)
+                for _ in range(num_layers)
+            ])
+        if stype.numerical in self.col_names_dict:
+            numerical_stats_list = [
+                col_stats[col_name]
+                for col_name in self.col_names_dict[stype.numerical]
+            ]
+            numerical_col_len = len(self.col_names_dict[stype.numerical])
+            # Use stack encoder to normalize the numerical columns.
+            self.num_encoder = StackEncoder(
+                out_channels=1,
+                stats_list=numerical_stats_list,
+                stype=stype.numerical,
+            )
+            self.num_norm = LayerNorm(numerical_col_len)
+        mlp_input_len = categorical_col_len * channels + numerical_col_len
+        mlp_first_hidden_layer_size = 2 * mlp_input_len
+        mlp_second_hidden_layer_size = 4 * mlp_input_len
+        self.decoder = Sequential(
+            Linear(mlp_input_len, mlp_first_hidden_layer_size),
+            BatchNorm1d(mlp_first_hidden_layer_size), SELU(),
+            Linear(2 * mlp_input_len, mlp_second_hidden_layer_size),
+            BatchNorm1d(mlp_second_hidden_layer_size), SELU(),
+            Linear(mlp_second_hidden_layer_size, out_channels))
+        self.reset_parameters()
+
+    def reset_parameters(self) -> None:
+        if stype.categorical in self.col_names_dict:
+            self.cat_encoder.reset_parameters()
+            torch.nn.init.normal_(self.pad_embedding.weight, std=0.01)
+            for tab_transformer_conv in self.tab_transformer_convs:
+                tab_transformer_conv.reset_parameters()
+        if stype.numerical in self.col_names_dict:
+            self.num_encoder.reset_parameters()
+            self.num_norm.reset_parameters()
+        for m in self.decoder:
+            if not isinstance(m, SELU):
+                m.reset_parameters()
+
+    def forward(self, tf: TensorFrame) -> Tensor:
+        r"""Transforming :class:`TensorFrame` object into output prediction.
+
+        Args:
+            tf (TensorFrame):
+                Input :class:`TensorFrame` object.
+
+        Returns:
+            torch.Tensor: Output of shape [batch_size, out_channels].
+        """
+        xs = []
+        batch_size = len(tf)
+        if stype.categorical in self.col_names_dict:
+            x_cat = self.cat_encoder(tf.feat_dict[stype.categorical])
+            # A positional embedding [batch_size, num_cols, encoder_pad_size]
+            # is padded to the categorical embedding
+            # [batch_size, num_cols, channels].
+            pos_enc_pad = self.pad_embedding.weight.unsqueeze(0).repeat(
+                batch_size, 1, 1)
+            # The final categorical embedding is of size [B, num_cols,
+            # channels + encoder_pad_size]
+            x_cat = torch.cat((x_cat, pos_enc_pad), dim=-1)
+            for tab_transformer_conv in self.tab_transformer_convs:
+                x_cat = tab_transformer_conv(x_cat)
+            x_cat = x_cat.reshape(batch_size, math.prod(x_cat.shape[1:]))
+            xs.append(x_cat)
+        if stype.numerical in self.col_names_dict:
+            x_num = self.num_encoder(tf.feat_dict[stype.numerical])
+            x_num = x_num.view(batch_size, math.prod(x_num.shape[1:]))
+            x_num = self.num_norm(x_num)
+            xs.append(x_num)
+        x = torch.cat(xs, dim=1)
+        out = self.decoder(x)
+        return out
 
 import torch
 from torch_geometric.nn import GCNConv
 from sklearn.neighbors import NearestNeighbors
 import pandas as pd
+
 
 
 class SimpleGCN(torch.nn.Module):
@@ -97,7 +231,7 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     gnn_epochs = config.get('gnn_epochs', 200)
     # 合併三個df
     all_df = pd.concat([train_df, val_df, test_df], axis=0, ignore_index=True)
-    # print(f"all_df.head():\n{all_df.head()}")
+    print(f"all_df.head():\n{all_df.head()}")
     feature_cols = [c for c in all_df.columns if c != 'target']
     x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
     y = all_df['target'].values
@@ -108,7 +242,7 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
         print(f"Detected num_classes: {num_classes}")
     else:
         num_classes = 1
-# label 處理
+    # label 處理
     if task_type == 'binclass':
         y = torch.tensor(y, dtype=torch.float32, device=device)
     elif task_type == 'multiclass':
@@ -193,190 +327,137 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     # print(f"val_df_gnn.head():\n{val_df_gnn.head()}")
     # print(f"test_df.head():\n{test_df.head()}")
     # print(f"test_df_gnn.head():\n{test_df_gnn.head()}")
+    
+
+    
+    
+    
+
     # 若需要將 num_classes 傳遞到下游，可 return
     return train_df_gnn, val_df_gnn, test_df_gnn, gnn_early_stop_epochs
-class FCResidualBlock(Module):
-    r"""Fully connected residual block.
 
-    Args:
-        in_channels (int): The number of input channels.
-        out_channels (int): The number of output channels.
-        normalization (str, optional): The type of normalization to use.
-            :obj:`layer_norm`, :obj:`batch_norm`, or :obj:`None`.
-            (default: :obj:`layer_norm`)
-        dropout_prob (float): The dropout probability (default: `0.0`, i.e.,
-            no dropout).
-    """
-    def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        normalization: str | None = "layer_norm",
-        dropout_prob: float = 0.0,
-    ) -> None:
-        super().__init__()
-        self.lin1 = Linear(in_channels, out_channels)
-        self.lin2 = Linear(out_channels, out_channels)
-        self.relu = ReLU()
-        self.dropout = Dropout(dropout_prob)
 
-        self.norm1: BatchNorm1d | LayerNorm | None
-        self.norm2: BatchNorm1d | LayerNorm | None
-        if normalization == "batch_norm":
-            self.norm1 = BatchNorm1d(out_channels)
-            self.norm2 = BatchNorm1d(out_channels)
-        elif normalization == "layer_norm":
-            self.norm1 = LayerNorm(out_channels)
-            self.norm2 = LayerNorm(out_channels)
+def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_frame, config, dataset_name, task_type):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    k = config.get('gnn_knn', 5)
+    hidden_dim = config.get('gnn_hidden', 64)
+    gnn_epochs = config.get('gnn_epochs', 200)
+    def tensor_frame_to_df(tensor_frame):
+        # 取得 feature 名稱與 tensor
+        col_names = tensor_frame.col_names_dict[stype.numerical]
+        features = tensor_frame.feat_dict[stype.numerical]
+        df = pd.DataFrame(features, columns=col_names)
+        # 加入 target
+        if hasattr(tensor_frame, 'y') and tensor_frame.y is not None:
+            df['target'] = tensor_frame.y.cpu().numpy()
+        return df
+    
+    
+    train_df = tensor_frame_to_df(train_tensor_frame)
+    val_df = tensor_frame_to_df(val_tensor_frame)
+    test_df = tensor_frame_to_df(test_tensor_frame)
+
+    # 合併三個df
+    all_df = pd.concat([train_df, val_df, test_df], axis=0, ignore_index=True)
+    # print(f"all_df.head():\n{all_df.head()}")
+    feature_cols = [c for c in all_df.columns if c != 'target']
+    x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
+    y = all_df['target'].values
+
+    # 自動計算 num_classes
+    if task_type in ['binclass', 'multiclass']:
+        num_classes = len(pd.unique(y))
+        print(f"Detected num_classes: {num_classes}")
+    else:
+        num_classes = 1
+# label 處理
+    if task_type == 'binclass':
+        y = torch.tensor(y, dtype=torch.float32, device=device)
+    elif task_type == 'multiclass':
+        y = torch.tensor(y, dtype=torch.long, device=device)
+    else:  # regression
+        y = torch.tensor(y, dtype=torch.float32, device=device)
+
+    # 建圖
+    edge_index = knn_graph(x, k).to(device)
+    in_dim = x.shape[1]
+    out_dim = in_dim
+    # mask
+    n_train = len(train_df)
+    n_val = len(val_df)
+    n_test = len(test_df)
+    N = n_train + n_val + n_test
+    train_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    val_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    test_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    train_mask[:n_train] = True
+    val_mask[n_train:n_train+n_val] = True
+    test_mask[n_train+n_val:] = True
+    patience = config.get('gnn_patience', 10)
+    best_loss = float('inf')
+    early_stop_counter = 0
+
+    # 建立並訓練GNN
+    gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
+    optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
+    gnn_early_stop_epochs = 0
+    gnn.train()
+    for epoch in range(gnn_epochs):
+        optimizer.zero_grad()
+        out = gnn(x, edge_index)
+        loss = torch.nn.functional.mse_loss(out, x)
+        loss.backward()
+        optimizer.step()
+        # Early stopping check
+        if loss.item() < best_loss:
+            best_loss = loss.item()
+            early_stop_counter = 0
         else:
-            self.norm1 = self.norm2 = None
+            early_stop_counter += 1
+        if (epoch+1) % 10 == 0:
+            print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
+        if early_stop_counter >= patience:
+            gnn_early_stop_epochs = epoch + 1
+            print(f"GNN Early stopping at epoch {epoch+1}")
+            break
+    gnn.eval()
+    with torch.no_grad():
+        final_emb = gnn(x, edge_index).cpu().numpy()
+    # 將final_emb分回三個df
+    train_emb = final_emb[:n_train]
+    val_emb = final_emb[n_train:n_train+n_val]
+    test_emb = final_emb[n_train+n_val:]
 
-        self.shortcut: Linear | None
-        if in_channels != out_channels:
-            self.shortcut = Linear(in_channels, out_channels)
-        else:
-            self.shortcut = None
+    emb_cols = [f'N_feature_{i}' for i in range(1,out_dim+1)]
+    train_df_gnn = pd.DataFrame(train_emb, columns=emb_cols, index=train_df.index)
+    val_df_gnn = pd.DataFrame(val_emb, columns=emb_cols, index=val_df.index)
+    test_df_gnn = pd.DataFrame(test_emb, columns=emb_cols, index=test_df.index)
 
-    def reset_parameters(self) -> None:
-        self.lin1.reset_parameters()
-        self.lin2.reset_parameters()
-        if self.norm1 is not None:
-            self.norm1.reset_parameters()
-        if self.norm2 is not None:
-            self.norm2.reset_parameters()
-        if self.shortcut is not None:
-            self.shortcut.reset_parameters()
+    # 保留原標籤
+    train_df_gnn['target'] = train_df['target'].values
+    val_df_gnn['target'] = val_df['target'].values
+    test_df_gnn['target'] = test_df['target'].values
 
-    def forward(self, x: Tensor) -> Tensor:
-        out = self.lin1(x)
-        out = self.norm1(out) if self.norm1 else out
-        out = self.relu(out)
-        out = self.dropout(out)
+    # 7. Yandex 數據集包裝
+    dataset = Yandex(train_df_gnn, val_df_gnn, test_df_gnn, name=dataset_name, task_type=task_type)
+    dataset.materialize()
 
-        out = self.lin2(out)
-        out = self.norm2(out) if self.norm2 else out
-        out = self.relu(out)
-        out = self.dropout(out)
+    # 8. split tensor_frame
+    train_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 0]
+    val_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 1]
+    test_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 2]
 
-        if self.shortcut is not None:
-            x = self.shortcut(x)
+    batch_size = config.get('batch_size', 4096)  # TabNet通常使用較大的批次
+    train_loader = DataLoader(train_tensor_frame, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_tensor_frame, batch_size=batch_size)
+    test_loader = DataLoader(test_tensor_frame, batch_size=batch_size)
 
-        out = out + x
-
-        return out
-
-
-class ResNet(Module):
-    r"""The ResNet model introduced in the
-    `"Revisiting Deep Learning Models for Tabular Data"
-    <https://arxiv.org/abs/2106.11959>`_ paper.
-
-    .. note::
-
-        For an example of using ResNet, see `examples/revisiting.py
-        <https://github.com/pyg-team/pytorch-frame/blob/master/examples/
-        revisiting.py>`_.
-
-    Args:
-        channels (int): The number of channels in the backbone layers.
-        out_channels (int): The number of output channels in the decoder.
-        num_layers (int): The number of layers in the backbone.
-        col_stats(dict[str,Dict[:class:`torch_frame.data.stats.StatType`,Any]]):
-             A dictionary that maps column name into stats.
-             Available as :obj:`dataset.col_stats`.
-        col_names_dict (dict[:class:`torch_frame.stype`, List[str]]): A
-            dictionary that maps stype to a list of column names. The column
-            names are sorted based on the ordering that appear in
-            :obj:`tensor_frame.feat_dict`. Available as
-            :obj:`tensor_frame.col_names_dict`.
-        stype_encoder_dict
-            (dict[:class:`torch_frame.stype`,
-            :class:`torch_frame.nn.encoder.StypeEncoder`], optional):
-            A dictionary mapping stypes into their stype encoders.
-            (default: :obj:`None`, will call :obj:`EmbeddingEncoder()`
-            for categorical feature and :obj:`LinearEncoder()` for
-            numerical feature)
-        normalization (str, optional): The type of normalization to use.
-            :obj:`batch_norm`, :obj:`layer_norm`, or :obj:`None`.
-            (default: :obj:`layer_norm`)
-        dropout_prob (float): The dropout probability (default: `0.2`).
-    """
-    def __init__(
-        self,
-        channels: int,
-        out_channels: int,
-        num_layers: int,
-        col_stats: dict[str, dict[StatType, Any]],
-        col_names_dict: dict[torch_frame.stype, list[str]],
-        stype_encoder_dict: dict[torch_frame.stype, StypeEncoder]
-        | None = None,
-        normalization: str | None = "layer_norm",
-        dropout_prob: float = 0.2,
-    ) -> None:
-        super().__init__()
-
-        if stype_encoder_dict is None:
-            stype_encoder_dict = {
-                stype.categorical: EmbeddingEncoder(),
-                stype.numerical: LinearEncoder(),
-            }
-
-        self.encoder = StypeWiseFeatureEncoder(
-            out_channels=channels,
-            col_stats=col_stats,
-            col_names_dict=col_names_dict,
-            stype_encoder_dict=stype_encoder_dict,
-        )
-
-        num_cols = sum(
-            [len(col_names) for col_names in col_names_dict.values()])
-        in_channels = channels * num_cols
-        self.backbone = Sequential(*[
-            FCResidualBlock(
-                in_channels if i == 0 else channels,
-                channels,
-                normalization=normalization,
-                dropout_prob=dropout_prob,
-            ) for i in range(num_layers)
-        ])
-
-        self.decoder = Sequential(
-            LayerNorm(channels),
-            ReLU(),
-            Linear(channels, out_channels),
-        )
-
-        self.reset_parameters()
-
-    def reset_parameters(self) -> None:
-        self.encoder.reset_parameters()
-        for block in self.backbone:
-            block.reset_parameters()
-        self.decoder[0].reset_parameters()
-        self.decoder[-1].reset_parameters()
-
-    def forward(self, tf: TensorFrame) -> Tensor:
-        r"""Transforming :class:`TensorFrame` object into output prediction.
-
-        Args:
-            tf (TensorFrame): Input :class:`TensorFrame` object.
-
-        Returns:
-            torch.Tensor: Output of shape [batch_size, out_channels].
-        """
-        x, _ = self.encoder(tf)
-
-        # Flattening the encoder output
-        x = x.view(x.size(0), math.prod(x.shape[1:]))
-
-        x = self.backbone(x)
-        out = self.decoder(x)
-        return out
-
+    return train_loader, val_loader, test_loader,dataset.col_stats, dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs
 
 
 def start_fn(train_df, val_df, test_df):
     return train_df, val_df, test_df
+
 
 def materialize_fn(train_df, val_df, test_df, dataset_results, config):
     """
@@ -400,25 +481,10 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
     val_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 1]
     test_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 2]
 
-    batch_size = config.get('batch_size', 512)
+    batch_size = config.get('batch_size', 128)
     train_loader = DataLoader(train_tensor_frame, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_tensor_frame, batch_size=batch_size)
     test_loader = DataLoader(test_tensor_frame, batch_size=batch_size)
-
-    numerical_encoder_type = config.get('numerical_encoder_type', 'linear')
-    if numerical_encoder_type == 'linear':
-        numerical_encoder = LinearEncoder()
-    elif numerical_encoder_type == 'linearbucket':
-        numerical_encoder = LinearBucketEncoder()
-    elif numerical_encoder_type == 'linearperiodic':
-        numerical_encoder = LinearPeriodicEncoder()
-    else:
-        raise ValueError(f'Unsupported encoder type: {numerical_encoder_type}')
-
-    stype_encoder_dict = {
-        stype.categorical: EmbeddingEncoder(),
-        stype.numerical: numerical_encoder,
-    }
 
     if is_classification:
         out_channels = dataset.num_classes
@@ -427,13 +493,17 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
 
     is_binary_class = is_classification and out_channels == 2
 
+    # 設置評估指標
     if is_binary_class:
+        from torchmetrics import AUROC
         metric_computer = AUROC(task='binary')
         metric = 'AUC'
     elif is_classification:
+        from torchmetrics import Accuracy
         metric_computer = Accuracy(task='multiclass', num_classes=out_channels)
         metric = 'Acc'
     else:
+        from torchmetrics import MeanSquaredError
         metric_computer = MeanSquaredError()
         metric = 'RMSE'
 
@@ -448,7 +518,6 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
         'val_loader': val_loader,
         'test_loader': test_loader,
         'col_stats': dataset.col_stats,
-        'stype_encoder_dict': stype_encoder_dict,
         'metric_computer': metric_computer,
         'metric': metric,
         'is_classification': is_classification,
@@ -457,17 +526,17 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
         'device': device
     }
 
-
+    
 def encoding_fn(material_outputs, config):
     """
-    階段2: Encoding - 將張量框架編碼為嵌入向量
+    階段2: Encoding - 創建編碼器並處理類別特徵和數值特徵
     
     輸入:
     - material_outputs: materialize_fn的輸出
     - config: 配置參數
     
     輸出:
-    - 編碼後的嵌入表示，可傳給columnwise_fn或自定義GNN
+    - 包含編碼器和相關設置的字典，可傳給columnwise_fn或自定義GNN
     """
     print("Executing encoding_fn")
     
@@ -479,107 +548,102 @@ def encoding_fn(material_outputs, config):
     val_loader = material_outputs['val_loader']
     test_loader = material_outputs['test_loader']
     col_stats = material_outputs['col_stats']
-    stype_encoder_dict = material_outputs['stype_encoder_dict']
+    col_names_dict = train_tensor_frame.col_names_dict
     device = material_outputs['device']
     
     # 獲取模型參數
-    channels = config.get('channels', 256)
-    print(f"Encoding with channels: {channels}")
+    channels = config.get('channels', 32)
+    encoder_pad_size = config.get('encoder_pad_size', 2)
+    print(f"Encoding with channels: {channels}, encoder_pad_size: {encoder_pad_size}")
     
-    # 創建ResNet的編碼器部分
-    encoder = StypeWiseFeatureEncoder(
-        out_channels=channels,
-        col_stats=col_stats,
-        col_names_dict=train_tensor_frame.col_names_dict,
-        stype_encoder_dict=stype_encoder_dict,
-    ).to(device)
+    # 初始化編碼器變量
+    cat_encoder = None
+    pad_embedding = None
+    num_encoder = None
+    num_norm = None
     
-    # 對訓練、驗證和測試數據進行編碼處理
-    train_embeddings = []
-    val_embeddings = []
-    test_embeddings = []
-    train_labels = []
-    val_labels = []
-    test_labels = []
+    # 計算特徵維度
+    categorical_col_len = 0
+    numerical_col_len = 0
     
-    # 控制批次大小，避免GPU內存不足
-    batch_size = config.get('batch_size', 512)
-    
-    with torch.no_grad():
-        # 處理訓練數據
-        for tf in train_loader:
-            tf = tf.to(device)
-            x, _ = encoder(tf)  # 獲取編碼後的嵌入
-            
-            # 在ResNet中，嵌入會被展平處理
-            batch_size, num_cols, embed_dim = x.shape
-            x_flattened = x.reshape(batch_size, -1)  # 展平為[batch_size, num_cols*embed_dim]
-            
-            train_embeddings.append(x_flattened.cpu())  # 移到CPU以節省GPU內存
-            train_labels.append(tf.y.cpu())
+    # 創建類別特徵編碼器
+    if stype.categorical in col_names_dict:
+        categorical_stats_list = [
+            col_stats[col_name]
+            for col_name in col_names_dict[stype.categorical]
+        ]
+        categorical_col_len = len(col_names_dict[stype.categorical])
         
-        # 處理驗證數據
-        for tf in val_loader:
-            tf = tf.to(device)
-            x, _ = encoder(tf)
-            
-            batch_size, num_cols, embed_dim = x.shape
-            x_flattened = x.reshape(batch_size, -1)
-            
-            val_embeddings.append(x_flattened.cpu())
-            val_labels.append(tf.y.cpu())
+        # 使用EmbeddingEncoder編碼類別特徵
+        cat_encoder = EmbeddingEncoder(
+            out_channels=channels - encoder_pad_size,
+            stats_list=categorical_stats_list,
+            stype=stype.categorical,
+            na_strategy=NAStrategy.MOST_FREQUENT,
+        ).to(device)
         
-        # 處理測試數據
-        for tf in test_loader:
-            tf = tf.to(device)
-            x, _ = encoder(tf)
-            
-            batch_size, num_cols, embed_dim = x.shape
-            x_flattened = x.reshape(batch_size, -1)
-            
-            test_embeddings.append(x_flattened.cpu())
-            test_labels.append(tf.y.cpu())
+        # 用於列位置嵌入的padding
+        pad_embedding = Embedding(categorical_col_len, encoder_pad_size).to(device)
+        torch.nn.init.normal_(pad_embedding.weight, std=0.01)
     
-    # 合併所有批次的嵌入和標籤
-    if train_embeddings:
-        all_train_embeddings = torch.cat(train_embeddings, dim=0)
-        all_train_labels = torch.cat(train_labels, dim=0)
-    else:
-        all_train_embeddings = None
-        all_train_labels = None
+    # 創建數值特徵編碼器
+    if stype.numerical in col_names_dict:
+        numerical_stats_list = [
+            col_stats[col_name]
+            for col_name in col_names_dict[stype.numerical]
+        ]
+        numerical_col_len = len(col_names_dict[stype.numerical])
         
-    if val_embeddings:
-        all_val_embeddings = torch.cat(val_embeddings, dim=0)
-        all_val_labels = torch.cat(val_labels, dim=0)
-    else:
-        all_val_embeddings = None
-        all_val_labels = None
+        # 使用StackEncoder對數值列進行標準化
+        num_encoder = StackEncoder(
+            out_channels=1,
+            stats_list=numerical_stats_list,
+            stype=stype.numerical,
+        ).to(device)
         
-    if test_embeddings:
-        all_test_embeddings = torch.cat(test_embeddings, dim=0)
-        all_test_labels = torch.cat(test_labels, dim=0)
-    else:
-        all_test_embeddings = None
-        all_test_labels = None
+        num_norm = LayerNorm(numerical_col_len).to(device)
     
-    # 計算嵌入的特徵數量，用於後續的backbone層
-    embed_dim = all_train_embeddings.shape[1] if all_train_embeddings is not None else 0
+    # 對批次數據進行編碼的函數
+    def encode_batch(tf):
+        xs = []
+        batch_size = len(tf)
+        
+        # 編碼類別特徵
+        if stype.categorical in col_names_dict and cat_encoder is not None:
+            x_cat = cat_encoder(tf.feat_dict[stype.categorical])
+            # 添加位置嵌入
+            pos_enc_pad = pad_embedding.weight.unsqueeze(0).repeat(batch_size, 1, 1)
+            x_cat_with_pos = torch.cat((x_cat, pos_enc_pad), dim=-1)
+            xs.append((x_cat_with_pos, "categorical"))
+        
+        # 編碼數值特徵
+        if stype.numerical in col_names_dict and num_encoder is not None:
+            x_num = num_encoder(tf.feat_dict[stype.numerical])
+            x_num = x_num.view(batch_size, -1)
+            x_num_norm = num_norm(x_num)
+            xs.append((x_num_norm, "numerical"))
+        
+        return xs
     
-    # 返回編碼結果和相關信息 - 這些都是columnwise_fn的輸入
+    # 返回編碼器和相關信息
     return {
-        'encoder': encoder,
-        'train_embeddings': all_train_embeddings,
-        'val_embeddings': all_val_embeddings, 
-        'test_embeddings': all_test_embeddings,
-        'train_labels': all_train_labels,
-        'val_labels': all_val_labels,
-        'test_labels': all_test_labels,
+        'cat_encoder': cat_encoder,
+        'pad_embedding': pad_embedding,
+        'num_encoder': num_encoder,
+        'num_norm': num_norm,
+        'categorical_col_len': categorical_col_len,
+        'numerical_col_len': numerical_col_len,
+        'col_names_dict': col_names_dict,
+        'col_stats': col_stats,
+        'encode_batch': encode_batch,
         'train_loader': train_loader,
         'val_loader': val_loader,
         'test_loader': test_loader,
         'train_tensor_frame': train_tensor_frame,
-        'embed_dim': embed_dim,  # 嵌入特徵數
+        'val_tensor_frame': val_tensor_frame,
+        'test_tensor_frame': test_tensor_frame,
         'channels': channels,
+        'encoder_pad_size': encoder_pad_size,
         'out_channels': material_outputs['out_channels'],
         'is_classification': material_outputs['is_classification'],
         'is_binary_class': material_outputs['is_binary_class'],
@@ -587,103 +651,88 @@ def encoding_fn(material_outputs, config):
         'metric': material_outputs['metric'],
         'device': device
     }
-
-
 def columnwise_fn(encoding_outputs, config):
     """
-    階段3: Column-wise Interaction - 處理列間交互
+    階段3: Column-wise Interaction - 創建Transformer層處理類別特徵的列間交互
     
     輸入:
     - encoding_outputs: encoding_fn的輸出或GNN的輸出
     - config: 配置參數
     
     輸出:
-    - 處理後的嵌入，可傳給decoding_fn或自定義GNN
+    - 包含列間交互處理層的字典，可傳給decoding_fn或自定義GNN
     """
     print("Executing columnwise_fn")
     
     # 從上一階段獲取數據
-    train_embeddings = encoding_outputs['train_embeddings']
-    val_embeddings = encoding_outputs['val_embeddings']
-    test_embeddings = encoding_outputs['test_embeddings']
-    train_labels = encoding_outputs['train_labels']
-    val_labels = encoding_outputs['val_labels']
-    test_labels = encoding_outputs['test_labels']
+    cat_encoder = encoding_outputs['cat_encoder']
+    pad_embedding = encoding_outputs['pad_embedding']
+    num_encoder = encoding_outputs['num_encoder']
+    num_norm = encoding_outputs['num_norm']
+    categorical_col_len = encoding_outputs['categorical_col_len']
+    numerical_col_len = encoding_outputs['numerical_col_len']
+    col_names_dict = encoding_outputs['col_names_dict']
     channels = encoding_outputs['channels']
-    embed_dim = encoding_outputs['embed_dim']
     device = encoding_outputs['device']
     
-    # 獲取ResNet的參數
-    num_layers = config.get('num_layers', 4)
-    normalization = config.get('normalization', 'layer_norm')
-    dropout_prob = config.get('dropout_prob', 0.2)
+    # 獲取Transformer的參數
+    num_layers = config.get('num_layers', 6)
+    num_heads = config.get('num_heads', 8)
+    attn_dropout = config.get('attention_dropout', 0.3)
+    ffn_dropout = config.get('ffn_dropout', 0.3)
     
-    print(f"Building ResNet backbone with {num_layers} layers")
+    print(f"Building TabTransformer with {num_layers} layers, {num_heads} heads")
     
-    # 創建ResNet的骨幹網絡 - FCResidualBlock的堆疊
-    backbone = Sequential(*[
-        FCResidualBlock(
-            embed_dim if i == 0 else channels,  # 第一層使用原始嵌入維度
-            channels,
-            normalization=normalization,
-            dropout_prob=dropout_prob,
-        ).to(device)
-        for i in range(num_layers)
-    ])
+    # 創建TabTransformer的列間交互層 - 僅用於類別特徵
+    tab_transformer_convs = None
+    if stype.categorical in col_names_dict:
+        tab_transformer_convs = ModuleList([
+            TabTransformerConv(
+                channels=channels,
+                num_heads=num_heads,
+                attn_dropout=attn_dropout,
+                ffn_dropout=ffn_dropout
+            ).to(device)
+            for _ in range(num_layers)
+        ])
     
-    # 對嵌入數據應用骨幹網絡進行處理
-    # 使用小批次處理以避免GPU內存不足
-    batch_size = 128
-    
-    train_backbone_outputs = []
-    val_backbone_outputs = []
-    test_backbone_outputs = []
-    
-    # 將數據移回GPU進行處理
-    with torch.no_grad():
-        # 處理訓練數據
-        for i in range(0, train_embeddings.size(0), batch_size):
-            end_idx = min(i + batch_size, train_embeddings.size(0))
-            batch = train_embeddings[i:end_idx].to(device)
-            output = backbone(batch)
-            train_backbone_outputs.append(output.cpu())
+    # 定義列間交互處理函數
+    def process_batch_interaction(encoded_features):
+        processed_features = []
         
-        # 處理驗證數據
-        for i in range(0, val_embeddings.size(0), batch_size):
-            end_idx = min(i + batch_size, val_embeddings.size(0))
-            batch = val_embeddings[i:end_idx].to(device)
-            output = backbone(batch)
-            val_backbone_outputs.append(output.cpu())
+        for feature, feature_type in encoded_features:
+            # 僅對類別特徵應用TabTransformerConv
+            if feature_type == "categorical" and tab_transformer_convs is not None:
+                x = feature
+                for conv in tab_transformer_convs:
+                    x = conv(x)
+                processed_features.append((x, feature_type))
+            else:
+                # 數值特徵保持不變
+                processed_features.append((feature, feature_type))
         
-        # 處理測試數據
-        for i in range(0, test_embeddings.size(0), batch_size):
-            end_idx = min(i + batch_size, test_embeddings.size(0))
-            batch = test_embeddings[i:end_idx].to(device)
-            output = backbone(batch)
-            test_backbone_outputs.append(output.cpu())
+        return processed_features
     
-    # 合併處理後的結果
-    all_train_backbone_outputs = torch.cat(train_backbone_outputs, dim=0) if train_backbone_outputs else None
-    all_val_backbone_outputs = torch.cat(val_backbone_outputs, dim=0) if val_backbone_outputs else None
-    all_test_backbone_outputs = torch.cat(test_backbone_outputs, dim=0) if test_backbone_outputs else None
-    
-    # 返回骨幹網絡處理結果和相關信息 - 這些都是decoding_fn的輸入
+    # 返回列間交互層和相關信息
     return {
-        'backbone': backbone,
-        'train_backbone_outputs': all_train_backbone_outputs,
-        'val_backbone_outputs': all_val_backbone_outputs,
-        'test_backbone_outputs': all_test_backbone_outputs,
-        'train_labels': train_labels,
-        'val_labels': val_labels,
-        'test_labels': test_labels,
-        'train_embeddings': train_embeddings,  # 保留原始嵌入，以便可能的需要
-        'val_embeddings': val_embeddings,
-        'test_embeddings': test_embeddings,
+        'tab_transformer_convs': tab_transformer_convs,
+        'cat_encoder': cat_encoder,
+        'pad_embedding': pad_embedding,
+        'num_encoder': num_encoder,
+        'num_norm': num_norm,
+        'categorical_col_len': categorical_col_len,
+        'numerical_col_len': numerical_col_len,
+        'col_names_dict': col_names_dict,
+        'encode_batch': encoding_outputs['encode_batch'],
+        'process_batch_interaction': process_batch_interaction,
         'train_loader': encoding_outputs['train_loader'],
         'val_loader': encoding_outputs['val_loader'],
         'test_loader': encoding_outputs['test_loader'],
-        'encoder': encoding_outputs['encoder'],
+        'train_tensor_frame': encoding_outputs['train_tensor_frame'],
+        'val_tensor_frame': encoding_outputs['val_tensor_frame'],
+        'test_tensor_frame': encoding_outputs['test_tensor_frame'],
         'channels': channels,
+        'encoder_pad_size': encoding_outputs['encoder_pad_size'],
         'out_channels': encoding_outputs['out_channels'],
         'is_classification': encoding_outputs['is_classification'],
         'is_binary_class': encoding_outputs['is_binary_class'],
@@ -691,10 +740,9 @@ def columnwise_fn(encoding_outputs, config):
         'metric': encoding_outputs['metric'],
         'device': device
     }
-
 def decoding_fn(columnwise_outputs, config):
     """
-    階段4: Decoding - 解碼預測並訓練模型
+    階段4: Decoding - 創建解碼器並訓練模型
     
     輸入:
     - columnwise_outputs: columnwise_fn的輸出或GNN的輸出
@@ -706,17 +754,19 @@ def decoding_fn(columnwise_outputs, config):
     print("Executing decoding_fn")
     
     # 從上一階段獲取數據
-    backbone = columnwise_outputs['backbone']
-    train_backbone_outputs = columnwise_outputs['train_backbone_outputs']
-    val_backbone_outputs = columnwise_outputs['val_backbone_outputs']
-    test_backbone_outputs = columnwise_outputs['test_backbone_outputs']
-    train_labels = columnwise_outputs['train_labels']
-    val_labels = columnwise_outputs['val_labels']
-    test_labels = columnwise_outputs['test_labels']
+    cat_encoder = columnwise_outputs['cat_encoder']
+    pad_embedding = columnwise_outputs['pad_embedding']
+    num_encoder = columnwise_outputs['num_encoder']
+    num_norm = columnwise_outputs['num_norm']
+    tab_transformer_convs = columnwise_outputs['tab_transformer_convs']
+    categorical_col_len = columnwise_outputs['categorical_col_len']
+    numerical_col_len = columnwise_outputs['numerical_col_len']
+    col_names_dict = columnwise_outputs['col_names_dict']
+    encode_batch = columnwise_outputs['encode_batch']
+    process_batch_interaction = columnwise_outputs['process_batch_interaction']
     train_loader = columnwise_outputs['train_loader']
     val_loader = columnwise_outputs['val_loader']
     test_loader = columnwise_outputs['test_loader']
-    encoder = columnwise_outputs['encoder']
     channels = columnwise_outputs['channels']
     out_channels = columnwise_outputs['out_channels']
     device = columnwise_outputs['device']
@@ -725,85 +775,100 @@ def decoding_fn(columnwise_outputs, config):
     metric_computer = columnwise_outputs['metric_computer']
     metric = columnwise_outputs['metric']
     
-    # 創建ResNet的解碼器部分
+    # 計算MLP輸入維度
+    mlp_input_len = categorical_col_len * channels + numerical_col_len
+    
+    # MLP層的大小
+    mlp_first_hidden_layer_size = 2 * mlp_input_len
+    mlp_second_hidden_layer_size = 4 * mlp_input_len
+    
+    # 創建TabTransformer的解碼器 - MLP
     decoder = Sequential(
-        LayerNorm(channels),
-        ReLU(),
-        Linear(channels, out_channels),
+        Linear(mlp_input_len, mlp_first_hidden_layer_size),
+        BatchNorm1d(mlp_first_hidden_layer_size),
+        SELU(),
+        Linear(mlp_first_hidden_layer_size, mlp_second_hidden_layer_size),
+        BatchNorm1d(mlp_second_hidden_layer_size),
+        SELU(),
+        Linear(mlp_second_hidden_layer_size, out_channels)
     ).to(device)
     
     # 初始化解碼器參數
-    decoder[0].reset_parameters()  # LayerNorm
-    decoder[2].reset_parameters()  # Linear
+    for m in decoder:
+        if not isinstance(m, SELU):
+            m.reset_parameters()
     
-    # 實現完整的ResNet前向傳播函數
-    def model_forward(tf):
-        x, _ = encoder(tf)
-        batch_size, num_cols, embed_dim = x.shape
-        x = x.reshape(batch_size, -1)  # 展平
-        x = backbone(x)
-        out = decoder(x)
-        return out
-    
-    # 設置優化器
-    lr = config.get('lr', 0.0001)
-    all_params = list(encoder.parameters()) + list(backbone.parameters()) + list(decoder.parameters())
-    optimizer = torch.optim.AdamW(all_params, lr=lr)
-    
-    # 創建數據集
-    class EmbeddingDataset:
-        def __init__(self, embeddings, labels):
-            self.embeddings = embeddings
-            self.labels = labels
+    # 定義完整的前向傳播函數
+    def forward(tf):
+        # 編碼階段
+        encoded_features = encode_batch(tf)
         
-        def __len__(self):
-            return len(self.labels)
+        # 列間交互階段
+        processed_features = process_batch_interaction(encoded_features)
         
-        def __getitem__(self, idx):
-            return self.embeddings[idx], self.labels[idx]
-    
-    # 創建數據加載器
-    batch_size = config.get('batch_size', 512)
-    train_embed_dataset = EmbeddingDataset(train_backbone_outputs.to(device), train_labels.to(device))
-    val_embed_dataset = EmbeddingDataset(val_backbone_outputs.to(device), val_labels.to(device))
-    test_embed_dataset = EmbeddingDataset(test_backbone_outputs.to(device), test_labels.to(device))
-    
-    train_embed_loader = torch.utils.data.DataLoader(train_embed_dataset, batch_size=batch_size, shuffle=True)
-    val_embed_loader = torch.utils.data.DataLoader(val_embed_dataset, batch_size=batch_size)
-    test_embed_loader = torch.utils.data.DataLoader(test_embed_dataset, batch_size=batch_size)
-    
-    # 定義訓練函數 - 使用預處理後的嵌入進行快速訓練
-    def train_on_embeddings(epoch):
-        decoder.train()
-        loss_accum = total_count = 0
+        # 準備解碼輸入
+        xs = []
+        batch_size = len(tf)
         
-        for embeddings, labels in tqdm(train_embed_loader, desc=f'Epoch: {epoch}'):
-            out = decoder(embeddings)
-            
-            if is_classification:
-                loss = F.cross_entropy(out, labels)
+        for feature, feature_type in processed_features:
+            if feature_type == "categorical":
+                # 展平類別特徵
+                x_cat_flat = feature.reshape(batch_size, -1)
+                xs.append(x_cat_flat)
             else:
-                loss = F.mse_loss(out.view(-1), labels.view(-1))
-            
-            optimizer.zero_grad()
-            loss.backward()
-            loss_accum += float(loss) * len(labels)
-            total_count += len(labels)
-            optimizer.step()
+                # 數值特徵已經是展平的
+                xs.append(feature)
         
-        return loss_accum / total_count
+        # 連接所有特徵
+        if xs:
+            x = torch.cat(xs, dim=1)
+            # 解碼階段
+            out = decoder(x)
+            return out
+        else:
+            # 處理無特徵的極端情況
+            return torch.zeros(batch_size, out_channels, device=device)
     
-    # 定義完整模型的訓練函數
-    def train_full_model(epoch):
-        encoder.train()
-        backbone.train()
+    # 設置優化器和學習率調度器
+    lr = config.get('lr', 0.0001)
+    
+    # 收集所有參數
+    model_params = []
+    if cat_encoder is not None:
+        model_params.extend(list(cat_encoder.parameters()))
+    if pad_embedding is not None:
+        model_params.extend(list(pad_embedding.parameters()))
+    if num_encoder is not None:
+        model_params.extend(list(num_encoder.parameters()))
+    if num_norm is not None:
+        model_params.extend(list(num_norm.parameters()))
+    if tab_transformer_convs is not None:
+        for conv in tab_transformer_convs:
+            model_params.extend(list(conv.parameters()))
+    model_params.extend(list(decoder.parameters()))
+    
+    optimizer = torch.optim.Adam(model_params, lr=lr)
+    lr_scheduler = ExponentialLR(optimizer, gamma=0.95)
+    
+    # 定義訓練函數
+    def train(epoch):
+        # 設置為訓練模式
+        if cat_encoder is not None:
+            cat_encoder.train()
+        if num_encoder is not None:
+            num_encoder.train()
+        if num_norm is not None:
+            num_norm.train()
+        if tab_transformer_convs is not None:
+            for conv in tab_transformer_convs:
+                conv.train()
         decoder.train()
         
         loss_accum = total_count = 0
         
         for tf in tqdm(train_loader, desc=f'Epoch: {epoch}'):
             tf = tf.to(device)
-            pred = model_forward(tf)
+            pred = forward(tf)
             
             if is_classification:
                 loss = F.cross_entropy(pred, tf.y)
@@ -818,40 +883,26 @@ def decoding_fn(columnwise_outputs, config):
         
         return loss_accum / total_count
     
-    # 定義測試函數 - 使用預處理後的嵌入進行快速評估
+    # 定義測試函數
     @torch.no_grad()
-    def test_on_embeddings(loader):
-        decoder.eval()
-        metric_computer.reset()
-        
-        for embeddings, labels in loader:
-            pred = decoder(embeddings)
-            
-            if is_binary_class:
-                metric_computer.update(pred[:, 1], labels)
-            elif is_classification:
-                pred_class = pred.argmax(dim=-1)
-                metric_computer.update(pred_class, labels)
-            else:
-                metric_computer.update(pred.view(-1), labels.view(-1))
-        
-        if is_classification:
-            return metric_computer.compute().item()
-        else:
-            return metric_computer.compute().item()**0.5
-    
-    # 定義完整模型的測試函數
-    @torch.no_grad()
-    def test_full_model(loader):
-        encoder.eval()
-        backbone.eval()
+    def test(loader):
+        # 設置為評估模式
+        if cat_encoder is not None:
+            cat_encoder.eval()
+        if num_encoder is not None:
+            num_encoder.eval()
+        if num_norm is not None:
+            num_norm.eval()
+        if tab_transformer_convs is not None:
+            for conv in tab_transformer_convs:
+                conv.eval()
         decoder.eval()
         
         metric_computer.reset()
         
         for tf in loader:
             tf = tf.to(device)
-            pred = model_forward(tf)
+            pred = forward(tf)
             
             if is_binary_class:
                 metric_computer.update(pred[:, 1], tf.y)
@@ -881,21 +932,12 @@ def decoding_fn(columnwise_outputs, config):
     test_metrics = []
     
     # 訓練循環
-    epochs = config.get('epochs', 100)
-    use_embeddings = config.get('use_embeddings', True)  # 是否使用預處理嵌入訓練
-    
+    epochs = config.get('epochs', 50)
     for epoch in range(1, epochs + 1):
-        # 使用預處理嵌入或完整模型訓練
-        if use_embeddings:
-            train_loss = train_on_embeddings(epoch)
-            train_metric = test_on_embeddings(train_embed_loader)
-            val_metric = test_on_embeddings(val_embed_loader)
-            test_metric = test_on_embeddings(test_embed_loader)
-        else:
-            train_loss = train_full_model(epoch)
-            train_metric = test_full_model(train_loader)
-            val_metric = test_full_model(val_loader)
-            test_metric = test_full_model(test_loader)
+        train_loss = train(epoch)
+        train_metric = test(train_loader)
+        val_metric = test(val_loader)
+        test_metric = test(test_loader)
         
         train_losses.append(train_loss)
         train_metrics.append(train_metric)
@@ -911,11 +953,14 @@ def decoding_fn(columnwise_outputs, config):
         
         print(f'Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
               f'Val {metric}: {val_metric:.4f}, Test {metric}: {test_metric:.4f}')
+        
+        # 學習率調整
+        lr_scheduler.step()
     
     print(f'Best Val {metric}: {best_val_metric:.4f}, '
           f'Best Test {metric}: {best_test_metric:.4f}')
     
-    # 返回訓練結果
+    # 返回訓練結果和模型組件
     return {
         'train_losses': train_losses,
         'train_metrics': train_metrics,
@@ -923,23 +968,27 @@ def decoding_fn(columnwise_outputs, config):
         'test_metrics': test_metrics,
         'best_val_metric': best_val_metric,
         'best_test_metric': best_test_metric,
-        'encoder': encoder,
-        'backbone': backbone,
+        'cat_encoder': cat_encoder,
+        'pad_embedding': pad_embedding,
+        'num_encoder': num_encoder,
+        'num_norm': num_norm,
+        'tab_transformer_convs': tab_transformer_convs,
         'decoder': decoder,
-        'model_forward': model_forward  # 返回完整模型的前向函數
+        'forward': forward  # 返回完整模型的前向函數
     }
 
 def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     """
     主函數：按順序調用四個階段函數
     """
-    print("ResNet - 四階段執行")
+    print("TabTransformer - 五階段執行")
     print(f"gnn_stage: {gnn_stage}")
     task_type = dataset_results['info']['task_type']
     try:
         # 階段0: 開始
         train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
-        if gnn_stage=="start":
+        if gnn_stage=='start':
+            # 在 start_fn 和 materialize_fn 之間插入 GNN
             train_df, val_df, test_df, gnn_early_stop_epochs = gnn_after_start_fn(train_df, val_df, test_df, config, task_type)
         # 階段1: Materialization
         material_outputs = materialize_fn(train_df, val_df, test_df, dataset_results, config)
@@ -948,30 +997,20 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             train_tensor_frame = material_outputs['train_tensor_frame']
             val_tensor_frame = material_outputs['val_tensor_frame']
             test_tensor_frame = material_outputs['test_tensor_frame']
-            (train_loader, val_loader, test_loader,col_stats, stype_encoder_dict, dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs) = gnn_after_materialize_fn(
+            (train_loader, val_loader, test_loader,col_stats, dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs) = gnn_after_materialize_fn(
                 train_tensor_frame, val_tensor_frame, test_tensor_frame, config, dataset_results['dataset'], task_type)
             material_outputs.update({
                 'train_loader': train_loader,
                 'val_loader': val_loader,
                 'test_loader': test_loader,
                 'col_stats': col_stats,
-                'stype_encoder_dict': stype_encoder_dict,
                 'dataset': dataset,
                 'train_tensor_frame': train_tensor_frame,
                 'val_tensor_frame': val_tensor_frame,
                 'test_tensor_frame': test_tensor_frame,
             })
             material_outputs['gnn_early_stop_epochs'] = gnn_early_stop_epochs
-        # # 階段2: Encoding
-        # encoding_outputs = encoding_fn(material_outputs, config)
-        # # 這裡可以插入GNN處理編碼後的數據
-        # # encoding_outputs = gnn_process(encoding_outputs, config)
-        # # 階段3: Column-wise Interaction
-        # columnwise_outputs = columnwise_fn(encoding_outputs, config)
-        # # 這裡可以插入GNN處理列間交互後的數據
-        # # columnwise_outputs = gnn_process(columnwise_outputs, config)
-        # # 階段4: Decoding
-        # results = decoding_fn(columnwise_outputs, config)
+        results=tabtransformer_core_fn(material_outputs, config, task_type, gnn_stage=gnn_stage)
     except Exception as e:
         is_classification = dataset_results['info']['task_type'] == 'classification'
         results = {

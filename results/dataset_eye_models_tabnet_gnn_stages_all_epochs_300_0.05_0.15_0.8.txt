@@ -1,0 +1,38 @@
+dataset: eye
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.46252286434173584
+          Best test metric: 0.465767502784729
+          早停輪數: 25
+          GNN早停輪數: 0
+          耗時: 8.37 秒
+    GNN階段: start
+          Best val metric: 0.46313223242759705
+          Best test metric: 0.449994295835495
+          早停輪數: 32
+          GNN早停輪數: 0
+          耗時: 9.17 秒
+    GNN階段: materialize
+          Best val metric: 0.4783668518066406
+          Best test metric: 0.4646245241165161
+          早停輪數: 33
+          GNN早停輪數: 0
+          耗時: 11.69 秒
+    GNN階段: encoding
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.389758825302124
+          早停輪數: 19
+          GNN早停輪數: 0
+          耗時: 28.47 秒
+    GNN階段: columnwise
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.389758825302124
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 95.73 秒
+    GNN階段: decoding
+          Best val metric: 0.4923827052116394
+          Best test metric: 0.47308263182640076
+          早停輪數: 26
+          GNN早停輪數: 17
+          耗時: 7.50 秒

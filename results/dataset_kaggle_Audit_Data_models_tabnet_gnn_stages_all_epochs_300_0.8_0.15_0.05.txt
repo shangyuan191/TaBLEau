@@ -1,0 +1,38 @@
+dataset: kaggle_Audit_Data
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 0.966013491153717
+          Best test metric: 0.9694444537162781
+          早停輪數: 59
+          GNN早停輪數: 0
+          耗時: 6.79 秒
+    GNN階段: start
+          Best val metric: 0.9497857093811035
+          Best test metric: 0.9888888597488403
+          早停輪數: 75
+          GNN早停輪數: 0
+          耗時: 6.87 秒
+    GNN階段: materialize
+          Best val metric: 0.9479485750198364
+          Best test metric: 0.9861111640930176
+          早停輪數: 39
+          GNN早停輪數: 0
+          耗時: 3.95 秒
+    GNN階段: encoding
+          Best val metric: 0.5624617338180542
+          Best test metric: 0.5
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 8.84 秒
+    GNN階段: columnwise
+          Best val metric: 0.5
+          Best test metric: 0.5
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 32.97 秒
+    GNN階段: decoding
+          Best val metric: 0.9733619093894958
+          Best test metric: 0.9888888597488403
+          早停輪數: 49
+          GNN早停輪數: 14
+          耗時: 5.02 秒

@@ -1,0 +1,38 @@
+dataset: openml_The_Office_Dataset
+  模型: tabnet
+    GNN階段: none
+          Best val metric: 1.0006906389465142
+          Best test metric: 0.8793446104631865
+          早停輪數: 55
+          GNN早停輪數: 0
+          耗時: 4.19 秒
+    GNN階段: start
+          Best val metric: 1.0055375556552475
+          Best test metric: 0.9231237262466517
+          早停輪數: 42
+          GNN早停輪數: 0
+          耗時: 2.06 秒
+    GNN階段: materialize
+          Best val metric: 0.9329868722362101
+          Best test metric: 0.8607571324660377
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 1.08 秒
+    GNN階段: encoding
+          Best val metric: 1.072870247339795
+          Best test metric: 0.9654892217981759
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.61 秒
+    GNN階段: columnwise
+          Best val metric: 1.087664102910401
+          Best test metric: 0.9673047205772436
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 0.89 秒
+    GNN階段: decoding
+          Best val metric: 0.8420712351799011
+          Best test metric: 8.728776931762695
+          早停輪數: 33
+          GNN早停輪數: 11
+          耗時: 1.58 秒

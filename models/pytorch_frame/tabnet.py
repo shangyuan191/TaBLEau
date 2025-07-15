@@ -300,9 +300,142 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
     val_loader = DataLoader(val_tensor_frame, batch_size=batch_size)
     test_loader = DataLoader(test_tensor_frame, batch_size=batch_size)
 
-    return 
+    return train_loader, val_loader, test_loader,dataset.col_stats, dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs
 
 
+    # 取得所有 row 的 embedding
+def get_all_embeddings_and_targets(loader,  encode_batch, process_batch_interaction):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    all_embeds, all_targets = [], []
+    for tf in loader:
+        tf = tf.to(device)
+        x = encode_batch(tf)
+        feature_outputs, reg = process_batch_interaction(x, return_reg=True)
+        # feature_outputs 是一個列表，需要先合併再處理
+        if isinstance(feature_outputs, list):
+            # 將列表中的所有特徵合併
+            combined_features = sum(feature_outputs)  # 按元素相加
+        else:
+            combined_features = feature_outputs
+        all_embeds.append(combined_features.detach().cpu())
+        all_targets.append(tf.y.detach().cpu())
+    return torch.cat(all_embeds, dim=0), torch.cat(all_targets, dim=0)
+
+
+def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encode_batch, process_batch_interaction):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    train_emb, train_y = get_all_embeddings_and_targets(train_loader,  encode_batch, process_batch_interaction)
+    val_emb, val_y = get_all_embeddings_and_targets(val_loader,  encode_batch, process_batch_interaction)
+    test_emb, test_y = get_all_embeddings_and_targets(test_loader,  encode_batch, process_batch_interaction)
+    # 合併
+    all_emb = torch.cat([train_emb, val_emb, test_emb], dim=0)  # (total_rows, num_cols)
+    all_y = torch.cat([train_y, val_y, test_y], dim=0)
+    # print(f"all_emb shape: {all_emb.shape}, all_y shape: {all_y.shape}")
+    # 合併成 DataFrame
+    all_df = pd.DataFrame(all_emb.numpy())
+    all_df['target'] = all_y.numpy()
+    # print(f"all_df shape: {all_df.shape}")
+    # print(f"all_df head:\n{all_df.head()}")
+    # print(f"all_df columns: {all_df.columns}")
+    feature_cols = [c for c in all_df.columns if c != 'target']
+    x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
+    y = all_df['target'].values
+    k=5
+            # 自動計算 num_classes
+    if task_type in ['binclass', 'multiclass']:
+        num_classes = len(pd.unique(y))
+        print(f"Detected num_classes: {num_classes}")
+    else:
+        num_classes = 1
+    # label 處理
+    if task_type == 'binclass':
+        y = torch.tensor(y, dtype=torch.float32, device=device)
+    elif task_type == 'multiclass':
+        y = torch.tensor(y, dtype=torch.long, device=device)
+    else:  # regression
+        y = torch.tensor(y, dtype=torch.float32, device=device)
+    # 建圖
+    print(f"x shape: {x.shape}, y shape: {y.shape}")
+    edge_index = knn_graph(x, k).to(device)
+    # mask
+    n_train = len(train_emb)
+    n_val = len(val_emb)
+    n_test = len(test_emb)
+    print(f"n_train: {n_train}, n_val: {n_val}, n_test: {n_test}")
+    N = n_train + n_val + n_test
+    train_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    val_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    test_mask = torch.zeros(N, dtype=torch.bool, device=device)
+    train_mask[:n_train] = True
+    val_mask[n_train:n_train+n_val] = True
+    test_mask[n_train+n_val:] = True
+    hidden_dim = config.get('hidden_dim', 64)
+    gnn_epochs = config.get('gnn_epochs', 200)
+    in_dim = x.shape[1]
+    out_dim = 1 if (task_type == 'regression' or task_type=="binclass") else num_classes
+    gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
+    optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
+    gnn.train()
+    best_val_metric = None
+    best_test_metric = None
+    best_val = -float('inf') if (task_type=="binclass" or task_type=="multiclass") else float('inf')
+    is_binary_class = task_type == 'binclass'
+    is_classification = task_type in ['binclass', 'multiclass']
+    metric_computer = metric_computer.to(device)
+    best_epoch = 0
+    early_stop_counter = 0
+    patience = config.get('gnn_patience', 10)
+    early_stop_epoch = 0
+    best_val_metric = -float('inf') if is_classification else float('inf')
+    for epoch in tqdm(range(gnn_epochs),desc="GNN Training"):
+        optimizer.zero_grad()
+        out = gnn(x, edge_index)
+        if task_type == 'binclass':
+            loss = torch.nn.functional.binary_cross_entropy_with_logits(
+                out[train_mask][:, 0], y[train_mask])
+        elif task_type == 'multiclass':
+            loss = torch.nn.functional.cross_entropy(
+                out[train_mask], y[train_mask])
+        else:
+            loss = torch.nn.functional.mse_loss(
+                out[train_mask][:, 0], y[train_mask])
+        loss.backward()
+        optimizer.step()
+        gnn.eval()
+        with torch.no_grad():
+            out_val = gnn(x, edge_index)
+            val_idx = torch.arange(n_train, n_train+n_val)
+            if is_binary_class:
+                val_metric = metric_computer(out_val[val_idx, 0], y[val_idx])
+            elif is_classification:
+                pred_class = out_val[val_idx].argmax(dim=-1)
+                val_metric = metric_computer(pred_class, y[val_idx])
+            else:
+                val_metric = metric_computer(out_val[val_idx].view(-1), y[val_idx].view(-1))
+            val_metric = val_metric.item() if hasattr(val_metric, 'item') else float(val_metric)
+            improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+            print(f"epoch {epoch+1}/{gnn_epochs}, val_metric: {val_metric:.4f}, best_val_metric: {best_val_metric:.4f}, improved: {improved}, task_type: {task_type}")
+            if improved:
+                best_val_metric = val_metric
+                best_epoch = epoch + 1
+                early_stop_counter = 0
+            else:
+                early_stop_counter += 1
+            # test_metric 仍用 test set
+            test_idx = torch.arange(n_train+n_val, N)
+            if is_binary_class:
+                test_metric = metric_computer(out_val[test_idx, 0], y[test_idx])
+            elif is_classification:
+                pred_class = out_val[test_idx].argmax(dim=-1)
+                test_metric = metric_computer(pred_class, y[test_idx])
+            else:
+                test_metric = metric_computer(out_val[test_idx].view(-1), y[test_idx].view(-1))
+            test_metric = test_metric.item() if hasattr(test_metric, 'item') else float(test_metric)
+        if early_stop_counter >= patience:
+            early_stop_epoch = epoch + 1
+            print(f"GNN Early stopping at epoch {early_stop_epoch}")
+            break
+    return best_val_metric, test_metric, early_stop_epoch
 
 
 class TabNet(Module):
@@ -721,19 +854,12 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
         'out_channels': out_channels,
         'device': device
     }
-def encoding_fn(material_outputs, config):
-    """
-    階段2: Encoding - 創建特徵編碼器並對特徵進行初始處理
-    
-    輸入:
-    - material_outputs: materialize_fn的輸出
-    - config: 配置參數
-    
-    輸出:
-    - 包含編碼器和處理後特徵的字典，可傳給columnwise_fn或自定義GNN
-    """
-    print("Executing encoding_fn")
-    
+
+
+
+
+
+def tabnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
     # 從上一階段獲取數據
     train_tensor_frame = material_outputs['train_tensor_frame']
     val_tensor_frame = material_outputs['val_tensor_frame']
@@ -745,7 +871,6 @@ def encoding_fn(material_outputs, config):
     col_names_dict = train_tensor_frame.col_names_dict
     device = material_outputs['device']
     out_channels = material_outputs['out_channels']
-    
     # 獲取TabNet的參數
     cat_emb_channels = config.get('cat_emb_channels', 2)
     print(f"Encoding with cat_emb_channels: {cat_emb_channels}")
@@ -771,73 +896,59 @@ def encoding_fn(material_outputs, config):
     
     # 創建批次標準化層
     bn = BatchNorm1d(in_channels).to(device)
-    
     # 對批次數據進行編碼的函數
-    def encode_batch(tf):
+    def encode_batch(tf, debug=False):
         # 編碼特徵
         x, _ = feature_encoder(tf)
+        if debug:
+            print(f"[TabNet] Raw feature encoding: batch_size={x.shape[0]}, num_cols={x.shape[1]}, channels={x.shape[2]}")
         batch_size = x.shape[0]
         # 展平特徵
         x_flat = x.view(batch_size, math.prod(x.shape[1:]))
+        if debug:
+            print(f"[TabNet] After flattening: batch_size={x_flat.shape[0]}, flattened_features={x_flat.shape[1]}")
         # 應用批次標準化
         x_norm = bn(x_flat)
+        if debug:
+            print(f"[TabNet] After batch norm: batch_size={x_norm.shape[0]}, features={x_norm.shape[1]}")
         return x_norm
-    
-    # 處理樣本數據以便檢查形狀
-    with torch.no_grad():
-        if len(train_loader) > 0:
-            sample_tf = next(iter(train_loader))
-            sample_tf = sample_tf.to(device)
-            sample_encoded = encode_batch(sample_tf)
-            print(f"Encoded shape: {sample_encoded.shape}")
-    
-    # 返回編碼器和相關信息
-    return {
-        'feature_encoder': feature_encoder,
-        'bn': bn,
-        'encode_batch': encode_batch,
-        'in_channels': in_channels,
-        'train_loader': train_loader,
-        'val_loader': val_loader,
-        'test_loader': test_loader,
-        'train_tensor_frame': train_tensor_frame,
-        'val_tensor_frame': val_tensor_frame,
-        'test_tensor_frame': test_tensor_frame,
-        'cat_emb_channels': cat_emb_channels,
-        'out_channels': out_channels,
-        'is_classification': material_outputs['is_classification'],
-        'is_binary_class': material_outputs['is_binary_class'],
-        'metric_computer': material_outputs['metric_computer'],
-        'metric': material_outputs['metric'],
-        'device': device
-    }
-def columnwise_fn(encoding_outputs, config):
-    """
-    階段3: Column-wise Interaction - 創建TabNet的特徵和注意力變換器
-    
-    輸入:
-    - encoding_outputs: encoding_fn的輸出或GNN的輸出
-    - config: 配置參數
-    
-    輸出:
-    - 包含特徵變換器和注意力變換器的字典，可傳給decoding_fn或自定義GNN
-    """
-    print("Executing columnwise_fn")
-    
-    # 從上一階段獲取數據
-    feature_encoder = encoding_outputs['feature_encoder']
-    bn = encoding_outputs['bn']
-    encode_batch = encoding_outputs['encode_batch']
-    in_channels = encoding_outputs['in_channels']
-    device = encoding_outputs['device']
-    
-    # 獲取TabNet的參數
+# 獲取TabNet的參數
     split_feat_channels = config.get('channels', 128)
     split_attn_channels = config.get('channels', 128)
     num_layers = config.get('num_layers', 6)
     gamma = config.get('gamma', 1.2)
     num_shared_glu_layers = config.get('num_shared_glu_layers', 2)
     num_dependent_glu_layers = config.get('num_dependent_glu_layers', 2)
+    patience = config.get('patience', 10)
+    # 獲取模型參數
+    channels = config.get('channels', 256)
+    # 新增：引入必要的GNN模組（以PyG為例）- 簡化版本
+    from torch_geometric.nn import GCNConv
+    import torch.nn as nn
+    class SimpleGCN_INTERNAL(nn.Module):
+        def __init__(self, in_channels, out_channels):
+            super().__init__()
+            self.conv1 = GCNConv(in_channels, out_channels)
+            
+        def forward(self, x, edge_index):
+            x = self.conv1(x, edge_index)
+            return x
+    
+    # 為不同階段創建簡單的GNN
+    gnn_encoding = SimpleGCN_INTERNAL(in_channels, in_channels).to(device) if gnn_stage == 'encoding' else None
+    gnn_columnwise = SimpleGCN_INTERNAL(split_feat_channels, split_feat_channels).to(device) if gnn_stage == 'columnwise' else None
+    
+    print(f"=== TabNet Architecture Info ===")
+    print(f"Input channels (after encoding): {in_channels}")
+    print(f"Split feature channels: {split_feat_channels}")
+    print(f"Split attention channels: {split_attn_channels}")
+    print(f"Number of layers: {num_layers}")
+    print(f"Output channels: {out_channels}")
+    if gnn_encoding is not None:
+        print(f"Created GNN for encoding stage: {in_channels} -> {in_channels}")
+    if gnn_columnwise is not None:
+        print(f"Created GNN for columnwise stage: {split_feat_channels} -> {split_feat_channels}")
+    print("================================")
     
     print(f"Building TabNet with {num_layers} layers, split channels: {split_feat_channels}")
     
@@ -924,86 +1035,90 @@ def columnwise_fn(encoding_outputs, config):
             return feature_outputs, reg / num_layers
         else:
             return feature_outputs
-    
-    # 返回特徵變換器、注意力變換器和相關信息
-    return {
-        'feature_encoder': feature_encoder,
-        'bn': bn,
-        'encode_batch': encode_batch,
-        'feat_transformers': feat_transformers,
-        'attn_transformers': attn_transformers,
-        'process_batch_interaction': process_batch_interaction,
-        'shared_glu_block': shared_glu_block,
-        'in_channels': in_channels,
-        'split_feat_channels': split_feat_channels,
-        'split_attn_channels': split_attn_channels,
-        'gamma': gamma,
-        'num_layers': num_layers,
-        'train_loader': encoding_outputs['train_loader'],
-        'val_loader': encoding_outputs['val_loader'],
-        'test_loader': encoding_outputs['test_loader'],
-        'out_channels': encoding_outputs['out_channels'],
-        'is_classification': encoding_outputs['is_classification'],
-        'is_binary_class': encoding_outputs['is_binary_class'],
-        'metric_computer': encoding_outputs['metric_computer'],
-        'metric': encoding_outputs['metric'],
-        'device': device
-    }
+        
 
-def decoding_fn(columnwise_outputs, config):
-    """
-    階段4: Decoding - 創建輸出層並訓練模型
-    
-    輸入:
-    - columnwise_outputs: columnwise_fn的輸出或GNN的輸出
-    - config: 配置參數
-    
-    輸出:
-    - 訓練結果和最終模型
-    """
-    print("Executing decoding_fn")
-    
-    # 從上一階段獲取數據
-    feature_encoder = columnwise_outputs['feature_encoder']
-    bn = columnwise_outputs['bn']
-    encode_batch = columnwise_outputs['encode_batch']
-    feat_transformers = columnwise_outputs['feat_transformers']
-    attn_transformers = columnwise_outputs['attn_transformers']
-    process_batch_interaction = columnwise_outputs['process_batch_interaction']
-    split_feat_channels = columnwise_outputs['split_feat_channels']
-    num_layers = columnwise_outputs['num_layers']
-    train_loader = columnwise_outputs['train_loader']
-    val_loader = columnwise_outputs['val_loader']
-    test_loader = columnwise_outputs['test_loader']
-    out_channels = columnwise_outputs['out_channels']
-    device = columnwise_outputs['device']
-    is_classification = columnwise_outputs['is_classification']
-    is_binary_class = columnwise_outputs['is_binary_class']
-    metric_computer = columnwise_outputs['metric_computer']
-    metric = columnwise_outputs['metric']
-    
+    is_classification = material_outputs['is_classification']
+    is_binary_class = material_outputs['is_binary_class']
+    metric_computer = material_outputs['metric_computer']
+    metric = material_outputs['metric']
+
     # 創建輸出層
     lin = Linear(split_feat_channels, out_channels).to(device)
     
     # 重置參數
     lin.reset_parameters()
     
+
+
+
     # 定義完整的TabNet前向傳播函數
-    def forward(tf, return_reg=False):
-        # 編碼特徵
-        x = encode_batch(tf)
+    def forward(tf, return_reg=False, debug=False):
+        # Stage 0: 編碼特徵
+        x = encode_batch(tf, debug=debug)  # 返回 (batch_size, in_channels)
+        batch_size = x.shape[0]
+        if debug:
+            print(f"[TabNet] After encoding: batch_size={batch_size}, channels={x.shape[1]} (flattened)")
         
-        # 通過特徵變換器和注意力變換器處理
+        # Stage 1: Encoding後GNN處理 (模仿ExcelFormer風格)
+        if gnn_stage == 'encoding' and gnn_encoding is not None:
+            if debug:
+                print(f"[TabNet] Applying GNN at encoding stage")
+            if batch_size > 1:
+                # 使用簡單的全連接圖（模仿ExcelFormer的簡單方法）
+                edge_index = []
+                for i in range(batch_size):
+                    for j in range(batch_size):
+                        if i != j:
+                            edge_index.append([i, j])
+                if edge_index:
+                    edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().to(x.device)
+                    x = gnn_encoding(x, edge_index)
+            if debug:
+                print(f"[TabNet] After encoding GNN: batch_size={batch_size}, channels={x.shape[1]}")
+        
+        # Stage 2: 通過特徵變換器和注意力變換器處理
+        if debug:
+            print(f"[TabNet] Starting TabNet interaction layers...")
         if return_reg:
             feature_outputs, reg = process_batch_interaction(x, return_reg=True)
         else:
             feature_outputs = process_batch_interaction(x, return_reg=False)
         
-        # 合併所有層的特徵輸出
+        if debug:
+            print(f"[TabNet] After TabNet layers: {len(feature_outputs)} feature outputs")
+            for i, feat in enumerate(feature_outputs):
+                print(f"[TabNet]   Layer {i+1}: batch_size={feat.shape[0]}, channels={feat.shape[1]}")
+            
+        # Stage 3: Columnwise階段GNN處理
+        if gnn_stage == 'columnwise' and gnn_columnwise is not None:
+            if debug:
+                print(f"[TabNet] Applying GNN at columnwise stage")
+            processed_outputs = []
+            for i, feat in enumerate(feature_outputs):
+                if batch_size > 1:
+                    # 使用簡單的全連接圖
+                    edge_index = []
+                    for j in range(batch_size):
+                        for k in range(batch_size):
+                            if j != k:
+                                edge_index.append([j, k])
+                    if edge_index:
+                        edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().to(feat.device)
+                        feat = gnn_columnwise(feat, edge_index)
+                processed_outputs.append(feat)
+                if debug:
+                    print(f"[TabNet]   After columnwise GNN layer {i+1}: batch_size={feat.shape[0]}, channels={feat.shape[1]}")
+            feature_outputs = processed_outputs
+            
+        # Stage 4: 合併所有層的特徵輸出
         out = sum(feature_outputs)
+        if debug:
+            print(f"[TabNet] After summing all layers: batch_size={out.shape[0]}, channels={out.shape[1]}")
         
-        # 應用輸出層
+        # Stage 5: 應用輸出層
         out = lin(out)
+        if debug:
+            print(f"[TabNet] Final output: batch_size={out.shape[0]}, out_channels={out.shape[1]}")
         
         if return_reg:
             return out, reg
@@ -1011,16 +1126,31 @@ def decoding_fn(columnwise_outputs, config):
             return out
     
     # 設置優化器和學習率調度器
-    lr = config.get('lr', 0.005)  # TabNet默認學習率
+    lr = config.get('lr', 0.001)  # TabNet默認學習率
     
-    # 收集所有參數
-    all_params = list(feature_encoder.parameters()) + \
-                 list(bn.parameters()) + \
-                 [p for ft in feat_transformers for p in ft.parameters()] + \
-                 [p for at in attn_transformers for p in at.parameters()] + \
-                 list(lin.parameters())
+    # 收集所有參數（去除重複，避免optimizer警告）
+    all_params = []
+    all_params.extend(feature_encoder.parameters())
+    all_params.extend(bn.parameters())
     
-    optimizer = torch.optim.Adam(all_params, lr=lr)
+    # 避免重複添加shared_glu_block的參數
+    for ft in feat_transformers:
+        all_params.extend(ft.parameters())
+    for at in attn_transformers:
+        all_params.extend(at.parameters())
+    all_params.extend(lin.parameters())
+    
+    # 添加GNN參數
+    if gnn_encoding is not None:
+        all_params.extend(gnn_encoding.parameters())
+    if gnn_columnwise is not None:
+        all_params.extend(gnn_columnwise.parameters())
+    
+    # 去除重複參數，避免optimizer警告
+    unique_params = list(set(all_params))
+    print(f"Total parameters collected: {len(all_params)}, Unique parameters: {len(unique_params)}")
+    
+    optimizer = torch.optim.Adam(unique_params, lr=lr)
     lr_scheduler = ExponentialLR(optimizer, gamma=0.95)
     
     # 定義訓練函數
@@ -1032,13 +1162,21 @@ def decoding_fn(columnwise_outputs, config):
             ft.train()
         for at in attn_transformers:
             at.train()
+        if gnn_encoding is not None:
+            gnn_encoding.train()
+        if gnn_columnwise is not None:
+            gnn_columnwise.train()
         lin.train()
         
         loss_accum = total_count = 0
+        first_batch = True
         
         for tf in tqdm(train_loader, desc=f'Epoch: {epoch}'):
             tf = tf.to(device)
-            pred, reg = forward(tf, return_reg=True)
+            # 只在第一個epoch的第一個batch啟用調試
+            debug = (epoch == 1 and first_batch)
+            pred, reg = forward(tf, return_reg=True, debug=debug)
+            first_batch = False
             
             if is_classification:
                 loss = F.cross_entropy(pred, tf.y)
@@ -1066,13 +1204,17 @@ def decoding_fn(columnwise_outputs, config):
             ft.eval()
         for at in attn_transformers:
             at.eval()
+        if gnn_encoding is not None:
+            gnn_encoding.eval()
+        if gnn_columnwise is not None:
+            gnn_columnwise.eval()
         lin.eval()
         
         metric_computer.reset()
         
         for tf in loader:
             tf = tf.to(device)
-            pred = forward(tf)
+            pred = forward(tf, debug=False)
             
             if is_binary_class:
                 metric_computer.update(pred[:, 1], tf.y)
@@ -1096,55 +1238,77 @@ def decoding_fn(columnwise_outputs, config):
         best_test_metric = float('inf')
     
     # 記錄訓練過程
+    best_epoch = 0
+    early_stop_counter = 0
+    early_stop_epochs = 0  # 初始化 early_stop_epochs
     train_losses = []
     train_metrics = []
     val_metrics = []
-    test_metrics = []
     
     # 訓練循環
-    epochs = config.get('epochs', 50)
+    epochs = config.get('epochs', 200)
     for epoch in range(1, epochs + 1):
         train_loss = train(epoch)
         train_metric = test(train_loader)
         val_metric = test(val_loader)
-        test_metric = test(test_loader)
+        # test_metric = test(test_loader)
         
         train_losses.append(train_loss)
         train_metrics.append(train_metric)
         val_metrics.append(val_metric)
-        test_metrics.append(test_metric)
+        # test_metrics.append(test_metric)
         
+        improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+        if improved:
+            best_val_metric = val_metric
+            best_epoch = epoch
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
+
         if is_classification and val_metric > best_val_metric:
             best_val_metric = val_metric
-            best_test_metric = test_metric
         elif not is_classification and val_metric < best_val_metric:
             best_val_metric = val_metric
-            best_test_metric = test_metric
-        
+
         print(f'Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
-              f'Val {metric}: {val_metric:.4f}, Test {metric}: {test_metric:.4f}')
-        
-        # 學習率調整
+              f'Val {metric}: {val_metric:.4f}')
+
         lr_scheduler.step()
+        if early_stop_counter >= patience:
+            early_stop_epochs = epoch
+            print(f"Early stopping at epoch {epoch}")
+            break
     
-    print(f'Best Val {metric}: {best_val_metric:.4f}, '
-          f'Best Test {metric}: {best_test_metric:.4f}')
-    
-    # 返回訓練結果和模型組件
+    # 決定最終 metric 輸出
+    final_metric = None
+    test_metric = None
+    if gnn_stage == 'decoding':
+        # 確保gnn在gnn_decoding_eval作用域可見
+        best_val_metric, test_metric, gnn_early_stop_epochs = gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encode_batch, process_batch_interaction)
+        final_metric = best_val_metric
+    else:
+        final_metric = best_val_metric
+        print(f'Best Val {metric}: {final_metric:.4f}')
+        test_metric = test(test_loader)
     return {
         'train_losses': train_losses,
         'train_metrics': train_metrics,
         'val_metrics': val_metrics,
-        'test_metrics': test_metrics,
         'best_val_metric': best_val_metric,
-        'best_test_metric': best_test_metric,
-        'feature_encoder': feature_encoder,
-        'bn': bn,
-        'feat_transformers': feat_transformers,
-        'attn_transformers': attn_transformers,
-        'lin': lin,
-        'forward': forward  # 返回完整模型的前向函數
+        'final_metric': final_metric,
+        'best_test_metric': test_metric,
+        'train_loader': train_loader,
+        'val_loader': val_loader,
+        'test_loader': test_loader,
+        'is_classification': is_classification,
+        'is_binary_class': is_binary_class,
+        'metric_computer': metric_computer,
+        'metric': metric,
+        'early_stop_epochs': early_stop_epochs,
+        'gnn_early_stop_epochs': 0 if gnn_stage != 'decoding' else gnn_early_stop_epochs,
     }
+
 def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     """
     主函數：按順序調用四個階段函數
@@ -1152,6 +1316,7 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     print("TabNet - 五階段執行")
     print(f"gnn_stage: {gnn_stage}")
     task_type = dataset_results['info']['task_type']
+    gnn_early_stop_epochs = 0  # 初始化變數
     try:
         # 階段0: 開始
         train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
@@ -1172,7 +1337,6 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
                 'val_loader': val_loader,
                 'test_loader': test_loader,
                 'col_stats': col_stats,
-                'mutual_info_sort': mutual_info_sort,
                 'dataset': dataset,
                 'train_tensor_frame': train_tensor_frame,
                 'val_tensor_frame': val_tensor_frame,
@@ -1180,7 +1344,7 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             })
             material_outputs['gnn_early_stop_epochs'] = gnn_early_stop_epochs
 
-        results=excelformer_core_fn(material_outputs, config, task_type, gnn_stage=gnn_stage)
+        results=tabnet_core_fn(material_outputs, config, task_type, gnn_stage=gnn_stage)
     
         # # 階段2: Encoding
         # encoding_outputs = encoding_fn(material_outputs, config)
@@ -1193,7 +1357,7 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
         # # 階段4: Decoding
         # results = decoding_fn(columnwise_outputs, config)
     except Exception as e:
-        is_classification = dataset_results['info']['task_type'] == 'classification'
+        is_classification = task_type in ['binclass', 'multiclass']
         results = {
             'train_losses': [],
             'train_metrics': [],
@@ -1201,6 +1365,20 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             'test_metrics': [],
             'best_val_metric': float('-inf') if is_classification else float('inf'),
             'best_test_metric': float('-inf') if is_classification else float('inf'),
+            'early_stop_epochs': 0,
+            'gnn_early_stop_epochs': gnn_early_stop_epochs,
             'error': str(e),
         }
     return results
+
+
+#  small+binclass
+#  python main.py --dataset kaggle_Audit_Data --models tabnet --gnn_stages all --epochs 2
+#  small+regression
+#  python main.py --dataset openml_The_Office_Dataset --models tabnet --gnn_stages all --epochs 2
+#  large+binclass
+#  python main.py --dataset credit --models tabnet --gnn_stages all --epochs 2
+#  large+multiclass
+#  python main.py --dataset eye --models tabnet --gnn_stages all --epochs 2
+#  large+regression
+#  python main.py --dataset house --models tabnet --gnn_stages all --epochs 2
