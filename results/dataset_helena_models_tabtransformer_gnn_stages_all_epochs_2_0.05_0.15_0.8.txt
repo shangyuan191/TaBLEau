@@ -1,0 +1,38 @@
+dataset: helena
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.18813906610012054
+          Best test metric: 0.19494986534118652
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 24.44 秒
+    GNN階段: start
+          Best val metric: 0.17995910346508026
+          Best test metric: 0.18726153671741486
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 27.37 秒
+    GNN階段: materialize
+          Best val metric: 0.18640081584453583
+          Best test metric: 0.19272580742835999
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 48.37 秒
+    GNN階段: encoding
+          Best val metric: 0.19887524843215942
+          Best test metric: 0.20434457063674927
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 22.43 秒
+    GNN階段: columnwise
+          Best val metric: 0.1896727979183197
+          Best test metric: 0.19826677441596985
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 22.13 秒
+    GNN階段: decoding
+          Best val metric: 0.0589192733168602
+          Best test metric: 0.064453125
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 26.58 秒

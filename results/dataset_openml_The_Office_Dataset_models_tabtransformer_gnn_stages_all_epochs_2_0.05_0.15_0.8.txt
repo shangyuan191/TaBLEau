@@ -1,0 +1,38 @@
+dataset: openml_The_Office_Dataset
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.975930642755257
+          Best test metric: 0.9542405526041072
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 2.40 秒
+    GNN階段: start
+          Best val metric: 1.077292411084429
+          Best test metric: 1.0086305831696032
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.77 秒
+    GNN階段: materialize
+          Best val metric: 1.1417068680880682
+          Best test metric: 0.9857466390534547
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.51 秒
+    GNN階段: encoding
+          Best val metric: 0.9578003887263346
+          Best test metric: 0.9657923865065804
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.18 秒
+    GNN階段: columnwise
+          Best val metric: 0.8823992006479829
+          Best test metric: 0.9628560522345365
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.16 秒
+    GNN階段: decoding
+          Best val metric: 1.1618256568908691
+          Best test metric: 0.9767369627952576
+          早停輪數: 0
+          GNN早停輪數: 110
+          耗時: 0.71 秒

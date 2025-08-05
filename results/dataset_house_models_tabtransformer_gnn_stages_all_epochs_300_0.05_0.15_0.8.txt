@@ -1,0 +1,38 @@
+dataset: house
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.8013323864410231
+          Best test metric: 0.8007813244331139
+          早停輪數: 80
+          GNN早停輪數: 0
+          耗時: 9.05 秒
+    GNN階段: start
+          Best val metric: 0.8301533384467715
+          Best test metric: 0.8341136180067397
+          早停輪數: 104
+          GNN早停輪數: 0
+          耗時: 10.36 秒
+    GNN階段: materialize
+          Best val metric: 0.8205719310512856
+          Best test metric: 0.8262731611782782
+          早停輪數: 111
+          GNN早停輪數: 0
+          耗時: 14.90 秒
+    GNN階段: encoding
+          Best val metric: 1.0352380108483386
+          Best test metric: 9.664400383139402
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 35.96 秒
+    GNN階段: columnwise
+          Best val metric: 1.0434651425822425
+          Best test metric: 10.576690351153317
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 37.40 秒
+    GNN階段: decoding
+          Best val metric: 1.0779235363006592
+          Best test metric: 1.1078684329986572
+          早停輪數: 98
+          GNN早停輪數: 0
+          耗時: 9.15 秒

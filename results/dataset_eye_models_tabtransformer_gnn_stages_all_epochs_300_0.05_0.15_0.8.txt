@@ -1,0 +1,38 @@
+dataset: eye
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.46496039628982544
+          Best test metric: 0.465767502784729
+          早停輪數: 26
+          GNN早停輪數: 0
+          耗時: 5.65 秒
+    GNN階段: start
+          Best val metric: 0.45825716853141785
+          Best test metric: 0.4461081326007843
+          早停輪數: 18
+          GNN早停輪數: 0
+          耗時: 5.59 秒
+    GNN階段: materialize
+          Best val metric: 0.46252286434173584
+          Best test metric: 0.4514801800251007
+          早停輪數: 24
+          GNN早停輪數: 0
+          耗時: 8.42 秒
+    GNN階段: encoding
+          Best val metric: 0.3418647050857544
+          Best test metric: 0.31763631105422974
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 21.09 秒
+    GNN階段: columnwise
+          Best val metric: 0.38939669728279114
+          Best test metric: 0.3696422576904297
+          早停輪數: 34
+          GNN早停輪數: 0
+          耗時: 41.61 秒
+    GNN階段: decoding
+          Best val metric: 0.3315051794052124
+          Best test metric: 0.3375651240348816
+          早停輪數: 42
+          GNN早停輪數: 0
+          耗時: 5.67 秒

@@ -1,0 +1,38 @@
+dataset: credit
+  模型: tabtransformer
+    GNN階段: none
+          Best val metric: 0.7158983945846558
+          Best test metric: 0.7004588842391968
+          早停輪數: 18
+          GNN早停輪數: 0
+          耗時: 4.43 秒
+    GNN階段: start
+          Best val metric: 0.7551449537277222
+          Best test metric: 0.7581509351730347
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 5.04 秒
+    GNN階段: materialize
+          Best val metric: 0.717427134513855
+          Best test metric: 0.7054917216300964
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 6.54 秒
+    GNN階段: encoding
+          Best val metric: 0.5146672129631042
+          Best test metric: 0.4971001148223877
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 25.32 秒
+    GNN階段: columnwise
+          Best val metric: 0.5116801261901855
+          Best test metric: 0.5025395154953003
+          早停輪數: 11
+          GNN早停輪數: 0
+          耗時: 25.02 秒
+    GNN階段: decoding
+          Best val metric: 0.5639221848425024
+          Best test metric: 0.5718430828337357
+          早停輪數: 92
+          GNN早停輪數: 0
+          耗時: 4.97 秒
