@@ -1,0 +1,38 @@
+dataset: helena
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.19928425550460815
+          Best test metric: 0.20125773549079895
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 64.98 秒
+    GNN階段: start
+          Best val metric: 0.186503067612648
+          Best test metric: 0.18990740180015564
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 67.99 秒
+    GNN階段: materialize
+          Best val metric: 0.20051124691963196
+          Best test metric: 0.20236976444721222
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 88.15 秒
+    GNN階段: encoding
+          Best val metric: 0.19723926484584808
+          Best test metric: 0.19424046576023102
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 64.67 秒
+    GNN階段: columnwise
+          Best val metric: 0.17259714007377625
+          Best test metric: 0.17397473752498627
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 279.31 秒
+    GNN階段: decoding
+          Best val metric: 0.10306748747825623
+          Best test metric: 0.10004409402608871
+          早停輪數: 100
+          GNN早停輪數: 100
+          耗時: 186.90 秒

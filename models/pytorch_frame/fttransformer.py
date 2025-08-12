@@ -814,12 +814,14 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     try:
         # 階段0: 開始
         train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
+        gnn_early_stop_epochs=0
         if gnn_stage=="start":
             train_df, val_df, test_df, gnn_early_stop_epochs = gnn_after_start_fn(train_df, val_df, test_df, config, task_type)
 
         
         # 階段1: Materialization
         material_outputs = materialize_fn(train_df, val_df, test_df, dataset_results, config)
+        material_outputs['gnn_early_stop_epochs'] = gnn_early_stop_epochs
         if gnn_stage == 'materialize':
             # 在 materialize_fn 和 encoding_fn 之間插入 GNN
             train_tensor_frame = material_outputs['train_tensor_frame']

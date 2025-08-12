@@ -1,0 +1,38 @@
+dataset: house
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8740621036096301
+          Best test metric: 0.8703523226107562
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 16.27 秒
+    GNN階段: start
+          Best val metric: 0.8895493754770393
+          Best test metric: 0.8854041753149582
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 17.63 秒
+    GNN階段: materialize
+          Best val metric: 0.9249071912343438
+          Best test metric: 0.9118427156376935
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 21.36 秒
+    GNN階段: encoding
+          Best val metric: 0.8668005483789298
+          Best test metric: 0.8599002620060027
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 15.34 秒
+    GNN階段: columnwise
+          Best val metric: 0.9883186725270998
+          Best test metric: 0.9755959572339566
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 78.49 秒
+    GNN階段: decoding
+          Best val metric: 1.0334954261779785
+          Best test metric: 1.0194635391235352
+          早停輪數: 10
+          GNN早停輪數: 10
+          耗時: 47.51 秒

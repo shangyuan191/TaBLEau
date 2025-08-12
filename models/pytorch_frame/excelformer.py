@@ -961,11 +961,12 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
     # 獲取配置參數
     try:
         train_df, val_df, test_df = start_fn(train_df, val_df, test_df)
-        
+        gnn_early_stop_epochs=0
         if gnn_stage=='start':
             # 在 start_fn 和 materialize_fn 之間插入 GNN
             train_df, val_df, test_df, gnn_early_stop_epochs = gnn_after_start_fn(train_df, val_df, test_df, config, task_type)
         material_outputs = materialize_fn(train_df, val_df, test_df, dataset_results, config)
+        material_outputs['gnn_early_stop_epochs'] = gnn_early_stop_epochs
         if gnn_stage == 'materialize':
             # 在 materialize_fn 和 encoding_fn 之間插入 GNN
             train_tensor_frame = material_outputs['train_tensor_frame']
