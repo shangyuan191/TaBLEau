@@ -1,0 +1,8 @@
+dataset: kaggle_Penguins_Classified
+  模型: excelformer
+    GNN階段: decoding
+          Best val metric: 0.991004467010498
+          Best test metric: 0.4625000059604645
+          早停輪數: 0
+          GNN早停輪數: 11
+          耗時: 10.09 秒

@@ -1,0 +1,8 @@
+dataset: openml_Diabetes_Data_Set
+  模型: excelformer
+    GNN階段: start
+          Best val metric: 0.7315789461135864
+          Best test metric: 0.8600000143051147
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 18.54 秒

@@ -1,0 +1,7 @@
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: trompt
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 464.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 53.12 MiB is free. Process 1885173 has 26.13 GiB memory in use. Including non-PyTorch memory, this process has 5.55 GiB memory in use. Of the allocated memory 5.08 GiB is allocated by PyTorch, and 106.97 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 2.91 秒

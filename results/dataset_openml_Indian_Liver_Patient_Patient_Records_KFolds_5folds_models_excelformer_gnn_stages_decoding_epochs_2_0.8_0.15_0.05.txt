@@ -1,0 +1,8 @@
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: excelformer
+    GNN階段: decoding
+          Best val metric: 0.44063490629196167
+          Best test metric: 0.4708994925022125
+          早停輪數: 0
+          GNN早停輪數: 13
+          耗時: 7.07 秒

@@ -1,0 +1,7 @@
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: trompt
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 528.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 447.12 MiB is free. Process 1883199 has 26.08 GiB memory in use. Including non-PyTorch memory, this process has 5.22 GiB memory in use. Of the allocated memory 4.44 GiB is allocated by PyTorch, and 418.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 5.32 秒

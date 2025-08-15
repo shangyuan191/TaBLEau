@@ -1,0 +1,8 @@
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.8127572016460906
+          Best test metric: 0.5648148148148149
+          早停輪數: 20
+          GNN早停輪數: 20
+          耗時: 13.50 秒

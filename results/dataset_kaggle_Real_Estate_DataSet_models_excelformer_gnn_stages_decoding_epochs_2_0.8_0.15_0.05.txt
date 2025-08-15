@@ -1,0 +1,8 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: excelformer
+    GNN階段: decoding
+          Best val metric: 0.6980027556419373
+          Best test metric: 0.7090909481048584
+          早停輪數: 0
+          GNN早停輪數: 11
+          耗時: 6.23 秒

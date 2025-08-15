@@ -1,0 +1,7 @@
+dataset: kaggle_Startup_Success_Prediction
+  模型: trompt
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 560.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 89.12 MiB is free. Process 1885173 has 26.13 GiB memory in use. Including non-PyTorch memory, this process has 5.52 GiB memory in use. Of the allocated memory 4.75 GiB is allocated by PyTorch, and 408.08 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 2.87 秒

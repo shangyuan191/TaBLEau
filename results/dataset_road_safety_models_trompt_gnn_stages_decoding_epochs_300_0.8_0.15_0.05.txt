@@ -1,0 +1,8 @@
+dataset: road_safety
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.8014624890057548
+          Best test metric: 0.8011333383701083
+          早停輪數: 100
+          GNN早停輪數: 100
+          耗時: 3332.24 秒
