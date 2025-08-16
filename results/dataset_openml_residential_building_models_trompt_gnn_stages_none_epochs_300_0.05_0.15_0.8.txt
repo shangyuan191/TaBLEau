@@ -1,0 +1,8 @@
+dataset: openml_residential_building
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.7201662622650902
+          Best test metric: 0.6698354771011773
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 17.60 秒

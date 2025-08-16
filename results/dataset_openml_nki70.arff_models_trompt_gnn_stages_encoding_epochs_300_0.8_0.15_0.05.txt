@@ -5,4 +5,4 @@ dataset: openml_nki70.arff
           Best test metric: 0.7333333492279053
           早停輪數: 0
           GNN早停輪數: 0
-          耗時: 6.02 秒
+          耗時: 4.56 秒

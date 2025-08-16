@@ -2,7 +2,7 @@ import re
 import subprocess
 import shutil
 
-RESULT_FILE = "./results/dataset_size_all_task_type_all_feature_type_all_models_trompt_gnn_stages_all_epochs_300_0.8_0.15_0.05.txt"
+RESULT_FILE = "./results/dataset_size_all_task_type_all_feature_type_all_models_trompt_gnn_stages_all_epochs_300_0.05_0.15_0.8.txt"
 NEW_FILE = RESULT_FILE + ".new"
 BACKUP_FILE = RESULT_FILE + ".bak"
 

@@ -1,0 +1,8 @@
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.9737499999999999
+          Best test metric: 0.9672079100145138
+          早停輪數: 10
+          GNN早停輪數: 10
+          耗時: 7.08 秒

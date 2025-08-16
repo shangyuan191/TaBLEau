@@ -1,0 +1,8 @@
+dataset: binarized_pol
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.8835243974132863
+          Best test metric: 0.894439376462124
+          早停輪數: 100
+          GNN早停輪數: 100
+          耗時: 50.53 秒

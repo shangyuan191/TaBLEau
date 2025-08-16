@@ -1,0 +1,8 @@
+dataset: binarized_pol
+  模型: trompt
+    GNN階段: materialize
+          Best val metric: 0.9416931867599487
+          Best test metric: 0.9354584813117981
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 146.78 秒

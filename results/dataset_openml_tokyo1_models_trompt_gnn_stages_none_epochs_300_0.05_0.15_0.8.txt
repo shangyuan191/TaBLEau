@@ -1,0 +1,8 @@
+dataset: openml_tokyo1
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9385451674461365
+          Best test metric: 0.9536347389221191
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 7.99 秒

@@ -1,0 +1,8 @@
+dataset: jannis
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.5282643437385559
+          Best test metric: 0.527624785900116
+          早停輪數: 100
+          GNN早停輪數: 100
+          耗時: 341.68 秒

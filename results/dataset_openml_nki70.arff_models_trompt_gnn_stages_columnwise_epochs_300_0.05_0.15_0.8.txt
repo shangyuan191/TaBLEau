@@ -1,0 +1,8 @@
+dataset: openml_nki70.arff
+  模型: trompt
+    GNN階段: columnwise
+          Best val metric: 0.5306122303009033
+          Best test metric: 0.40226441621780396
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 5.79 秒

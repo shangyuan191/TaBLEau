@@ -1,0 +1,8 @@
+dataset: higgs_small
+  模型: trompt
+    GNN階段: materialize
+          Best val metric: 0.7098485231399536
+          Best test metric: 0.6968772411346436
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1252.73 秒

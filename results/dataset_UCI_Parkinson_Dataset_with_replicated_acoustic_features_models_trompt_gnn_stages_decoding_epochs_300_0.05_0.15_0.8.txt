@@ -1,0 +1,8 @@
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.7222222222222223
+          Best test metric: 0.7702365451388888
+          早停輪數: 10
+          GNN早停輪數: 10
+          耗時: 7.49 秒

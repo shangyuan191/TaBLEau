@@ -1,0 +1,8 @@
+dataset: helena
+  模型: trompt
+    GNN階段: encoding
+          Best val metric: 0.31922289729118347
+          Best test metric: 0.31782886385917664
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 469.64 秒

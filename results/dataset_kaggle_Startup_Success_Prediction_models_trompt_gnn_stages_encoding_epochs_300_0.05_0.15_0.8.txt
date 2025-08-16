@@ -1,0 +1,8 @@
+dataset: kaggle_Startup_Success_Prediction
+  模型: trompt
+    GNN階段: encoding
+          Best val metric: 0.7117633819580078
+          Best test metric: 0.7814809679985046
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 8.45 秒

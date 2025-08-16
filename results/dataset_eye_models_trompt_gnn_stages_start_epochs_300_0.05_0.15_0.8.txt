@@ -1,0 +1,8 @@
+dataset: eye
+  模型: trompt
+    GNN階段: start
+          Best val metric: 0.47775745391845703
+          Best test metric: 0.45959538221359253
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 38.31 秒

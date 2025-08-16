@@ -1,0 +1,8 @@
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.8485576923076923
+          Best test metric: 0.8971098265895954
+          早停輪數: 50
+          GNN早停輪數: 50
+          耗時: 8.74 秒

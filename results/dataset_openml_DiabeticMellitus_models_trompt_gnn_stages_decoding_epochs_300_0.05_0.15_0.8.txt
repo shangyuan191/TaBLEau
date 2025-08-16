@@ -1,0 +1,8 @@
+dataset: openml_DiabeticMellitus
+  模型: trompt
+    GNN階段: decoding
+          Best val metric: 0.5975308641975309
+          Best test metric: 0.5700971042136292
+          早停輪數: 10
+          GNN早停輪數: 10
+          耗時: 10.30 秒
