@@ -1,0 +1,960 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8852993043989419
+          Best test metric: 0.879371999608112
+          早停輪數: 25
+          耗時: 2.22秒
+
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7099412845681502
+          Best test metric: 0.7078795213123572
+          早停輪數: 26
+          耗時: 2.30秒
+
+dataset: openml_Diabetes_Data_Set
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8054767441860464
+          Best test metric: 0.8054651162790698
+          早停輪數: 30
+          耗時: 2.56秒
+
+dataset: kaggle_Penguins_Classified
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'kaggle_Penguins_Classified', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8893851681804572
+          Best test metric: 0.8761602954386667
+          早停輪數: 39
+          耗時: 2.93秒
+
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6423902894491129
+          Best test metric: 0.6353874883286648
+          早停輪數: 24
+          耗時: 2.03秒
+
+dataset: kaggle_Development_Index
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.915622173407417
+          Best test metric: 0.8981780591807728
+          早停輪數: 30
+          耗時: 2.19秒
+
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7838522066370168
+          Best test metric: 0.7698939445774889
+          早停輪數: 36
+          耗時: 2.89秒
+
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9871246400658165
+          Best test metric: 0.98475935828877
+          早停輪數: 30
+          耗時: 2.31秒
+
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.38636363636363635
+          Best test metric: 0.38636363636363635
+          早停輪數: 30
+          耗時: 2.17秒
+
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9885622179239202
+          Best test metric: 0.9866731141199226
+          早停輪數: 65
+          耗時: 5.22秒
+
+dataset: openml_nki70.arff
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5541125541125541
+          Best test metric: 0.43956043956043955
+          早停輪數: 20
+          耗時: 1.73秒
+
+dataset: openml_Pima_Indians_Diabetes
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8054767441860464
+          Best test metric: 0.8054651162790698
+          早停輪數: 30
+          耗時: 2.57秒
+
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9978125
+          Best test metric: 0.9975
+          早停輪數: 22
+          耗時: 1.82秒
+
+dataset: openml_hungarian
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_hungarian', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_HCV_data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9769881917769242
+          Best test metric: 0.9769881917769242
+          早停輪數: 56
+          耗時: 3.81秒
+
+dataset: openml_analcatdata_lawsuit
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9377326565143824
+          Best test metric: 0.9282571912013537
+          早停輪數: 17
+          耗時: 1.65秒
+
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'UCI_Cervical_cancer__Risk_Factors_', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_Audit_Data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'UCI_Audit_Data', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_User_Knowledge_Modeling
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8024026512013256
+          Best test metric: 0.7941176470588236
+          早停輪數: 67
+          耗時: 3.93秒
+
+dataset: kaggle_Audit_Data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'kaggle_Audit_Data', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: kaggle_chronic_kidney_disease
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9866666666666666
+          Best test metric: 0.9864166666666667
+          早停輪數: 21
+          耗時: 2.00秒
+
+dataset: openml_tokyo1
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.974229267611226
+          Best test metric: 0.9706191593079768
+          早停輪數: 20
+          耗時: 2.05秒
+
+dataset: kaggle_Compositions_of_Glass
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5671245015507311
+          Best test metric: 0.5671245015507311
+          早停輪數: 46
+          耗時: 3.01秒
+
+dataset: openml_Pokmon_Legendary_Data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.944078144078144
+          Best test metric: 0.9402625152625153
+          早停輪數: 30
+          耗時: 2.70秒
+
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8190930232558138
+          Best test metric: 0.8189186046511627
+          早停輪數: 33
+          耗時: 2.66秒
+
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8546006944444445
+          Best test metric: 0.8487413194444444
+          早停輪數: 18
+          耗時: 1.67秒
+
+dataset: kaggle_fitbit_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'kaggle_fitbit_dataset', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9858037010159653
+          Best test metric: 0.9746008708272859
+          早停輪數: 38
+          耗時: 2.80秒
+
+dataset: kaggle_Startup_Success_Prediction
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7905304669840811
+          Best test metric: 0.7855608457974639
+          早停輪數: 24
+          耗時: 2.34秒
+
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.924169921875
+          Best test metric: 0.9194824218750001
+          早停輪數: 24
+          耗時: 2.21秒
+
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7488802985870434
+          Best test metric: 0.7346574246867503
+          早停輪數: 55
+          耗時: 4.37秒
+
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7008146492682575
+          Best test metric: 0.7002379064234734
+          早停輪數: 25
+          耗時: 2.25秒
+
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7488802985870434
+          Best test metric: 0.7346574246867503
+          早停輪數: 55
+          耗時: 4.84秒
+
+dataset: openml_DiabeticMellitus
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6950754291659442
+          Best test metric: 0.6904803190567019
+          早停輪數: 65
+          耗時: 3.88秒
+
+dataset: kaggle_Credit_Card_Approval
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'kaggle_Credit_Card_Approval', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9323699421965318
+          Best test metric: 0.9061932287365814
+          早停輪數: 60
+          耗時: 3.43秒
+
+dataset: kaggle_Automobiles
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'kaggle_Automobiles', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_Z_Alizadeh_Sani
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'UCI_Z_Alizadeh_Sani', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_Absenteeism_at_work
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6470388596640081
+          Best test metric: 0.646586345381526
+          早停輪數: 25
+          耗時: 2.70秒
+
+dataset: kaggle_Bigg_Boss_India
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9903962703962703
+          Best test metric: 0.9890909090909091
+          早停輪數: 26
+          耗時: 2.19秒
+
+dataset: openml_analcatdata_creditscore
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_analcatdata_creditscore', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7526319834012141
+          Best test metric: 0.6949973103819257
+          早停輪數: 20
+          耗時: 1.92秒
+
+dataset: UCI_Heart_failure_clinical_records
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7627280694765358
+          Best test metric: 0.7421719384909569
+          早停輪數: 29
+          耗時: 2.25秒
+
+dataset: kaggle_Store_Data_Performance
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'kaggle_Store_Data_Performance', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7113727072010869
+          Best test metric: 0.7113727072010869
+          早停輪數: 27
+          耗時: 2.56秒
+
+dataset: kaggle_Customer_Classification
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5602550724637682
+          Best test metric: 0.5602550724637682
+          早停輪數: 36
+          耗時: 3.73秒
+
+dataset: openml_Heart_disease_classification
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_Heart_disease_classification', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: kaggle_Campus_Recruitment
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8427495291902071
+          Best test metric: 0.8022598870056498
+          早停輪數: 37
+          耗時: 2.85秒
+
+dataset: openml_fishcatch
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_fishcatch', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_wisconsin
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.709518483587988
+          Best test metric: 0.709518483587988
+          早停輪數: 19
+          耗時: 1.57秒
+
+dataset: openml_yacht_hydrodynamics
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5508307348448566
+          Best test metric: 0.5721971209980635
+          早停輪數: 22
+          耗時: 1.84秒
+
+dataset: openml_cpu
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_cpu', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_disclosure_x_noise
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6774452035478691
+          Best test metric: 0.6815471237980569
+          早停輪數: 21
+          耗時: 1.92秒
+
+dataset: openml_visualizing_environmental
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8885297070375457
+          Best test metric: 0.8885297070375457
+          早停輪數: 17
+          耗時: 1.34秒
+
+dataset: openml_rmftsa_ladata
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7634092027455232
+          Best test metric: 0.8146321695230819
+          早停輪數: 20
+          耗時: 1.88秒
+
+dataset: openml_residential_building
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_residential_building', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_lungcancer_shedden
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.727838515479631
+          Best test metric: 0.727838515479631
+          早停輪數: 18
+          耗時: 1.77秒
+
+dataset: openml_forest_fires
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_forest_fires', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_boston_corrected
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_boston_corrected', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_liver_disorders
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4863459859736609
+          Best test metric: 0.48821868428115167
+          早停輪數: 25
+          耗時: 1.79秒
+
+dataset: openml_disclosure_z
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7113022218729885
+          Best test metric: 0.7113022218729885
+          早停輪數: 18
+          耗時: 1.84秒
+
+dataset: openml_disclosure_x_tampered
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.671248027130102
+          Best test metric: 0.671248027130102
+          早停輪數: 22
+          耗時: 2.18秒
+
+dataset: openml_weather_ankara
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.41886658847559627
+          Best test metric: 0.4196232849696529
+          早停輪數: 19
+          耗時: 1.66秒
+
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.2535594558800432
+          Best test metric: 0.2601852798730374
+          早停輪數: 35
+          耗時: 2.39秒
+
+dataset: openml_EgyptianSkulls
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_EgyptianSkulls', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.26111051429819954
+          Best test metric: 0.26797013045424584
+          早停輪數: 38
+          耗時: 2.61秒
+
+dataset: openml_autoPrice
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_autoPrice', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_ELE_1
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6503508452201818
+          Best test metric: 0.6825684325955979
+          早停輪數: 31
+          耗時: 2.44秒
+
+dataset: openml_machine_cpu
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_machine_cpu', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.27430989464030614
+          Best test metric: 0.28491292312691596
+          早停輪數: 33
+          耗時: 2.32秒
+
+dataset: openml_disclosure_x_bias
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7404065588909124
+          Best test metric: 0.7404065588909124
+          早停輪數: 18
+          耗時: 1.66秒
+
+dataset: openml_Boston_house_price_data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_Boston_house_price_data', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_bodyfat
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.37774044608692015
+          Best test metric: 0.3889319819724837
+          早停輪數: 50
+          耗時: 2.89秒
+
+dataset: openml_Fish_market
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_Fish_market', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_auto_price
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_auto_price', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_DEE
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4863846334418374
+          Best test metric: 0.4866061254781029
+          早停輪數: 22
+          耗時: 1.80秒
+
+dataset: openml_pm10
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6964705808306098
+          Best test metric: 0.6964705808306098
+          早停輪數: 21
+          耗時: 1.76秒
+
+dataset: openml_meta
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_meta', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_Forest_Fire_Area
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_Forest_Fire_Area', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_HappinessRank_2015
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_HappinessRank_2015', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_boston
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_boston', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_echoMonths
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7245231273309519
+          Best test metric: 0.7281290480874516
+          早停輪數: 33
+          耗時: 1.96秒
+
+dataset: openml_strikes
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_strikes', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_no2
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6119114478874353
+          Best test metric: 0.6279007000163848
+          早停輪數: 32
+          耗時: 2.52秒
+
+dataset: openml_pharynx
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7851188704601639
+          Best test metric: 0.7932937239096277
+          早停輪數: 24
+          耗時: 1.71秒
+
+dataset: openml_The_Office_Dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_The_Office_Dataset', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_analcatdata_vineyard
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_analcatdata_vineyard', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_lowbwt
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_lowbwt', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_cps_85_wages
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.719189425271336
+          Best test metric: 0.7197005488335213
+          早停輪數: 26
+          耗時: 2.17秒
+
+dataset: openml_cleveland
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.45831992377454694
+          Best test metric: 0.464375325794263
+          早停輪數: 25
+          耗時: 1.83秒
+
+dataset: openml_cloud
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_cloud', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_fruitfly
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6616108721495382
+          Best test metric: 0.663541751353374
+          早停輪數: 18
+          耗時: 1.42秒
+
+dataset: openml_analcatdata_homerun
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: error
+          Best test metric: error
+          早停輪數: error
+          耗時: error
+          [Error]: Command '['python', 'run_t2g.py', '--dataset', 'openml_analcatdata_homerun', '--seed', '42', '--output', 'test_results', '--split_ratio', '0.05,0.15,0.80']' returned non-zero exit status 1.
+
+dataset: openml_cholesterol
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7891568571748806
+          Best test metric: 0.7948336445782057
+          早停輪數: 17
+          耗時: 1.60秒
+
+dataset: openml_Reading_Hydro
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.40763313339565443
+          Best test metric: 0.4077505958999558
+          早停輪數: 34
+          耗時: 2.78秒
+
+dataset: road_safety
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8617245177131507
+          Best test metric: 0.8617245177131507
+          早停輪數: 43
+          耗時: 160.13秒
+
+dataset: higgs_small
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7716129800007692
+          Best test metric: 0.7716129800007692
+          早停輪數: 30
+          耗時: 92.80秒
+
+dataset: bank_marketing
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8417650195536678
+          Best test metric: 0.8417650195536678
+          早停輪數: 39
+          耗時: 13.72秒
+
+dataset: MagicTelescope
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9078093709447269
+          Best test metric: 0.9078093709447269
+          早停輪數: 60
+          耗時: 25.65秒
+
+dataset: credit
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8498539436054228
+          Best test metric: 0.8474079111647119
+          早停輪數: 31
+          耗時: 16.77秒
+
+dataset: binarized_pol
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9931016583999128
+          Best test metric: 0.993093986659762
+          早停輪數: 70
+          耗時: 35.12秒
+
+dataset: helena
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.3192093103514389
+          Best test metric: 0.3160457848419196
+          早停輪數: 146
+          耗時: 324.42秒
+
+dataset: jannis
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6824010628928001
+          Best test metric: 0.681714362488244
+          早停輪數: 62
+          耗時: 211.67秒
+
+dataset: eye
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5026860212595725
+          Best test metric: 0.4950280032003658
+          早停輪數: 25
+          耗時: 13.28秒
+
+dataset: Brazilian_houses
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.20815595837508621
+          Best test metric: 0.2091077572431026
+          早停輪數: 132
+          耗時: 42.59秒
+
+dataset: medical_charges
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.2155408084084747
+          Best test metric: 0.2155408084084747
+          早停輪數: 96
+          耗時: 413.44秒
+
+dataset: nyc_taxi_green_dec_2016
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.45512553365488406
+          Best test metric: 0.45512553365488406
+          早停輪數: 57
+          耗時: 885.17秒
+
+dataset: Ailerons
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4317933495253297
+          Best test metric: 0.4317933495253297
+          早停輪數: 35
+          耗時: 14.10秒
+
+dataset: california
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.45679563412860996
+          Best test metric: 0.45679563412860996
+          早停輪數: 84
+          耗時: 50.74秒
+
+dataset: sulfur
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5106781439162761
+          Best test metric: 0.5246746820693204
+          早停輪數: 92
+          耗時: 30.05秒
+
+dataset: pol
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.17465649089221566
+          Best test metric: 0.17988798776447654
+          早停輪數: 54
+          耗時: 22.75秒
+
+dataset: diamonds
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.32879176190616566
+          Best test metric: 0.32879176190616566
+          早停輪數: 84
+          耗時: 118.64秒
+
+dataset: house_sales
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.39908805475031517
+          Best test metric: 0.39908805475031517
+          早停輪數: 54
+          耗時: 32.58秒
+
+dataset: house
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6272310603947023
+          Best test metric: 0.6272310603947023
+          早停輪數: 37
+          耗時: 23.98秒
+
+dataset: SGEMM_GPU_kernel_performance
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.08510332589190515
+          Best test metric: 0.0857272087427913
+          早停輪數: 41
+          耗時: 296.69秒
