@@ -1,0 +1,36 @@
+dataset: kaggle_Audit_Data
+  模型: scarf
+    GNN階段: none
+          Best val metric: 0.981322718922229
+          Best test metric: 0.9736161238422404
+          早停輪數: 27
+          GNN早停輪數: 0
+          耗時: 1.90 秒
+    GNN階段: start
+          Best val metric: 0.9650949173300674
+          Best test metric: 0.963832238987694
+          早停輪數: 107
+          GNN早停輪數: 0
+          耗時: 3.05 秒
+    GNN階段: materialize
+          Best val metric: 0.9589712186160442
+          Best test metric: 0.9715288950732706
+          早停輪數: 148
+          GNN早停輪數: 0
+          耗時: 2.88 秒
+    GNN階段: encoding
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.
+          耗時: 0.04 秒
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.
+          耗時: 0.01 秒
+    GNN階段: decoding
+          Best val metric: 0.981322718922229
+          Best test metric: 0.9736161238422404
+          早停輪數: 27
+          GNN早停輪數: 0
+          耗時: 0.45 秒

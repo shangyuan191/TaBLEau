@@ -1,0 +1,38 @@
+dataset: house
+  模型: scarf
+    GNN階段: none
+          Best val metric: 0.9667892456054688
+          Best test metric: 0.9578247666358948
+          早停輪數: 41
+          GNN早停輪數: 0
+          耗時: 7.76 秒
+    GNN階段: start
+          Best val metric: 0.9255340099334717
+          Best test metric: 0.9191109538078308
+          早停輪數: 71
+          GNN早停輪數: 0
+          耗時: 13.13 秒
+    GNN階段: materialize
+          Best val metric: 0.9438169598579407
+          Best test metric: 0.9445042014122009
+          早停輪數: 28
+          GNN早停輪數: 0
+          耗時: 5.80 秒
+    GNN階段: encoding
+          Best val metric: 0.9667892456054688
+          Best test metric: 0.9578247666358948
+          早停輪數: 41
+          GNN早停輪數: 0
+          耗時: 6.05 秒
+    GNN階段: columnwise
+          Best val metric: 0.9667892456054688
+          Best test metric: 0.9578247666358948
+          早停輪數: 41
+          GNN早停輪數: 0
+          耗時: 7.04 秒
+    GNN階段: decoding
+          Best val metric: 0.9667892456054688
+          Best test metric: 0.9578247666358948
+          早停輪數: 41
+          GNN早停輪數: 0
+          耗時: 6.10 秒

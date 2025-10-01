@@ -1,0 +1,14 @@
+dataset: kaggle_Audit_Data
+  模型: scarf
+    GNN階段: none
+          耗時: 1.60 秒
+    GNN階段: start
+          耗時: 0.08 秒
+    GNN階段: materialize
+          耗時: 0.06 秒
+    GNN階段: encoding
+          耗時: 0.06 秒
+    GNN階段: columnwise
+          耗時: 0.06 秒
+    GNN階段: decoding
+          耗時: 0.06 秒

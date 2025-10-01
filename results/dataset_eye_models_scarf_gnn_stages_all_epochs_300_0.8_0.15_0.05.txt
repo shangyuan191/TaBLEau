@@ -1,0 +1,14 @@
+dataset: eye
+  模型: scarf
+    GNN階段: none
+          耗時: 11.42 秒
+    GNN階段: start
+          耗時: 9.91 秒
+    GNN階段: materialize
+          耗時: 10.10 秒
+    GNN階段: encoding
+          耗時: 9.84 秒
+    GNN階段: columnwise
+          耗時: 10.93 秒
+    GNN階段: decoding
+          耗時: 9.89 秒

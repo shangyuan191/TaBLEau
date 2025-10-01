@@ -19,26 +19,17 @@ def get_device():
 def train_epoch(model, criterion, train_loader, optimizer, device):
     model.train()
     epoch_loss = 0.0
+    for x in tqdm(train_loader, desc="Training", leave=False):
+        features, targets = x  # x is a tuple (features, label)
+        features = torch.as_tensor(features).to(device)
+        # targets = torch.as_tensor(targets).to(device)  # 如果 loss 需要 label才要
+        emb_anchor, emb_positive = model(features)
 
-    for x in train_loader:
-        x = x.to(device)
-
-        # get embeddings
-        emb_anchor, emb_positive = model(x)
-
-        # compute loss
         loss = criterion(emb_anchor, emb_positive)
         loss.backward()
-
-        # update model weights
         optimizer.step()
-
-        # reset gradients
         optimizer.zero_grad()
-
-        # log progress
         epoch_loss += loss.item()
-
     return epoch_loss / len(train_loader.dataset)
 
 

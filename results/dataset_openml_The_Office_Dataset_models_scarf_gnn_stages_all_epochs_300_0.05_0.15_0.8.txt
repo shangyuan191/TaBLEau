@@ -1,0 +1,38 @@
+dataset: openml_The_Office_Dataset
+  模型: scarf
+    GNN階段: none
+          Best val metric: 0.08428575843572617
+          Best test metric: 0.6904053092002869
+          早停輪數: 8
+          GNN早停輪數: 0
+          耗時: 1.65 秒
+    GNN階段: start
+          Best val metric: 0.08428575843572617
+          Best test metric: 0.6904053092002869
+          早停輪數: 8
+          GNN早停輪數: 0
+          耗時: 0.23 秒
+    GNN階段: materialize
+          Best val metric: 0.08428575843572617
+          Best test metric: 0.6904053092002869
+          早停輪數: 8
+          GNN早停輪數: 0
+          耗時: 0.17 秒
+    GNN階段: encoding
+          Best val metric: 0.08428575843572617
+          Best test metric: 0.6904053092002869
+          早停輪數: 8
+          GNN早停輪數: 0
+          耗時: 0.19 秒
+    GNN階段: columnwise
+          Best val metric: 0.08428575843572617
+          Best test metric: 0.6904053092002869
+          早停輪數: 8
+          GNN早停輪數: 0
+          耗時: 0.18 秒
+    GNN階段: decoding
+          Best val metric: 0.08428575843572617
+          Best test metric: 0.6904053092002869
+          早停輪數: 8
+          GNN早停輪數: 0
+          耗時: 0.18 秒

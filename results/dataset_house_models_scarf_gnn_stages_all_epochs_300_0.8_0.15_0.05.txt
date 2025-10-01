@@ -1,0 +1,14 @@
+dataset: house
+  模型: scarf
+    GNN階段: none
+          耗時: 92.93 秒
+    GNN階段: start
+          耗時: 90.37 秒
+    GNN階段: materialize
+          耗時: 89.07 秒
+    GNN階段: encoding
+          耗時: 93.83 秒
+    GNN階段: columnwise
+          耗時: 91.32 秒
+    GNN階段: decoding
+          耗時: 92.49 秒
