@@ -372,6 +372,8 @@ def scarf_core_fn(material_outputs, config, task_type, gnn_stage):
     # GNN 作為子模組
     gnn_encoding = None
     gnn_columnwise = None
+    gnn_encoding_edge_index = None  # 移到這裡初始化
+    gnn_columnwise_edge_index = None  # 移到這裡初始化
     if gnn_stage == 'encoding':
         gnn_encoding = SimpleGCN(dim_hidden_encoder, gnn_hidden, dim_hidden_encoder).to(device)
         gnn_encoding_edge_index = None
@@ -399,7 +401,8 @@ def scarf_core_fn(material_outputs, config, task_type, gnn_stage):
 
     def get_edge_index(x):
         # x: (batch, dim)
-        return knn_graph(x, gnn_knn).to(device)
+        with torch.no_grad():
+            return knn_graph(x.detach(), gnn_knn).to(device)
 
 
     for epoch in range(1, epochs + 1):
@@ -412,68 +415,94 @@ def scarf_core_fn(material_outputs, config, task_type, gnn_stage):
         total_count = 0
         for features, _ in train_loader:
             features = torch.as_tensor(features).to(device)
-            # SCARF pretraining: anchor, positive
+                        # SCARF pretraining: anchor
             z = encoder(features)
+            
             # encoding GNN
             if gnn_encoding is not None:
-                if gnn_encoding_edge_index is None or gnn_encoding_edge_index.size(1) != z.size(0) * gnn_knn:
-                    gnn_encoding_edge_index = get_edge_index(z)
+                # 重新計算 edge index (使用 detach 避免梯度)
+                z_detached = z.detach()  # 用於圖構建
+                gnn_encoding_edge_index = get_edge_index(z_detached)
                 z = gnn_encoding(z, gnn_encoding_edge_index)
+            
             z = columnwise(z)
+            
             # columnwise GNN
             if gnn_columnwise is not None:
-                if gnn_columnwise_edge_index is None or gnn_columnwise_edge_index.size(1) != z.size(0) * gnn_knn:
-                    gnn_columnwise_edge_index = get_edge_index(z)
+                # 重新計算 edge index (使用 detach 避免梯度)
+                z_detached = z.detach()  # 用於圖構建
+                gnn_columnwise_edge_index = get_edge_index(z_detached)
                 z = gnn_columnwise(z, gnn_columnwise_edge_index)
+            
             anchor = decoder(z)
-            # corruption
+            
+            # corruption - 同樣的過程
             batch_size = features.size(0)
             corruption_mask = torch.rand_like(features, device=features.device) > 0.6
             x_random = torch.rand_like(features)
             features_corrupt = torch.where(corruption_mask, x_random, features)
+            
             z_c = encoder(features_corrupt)
+            
             if gnn_encoding is not None:
-                if gnn_encoding_edge_index is None or gnn_encoding_edge_index.size(1) != z_c.size(0) * gnn_knn:
-                    gnn_encoding_edge_index = get_edge_index(z_c)
+                z_c_detached = z_c.detach()
+                gnn_encoding_edge_index = get_edge_index(z_c_detached)
                 z_c = gnn_encoding(z_c, gnn_encoding_edge_index)
+            
             z_c = columnwise(z_c)
+            
             if gnn_columnwise is not None:
-                if gnn_columnwise_edge_index is None or gnn_columnwise_edge_index.size(1) != z_c.size(0) * gnn_knn:
-                    gnn_columnwise_edge_index = get_edge_index(z_c)
+                z_c_detached = z_c.detach()
+                gnn_columnwise_edge_index = get_edge_index(z_c_detached)
                 z_c = gnn_columnwise(z_c, gnn_columnwise_edge_index)
+            
             positive = decoder(z_c)
+            
             loss = ntxent_loss(anchor, positive)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+            
             epoch_loss += float(loss) * len(features)
             total_count += len(features)
+        
         epoch_loss = epoch_loss / total_count
 
         # Validation
+        # Validation - 完全重寫避免梯度問題
         encoder.eval(); columnwise.eval(); decoder.eval()
         if gnn_encoding is not None:
             gnn_encoding.eval()
         if gnn_columnwise is not None:
             gnn_columnwise.eval()
+            
         val_targets, val_preds = [], []
+        
         with torch.no_grad():
             for features, targets in val_loader:
                 features = torch.as_tensor(features).to(device)
+                
+                # Forward pass with explicit no_grad
                 z = encoder(features)
+                
                 if gnn_encoding is not None:
-                    if gnn_encoding_edge_index is None or gnn_encoding_edge_index.size(1) != z.size(0) * gnn_knn:
-                        gnn_encoding_edge_index = get_edge_index(z)
-                    z = gnn_encoding(z, gnn_encoding_edge_index)
+                    edge_idx = get_edge_index(z)
+                    z = gnn_encoding(z, edge_idx)
+                
                 z = columnwise(z)
+                
                 if gnn_columnwise is not None:
-                    if gnn_columnwise_edge_index is None or gnn_columnwise_edge_index.size(1) != z.size(0) * gnn_knn:
-                        gnn_columnwise_edge_index = get_edge_index(z)
-                    z = gnn_columnwise(z, gnn_columnwise_edge_index)
+                    edge_idx = get_edge_index(z)
+                    z = gnn_columnwise(z, edge_idx)
+                
                 preds = decoder(z)
-                preds = preds.cpu().numpy()
-                val_targets.extend(np.ravel(targets.cpu().numpy()))
-                val_preds.extend(np.atleast_2d(preds))
+                
+                # 確保完全分離梯度
+                preds_np = preds.detach().cpu().numpy()
+                targets_np = targets.detach().cpu().numpy() if hasattr(targets, 'detach') else targets.cpu().numpy()
+                
+                val_targets.extend(np.ravel(targets_np))
+                val_preds.extend(np.atleast_2d(preds_np))
         val_targets = np.array(val_targets)
         val_preds = np.array(val_preds)
         # downstream
@@ -517,24 +546,33 @@ def scarf_core_fn(material_outputs, config, task_type, gnn_stage):
         gnn_encoding.eval()
     if gnn_columnwise is not None:
         gnn_columnwise.eval()
+        
     test_targets, test_preds = [], []
+    
     with torch.no_grad():
         for features, targets in test_loader:
             features = torch.as_tensor(features).to(device)
+            
             z = encoder(features)
+            
             if gnn_encoding is not None:
-                if gnn_encoding_edge_index is None or gnn_encoding_edge_index.size(1) != z.size(0) * gnn_knn:
-                    gnn_encoding_edge_index = get_edge_index(z)
-                z = gnn_encoding(z, gnn_encoding_edge_index)
+                edge_idx = get_edge_index(z)
+                z = gnn_encoding(z, edge_idx)
+            
             z = columnwise(z)
+            
             if gnn_columnwise is not None:
-                if gnn_columnwise_edge_index is None or gnn_columnwise_edge_index.size(1) != z.size(0) * gnn_knn:
-                    gnn_columnwise_edge_index = get_edge_index(z)
-                z = gnn_columnwise(z, gnn_columnwise_edge_index)
+                edge_idx = get_edge_index(z)
+                z = gnn_columnwise(z, edge_idx)
+            
             preds = decoder(z)
-            preds = preds.cpu().numpy()
-            test_targets.extend(np.ravel(targets.cpu().numpy()))
-            test_preds.extend(np.atleast_2d(preds))
+            
+            # 確保完全分離梯度
+            preds_np = preds.detach().cpu().numpy()
+            targets_np = targets.detach().cpu().numpy() if hasattr(targets, 'detach') else targets.cpu().numpy()
+            
+            test_targets.extend(np.ravel(targets_np))
+            test_preds.extend(np.atleast_2d(preds_np))
     test_targets = np.array(test_targets)
     test_preds = np.array(test_preds)
     if task_type == 'binclass':

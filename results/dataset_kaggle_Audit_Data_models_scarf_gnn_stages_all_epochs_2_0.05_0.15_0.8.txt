@@ -1,14 +1,38 @@
 dataset: kaggle_Audit_Data
   模型: scarf
     GNN階段: none
-          耗時: 1.60 秒
+          Best val metric: 0.917942437232088
+          Best test metric: 0.8726899160760098
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 1.44 秒
     GNN階段: start
-          耗時: 0.08 秒
+          Best val metric: 0.7588793631353338
+          Best test metric: 0.7294212288559377
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 0.91 秒
     GNN階段: materialize
-          耗時: 0.06 秒
+          Best val metric: 0.8848744641763625
+          Best test metric: 0.9069063356089925
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 0.76 秒
     GNN階段: encoding
-          耗時: 0.06 秒
+          Best val metric: 0.8254745866503368
+          Best test metric: 0.8240259599078141
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 0.13 秒
     GNN階段: columnwise
-          耗時: 0.06 秒
+          Best val metric: 0.7054500918554808
+          Best test metric: 0.6726475192416402
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 0.12 秒
     GNN階段: decoding
-          耗時: 0.06 秒
+          Best val metric: 0.917942437232088
+          Best test metric: 0.8726899160760098
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 0.08 秒
