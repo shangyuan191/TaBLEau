@@ -1,38 +1,38 @@
 dataset: credit
   模型: scarf
     GNN階段: none
-          Best val metric: 0.796265995104572
-          Best test metric: 0.8140440881777873
-          早停輪數: 46
+          Best val metric: 0.8023474124620846
+          Best test metric: 0.8159264620783993
+          早停輪數: 22
           GNN早停輪數: 0
-          耗時: 6.91 秒
+          耗時: 4.29 秒
     GNN階段: start
-          Best val metric: 0.7951920176265956
-          Best test metric: 0.7968944242074891
-          早停輪數: 61
+          Best val metric: 0.8072523869348333
+          Best test metric: 0.8068854323359654
+          早停輪數: 42
           GNN早停輪數: 0
-          耗時: 9.00 秒
+          耗時: 8.11 秒
     GNN階段: materialize
-          Best val metric: 0.7926427928633163
-          Best test metric: 0.7893668859857713
-          早停輪數: 20
+          Best val metric: 0.794241507781643
+          Best test metric: 0.7902722920163293
+          早停輪數: 23
           GNN早停輪數: 0
-          耗時: 4.75 秒
+          耗時: 4.78 秒
     GNN階段: encoding
-          Best val metric: 0.796265995104572
-          Best test metric: 0.8140440881777873
-          早停輪數: 46
+          Best val metric: 0.8021568013482157
+          Best test metric: 0.8103906873775295
+          早停輪數: 53
           GNN早停輪數: 0
-          耗時: 5.25 秒
+          耗時: 10.44 秒
     GNN階段: columnwise
-          Best val metric: 0.796265995104572
-          Best test metric: 0.8140440881777873
-          早停輪數: 46
+          Best val metric: 0.79860901619208
+          Best test metric: 0.809145435312079
+          早停輪數: 40
           GNN早停輪數: 0
-          耗時: 5.32 秒
+          耗時: 8.93 秒
     GNN階段: decoding
-          Best val metric: 0.796265995104572
-          Best test metric: 0.8140440881777873
-          早停輪數: 46
-          GNN早停輪數: 0
-          耗時: 5.33 秒
+          Best val metric: 0.7905995308229945
+          Best test metric: 0.8034214724352922
+          早停輪數: 22
+          GNN早停輪數: 43
+          耗時: 4.48 秒

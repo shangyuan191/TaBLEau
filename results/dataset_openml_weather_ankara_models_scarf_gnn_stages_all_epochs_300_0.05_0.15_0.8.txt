@@ -1,0 +1,38 @@
+dataset: openml_weather_ankara
+  模型: scarf
+    GNN階段: none
+          Best val metric: 0.21559195220470428
+          Best test metric: 0.5110477209091187
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 1.57 秒
+    GNN階段: start
+          Best val metric: 0.22574923932552338
+          Best test metric: 0.3796145021915436
+          早停輪數: 17
+          GNN早停輪數: 0
+          耗時: 1.02 秒
+    GNN階段: materialize
+          Best val metric: 0.263651967048645
+          Best test metric: 0.42515623569488525
+          早停輪數: 30
+          GNN早停輪數: 0
+          耗時: 1.03 秒
+    GNN階段: encoding
+          Best val metric: 0.32157811522483826
+          Best test metric: 0.536228358745575
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 0.58 秒
+    GNN階段: columnwise
+          Best val metric: 0.34560626745224
+          Best test metric: 0.6298182010650635
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 0.51 秒
+    GNN階段: decoding
+          Best val metric: 0.7665975093841553
+          Best test metric: 0.7727029323577881
+          早停輪數: 22
+          GNN早停輪數: 42
+          耗時: 0.74 秒

@@ -1,0 +1,38 @@
+dataset: openml_visualizing_environmental
+  模型: scarf
+    GNN階段: none
+          Best val metric: 1.1268630260019563e-05
+          Best test metric: 0.6936611533164978
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 1.49 秒
+    GNN階段: start
+          Best val metric: 7.148853001126554e-06
+          Best test metric: 0.7407074570655823
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 1.18 秒
+    GNN階段: materialize
+          Best val metric: 2.7332062018103898e-06
+          Best test metric: 0.7412704229354858
+          早停輪數: 25
+          GNN早停輪數: 0
+          耗時: 1.20 秒
+    GNN階段: encoding
+          Best val metric: 0.0027349060401320457
+          Best test metric: 0.785534143447876
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.65 秒
+    GNN階段: columnwise
+          Best val metric: 0.19645875692367554
+          Best test metric: 0.7853517532348633
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 0.37 秒
+    GNN階段: decoding
+          Best val metric: 1.9215155839920044
+          Best test metric: 1.4520454406738281
+          早停輪數: 16
+          GNN早停輪數: 11
+          耗時: 0.42 秒

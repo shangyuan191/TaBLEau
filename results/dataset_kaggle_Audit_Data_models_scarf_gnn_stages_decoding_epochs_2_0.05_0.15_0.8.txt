@@ -1,0 +1,8 @@
+dataset: kaggle_Audit_Data
+  模型: scarf
+    GNN階段: decoding
+          Best val metric: 0.6338028169014085
+          Best test metric: 0.5832336826542592
+          早停輪數: 2
+          GNN早停輪數: 11
+          耗時: 1.58 秒

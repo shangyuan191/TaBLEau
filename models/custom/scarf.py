@@ -11,6 +11,7 @@ from models.custom.scarf_lib.dataset import SCARFDataset
 from models.custom.scarf_lib.utils import get_device, fix_seed, train_epoch
 import torch
 import numpy as np
+import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 from sklearn.neighbors import NearestNeighbors
 import pandas as pd
@@ -30,13 +31,27 @@ class SimpleGCN(torch.nn.Module):
 
 def knn_graph(x, k):
     x_np = x.cpu().numpy() if isinstance(x, torch.Tensor) else x
-    nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
+    N = x_np.shape[0]
+    
+    # 防護：如果樣本數太少，調整 k 值
+    if N <= 1:
+        # 只有1個或0個樣本，返回空圖
+        return torch.empty((2, 0), dtype=torch.long)
+    
+    # k 不能大於等於樣本數
+    actual_k = min(k, N - 1)
+    
+    nbrs = NearestNeighbors(n_neighbors=actual_k+1, algorithm='auto').fit(x_np)
     _, indices = nbrs.kneighbors(x_np)
     edge_index = []
-    N = x_np.shape[0]
     for i in range(N):
         for j in indices[i][1:]:
             edge_index.append([i, j])
+    
+    if len(edge_index) == 0:
+        # 如果沒有邊，返回空圖
+        return torch.empty((2, 0), dtype=torch.long)
+    
     edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous()
     return edge_index
 
@@ -538,6 +553,152 @@ def scarf_core_fn(material_outputs, config, task_type, gnn_stage):
         if early_stop_counter >= patience:
             print(f"Early stopping at epoch {epoch}")
             break
+
+    # If we want to use a graph decoder on top of learned embeddings (decoding stage),
+    # we replace the linear/logistic decoder with a supervised GNN trained on kNN graph
+    # over instance embeddings.
+    if gnn_stage == 'decoding':
+        def get_all_embeddings_and_targets_scarf(loader, encoder, columnwise, device):
+            encs, targets = [], []
+            encoder.eval(); columnwise.eval()
+            with torch.no_grad():
+                for feats, ys in loader:
+                    feats = torch.as_tensor(feats, device=device)
+                    z = encoder(feats)
+                    z = columnwise(z)
+                    encs.append(z.detach().cpu())
+                    targets.append(torch.as_tensor(ys).view(-1).cpu())
+            return torch.cat(encs, dim=0), torch.cat(targets, dim=0)
+
+        device_local = device
+        train_emb, train_y = get_all_embeddings_and_targets_scarf(train_loader, encoder, columnwise, device_local)
+        val_emb, val_y = get_all_embeddings_and_targets_scarf(val_loader, encoder, columnwise, device_local)
+        test_emb, test_y = get_all_embeddings_and_targets_scarf(test_loader, encoder, columnwise, device_local)
+
+        # Build graph on embeddings
+        all_emb = torch.cat([train_emb, val_emb, test_emb], dim=0).to(device_local)
+        all_y_np = np.concatenate([train_y.numpy(), val_y.numpy(), test_y.numpy()], axis=0)
+        k = config.get('gnn_knn', 5)
+        edge_index = knn_graph(all_emb.detach(), k).to(device_local)
+
+        n_train, n_val, n_test = len(train_emb), len(val_emb), len(test_emb)
+        N = n_train + n_val + n_test
+        train_mask = torch.zeros(N, dtype=torch.bool, device=device_local); train_mask[:n_train] = True
+        val_mask = torch.zeros(N, dtype=torch.bool, device=device_local); val_mask[n_train:n_train+n_val] = True
+        test_mask = torch.zeros(N, dtype=torch.bool, device=device_local); test_mask[n_train+n_val:] = True
+
+        # Prepare labels tensor
+        if task_type == 'binclass':
+            y_tensor = torch.tensor(all_y_np, dtype=torch.float32, device=device_local)
+            out_dim = 1
+            metric_name = 'AUC'
+        elif task_type == 'multiclass':
+            y_tensor = torch.tensor(all_y_np, dtype=torch.long, device=device_local)
+            num_classes = int(np.unique(all_y_np).shape[0])
+            out_dim = num_classes
+            metric_name = 'ACC'
+        else:
+            y_tensor = torch.tensor(all_y_np, dtype=torch.float32, device=device_local)
+            out_dim = 1
+            metric_name = 'RMSE'
+
+        in_dim = all_emb.shape[1]
+        hidden_dim = config.get('gnn_hidden', 64)
+        gnn_epochs = config.get('gnn_epochs', 200)
+        patience = config.get('gnn_patience', 10)
+
+        gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device_local)
+        opt = torch.optim.Adam(gnn.parameters(), lr=0.01)
+
+        def compute_metric(logits):
+            with torch.no_grad():
+                if task_type == 'binclass':
+                    probs = torch.sigmoid(logits.view(-1))
+                    return roc_auc_score(y_tensor[test_mask].cpu().numpy(), probs[test_mask].cpu().numpy())
+                elif task_type == 'multiclass':
+                    pred = logits.softmax(dim=-1).argmax(dim=-1)
+                    return accuracy_score(y_tensor[test_mask].cpu().numpy(), pred[test_mask].cpu().numpy())
+                else:
+                    pred = logits.view(-1)
+                    return root_mean_squared_error(y_tensor[test_mask].cpu().numpy(), pred[test_mask].cpu().numpy())
+        
+        best_val = -float('inf') if task_type in ['binclass','multiclass'] else float('inf')
+        best_val_metric, best_test_metric = None, None
+        early_stop_counter = 0
+        best_epoch = 0
+        stop_epoch = 0
+
+        for ep in range(gnn_epochs):
+            gnn.train()
+            opt.zero_grad()
+            logits = gnn(all_emb, edge_index)
+            if task_type == 'binclass':
+                loss = F.binary_cross_entropy_with_logits(logits.view(-1)[train_mask], y_tensor[train_mask])
+            elif task_type == 'multiclass':
+                loss = F.cross_entropy(logits[train_mask], y_tensor[train_mask])
+            else:
+                loss = F.mse_loss(logits.view(-1)[train_mask], y_tensor[train_mask])
+            loss.backward()
+            opt.step()
+
+            # Validation
+            gnn.eval()
+            with torch.no_grad():
+                logits = gnn(all_emb, edge_index)
+                if task_type == 'binclass':
+                    if val_mask.any():
+                        val_probs = torch.sigmoid(logits.view(-1)[val_mask]).cpu().numpy()
+                        val_score = roc_auc_score(y_tensor[val_mask].cpu().numpy(), val_probs)
+                    else:
+                        val_score = float('nan')
+                    test_score = compute_metric(logits)
+                    better = (best_val_metric is None) or (val_score > best_val)
+                elif task_type == 'multiclass':
+                    if val_mask.any():
+                        val_pred = logits[val_mask].softmax(dim=-1).argmax(dim=-1)
+                        val_score = accuracy_score(y_tensor[val_mask].cpu().numpy(), val_pred.cpu().numpy())
+                    else:
+                        val_score = float('nan')
+                    test_score = compute_metric(logits)
+                    better = (best_val_metric is None) or (val_score > best_val)
+                else:
+                    if val_mask.any():
+                        val_pred = logits.view(-1)[val_mask]
+                        val_score = root_mean_squared_error(y_tensor[val_mask].cpu().numpy(), val_pred.cpu().numpy())
+                    else:
+                        val_score = float('nan')
+                    test_score = compute_metric(logits)
+                    better = (best_val_metric is None) or (val_score < best_val)
+
+            if better and not np.isnan(val_score):
+                best_val = val_score
+                best_val_metric = val_score
+                best_test_metric = test_score
+                early_stop_counter = 0
+                best_epoch = ep + 1
+            else:
+                early_stop_counter += 1
+            if early_stop_counter >= patience:
+                stop_epoch = ep + 1
+                print(f"GNN decoding early stopping at epoch {stop_epoch} (patience {patience})")
+                break
+        else:
+            # no break: finished all epochs
+            stop_epoch = gnn_epochs
+
+        print(f"Decoding-stage best val {metric_name}: {best_val_metric:.4f}; test {best_test_metric:.4f} at epoch {best_epoch}")
+        return {
+            'best_val_metric': best_val_metric,
+            'best_test_metric': best_test_metric,
+            'metric_name': metric_name,
+            # Keep base (SCARF pretraining) early_stop consistent with the outer loop's epoch var
+            'early_stop_epochs': epoch,
+            # Report GNN decoding stop epoch (when patience triggered or max epochs reached)
+            'gnn_early_stop_epochs': stop_epoch,
+            'encoder': encoder,
+            'columnwise': columnwise,
+            'decoder': decoder,
+        }
 
     print(f"best val {metric_name}: {best_val_metric:.4f}")
     # Test
