@@ -1,0 +1,38 @@
+dataset: kaggle_Audit_Data
+  模型: subtab
+    GNN階段: none
+          Best val metric: 0.9923453766074708
+          Best test metric: 0.9893138235422011
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.57 秒
+    GNN階段: start
+          Best val metric: 0.9862216778934476
+          Best test metric: 0.9807474888028873
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.55 秒
+    GNN階段: materialize
+          Best val metric: 0.9849969381506429
+          Best test metric: 0.9801387137452711
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.78 秒
+    GNN階段: encoding
+          Best val metric: 0.9914268218003675
+          Best test metric: 0.9889115971648476
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.12 秒
+    GNN階段: columnwise
+          Best val metric: 0.9920391916717698
+          Best test metric: 0.9893899204244032
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.04 秒
+    GNN階段: decoding
+          Best val metric: 0.9954072259644826
+          Best test metric: 0.987813627864504
+          早停輪數: 0
+          GNN早停輪數: 12
+          耗時: 0.40 秒

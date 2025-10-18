@@ -1,0 +1,9 @@
+dataset: kaggle_Audit_Data
+  模型: subtab
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          早停輪數: 0
+          GNN早停輪數: 0
+          錯誤: The size of tensor a (14) must match the size of tensor b (24) at non-singleton dimension 1
+          耗時: 0.43 秒

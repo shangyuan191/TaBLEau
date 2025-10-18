@@ -63,11 +63,11 @@ def parse_args():
                         help='GNN插入階段列表 (用空格分隔多個階段名稱)')
     
     # 實驗相關參數
-    parser.add_argument('--train_ratio', type=float, default=0.05,
+    parser.add_argument('--train_ratio', type=float, default=0.80,
                         help='訓練集比例')
     parser.add_argument('--val_ratio', type=float, default=0.15,
                         help='驗證集比例')
-    parser.add_argument('--test_ratio', type=float, default=0.80,
+    parser.add_argument('--test_ratio', type=float, default=0.05,
                         help='測試集比例')
     parser.add_argument('--few_shot', action='store_true',
                         help='是否使用few-shot學習設置')
