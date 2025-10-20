@@ -93,6 +93,8 @@ def parse_args():
                         help='權重衰減')
     parser.add_argument('--patience', type=int, default=10,
                         help='早停patience')
+    parser.add_argument('--debug_metrics', action='store_true',
+                        help='啟用輕量級debug列印（回歸：y統計、naive baseline對照等）')
     
     # 其他參數
     parser.add_argument('--seed', type=int, default=42,
@@ -234,7 +236,8 @@ def run_experiment(args):
         'weight_decay': args.weight_decay,
         'patience': args.patience,
         'device': torch.device(f"cuda:{args.gpu}" if args.gpu >= 0 and torch.cuda.is_available() else "cpu"),
-        'seed': args.seed
+        'seed': args.seed,
+        'debug_metrics': args.debug_metrics,
     }
     
     # 準備GNN配置

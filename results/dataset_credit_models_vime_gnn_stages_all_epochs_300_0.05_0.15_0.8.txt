@@ -1,0 +1,38 @@
+dataset: credit
+  模型: vime
+    GNN階段: none
+          Best val metric: 0.8358796941566715
+          Best test metric: 0.8397353478084361
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 1.88 秒
+    GNN階段: start
+          Best val metric: 0.8323583208911054
+          Best test metric: 0.8338027281458106
+          早停輪數: 34
+          GNN早停輪數: 174
+          耗時: 4.16 秒
+    GNN階段: materialize
+          Best val metric: 0.8309199866094896
+          Best test metric: 0.8335338175885804
+          早停輪數: 23
+          GNN早停輪數: 171
+          耗時: 2.65 秒
+    GNN階段: encoding
+          Best val metric: 0.8367140553262282
+          Best test metric: 0.8359835299050642
+          早停輪數: 25
+          GNN早停輪數: 0
+          耗時: 4.03 秒
+    GNN階段: columnwise
+          Best val metric: 0.8384451479129514
+          Best test metric: 0.838497634455055
+          早停輪數: 37
+          GNN早停輪數: 0
+          耗時: 5.46 秒
+    GNN階段: decoding
+          Best val metric: 0.8391592236049747
+          Best test metric: 0.8429193798946262
+          早停輪數: 24
+          GNN早停輪數: 45
+          耗時: 1.80 秒

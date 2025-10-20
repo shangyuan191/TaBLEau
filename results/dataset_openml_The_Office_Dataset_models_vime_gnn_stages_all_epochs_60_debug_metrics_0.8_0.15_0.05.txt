@@ -1,0 +1,38 @@
+dataset: openml_The_Office_Dataset
+  模型: vime
+    GNN階段: none
+          Best val metric: 0.5557460472071516
+          Best test metric: 0.6969648368573557
+          早停輪數: 37
+          GNN早停輪數: 0
+          耗時: 1.35 秒
+    GNN階段: start
+          Best val metric: 0.594413944697173
+          Best test metric: 0.8045753709836418
+          早停輪數: 25
+          GNN早停輪數: 60
+          耗時: 2.28 秒
+    GNN階段: materialize
+          Best val metric: 0.6119557725385484
+          Best test metric: 0.7938667583596798
+          早停輪數: 38
+          GNN早停輪數: 50
+          耗時: 0.86 秒
+    GNN階段: encoding
+          Best val metric: 0.5670950839008387
+          Best test metric: 0.6849557418592441
+          早停輪數: 33
+          GNN早停輪數: 0
+          耗時: 0.92 秒
+    GNN階段: columnwise
+          Best val metric: 0.5279302319070004
+          Best test metric: 0.7021986302635136
+          早停輪數: 37
+          GNN早停輪數: 0
+          耗時: 1.02 秒
+    GNN階段: decoding
+          Best val metric: 0.6802126730001057
+          Best test metric: 0.8262345671258466
+          早停輪數: 44
+          GNN早停輪數: 23
+          耗時: 0.78 秒
