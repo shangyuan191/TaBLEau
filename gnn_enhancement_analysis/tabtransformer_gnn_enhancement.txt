@@ -1,0 +1,226 @@
+====================================================================================================
+GNN增強效果分析 - 模型: TABTRANSFORMER
+====================================================================================================
+
+說明：
+- 比較 tabtransformer 模型的原始表現與GNN增強變體
+- 包含5個參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
+- 共17個競爭者：大訓練集原始(1) + 小訓練集6變體(6) + 參考模型兩種ratio(10)
+- 排名越小表示表現越好
+
+
+====================================================================================================
+分類: large_datasets+datasets+binclass (包含 6 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.50        6         
+2       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         2.67        6         
+3       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         2.67        6         
+4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          3.33        6         
+5       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           5.83        6         
+6       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         6.17        6         
+7       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         6.83        6         
+8       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.67        6         
+9       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   9.83        6         
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               11.00       6         
+11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             11.67       6         
+12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               13.50       6         
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               13.67       6         
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  13.83       6         
+15      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            14.67       6         
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   15.83       6         
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               16.50       6         
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  17.50       6         
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             17.50       6         
+20      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            17.83       6         
+
+====================================================================================================
+分類: large_datasets+multiclass+numerical (包含 3 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.33        3         
+2       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         2.67        3         
+3       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.67        3         
+4       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               4.67        3         
+5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.00        3         
+6       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   5.67        3         
+7       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             6.00        3         
+8       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.33        3         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.33        3         
+10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.67       3         
+11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.33       3         
+12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  12.00       3         
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            12.33       3         
+14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   14.67       3         
+15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               15.00       3         
+16      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               15.00       3         
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             15.33       3         
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               18.67       3         
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            19.00       3         
+20      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  19.33       3         
+
+====================================================================================================
+分類: large_datasets+regression+categorical (包含 1 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             1.00        1         
+2       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             2.00        1         
+3       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.00        1         
+4       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.00        1         
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            5.00        1         
+6       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               6.00        1         
+7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               7.00        1         
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               8.00        1         
+9       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               9.00        1         
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            10.00       1         
+11      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   11.00       1         
+12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   12.00       1         
+13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  13.00       1         
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  14.00       1         
+15      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         15.00       1         
+16      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.00       1         
+17      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          17.00       1         
+18      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          18.00       1         
+19      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         19.00       1         
+20      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         20.00       1         
+
+====================================================================================================
+分類: large_datasets+regression+numerical (包含 10 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.50        10        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.00        10        
+3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            5.50        10        
+4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               5.70        10        
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  6.10        10        
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             6.30        10        
+7       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               6.80        10        
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               7.00        10        
+9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   7.10        10        
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            11.30       10        
+11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  11.50       10        
+12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             11.60       10        
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   12.10       10        
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               12.20       10        
+15      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          14.40       10        
+16      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         16.00       10        
+17      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         16.10       10        
+18      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         18.50       10        
+19      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          18.90       10        
+20      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         19.40       10        
+
+====================================================================================================
+分類: small_datasets+datasets+binclass (包含 49 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.96        49        
+2       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.80        49        
+3       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.06        49        
+4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.94        49        
+5       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               8.29        49        
+6       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.45        49        
+7       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   8.55        49        
+8       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.67        49        
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.73        49        
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               10.96       49        
+11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.53       49        
+12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             11.76       49        
+13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               12.63       49        
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            12.69       49        
+15      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  12.73       49        
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   13.76       49        
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               14.20       49        
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             14.53       49        
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  14.61       49        
+20      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            16.14       49        
+
+====================================================================================================
+分類: small_datasets+regression+balanced (包含 6 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            5.67        6         
+2       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               6.17        6         
+3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   6.33        6         
+4       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.67        6         
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               8.67        6         
+6       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.83        6         
+7       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               10.00       6         
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  10.33       6         
+9       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               10.33       6         
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  10.67       6         
+11      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         11.00       6         
+12      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         11.67       6         
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             11.67       6         
+14      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          11.83       6         
+15      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            11.83       6         
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             12.33       6         
+17      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   12.67       6         
+18      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         13.17       6         
+19      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          13.50       6         
+20      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.67       6         
+
+====================================================================================================
+分類: small_datasets+regression+categorical (包含 5 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   4.80        5         
+2       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               6.20        5         
+3       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.40        5         
+4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             7.20        5         
+5       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            7.60        5         
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               7.60        5         
+7       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.00        5         
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            8.00        5         
+9       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             8.00        5         
+10      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  8.60        5         
+11      tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.40        5         
+12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               9.60        5         
+13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.60       5         
+14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.80       5         
+15      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   13.20       5         
+16      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  13.20       5         
+17      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               13.80       5         
+18      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          17.40       5         
+19      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         18.40       5         
+20      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         19.20       5         
+
+====================================================================================================
+分類: small_datasets+regression+numerical (包含 36 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           5.03        36        
+2       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             6.64        36        
+3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               6.94        36        
+4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  7.28        36        
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   7.44        36        
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               7.67        36        
+7       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.72        36        
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            7.92        36        
+9       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.33       36        
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)            10.89       36        
+11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.44       36        
+12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)               11.56       36        
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)             11.64       36        
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                  11.94       36        
+15      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.03       36        
+16      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   12.06       36        
+17      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)               12.92       36        
+18      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.00       36        
+19      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          16.19       36        
+20      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.36       36        

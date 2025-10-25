@@ -1,0 +1,226 @@
+====================================================================================================
+GNN增強效果分析 - 模型: EXCELFORMER
+====================================================================================================
+
+說明：
+- 比較 excelformer 模型的原始表現與GNN增強變體
+- 包含5個參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
+- 共17個競爭者：大訓練集原始(1) + 小訓練集6變體(6) + 參考模型兩種ratio(10)
+- 排名越小表示表現越好
+
+
+====================================================================================================
+分類: large_datasets+datasets+binclass (包含 6 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.50        6         
+2       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         2.67        6         
+3       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         2.67        6         
+4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          3.50        6         
+5       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.33        6         
+6       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.00        6         
+7       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.67        6         
+8       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          8.83        6         
+9       excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  12.00       6         
+10      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                12.17       6         
+11      excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      12.50       6         
+12      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  13.00       6         
+13      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  13.67       6         
+14      excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      13.67       6         
+15      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  14.50       6         
+16      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     14.83       6         
+17      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               14.83       6         
+18      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                15.33       6         
+19      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     16.50       6         
+20      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               16.83       6         
+
+====================================================================================================
+分類: large_datasets+multiclass+numerical (包含 3 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.67        3         
+2       excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  3.67        3         
+3       excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      3.67        3         
+4       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.00        3         
+5       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.33        3         
+6       excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                5.00        3         
+7       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.67        3         
+8       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.00        3         
+9       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           9.00        3         
+10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.33       3         
+11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.00       3         
+12      excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      13.33       3         
+13      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               14.00       3         
+14      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  14.67       3         
+15      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                15.33       3         
+16      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     15.67       3         
+17      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  15.67       3         
+18      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     17.33       3         
+19      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               18.00       3         
+20      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  18.67       3         
+
+====================================================================================================
+分類: large_datasets+regression+categorical (包含 1 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.00        1         
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.00        1         
+3       excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  3.00        1         
+4       excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  4.00        1         
+5       excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     5.00        1         
+6       excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  6.00        1         
+7       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.00        1         
+8       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.00        1         
+9       excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               9.00        1         
+10      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     10.00       1         
+11      excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      11.00       1         
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.00       1         
+13      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.00       1         
+14      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.00       1         
+15      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.00       1         
+16      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                16.00       1         
+17      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  17.00       1         
+18      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               18.00       1         
+19      excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      19.00       1         
+20      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                20.00       1         
+
+====================================================================================================
+分類: large_datasets+regression+numerical (包含 10 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.60        10        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.60        10        
+3       excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     4.10        10        
+4       excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               5.30        10        
+5       excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     6.30        10        
+6       excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               7.10        10        
+7       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.00        10        
+8       excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  10.10       10        
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.30       10        
+10      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                10.40       10        
+11      excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      10.50       10        
+12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.70       10        
+13      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  12.50       10        
+14      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  13.80       10        
+15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.60       10        
+16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.80       10        
+17      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  15.90       10        
+18      excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      16.20       10        
+19      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                16.30       10        
+20      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.90       10        
+
+====================================================================================================
+分類: small_datasets+datasets+binclass (包含 49 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           5.12        49        
+2       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.80        49        
+3       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.12        49        
+4       excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      6.84        49        
+5       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         7.00        49        
+6       excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  8.22        49        
+7       excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                9.29        49        
+8       excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     9.59        49        
+9       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.22       49        
+10      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  10.51       49        
+11      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               10.98       49        
+12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.04       49        
+13      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.61       49        
+14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.59       49        
+15      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                12.90       49        
+16      excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      13.22       49        
+17      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     13.27       49        
+18      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  13.80       49        
+19      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               15.41       49        
+20      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  16.47       49        
+
+====================================================================================================
+分類: small_datasets+regression+balanced (包含 6 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  6.33        6         
+2       excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               7.00        6         
+3       excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     8.17        6         
+4       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.33        6         
+5       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.50        6         
+6       excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  9.17        6         
+7       excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      9.17        6         
+8       excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                10.50       6         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.67       6         
+10      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               10.83       6         
+11      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         11.50       6         
+12      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     11.50       6         
+13      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         11.67       6         
+14      excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      11.67       6         
+15      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.67       6         
+16      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  11.67       6         
+17      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                12.33       6         
+18      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.33       6         
+19      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          12.67       6         
+20      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  14.33       6         
+
+====================================================================================================
+分類: small_datasets+regression+categorical (包含 5 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                3.60        5         
+2       excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               4.40        5         
+3       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           5.00        5         
+4       excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      6.60        5         
+5       excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  7.00        5         
+6       excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  7.20        5         
+7       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.20        5         
+8       excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     7.40        5         
+9       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.80        5         
+10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.00       5         
+11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.60       5         
+12      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               11.20       5         
+13      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     11.20       5         
+14      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          14.60       5         
+15      excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      14.80       5         
+16      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  14.80       5         
+17      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.40       5         
+18      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  16.20       5         
+19      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                16.80       5         
+20      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         18.20       5         
+
+====================================================================================================
+分類: small_datasets+regression+numerical (包含 36 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           4.28        36        
+2       excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  5.44        36        
+3       excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               6.39        36        
+4       excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     6.94        36        
+5       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.19        36        
+6       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.31        36        
+7       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.78        36        
+8       excelformer(ratio=0.05/0.15/0.8, gnn_stage=none)                      8.89        36        
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.97        36        
+10      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  9.11        36        
+11      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                9.86        36        
+12      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                     12.08       36        
+13      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)               13.11       36        
+14      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                  14.00       36        
+15      excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)                      14.31       36        
+16      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                14.36       36        
+17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.53       36        
+18      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                  15.00       36        
+19      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.22       36        
+20      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.22       36        
