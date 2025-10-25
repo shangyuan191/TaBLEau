@@ -1,0 +1,927 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8757225433526011
+          Best test metric: 0.875257176447536
+          早停輪數: 19
+          耗時: 129.98秒
+
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7083501411859621
+          Best test metric: 0.7037223790955134
+          早停輪數: 25
+          耗時: 22.80秒
+
+dataset: openml_Diabetes_Data_Set
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8213953488372093
+          Best test metric: 0.813953488372093
+          早停輪數: 32
+          耗時: 30.64秒
+
+dataset: kaggle_Penguins_Classified
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9989887162018309
+          Best test metric: 0.9977645305514158
+          早停輪數: 34
+          耗時: 26.63秒
+
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8803772831619923
+          Best test metric: 0.8692983331669828
+          早停輪數: 40
+          耗時: 36.30秒
+
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6391223155929038
+          Best test metric: 0.6293183940242765
+          早停輪數: 20
+          耗時: 13.07秒
+
+dataset: kaggle_Development_Index
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9280268768574751
+          Best test metric: 0.9227290347590128
+          早停輪數: 49
+          耗時: 31.17秒
+
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8332535066712283
+          Best test metric: 0.8220321587410195
+          早停輪數: 40
+          耗時: 35.37秒
+
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9860551213492391
+          Best test metric: 0.9836898395721926
+          早停輪數: 36
+          耗時: 30.68秒
+
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4027777777777778
+          Best test metric: 0.33333333333333337
+          早停輪數: 21
+          耗時: 14.52秒
+
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9877176015473887
+          Best test metric: 0.9848936170212766
+          早停輪數: 83
+          耗時: 89.45秒
+
+dataset: openml_nki70.arff
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5541125541125542
+          Best test metric: 0.47685647685647686
+          早停輪數: 18
+          耗時: 20.48秒
+
+dataset: openml_Pima_Indians_Diabetes
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8213953488372093
+          Best test metric: 0.813953488372093
+          早停輪數: 32
+          耗時: 31.09秒
+
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9976562499999999
+          Best test metric: 0.9970312499999999
+          早停輪數: 23
+          耗時: 12.86秒
+
+dataset: openml_hungarian
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8680171406310868
+          Best test metric: 0.8340475262952863
+          早停輪數: 17
+          耗時: 13.84秒
+
+dataset: UCI_HCV_data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9726845924029024
+          Best test metric: 0.9714041826717883
+          早停輪數: 50
+          耗時: 49.14秒
+
+dataset: openml_analcatdata_lawsuit
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9634517766497462
+          Best test metric: 0.9634517766497462
+          早停輪數: 17
+          耗時: 10.21秒
+
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6267319383571327
+          Best test metric: 0.6201929874169376
+          早停輪數: 22
+          耗時: 20.92秒
+
+dataset: UCI_Audit_Data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9901291472800801
+          Best test metric: 0.9892812105926859
+          早停輪數: 45
+          耗時: 44.80秒
+
+dataset: UCI_User_Knowledge_Modeling
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7714374482187241
+          Best test metric: 0.7483429991714996
+          早停輪數: 36
+          耗時: 22.97秒
+
+dataset: kaggle_Audit_Data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9901291472800801
+          Best test metric: 0.9892812105926859
+          早停輪數: 45
+          耗時: 41.79秒
+
+dataset: kaggle_chronic_kidney_disease
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9662083333333333
+          Best test metric: 0.9510833333333334
+          早停輪數: 18
+          耗時: 16.38秒
+
+dataset: openml_tokyo1
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9749351136338571
+          Best test metric: 0.9715676399008876
+          早停輪數: 20
+          耗時: 20.15秒
+
+dataset: kaggle_Compositions_of_Glass
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5582631812140009
+          Best test metric: 0.5514695022891744
+          早停輪數: 65
+          耗時: 48.51秒
+
+dataset: openml_Pokmon_Legendary_Data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9488400488400488
+          Best test metric: 0.9401098901098901
+          早停輪數: 26
+          耗時: 24.19秒
+
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.821093023255814
+          Best test metric: 0.8198720930232557
+          早停輪數: 34
+          耗時: 33.72秒
+
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8617621527777778
+          Best test metric: 0.8539496527777778
+          早停輪數: 21
+          耗時: 17.99秒
+
+dataset: kaggle_fitbit_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7914110429447851
+          Best test metric: 0.7869987004744778
+          早停輪數: 18
+          耗時: 16.15秒
+
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9625362844702468
+          Best test metric: 0.9602231494920174
+          早停輪數: 45
+          耗時: 42.99秒
+
+dataset: kaggle_Startup_Success_Prediction
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.799050962663717
+          Best test metric: 0.7965100434441078
+          早停輪數: 25
+          耗時: 27.05秒
+
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.934765625
+          Best test metric: 0.9337158203125
+          早停輪數: 23
+          耗時: 20.03秒
+
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7477605971740868
+          Best test metric: 0.7398560383897627
+          早停輪數: 41
+          耗時: 35.00秒
+
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7551726623891573
+          Best test metric: 0.739816884146781
+          早停輪數: 21
+          耗時: 16.81秒
+
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7477605971740868
+          Best test metric: 0.7398560383897627
+          早停輪數: 41
+          耗時: 40.00秒
+
+dataset: openml_DiabeticMellitus
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7450147390324259
+          Best test metric: 0.7182243800936362
+          早停輪數: 17
+          耗時: 17.43秒
+
+dataset: kaggle_Credit_Card_Approval
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9037521618166781
+          Best test metric: 0.8942025716219265
+          早停輪數: 27
+          耗時: 21.95秒
+
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9051197357555739
+          Best test metric: 0.8858794384805946
+          早停輪數: 32
+          耗時: 25.65秒
+
+dataset: kaggle_Automobiles
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.968412109978375
+          Best test metric: 0.9670219338894038
+          早停輪數: 21
+          耗時: 16.74秒
+
+dataset: UCI_Z_Alizadeh_Sani
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8264244426094137
+          Best test metric: 0.8090834021469859
+          早停輪數: 25
+          耗時: 22.67秒
+
+dataset: UCI_Absenteeism_at_work
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.659263815826687
+          Best test metric: 0.6299210928219923
+          早停輪數: 21
+          耗時: 19.45秒
+
+dataset: kaggle_Bigg_Boss_India
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9833100233100233
+          Best test metric: 0.9806060606060605
+          早停輪數: 44
+          耗時: 43.37秒
+
+dataset: openml_analcatdata_creditscore
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9992163009404389
+          Best test metric: 0.9663009404388715
+          早停輪數: 17
+          耗時: 12.23秒
+
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7703450395758089
+          Best test metric: 0.763986013986014
+          早停輪數: 26
+          耗時: 25.22秒
+
+dataset: UCI_Heart_failure_clinical_records
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.798502111385547
+          Best test metric: 0.7378694924707195
+          早停輪數: 22
+          耗時: 18.14秒
+
+dataset: kaggle_Store_Data_Performance
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4829059829059829
+          Best test metric: 0.4829059829059829
+          早停輪數: 17
+          耗時: 13.50秒
+
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7025624150815217
+          Best test metric: 0.6472911005434783
+          早停輪數: 18
+          耗時: 19.80秒
+
+dataset: kaggle_Customer_Classification
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5724521739130435
+          Best test metric: 0.5527806763285025
+          早停輪數: 19
+          耗時: 16.10秒
+
+dataset: openml_Heart_disease_classification
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8838940586972083
+          Best test metric: 0.8627773801002147
+          早停輪數: 51
+          耗時: 43.69秒
+
+dataset: kaggle_Campus_Recruitment
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.878060263653484
+          Best test metric: 0.8543628374136849
+          早停輪數: 46
+          耗時: 37.86秒
+
+dataset: openml_fishcatch
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4502145988493118
+          Best test metric: 0.45282484228339365
+          早停輪數: 58
+          耗時: 57.03秒
+
+dataset: openml_wisconsin
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7211833790480927
+          Best test metric: 0.7254345620808683
+          早停輪數: 19
+          耗時: 18.71秒
+
+dataset: openml_yacht_hydrodynamics
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.420535852805977
+          Best test metric: 0.420535852805977
+          早停輪數: 41
+          耗時: 32.24秒
+
+dataset: openml_cpu
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5364794902206822
+          Best test metric: 0.5404842365705452
+          早停輪數: 54
+          耗時: 49.44秒
+
+dataset: openml_disclosure_x_noise
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6756781037065569
+          Best test metric: 0.6756781037065569
+          早停輪數: 24
+          耗時: 27.47秒
+
+dataset: openml_visualizing_environmental
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.886165471458168
+          Best test metric: 0.886165471458168
+          早停輪數: 17
+          耗時: 14.67秒
+
+dataset: openml_rmftsa_ladata
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7568415976140338
+          Best test metric: 0.8057141573441611
+          早停輪數: 20
+          耗時: 26.73秒
+
+dataset: openml_residential_building
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5752452572501605
+          Best test metric: 0.5848559531665243
+          早停輪數: 26
+          耗時: 36.70秒
+
+dataset: openml_lungcancer_shedden
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7354212881452832
+          Best test metric: 0.7354212881452832
+          早停輪數: 17
+          耗時: 21.60秒
+
+dataset: openml_forest_fires
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 1.3091978006314262
+          Best test metric: 1.3091978006314262
+          早停輪數: 17
+          耗時: 21.51秒
+
+dataset: openml_boston_corrected
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6168236440324772
+          Best test metric: 0.6168236440324772
+          早停輪數: 20
+          耗時: 24.27秒
+
+dataset: openml_liver_disorders
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4782661581882334
+          Best test metric: 0.4791057942772834
+          早停輪數: 21
+          耗時: 19.43秒
+
+dataset: openml_disclosure_z
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7079229244063179
+          Best test metric: 0.7079229244063179
+          早停輪數: 18
+          耗時: 27.93秒
+
+dataset: openml_disclosure_x_tampered
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6587979179415177
+          Best test metric: 0.6726936823349262
+          早停輪數: 19
+          耗時: 20.89秒
+
+dataset: openml_weather_ankara
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.3992860538928461
+          Best test metric: 0.3992860538928461
+          早停輪數: 19
+          耗時: 21.28秒
+
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.27513760387233266
+          Best test metric: 0.28999370121148066
+          早停輪數: 26
+          耗時: 20.26秒
+
+dataset: openml_EgyptianSkulls
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6721986976673898
+          Best test metric: 0.691717827250433
+          早停輪數: 40
+          耗時: 39.85秒
+
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.2764700717794491
+          Best test metric: 0.2764700717794491
+          早停輪數: 40
+          耗時: 34.02秒
+
+dataset: openml_autoPrice
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6165623237234318
+          Best test metric: 0.6199599844829832
+          早停輪數: 19
+          耗時: 21.70秒
+
+dataset: openml_ELE_1
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6619974829533004
+          Best test metric: 0.6786066949354895
+          早停輪數: 31
+          耗時: 30.19秒
+
+dataset: openml_machine_cpu
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 1.7506
+          Best test metric: 0.6008
+          早停輪數: 41
+          耗時: 33.2秒
+
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.2813331237082753
+          Best test metric: 0.28394021514192447
+          早停輪數: 39
+          耗時: 34.28秒
+
+dataset: openml_disclosure_x_bias
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7360401451597242
+          Best test metric: 0.7407235506219526
+          早停輪數: 19
+          耗時: 22.03秒
+
+dataset: openml_Boston_house_price_data
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5684823630324234
+          Best test metric: 0.5699985951279581
+          早停輪數: 19
+          耗時: 22.09秒
+
+dataset: openml_bodyfat
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4007283908136936
+          Best test metric: 0.40657175141659396
+          早停輪數: 39
+          耗時: 32.70秒
+
+dataset: openml_Fish_market
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6190885038803492
+          Best test metric: 0.6211405671475485
+          早停輪數: 40
+          耗時: 37.23秒
+
+dataset: openml_auto_price
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.648514517392092
+          Best test metric: 0.6570466502216519
+          早停輪數: 41
+          耗時: 43.88秒
+
+dataset: openml_DEE
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.47268755883763075
+          Best test metric: 0.48266576748045636
+          早停輪數: 26
+          耗時: 20.25秒
+
+dataset: openml_pm10
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7256809756531153
+          Best test metric: 0.7486101341306131
+          早停輪數: 29
+          耗時: 31.56秒
+
+dataset: openml_meta
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.0514
+          Best test metric: 0.8484
+          早停輪數: 72
+          耗時: 89.8秒
+
+dataset: openml_Forest_Fire_Area
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 1.3091978006314262
+          Best test metric: 1.3091978006314262
+          早停輪數: 17
+          耗時: 20.18秒
+
+dataset: openml_HappinessRank_2015
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.40592486285645785
+          Best test metric: 0.44204924095707143
+          早停輪數: 20
+          耗時: 21.65秒
+
+dataset: openml_boston
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5684823630324234
+          Best test metric: 0.5699985951279581
+          早停輪數: 19
+          耗時: 20.37秒
+
+dataset: openml_echoMonths
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7220204468883252
+          Best test metric: 0.7249281973668658
+          早停輪數: 65
+          耗時: 46.30秒
+
+dataset: openml_strikes
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 1.2553
+          Best test metric: 1.0518
+          早停輪數: 19
+          耗時: 23.6秒
+
+dataset: openml_no2
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6019547457072536
+          Best test metric: 0.6019547457072536
+          早停輪數: 22
+          耗時: 22.14秒
+
+dataset: openml_pharynx
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9034045854683102
+          Best test metric: 0.9034045854683102
+          早停輪數: 17
+          耗時: 15.18秒
+
+dataset: openml_The_Office_Dataset
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6212636909355995
+          Best test metric: 0.6663680240217129
+          早停輪數: 20
+          耗時: 13.91秒
+
+dataset: openml_analcatdata_vineyard
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6671568776403051
+          Best test metric: 0.6810474637478835
+          早停輪數: 29
+          耗時: 29.94秒
+
+dataset: openml_lowbwt
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5568827354767412
+          Best test metric: 0.5577833393864708
+          早停輪數: 24
+          耗時: 20.93秒
+
+dataset: openml_cps_85_wages
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.732691934126477
+          Best test metric: 0.7373260920076818
+          早停輪數: 23
+          耗時: 27.23秒
+
+dataset: openml_cleveland
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4560591845595085
+          Best test metric: 0.4618403849722258
+          早停輪數: 34
+          耗時: 30.03秒
+
+dataset: openml_cloud
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7057277802061264
+          Best test metric: 0.737687580205707
+          早停輪數: 25
+          耗時: 21.10秒
+
+dataset: openml_fruitfly
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6558391182188795
+          Best test metric: 0.6558391182188795
+          早停輪數: 18
+          耗時: 14.12秒
+
+dataset: openml_analcatdata_homerun
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7350646027238988
+          Best test metric: 0.7682827158223264
+          早停輪數: 30
+          耗時: 26.11秒
+
+dataset: openml_cholesterol
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8040171498587443
+          Best test metric: 0.8040171498587443
+          早停輪數: 20
+          耗時: 21.34秒
+
+dataset: openml_Reading_Hydro
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4004112564178552
+          Best test metric: 0.4045410784634544
+          早停輪數: 64
+          耗時: 101.87秒
+
+dataset: road_safety
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8647932199304639
+          Best test metric: 0.8647932199304639
+          早停輪數: 44
+          耗時: 2013.86秒
+
+dataset: higgs_small
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.7693532530145151
+          Best test metric: 0.7674628819851868
+          早停輪數: 34
+          耗時: 1258.38秒
+
+dataset: bank_marketing
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8390424064169452
+          Best test metric: 0.8364264359424699
+          早停輪數: 36
+          耗時: 133.84秒
+
+dataset: MagicTelescope
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9094516353830273
+          Best test metric: 0.9064708666560709
+          早停輪數: 66
+          耗時: 290.28秒
+
+dataset: credit
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.8497086164749805
+          Best test metric: 0.8497086164749805
+          早停輪數: 27
+          耗時: 138.95秒
+
+dataset: binarized_pol
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.9935891173455991
+          Best test metric: 0.9935891173455991
+          早停輪數: 81
+          耗時: 497.99秒
+
+dataset: helena
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.31993787986272215
+          Best test metric: 0.3182506662576452
+          早停輪數: 161
+          耗時: 5871.52秒
+
+dataset: jannis
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6837595354322481
+          Best test metric: 0.6837595354322481
+          早停輪數: 52
+          耗時: 4114.68秒
+
+dataset: eye
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5082866613327237
+          Best test metric: 0.5039433078066065
+          早停輪數: 27
+          耗時: 127.82秒
+
+dataset: Brazilian_houses
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.2025911203890739
+          Best test metric: 0.2042606968247439
+          早停輪數: 164
+          耗時: 1612.84秒
+
+dataset: medical_charges
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.22125326791501745
+          Best test metric: 0.22138633443193595
+          早停輪數: 39
+          耗時: 5835.10秒
+
+dataset: nyc_taxi_green_dec_2016
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.4622398680390719
+          Best test metric: 0.4622398680390719
+          早停輪數: 56
+          耗時: 30824.15秒
+
+dataset: Ailerons
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.427120820540766
+          Best test metric: 0.427120820540766
+          早停輪數: 37
+          耗時: 483.75秒
+
+dataset: california
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.45248365147542446
+          Best test metric: 0.45248365147542446
+          早停輪數: 88
+          耗時: 2237.26秒
+
+dataset: sulfur
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.5085052756241915
+          Best test metric: 0.5192924607021142
+          早停輪數: 117
+          耗時: 1027.02秒
+
+dataset: pol
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.16748287448445978
+          Best test metric: 0.16748287448445978
+          早停輪數: 67
+          耗時: 871.61秒
+
+dataset: diamonds
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.3289890780207432
+          Best test metric: 0.3289890780207432
+          早停輪數: 91
+          耗時: 4674.97秒
+
+dataset: house_sales
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.40042552962772077
+          Best test metric: 0.40042552962772077
+          早停輪數: 30
+          耗時: 622.65秒
+
+dataset: house
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.6369190085236384
+          Best test metric: 0.6369190085236384
+          早停輪數: 36
+          耗時: 556.44秒
+
+dataset: SGEMM_GPU_kernel_performance
+  模型: t2g-former
+    GNN階段: none
+          Best val metric: 0.0751128729955643
+          Best test metric: 0.0751128729955643
+          早停輪數: 89
+          耗時: 21944.47秒
