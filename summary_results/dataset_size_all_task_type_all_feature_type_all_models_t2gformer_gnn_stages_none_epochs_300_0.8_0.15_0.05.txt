@@ -5,7 +5,6 @@ dataset: kaggle_Real_Estate_DataSet
           Best test metric: 0.9878787878787879
           早停輪數: 44
           耗時: 3.66秒
-
 dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
   模型: t2g-former
     GNN階段: none
@@ -13,7 +12,6 @@ dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
           Best test metric: 0.8253968253968254
           早停輪數: 38
           耗時: 3.49秒
-
 dataset: openml_Diabetes_Data_Set
   模型: t2g-former
     GNN階段: none
@@ -21,7 +19,6 @@ dataset: openml_Diabetes_Data_Set
           Best test metric: 0.9057142857142857
           早停輪數: 26
           耗時: 3.30秒
-
 dataset: kaggle_Penguins_Classified
   模型: t2g-former
     GNN階段: none
@@ -29,7 +26,6 @@ dataset: kaggle_Penguins_Classified
           Best test metric: 1.0
           早停輪數: 19
           耗時: 2.28秒
-
 dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
   模型: t2g-former
     GNN階段: none
@@ -37,7 +33,6 @@ dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
           Best test metric: 0.8606060606060606
           早停輪數: 56
           耗時: 4.87秒
-
 dataset: UCI_Breast_Cancer_Coimbra
   模型: t2g-former
     GNN階段: none
@@ -45,7 +40,6 @@ dataset: UCI_Breast_Cancer_Coimbra
           Best test metric: 0.6666666666666667
           早停輪數: 24
           耗時: 1.87秒
-
 dataset: kaggle_Development_Index
   模型: t2g-former
     GNN階段: none
@@ -53,7 +47,6 @@ dataset: kaggle_Development_Index
           Best test metric: 1.0
           早停輪數: 28
           耗時: 2.16秒
-
 dataset: UCI_Climate_Model_Simulation_Crashes
   模型: t2g-former
     GNN階段: none
@@ -61,7 +54,6 @@ dataset: UCI_Climate_Model_Simulation_Crashes
           Best test metric: 0.96
           早停輪數: 23
           耗時: 2.49秒
-
 dataset: kaggle_Breast_Cancer_Dataset
   模型: t2g-former
     GNN階段: none
@@ -69,7 +61,6 @@ dataset: kaggle_Breast_Cancer_Dataset
           Best test metric: 1.0
           早停輪數: 20
           耗時: 2.36秒
-
 dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
   模型: t2g-former
     GNN階段: none
@@ -77,7 +68,6 @@ dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
           Best test metric: 0.5
           早停輪數: 49
           耗時: 3.00秒
-
 dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
   模型: t2g-former
     GNN階段: none
@@ -85,7 +75,6 @@ dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
           Best test metric: 0.9950738916256158
           早停輪數: 24
           耗時: 3.73秒
-
 dataset: openml_nki70.arff
   模型: t2g-former
     GNN階段: none
@@ -93,7 +82,6 @@ dataset: openml_nki70.arff
           Best test metric: 0.9333333333333333
           早停輪數: 30
           耗時: 2.12秒
-
 dataset: openml_Pima_Indians_Diabetes
   模型: t2g-former
     GNN階段: none
@@ -101,7 +89,6 @@ dataset: openml_Pima_Indians_Diabetes
           Best test metric: 0.9057142857142857
           早停輪數: 26
           耗時: 3.19秒
-
 dataset: openml_Swiss_banknote_conterfeit_detection
   模型: t2g-former
     GNN階段: none
@@ -109,7 +96,6 @@ dataset: openml_Swiss_banknote_conterfeit_detection
           Best test metric: 1.0
           早停輪數: 17
           耗時: 1.57秒
-
 dataset: openml_hungarian
   模型: t2g-former
     GNN階段: none
@@ -117,7 +103,6 @@ dataset: openml_hungarian
           Best test metric: 0.98
           早停輪數: 19
           耗時: 1.98秒
-
 dataset: UCI_HCV_data
   模型: t2g-former
     GNN階段: none
@@ -125,7 +110,6 @@ dataset: UCI_HCV_data
           Best test metric: 0.9814814814814815
           早停輪數: 33
           耗時: 3.68秒
-
 dataset: openml_analcatdata_lawsuit
   模型: t2g-former
     GNN階段: none
@@ -133,7 +117,6 @@ dataset: openml_analcatdata_lawsuit
           Best test metric: 0.9230769230769231
           早停輪數: 21
           耗時: 2.05秒
-
 dataset: UCI_Cervical_cancer__Risk_Factors_
   模型: t2g-former
     GNN階段: none
@@ -141,7 +124,6 @@ dataset: UCI_Cervical_cancer__Risk_Factors_
           Best test metric: 0.7666666666666666
           早停輪數: 43
           耗時: 5.01秒
-
 dataset: UCI_Audit_Data
   模型: t2g-former
     GNN階段: none
@@ -149,7 +131,6 @@ dataset: UCI_Audit_Data
           Best test metric: 1.0
           早停輪數: 39
           耗時: 4.66秒
-
 dataset: UCI_User_Knowledge_Modeling
   模型: t2g-former
     GNN階段: none
@@ -157,7 +138,6 @@ dataset: UCI_User_Knowledge_Modeling
           Best test metric: 1.0
           早停輪數: 41
           耗時: 2.71秒
-
 dataset: kaggle_Audit_Data
   模型: t2g-former
     GNN階段: none
@@ -165,7 +145,6 @@ dataset: kaggle_Audit_Data
           Best test metric: 1.0
           早停輪數: 39
           耗時: 4.97秒
-
 dataset: kaggle_chronic_kidney_disease
   模型: t2g-former
     GNN階段: none
@@ -173,7 +152,6 @@ dataset: kaggle_chronic_kidney_disease
           Best test metric: 1.0
           早停輪數: 33
           耗時: 3.23秒
-
 dataset: openml_tokyo1
   模型: t2g-former
     GNN階段: none
@@ -181,7 +159,6 @@ dataset: openml_tokyo1
           Best test metric: 0.9487666034155597
           早停輪數: 37
           耗時: 4.52秒
-
 dataset: kaggle_Compositions_of_Glass
   模型: t2g-former
     GNN階段: none
@@ -189,7 +166,6 @@ dataset: kaggle_Compositions_of_Glass
           Best test metric: 0.8928571428571428
           早停輪數: 100
           耗時: 5.92秒
-
 dataset: openml_Pokmon_Legendary_Data
   模型: t2g-former
     GNN階段: none
@@ -197,7 +173,6 @@ dataset: openml_Pokmon_Legendary_Data
           Best test metric: 0.9932432432432433
           早停輪數: 44
           耗時: 5.64秒
-
 dataset: kaggle_Pima_Indians_Diabetes_with_null_values
   模型: t2g-former
     GNN階段: none
@@ -205,7 +180,6 @@ dataset: kaggle_Pima_Indians_Diabetes_with_null_values
           Best test metric: 0.8971428571428571
           早停輪數: 28
           耗時: 3.51秒
-
 dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
   模型: t2g-former
     GNN階段: none
@@ -213,7 +187,6 @@ dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
           Best test metric: 1.0
           早停輪數: 79
           耗時: 4.48秒
-
 dataset: kaggle_fitbit_dataset
   模型: t2g-former
     GNN階段: none
@@ -221,7 +194,6 @@ dataset: kaggle_fitbit_dataset
           Best test metric: 0.7384615384615384
           早停輪數: 20
           耗時: 2.38秒
-
 dataset: openml_student_grade_pass_or_fail_prediction
   模型: t2g-former
     GNN階段: none
@@ -229,7 +201,6 @@ dataset: openml_student_grade_pass_or_fail_prediction
           Best test metric: 1.0
           早停輪數: 23
           耗時: 2.38秒
-
 dataset: kaggle_Startup_Success_Prediction
   模型: t2g-former
     GNN階段: none
@@ -237,7 +208,6 @@ dataset: kaggle_Startup_Success_Prediction
           Best test metric: 0.7254901960784313
           早停輪數: 22
           耗時: 3.00秒
-
 dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
   模型: t2g-former
     GNN階段: none
@@ -245,7 +215,6 @@ dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
           Best test metric: 1.0
           早停輪數: 68
           耗時: 5.70秒
-
 dataset: kaggle_The_Estonia_Disaster_Passenger_List
   模型: t2g-former
     GNN階段: none
@@ -253,7 +222,6 @@ dataset: kaggle_The_Estonia_Disaster_Passenger_List
           Best test metric: 0.6976744186046512
           早停輪數: 26
           耗時: 4.01秒
-
 dataset: kaggle_Horse_Colic_Dataset__with_test_file_
   模型: t2g-former
     GNN階段: none
@@ -261,7 +229,6 @@ dataset: kaggle_Horse_Colic_Dataset__with_test_file_
           Best test metric: 0.7407407407407407
           早停輪數: 61
           耗時: 3.66秒
-
 dataset: openml_The_Estonia_Disaster_Passenger_List
   模型: t2g-former
     GNN階段: none
@@ -269,7 +236,6 @@ dataset: openml_The_Estonia_Disaster_Passenger_List
           Best test metric: 0.6976744186046512
           早停輪數: 26
           耗時: 4.63秒
-
 dataset: openml_DiabeticMellitus
   模型: t2g-former
     GNN階段: none
@@ -277,7 +243,6 @@ dataset: openml_DiabeticMellitus
           Best test metric: 1.0
           早停輪數: 31
           耗時: 2.73秒
-
 dataset: kaggle_Credit_Card_Approval
   模型: t2g-former
     GNN階段: none
@@ -285,7 +250,6 @@ dataset: kaggle_Credit_Card_Approval
           Best test metric: 0.925925925925926
           早停輪數: 83
           耗時: 7.52秒
-
 dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
   模型: t2g-former
     GNN階段: none
@@ -293,7 +257,6 @@ dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
           Best test metric: 1.0
           早停輪數: 28
           耗時: 2.36秒
-
 dataset: kaggle_Automobiles
   模型: t2g-former
     GNN階段: none
@@ -301,7 +264,6 @@ dataset: kaggle_Automobiles
           Best test metric: 0.9666666666666667
           早停輪數: 45
           耗時: 2.73秒
-
 dataset: UCI_Z_Alizadeh_Sani
   模型: t2g-former
     GNN階段: none
@@ -309,7 +271,6 @@ dataset: UCI_Z_Alizadeh_Sani
           Best test metric: 0.9090909090909092
           早停輪數: 18
           耗時: 1.79秒
-
 dataset: UCI_Absenteeism_at_work
   模型: t2g-former
     GNN階段: none
@@ -317,7 +278,6 @@ dataset: UCI_Absenteeism_at_work
           Best test metric: 0.788888888888889
           早停輪數: 48
           耗時: 5.94秒
-
 dataset: kaggle_Bigg_Boss_India
   模型: t2g-former
     GNN階段: none
@@ -325,7 +285,6 @@ dataset: kaggle_Bigg_Boss_India
           Best test metric: 1.0
           早停輪數: 41
           耗時: 3.69秒
-
 dataset: openml_analcatdata_creditscore
   模型: t2g-former
     GNN階段: none
@@ -333,7 +292,6 @@ dataset: openml_analcatdata_creditscore
           Best test metric: 1.0
           早停輪數: 17
           耗時: 1.56秒
-
 dataset: kaggle_Analytics_Vidhya_Loan_Prediction
   模型: t2g-former
     GNN階段: none
@@ -341,7 +299,6 @@ dataset: kaggle_Analytics_Vidhya_Loan_Prediction
           Best test metric: 0.6238095238095238
           早停輪數: 25
           耗時: 2.51秒
-
 dataset: UCI_Heart_failure_clinical_records
   模型: t2g-former
     GNN階段: none
@@ -349,7 +306,6 @@ dataset: UCI_Heart_failure_clinical_records
           Best test metric: 0.96
           早停輪數: 52
           耗時: 3.13秒
-
 dataset: kaggle_Store_Data_Performance
   模型: t2g-former
     GNN階段: none
@@ -357,7 +313,6 @@ dataset: kaggle_Store_Data_Performance
           Best test metric: 0.9
           早停輪數: 68
           耗時: 3.57秒
-
 dataset: UCI_QSAR_Bioconcentration_classes_dataset
   模型: t2g-former
     GNN階段: none
@@ -365,7 +320,6 @@ dataset: UCI_QSAR_Bioconcentration_classes_dataset
           Best test metric: 0.7663043478260869
           早停輪數: 25
           耗時: 3.17秒
-
 dataset: kaggle_Customer_Classification
   模型: t2g-former
     GNN階段: none
@@ -373,7 +327,6 @@ dataset: kaggle_Customer_Classification
           Best test metric: 0.5753968253968254
           早停輪數: 25
           耗時: 3.77秒
-
 dataset: openml_Heart_disease_classification
   模型: t2g-former
     GNN階段: none
@@ -381,7 +334,6 @@ dataset: openml_Heart_disease_classification
           Best test metric: 0.8392857142857142
           早停輪數: 29
           耗時: 2.16秒
-
 dataset: kaggle_Campus_Recruitment
   模型: t2g-former
     GNN階段: none
@@ -389,7 +341,6 @@ dataset: kaggle_Campus_Recruitment
           Best test metric: 0.875
           早停輪數: 23
           耗時: 1.96秒
-
 dataset: openml_fishcatch
   模型: t2g-former
     GNN階段: none
@@ -397,7 +348,6 @@ dataset: openml_fishcatch
           Best test metric: 0.5843612817889324
           早停輪數: 44
           耗時: 2.57秒
-
 dataset: openml_wisconsin
   模型: t2g-former
     GNN階段: none
@@ -405,7 +355,6 @@ dataset: openml_wisconsin
           Best test metric: 0.6280336394779064
           早停輪數: 19
           耗時: 1.60秒
-
 dataset: openml_yacht_hydrodynamics
   模型: t2g-former
     GNN階段: none
@@ -413,7 +362,6 @@ dataset: openml_yacht_hydrodynamics
           Best test metric: 0.1561703606733974
           早停輪數: 66
           耗時: 3.48秒
-
 dataset: openml_cpu
   模型: t2g-former
     GNN階段: none
@@ -421,7 +369,6 @@ dataset: openml_cpu
           Best test metric: 0.02989025253839545
           早停輪數: 255
           耗時: 8.78秒
-
 dataset: openml_disclosure_x_noise
   模型: t2g-former
     GNN階段: none
@@ -429,7 +376,6 @@ dataset: openml_disclosure_x_noise
           Best test metric: 0.61910840638914
           早停輪數: 24
           耗時: 2.72秒
-
 dataset: openml_visualizing_environmental
   模型: t2g-former
     GNN階段: none
@@ -437,7 +383,6 @@ dataset: openml_visualizing_environmental
           Best test metric: 1.07345368804115
           早停輪數: 17
           耗時: 1.44秒
-
 dataset: openml_rmftsa_ladata
   模型: t2g-former
     GNN階段: none
@@ -445,7 +390,6 @@ dataset: openml_rmftsa_ladata
           Best test metric: 0.6357477146872704
           早停輪數: 40
           耗時: 2.96秒
-
 dataset: openml_residential_building
   模型: t2g-former
     GNN階段: none
@@ -453,7 +397,6 @@ dataset: openml_residential_building
           Best test metric: 0.37747300326549404
           早停輪數: 37
           耗時: 3.74秒
-
 dataset: openml_lungcancer_shedden
   模型: t2g-former
     GNN階段: none
@@ -461,7 +404,6 @@ dataset: openml_lungcancer_shedden
           Best test metric: 0.5464904310643004
           早停輪數: 31
           耗時: 2.96秒
-
 dataset: openml_forest_fires
   模型: t2g-former
     GNN階段: none
@@ -469,7 +411,6 @@ dataset: openml_forest_fires
           Best test metric: 0.5841346755832654
           早停輪數: 21
           耗時: 2.12秒
-
 dataset: openml_boston_corrected
   模型: t2g-former
     GNN階段: none
@@ -477,7 +418,6 @@ dataset: openml_boston_corrected
           Best test metric: 0.5736547864116494
           早停輪數: 49
           耗時: 3.80秒
-
 dataset: openml_liver_disorders
   模型: t2g-former
     GNN階段: none
@@ -485,7 +425,6 @@ dataset: openml_liver_disorders
           Best test metric: 0.8289106372577617
           早停輪數: 19
           耗時: 2.13秒
-
 dataset: openml_disclosure_z
   模型: t2g-former
     GNN階段: none
@@ -493,7 +432,6 @@ dataset: openml_disclosure_z
           Best test metric: 0.4848341737740361
           早停輪數: 18
           耗時: 2.30秒
-
 dataset: openml_disclosure_x_tampered
   模型: t2g-former
     GNN階段: none
@@ -501,7 +439,6 @@ dataset: openml_disclosure_x_tampered
           Best test metric: 0.5833769377217379
           早停輪數: 19
           耗時: 2.33秒
-
 dataset: openml_weather_ankara
   模型: t2g-former
     GNN階段: none
@@ -509,7 +446,6 @@ dataset: openml_weather_ankara
           Best test metric: 0.3056936465164755
           早停輪數: 39
           耗時: 2.31秒
-
 dataset: openml_AAPL_stock_price_2021_2022_2
   模型: t2g-former
     GNN階段: none
@@ -517,7 +453,6 @@ dataset: openml_AAPL_stock_price_2021_2022_2
           Best test metric: 0.2183431778302737
           早停輪數: 23
           耗時: 2.45秒
-
 dataset: openml_EgyptianSkulls
   模型: t2g-former
     GNN階段: none
@@ -525,7 +460,6 @@ dataset: openml_EgyptianSkulls
           Best test metric: 0.7623725100130004
           早停輪數: 27
           耗時: 1.91秒
-
 dataset: openml_AAPL_stock_price_2021_2022
   模型: t2g-former
     GNN階段: none
@@ -533,7 +467,6 @@ dataset: openml_AAPL_stock_price_2021_2022
           Best test metric: 0.2935498125592901
           早停輪數: 23
           耗時: 2.47秒
-
 dataset: openml_autoPrice
   模型: t2g-former
     GNN階段: none
@@ -541,7 +474,6 @@ dataset: openml_autoPrice
           Best test metric: 0.5082083675059361
           早停輪數: 32
           耗時: 2.23秒
-
 dataset: openml_ELE_1
   模型: t2g-former
     GNN階段: none
@@ -549,7 +481,6 @@ dataset: openml_ELE_1
           Best test metric: 0.4134833834569267
           早停輪數: 52
           耗時: 4.35秒
-
 dataset: openml_machine_cpu
   模型: t2g-former
     GNN階段: none
@@ -557,7 +488,6 @@ dataset: openml_machine_cpu
           Best test metric: 0.1657092202972059
           早停輪數: 108
           耗時: 4.61秒
-
 dataset: openml_AAPL_stock_price_2021_2022_1
   模型: t2g-former
     GNN階段: none
@@ -565,7 +495,6 @@ dataset: openml_AAPL_stock_price_2021_2022_1
           Best test metric: 0.19397145671137622
           早停輪數: 28
           耗時: 2.48秒
-
 dataset: openml_disclosure_x_bias
   模型: t2g-former
     GNN階段: none
@@ -573,7 +502,6 @@ dataset: openml_disclosure_x_bias
           Best test metric: 0.6035447184136632
           早停輪數: 18
           耗時: 2.41秒
-
 dataset: openml_Boston_house_price_data
   模型: t2g-former
     GNN階段: none
@@ -581,7 +509,6 @@ dataset: openml_Boston_house_price_data
           Best test metric: 0.5725657926210055
           早停輪數: 63
           耗時: 4.59秒
-
 dataset: openml_bodyfat
   模型: t2g-former
     GNN階段: none
@@ -589,7 +516,6 @@ dataset: openml_bodyfat
           Best test metric: 0.10934577516346833
           早停輪數: 96
           耗時: 3.87秒
-
 dataset: openml_Fish_market
   模型: t2g-former
     GNN階段: none
@@ -597,7 +523,6 @@ dataset: openml_Fish_market
           Best test metric: 0.24782490325929452
           早停輪數: 27
           耗時: 1.81秒
-
 dataset: openml_auto_price
   模型: t2g-former
     GNN階段: none
@@ -605,7 +530,6 @@ dataset: openml_auto_price
           Best test metric: 0.6490260971897839
           早停輪數: 25
           耗時: 1.74秒
-
 dataset: openml_DEE
   模型: t2g-former
     GNN階段: none
@@ -613,7 +537,6 @@ dataset: openml_DEE
           Best test metric: 0.46319153482424685
           早停輪數: 98
           耗時: 6.39秒
-
 dataset: openml_pm10
   模型: t2g-former
     GNN階段: none
@@ -621,7 +544,6 @@ dataset: openml_pm10
           Best test metric: 0.5358513887086976
           早停輪數: 25
           耗時: 2.39秒
-
 dataset: openml_meta
   模型: t2g-former
     GNN階段: none
@@ -629,7 +551,6 @@ dataset: openml_meta
           Best test metric: 0.17709521310321732
           早停輪數: 23
           耗時: 2.33秒
-
 dataset: openml_Forest_Fire_Area
   模型: t2g-former
     GNN階段: none
@@ -637,7 +558,6 @@ dataset: openml_Forest_Fire_Area
           Best test metric: 0.5841346755832654
           早停輪數: 21
           耗時: 2.46秒
-
 dataset: openml_HappinessRank_2015
   模型: t2g-former
     GNN階段: none
@@ -645,7 +565,6 @@ dataset: openml_HappinessRank_2015
           Best test metric: 0.20221192227931353
           早停輪數: 50
           耗時: 2.49秒
-
 dataset: openml_boston
   模型: t2g-former
     GNN階段: none
@@ -653,7 +572,6 @@ dataset: openml_boston
           Best test metric: 0.5725657926210055
           早停輪數: 63
           耗時: 4.29秒
-
 dataset: openml_echoMonths
   模型: t2g-former
     GNN階段: none
@@ -661,7 +579,6 @@ dataset: openml_echoMonths
           Best test metric: 0.3458503881303185
           早停輪數: 19
           耗時: 1.60秒
-
 dataset: openml_strikes
   模型: t2g-former
     GNN階段: none
@@ -669,7 +586,6 @@ dataset: openml_strikes
           Best test metric: 2.6175381050566062
           早停輪數: 35
           耗時: 3.31秒
-
 dataset: openml_no2
   模型: t2g-former
     GNN階段: none
@@ -677,7 +593,6 @@ dataset: openml_no2
           Best test metric: 0.4252447966838142
           早停輪數: 20
           耗時: 2.16秒
-
 dataset: openml_pharynx
   模型: t2g-former
     GNN階段: none
@@ -685,7 +600,6 @@ dataset: openml_pharynx
           Best test metric: 0.43962999537490655
           早停輪數: 20
           耗時: 1.70秒
-
 dataset: openml_The_Office_Dataset
   模型: t2g-former
     GNN階段: none
@@ -693,7 +607,6 @@ dataset: openml_The_Office_Dataset
           Best test metric: 0.4804790953359261
           早停輪數: 17
           耗時: 1.57秒
-
 dataset: openml_analcatdata_vineyard
   模型: t2g-former
     GNN階段: none
@@ -701,7 +614,6 @@ dataset: openml_analcatdata_vineyard
           Best test metric: 0.4210428149355727
           早停輪數: 32
           耗時: 3.09秒
-
 dataset: openml_lowbwt
   模型: t2g-former
     GNN階段: none
@@ -709,7 +621,6 @@ dataset: openml_lowbwt
           Best test metric: 0.7245580742442398
           早停輪數: 21
           耗時: 1.72秒
-
 dataset: openml_cps_85_wages
   模型: t2g-former
     GNN階段: none
@@ -717,7 +628,6 @@ dataset: openml_cps_85_wages
           Best test metric: 0.5114704504707172
           早停輪數: 20
           耗時: 2.31秒
-
 dataset: openml_cleveland
   模型: t2g-former
     GNN階段: none
@@ -725,7 +635,6 @@ dataset: openml_cleveland
           Best test metric: 0.5277871001825833
           早停輪數: 23
           耗時: 1.85秒
-
 dataset: openml_cloud
   模型: t2g-former
     GNN階段: none
@@ -733,7 +642,6 @@ dataset: openml_cloud
           Best test metric: 0.27686501099400457
           早停輪數: 17
           耗時: 1.43秒
-
 dataset: openml_fruitfly
   模型: t2g-former
     GNN階段: none
@@ -741,7 +649,6 @@ dataset: openml_fruitfly
           Best test metric: 0.824978836711525
           早停輪數: 33
           耗時: 1.93秒
-
 dataset: openml_analcatdata_homerun
   模型: t2g-former
     GNN階段: none
@@ -749,7 +656,6 @@ dataset: openml_analcatdata_homerun
           Best test metric: 0.871203960139611
           早停輪數: 18
           耗時: 1.58秒
-
 dataset: openml_cholesterol
   模型: t2g-former
     GNN階段: none
@@ -757,7 +663,6 @@ dataset: openml_cholesterol
           Best test metric: 0.6406890173816865
           早停輪數: 35
           耗時: 2.13秒
-
 dataset: openml_Reading_Hydro
   模型: t2g-former
     GNN階段: none
@@ -765,7 +670,6 @@ dataset: openml_Reading_Hydro
           Best test metric: 0.36716629579270155
           早停輪數: 102
           耗時: 12.83秒
-
 dataset: road_safety
   模型: t2g-former
     GNN階段: none
@@ -773,7 +677,6 @@ dataset: road_safety
           Best test metric: 0.8828225061881901
           早停輪數: 22
           耗時: 208.49秒
-
 dataset: higgs_small
   模型: t2g-former
     GNN階段: none
@@ -781,7 +684,6 @@ dataset: higgs_small
           Best test metric: 0.8044695992328692
           早停輪數: 47
           耗時: 384.41秒
-
 dataset: bank_marketing
   模型: t2g-former
     GNN階段: none
@@ -789,7 +691,6 @@ dataset: bank_marketing
           Best test metric: 0.8775300171526587
           早停輪數: 66
           耗時: 63.20秒
-
 dataset: MagicTelescope
   模型: t2g-former
     GNN階段: none
@@ -797,7 +698,6 @@ dataset: MagicTelescope
           Best test metric: 0.9438734471355796
           早停輪數: 60
           耗時: 69.58秒
-
 dataset: credit
   模型: t2g-former
     GNN階段: none
@@ -805,7 +705,6 @@ dataset: credit
           Best test metric: 0.8514399853483208
           早停輪數: 28
           耗時: 39.53秒
-
 dataset: binarized_pol
   模型: t2g-former
     GNN階段: none
@@ -813,7 +712,6 @@ dataset: binarized_pol
           Best test metric: 0.9987728692547969
           早停輪數: 34
           耗時: 43.98秒
-
 dataset: helena
   模型: t2g-former
     GNN階段: none
@@ -821,7 +719,6 @@ dataset: helena
           Best test metric: 0.405521472392638
           早停輪數: 111
           耗時: 621.78秒
-
 dataset: jannis
   模型: t2g-former
     GNN階段: none
@@ -829,7 +726,6 @@ dataset: jannis
           Best test metric: 0.7365655600668737
           早停輪數: 54
           耗時: 539.48秒
-
 dataset: eye
   模型: t2g-former
     GNN階段: none
@@ -837,7 +733,6 @@ dataset: eye
           Best test metric: 0.7879341864716636
           早停輪數: 131
           耗時: 162.34秒
-
 dataset: Brazilian_houses
   模型: t2g-former
     GNN階段: none
@@ -845,7 +740,6 @@ dataset: Brazilian_houses
           Best test metric: 0.14670763944835707
           早停輪數: 171
           耗時: 155.29秒
-
 dataset: medical_charges
   模型: t2g-former
     GNN階段: none
@@ -853,7 +747,6 @@ dataset: medical_charges
           Best test metric: 0.21863104974453523
           早停輪數: 59
           耗時: 758.32秒
-
 dataset: nyc_taxi_green_dec_2016
   模型: t2g-former
     GNN階段: none
@@ -861,7 +754,6 @@ dataset: nyc_taxi_green_dec_2016
           Best test metric: 0.47772403788635237
           早停輪數: 34
           耗時: 1651.22秒
-
 dataset: Ailerons
   模型: t2g-former
     GNN階段: none
@@ -869,7 +761,6 @@ dataset: Ailerons
           Best test metric: 0.3975534083048866
           早停輪數: 44
           耗時: 53.00秒
-
 dataset: california
   模型: t2g-former
     GNN階段: none
@@ -877,7 +768,6 @@ dataset: california
           Best test metric: 0.34841418194791857
           早停輪數: 118
           耗時: 207.74秒
-
 dataset: sulfur
   模型: t2g-former
     GNN階段: none
@@ -885,7 +775,6 @@ dataset: sulfur
           Best test metric: 0.21231760022597468
           早停輪數: 130
           耗時: 110.01秒
-
 dataset: pol
   模型: t2g-former
     GNN階段: none
@@ -893,7 +782,6 @@ dataset: pol
           Best test metric: 0.1019864375902074
           早停輪數: 60
           耗時: 73.87秒
-
 dataset: diamonds
   模型: t2g-former
     GNN階段: none
@@ -901,7 +789,6 @@ dataset: diamonds
           Best test metric: 0.3195752818352784
           早停輪數: 66
           耗時: 299.96秒
-
 dataset: house_sales
   模型: t2g-former
     GNN階段: none
@@ -909,7 +796,6 @@ dataset: house_sales
           Best test metric: 0.38241107940732844
           早停輪數: 52
           耗時: 93.61秒
-
 dataset: house
   模型: t2g-former
     GNN階段: none
@@ -917,7 +803,6 @@ dataset: house
           Best test metric: 0.5893200820871525
           早停輪數: 42
           耗時: 81.79秒
-
 dataset: SGEMM_GPU_kernel_performance
   模型: t2g-former
     GNN階段: none

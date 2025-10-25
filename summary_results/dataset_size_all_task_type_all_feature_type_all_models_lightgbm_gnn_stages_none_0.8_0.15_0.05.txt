@@ -1,0 +1,580 @@
+dataset: kaggle_Real_Estate_DataSet
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9311294765840221
+          Best test metric: 0.9696969696969697
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8215873015873015
+          Best test metric: 0.9153439153439153
+dataset: openml_Diabetes_Data_Set
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.812828947368421
+          Best test metric: 0.8371428571428572
+dataset: kaggle_Penguins_Classified
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9985795454545455
+          Best test metric: 0.9939393939393939
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.5555555555555556
+dataset: kaggle_Development_Index
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9845559845559846
+          Best test metric: 0.98
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.75
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9978005865102639
+          Best test metric: 0.9950738916256158
+dataset: openml_nki70.arff
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.8666666666666667
+dataset: openml_Pima_Indians_Diabetes
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8167763157894736
+          Best test metric: 0.8742857142857142
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: openml_hungarian
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9299568965517242
+          Best test metric: 1.0
+dataset: UCI_HCV_data
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: openml_analcatdata_lawsuit
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8119834710743802
+          Best test metric: 0.43333333333333335
+dataset: UCI_Audit_Data
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: UCI_User_Knowledge_Modeling
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9689349112426037
+          Best test metric: 1.0
+dataset: kaggle_Audit_Data
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_chronic_kidney_disease
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: openml_tokyo1
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9826505016722408
+          Best test metric: 0.9411764705882353
+dataset: kaggle_Compositions_of_Glass
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9206349206349207
+          Best test metric: 0.7857142857142857
+dataset: openml_Pokmon_Legendary_Data
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9981818181818183
+          Best test metric: 0.9864864864864865
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8350328947368421
+          Best test metric: 0.8385714285714286
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9444444444444444
+          Best test metric: 1.0
+dataset: kaggle_fitbit_dataset
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8039049235993209
+          Best test metric: 0.7923076923076923
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Startup_Success_Prediction
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.845124716553288
+          Best test metric: 0.7647058823529412
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8686755952380952
+          Best test metric: 0.6295681063122924
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8703703703703703
+          Best test metric: 0.6851851851851852
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8796502976190477
+          Best test metric: 0.6345514950166113
+dataset: openml_DiabeticMellitus
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Credit_Card_Approval
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9174603174603175
+          Best test metric: 0.9814814814814814
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Automobiles
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9911111111111112
+          Best test metric: 1.0
+dataset: UCI_Z_Alizadeh_Sani
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9463869463869464
+          Best test metric: 0.9090909090909091
+dataset: UCI_Absenteeism_at_work
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8098790322580646
+          Best test metric: 0.8222222222222222
+dataset: kaggle_Bigg_Boss_India
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.995
+          Best test metric: 1.0
+dataset: openml_analcatdata_creditscore
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7303340517241379
+          Best test metric: 0.5666666666666667
+dataset: UCI_Heart_failure_clinical_records
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9331797235023042
+          Best test metric: 0.96
+dataset: kaggle_Store_Data_Performance
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7444444444444445
+          Best test metric: 0.6
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7765700483091786
+          Best test metric: 0.8070652173913043
+dataset: kaggle_Customer_Classification
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.724426807760141
+          Best test metric: 0.5535714285714286
+dataset: openml_Heart_disease_classification
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9097222222222222
+          Best test metric: 0.8392857142857143
+dataset: kaggle_Campus_Recruitment
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9782608695652174
+          Best test metric: 0.9583333333333334
+dataset: openml_fishcatch
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.08899022435065489
+          Best test metric: 0.137007079115173
+dataset: openml_wisconsin
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.799503481609957
+          Best test metric: 0.7871024389118819
+dataset: openml_yacht_hydrodynamics
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.021333792732034517
+          Best test metric: 0.06864052491283901
+dataset: openml_cpu
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.4881188465797803
+          Best test metric: 0.29102741199518994
+dataset: openml_disclosure_x_noise
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9102665764109926
+          Best test metric: 0.8683134179550457
+dataset: openml_visualizing_environmental
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0168555559463213
+          Best test metric: 1.1745264039130419
+dataset: openml_rmftsa_ladata
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6371761284383181
+          Best test metric: 0.7759805583205234
+dataset: openml_residential_building
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.23237831326010935
+          Best test metric: 0.09442449369782711
+dataset: openml_lungcancer_shedden
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.0212464244612762
+          Best test metric: 0.6683346852944659
+dataset: openml_forest_fires
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.43651347063729307
+          Best test metric: 0.597492488396298
+dataset: openml_boston_corrected
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.3892397514666633
+          Best test metric: 0.5339650533685062
+dataset: openml_liver_disorders
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7368258066009081
+          Best test metric: 1.2861795184121803
+dataset: openml_disclosure_z
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.890657616834444
+          Best test metric: 0.8594210858798974
+dataset: openml_disclosure_x_tampered
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8882806555019116
+          Best test metric: 0.862955628577425
+dataset: openml_weather_ankara
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.09889932026265451
+          Best test metric: 0.08925003967957687
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.025590032037426876
+          Best test metric: 0.024112571045088512
+dataset: openml_EgyptianSkulls
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7467867165896162
+          Best test metric: 1.037463109968466
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.04089041978015095
+          Best test metric: 0.027159824506029114
+dataset: openml_autoPrice
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.3436204853857531
+          Best test metric: 0.6592011480591452
+dataset: openml_ELE_1
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6223874556338818
+          Best test metric: 0.6054249627077278
+dataset: openml_machine_cpu
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.4555739857724755
+          Best test metric: 0.7593797679192203
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.02212026377061575
+          Best test metric: 0.019339135705577482
+dataset: openml_disclosure_x_bias
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8298374089222688
+          Best test metric: 0.8566035060290478
+dataset: openml_Boston_house_price_data
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.24745276426305124
+          Best test metric: 0.7073067241242048
+dataset: openml_bodyfat
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.11039996668401529
+          Best test metric: 0.08916734425128008
+dataset: openml_Fish_market
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.09326724168467544
+          Best test metric: 0.22765728873713467
+dataset: openml_auto_price
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.29745851156434305
+          Best test metric: 0.6065539755512405
+dataset: openml_DEE
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.42598137788055945
+          Best test metric: 0.29709024952322854
+dataset: openml_pm10
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8345246663928549
+          Best test metric: 0.5962054198439622
+dataset: openml_meta
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.12014759550435403
+          Best test metric: 0.1390757392847412
+dataset: openml_Forest_Fire_Area
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.4367428209771919
+          Best test metric: 0.7439405436226103
+dataset: openml_HappinessRank_2015
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.08044282458825104
+          Best test metric: 0.05538071056974881
+dataset: openml_boston
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.25196007881457455
+          Best test metric: 0.7181045620418196
+dataset: openml_echoMonths
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.5319323308616939
+          Best test metric: 0.5615412361444202
+dataset: openml_strikes
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6701225266805726
+          Best test metric: 2.925368583186678
+dataset: openml_no2
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6163878348545629
+          Best test metric: 0.7545190736789638
+dataset: openml_pharynx
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6156989074921679
+          Best test metric: 0.46894734645828423
+dataset: openml_The_Office_Dataset
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.5915009607712762
+          Best test metric: 0.5745156866156009
+dataset: openml_analcatdata_vineyard
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.4054814346841987
+          Best test metric: 0.38650049407415005
+dataset: openml_lowbwt
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.5470830336718738
+          Best test metric: 0.6463455376141696
+dataset: openml_cps_85_wages
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7386052674920649
+          Best test metric: 0.6072058430944899
+dataset: openml_cleveland
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6991381037328602
+          Best test metric: 1.0010593928079368
+dataset: openml_cloud
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.22375476173061018
+          Best test metric: 0.27004248348225696
+dataset: openml_fruitfly
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 1.068836710888666
+          Best test metric: 1.0848498497346017
+dataset: openml_analcatdata_homerun
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8635747972391664
+          Best test metric: 1.2569151980317828
+dataset: openml_cholesterol
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9969363891796983
+          Best test metric: 0.9953685674896154
+dataset: openml_Reading_Hydro
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.14941865482270145
+          Best test metric: 0.14354419818257094
+dataset: road_safety
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.880457455668724
+          Best test metric: 0.8833632765330257
+dataset: higgs_small
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8131763529693654
+          Best test metric: 0.7990336407733278
+dataset: bank_marketing
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8941049040565909
+          Best test metric: 0.8730989136649513
+dataset: MagicTelescope
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9429530134695516
+          Best test metric: 0.9273929752435428
+dataset: credit
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.8575321332183584
+          Best test metric: 0.8509248872507497
+dataset: binarized_pol
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.9994581500605597
+          Best test metric: 0.9994183081532478
+dataset: helena
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.3741308793456033
+          Best test metric: 0.37668711656441717
+dataset: jannis
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7167197452229299
+          Best test metric: 0.7126821112968713
+dataset: eye
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.7251675807434491
+          Best test metric: 0.7221206581352834
+dataset: Brazilian_houses
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.09092744084800153
+          Best test metric: 0.1081313397540808
+dataset: medical_charges
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.14255190776740984
+          Best test metric: 0.14206326504202715
+dataset: nyc_taxi_green_dec_2016
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6389295426823289
+          Best test metric: 0.6362396310660028
+dataset: Ailerons
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.38582527494374497
+          Best test metric: 0.41502484944031737
+dataset: california
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.38774754927802363
+          Best test metric: 0.3531887300650683
+dataset: sulfur
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.3389727492555259
+          Best test metric: 0.25950884422186093
+dataset: pol
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.12260578128694048
+          Best test metric: 0.12736863691125747
+dataset: diamonds
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.22836458430564904
+          Best test metric: 0.22381101435202003
+dataset: house_sales
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.3283322608935057
+          Best test metric: 0.3562333660535978
+dataset: house
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.6060985452538286
+          Best test metric: 0.6166259870009296
+dataset: SGEMM_GPU_kernel_performance
+  模型: lightgbm
+    GNN階段: none
+          Best val metric: 0.015556426626667643
+          Best test metric: 0.016287564888790542
