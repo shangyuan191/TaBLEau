@@ -5,36 +5,35 @@ GNN增強效果分析 - 模型: TROMPT
 說明：
 - 比較 trompt 模型的原始表現與GNN增強變體
 - 包含5個參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
-- 共17個競爭者：大訓練集原始(1) + 小訓練集6變體(6) + 參考模型兩種ratio(10)
+- 共17個競爭者：
+  * trompt的7個配置：大訓練集baseline(1) + 小訓練集6變體(6)
+  * 5個參考模型的兩種ratio：每個模型2個配置(10)
 - 排名越小表示表現越好
 
 
 ====================================================================================================
-分類: large_datasets+datasets+binclass (包含 6 個資料集)
+分類: large_datasets+binclass+numerical (包含 6 個資料集)
 ====================================================================================================
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.50        6         
-2       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.83        6         
-3       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.83        6         
-4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.50        6         
-5       trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     5.67        6         
-6       trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       6.50        6         
-7       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.50        6         
-8       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.83        6         
-9       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.33       6         
-10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.00       6         
-11      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       11.33       6         
-12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.00       6         
-13      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    12.50       6         
-14      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           13.17       6         
-15      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          13.33       6         
-16      trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          13.67       6         
-17      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          16.00       6         
-18      trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       17.33       6         
-19      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    17.67       6         
-20      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       19.50       6         
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.83        6         
+2       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       2.83        6         
+3       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.67        6         
+4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.83        6         
+5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.17        6         
+6       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.00        6         
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.17        6         
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.67        6         
+9       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     9.83        6         
+10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.83        6         
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       10.50       6         
+12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.67       6         
+13      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           12.17       6         
+14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.17       6         
+15      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          14.17       6         
+16      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    15.50       6         
+17      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       17.00       6         
 
 ====================================================================================================
 分類: large_datasets+multiclass+numerical (包含 3 個資料集)
@@ -42,26 +41,23 @@ GNN增強效果分析 - 模型: TROMPT
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       2.00        3         
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.67        3         
+1       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       1.33        3         
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.33        3         
 3       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.33        3         
 4       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.00        3         
 5       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.33        3         
-6       trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     5.33        3         
-7       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.33        3         
-8       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       10.33       3         
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.00       3         
-10      tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           11.00       3         
-11      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           11.33       3         
-12      trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          12.33       3         
-13      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.33       3         
-14      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     13.00       3         
-15      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         13.00       3         
-16      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    13.67       3         
-17      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          17.33       3         
-18      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    17.67       3         
-19      trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       19.00       3         
-20      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       20.00       3         
+6       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.67        3         
+7       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.00        3         
+8       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       9.33        3         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.00       3         
+10      tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.00       3         
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.33       3         
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.33       3         
+13      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     12.00       3         
+14      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.00       3         
+15      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          15.33       3         
+16      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    15.67       3         
+17      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       17.00       3         
 
 ====================================================================================================
 分類: large_datasets+regression+categorical (包含 1 個資料集)
@@ -70,25 +66,22 @@ GNN增強效果分析 - 模型: TROMPT
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
 1       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       1.00        1         
-2       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       2.00        1         
-3       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.00        1         
-4       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.00        1         
-5       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    5.00        1         
-6       trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    6.00        1         
+2       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           2.00        1         
+3       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.00        1         
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    4.00        1         
+5       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       5.00        1         
+6       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       6.00        1         
 7       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          7.00        1         
-8       trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          8.00        1         
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.00        1         
-10      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         10.00       1         
-11      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       11.00       1         
-12      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           12.00       1         
-13      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     13.00       1         
-14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          14.00       1         
-15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.00       1         
-16      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         16.00       1         
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.00       1         
-18      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     18.00       1         
-19      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           19.00       1         
-20      trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       20.00       1         
+8       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.00        1         
+9       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.00        1         
+10      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       10.00       1         
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           11.00       1         
+12      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     12.00       1         
+13      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          13.00       1         
+14      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          14.00       1         
+15      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         15.00       1         
+16      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.00       1         
+17      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           17.00       1         
 
 ====================================================================================================
 分類: large_datasets+regression+numerical (包含 10 個資料集)
@@ -96,53 +89,95 @@ GNN增強效果分析 - 模型: TROMPT
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           2.10        10        
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.30        10        
-3       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       2.60        10        
-4       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       3.00        10        
-5       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    5.50        10        
-6       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          5.80        10        
-7       trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          8.70        10        
-8       trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    9.60        10        
-9       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       9.90        10        
-10      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.40       10        
-11      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.50       10        
-12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.80       10        
-13      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.20       10        
-14      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.30       10        
-15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.20       10        
-16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          16.50       10        
-17      trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       17.50       10        
-18      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.80       10        
-19      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     18.00       10        
-20      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           18.30       10        
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.70        10        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.80        10        
+3       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       2.50        10        
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    4.90        10        
+5       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          5.10        10        
+6       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       8.40        10        
+7       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     8.70        10        
+8       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.80        10        
+9       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          8.80        10        
+10      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.90        10        
+11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.30       10        
+12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.30       10        
+13      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       13.00       10        
+14      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.90       10        
+15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          14.10       10        
+16      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.20       10        
+17      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           15.60       10        
 
 ====================================================================================================
-分類: small_datasets+datasets+binclass (包含 49 個資料集)
+分類: small_datasets+binclass+balanced (包含 14 個資料集)
 ====================================================================================================
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           5.67        49        
-2       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.12        49        
-3       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         6.47        49        
-4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.63        49        
-5       trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       6.76        49        
-6       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         7.61        49        
-7       trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     8.47        49        
-8       trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    9.06        49        
-9       trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          9.73        49        
-10      tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.86       49        
-11      trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       11.20       49        
-12      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       11.78       49        
-13      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     12.18       49        
-14      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           12.24       49        
-15      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.31       49        
-16      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.69       49        
-17      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          14.02       49        
-18      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          14.08       49        
-19      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    15.33       49        
-20      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       16.78       49        
+1       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.93        14        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.64        14        
+3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.79        14        
+4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.71        14        
+5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.86        14        
+6       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.57        14        
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.14        14        
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.50        14        
+9       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.29       14        
+10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.50       14        
+11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.64       14        
+12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.64       14        
+13      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.86       14        
+14      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       11.86       14        
+15      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          12.07       14        
+16      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       12.29       14        
+17      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    13.71       14        
+
+====================================================================================================
+分類: small_datasets+binclass+categorical (包含 7 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       6.29        7         
+2       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.86        7         
+3       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.29        7         
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       7.29        7         
+5       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.29        7         
+6       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.71        7         
+7       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     7.71        7         
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       7.86        7         
+9       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.00        7         
+10      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          8.57        7         
+11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.29        7         
+12      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.57        7         
+13      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.57        7         
+14      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         10.29       7         
+15      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          11.14       7         
+16      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    13.86       7         
+17      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       14.43       7         
+
+====================================================================================================
+分類: small_datasets+binclass+numerical (包含 28 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        資料集數      
+----------------------------------------------------------------------------------------------------
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.43        28        
+2       trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.93        28        
+3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.32        28        
+4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          4.75        28        
+5       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.04        28        
+6       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.75        28        
+7       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       9.29        28        
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.57        28        
+9       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           9.86        28        
+10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.29       28        
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.61       28        
+12      trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           11.29       28        
+13      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.61       28        
+14      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          12.18       28        
+15      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    12.46       28        
+16      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          13.14       28        
+17      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       15.50       28        
 
 ====================================================================================================
 分類: small_datasets+regression+balanced (包含 6 個資料集)
@@ -150,26 +185,23 @@ GNN增強效果分析 - 模型: TROMPT
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       5.67        6         
-2       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       8.00        6         
-3       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          8.00        6         
-4       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.67        6         
-5       trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          9.17        6         
-6       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.33        6         
-7       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    9.67        6         
-8       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.33       6         
-9       trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       10.50       6         
-10      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     10.50       6         
-11      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         10.83       6         
-12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.00       6         
-13      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       11.00       6         
-14      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           11.67       6         
-15      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.00       6         
-16      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         12.17       6         
-17      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    12.67       6         
-18      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          12.83       6         
-19      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.83       6         
-20      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     13.17       6         
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       4.33        6         
+2       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          6.33        6         
+3       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.83        6         
+4       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.50        6         
+5       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    7.67        6         
+6       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.00        6         
+7       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.50        6         
+8       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.50        6         
+9       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       8.50        6         
+10      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.17        6         
+11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.50        6         
+12      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.67        6         
+13      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          10.00       6         
+14      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.33       6         
+15      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.83       6         
+16      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.50       6         
+17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       13.83       6         
 
 ====================================================================================================
 分類: small_datasets+regression+categorical (包含 5 個資料集)
@@ -177,26 +209,23 @@ GNN增強效果分析 - 模型: TROMPT
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.80        5         
-2       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       4.20        5         
-3       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    4.40        5         
-4       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          5.40        5         
-5       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         6.60        5         
-6       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.40        5         
-7       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.60        5         
-8       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.00        5         
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.20        5         
-10      trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       9.60        5         
-11      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     9.80        5         
-12      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       10.00       5         
-13      trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          10.80       5         
-14      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    11.80       5         
-15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.60       5         
-16      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     15.60       5         
-17      trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       16.40       5         
-18      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.80       5         
-19      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           17.60       5         
-20      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         18.40       5         
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.20        5         
+2       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       3.60        5         
+3       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    4.00        5         
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          4.60        5         
+5       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         5.80        5         
+6       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.60        5         
+7       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.20        5         
+8       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.80        5         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.20        5         
+10      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     8.40        5         
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       8.80        5         
+12      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.00       5         
+13      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.00       5         
+14      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.20       5         
+15      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           14.40       5         
+16      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       14.80       5         
+17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.40       5         
 
 ====================================================================================================
 分類: small_datasets+regression+numerical (包含 36 個資料集)
@@ -204,23 +233,20 @@ GNN增強效果分析 - 模型: TROMPT
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       3.50        36        
-2       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           4.17        36        
-3       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       7.31        36        
-4       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.50        36        
-5       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          7.69        36        
-6       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.97        36        
-7       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    8.31        36        
-8       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.53        36        
-9       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.86        36        
-10      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       9.00        36        
-11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.92        36        
-12      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.33       36        
-13      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    12.64       36        
-14      trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                          13.00       36        
-15      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     14.36       36        
-16      trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       15.06       36        
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.06       36        
-18      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           15.19       36        
-19      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.75       36        
-20      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.86       36        
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       3.25        36        
+2       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.64        36        
+3       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.44        36        
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          6.72        36        
+5       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          6.94        36        
+6       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.22        36        
+7       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    7.28        36        
+8       trompt(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.69        36        
+9       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       7.83        36        
+10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.67        36        
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     9.06        36        
+12      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       12.19       36        
+13      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         12.69       36        
+14      trompt(ratio=0.8/0.15/0.05, gnn_stage=none)                           12.89       36        
+15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.17       36        
+16      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.22       36        
+17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       14.08       36        

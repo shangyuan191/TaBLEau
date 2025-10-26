@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 """
 分析GNN增強效果：比較每個可插入GNN的模型的原始表現與GNN增強變體
+
+比較模式：
+1. 'single_model' (預設): 17個競爭者
+   - 目標模型的7個配置（大訓練集baseline + 小訓練集6變體）
+   - 5個參考模型的兩種ratio（10個配置）
+
+2. 'all_models': 118個競爭者
+   - 9個可插入GNN的模型 × 6個變體 × 2種ratio = 108個
+   - 5個參考模型 × 2種ratio = 10個
 """
 
 import json
 import re
+import sys
 from pathlib import Path
 from collections import defaultdict
 
@@ -15,10 +25,13 @@ GNN_INSERTABLE_MODELS = [
 ]
 
 # 參考模型（無法插入GNN）
-REFERENCE_MODELS = ['t2gformer', 'tabpfn', 'xgboost', 'catboost', 'lightgbm']
+REFERENCE_MODELS = ['t2g-former', 'tabpfn', 'xgboost', 'catboost', 'lightgbm']
 
 # GNN插入階段
 GNN_STAGES = ['none', 'start', 'materialize', 'encoding', 'columnwise', 'decoding']
+
+# 比較模式
+COMPARISON_MODE = 'single_model'  # 可選: 'single_model' 或 'all_models'
 
 def parse_result_file(file_path):
     """解析實驗結果檔案"""
@@ -168,6 +181,9 @@ def analyze_gnn_enhancement(results_folder, datasets_folder, output_folder):
     # 組織資料：按模型、分類、資料集分組
     organized_data = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     
+    # 同時收集參考模型的資料
+    reference_data = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    
     for result in all_results:
         dataset = result['dataset']
         model = result['model']
@@ -176,7 +192,10 @@ def analyze_gnn_enhancement(results_folder, datasets_folder, output_folder):
         if classification == 'unknown':
             continue
         
-        organized_data[model][classification][dataset].append(result)
+        if model in REFERENCE_MODELS:
+            reference_data[model][classification][dataset].append(result)
+        else:
+            organized_data[model][classification][dataset].append(result)
     
     # 為每個可插入GNN的模型生成報告
     output_path = Path(output_folder)
@@ -204,18 +223,22 @@ def analyze_gnn_enhancement(results_folder, datasets_folder, output_folder):
                 # 準備17個競爭者的結果
                 competitors = []
                 
-                # 1. 該模型在大訓練集的原始表現 (0.8/0.15/0.05, none)
-                # 2. 該模型在小訓練集的6種變體 (0.05/0.15/0.8, 6 stages)
+                # 1. 該模型在大訓練集的baseline (0.8/0.15/0.05, none) - 只要none階段
                 for result in dataset_results:
-                    if result['model'] == model:
+                    if result['model'] == model and result['ratio'] == '0.8/0.15/0.05' and result['gnn_stage'] == 'none':
+                        competitors.append(result)
+                
+                # 2. 該模型在小訓練集的6種變體 (0.05/0.15/0.8, all stages)
+                for result in dataset_results:
+                    if result['model'] == model and result['ratio'] == '0.05/0.15/0.8':
                         competitors.append(result)
                 
                 # 3-7. 5個參考模型在兩種ratio下的表現
                 for ref_model in REFERENCE_MODELS:
-                    if ref_model in organized_data:
-                        if classification in organized_data[ref_model]:
-                            if dataset in organized_data[ref_model][classification]:
-                                for result in organized_data[ref_model][classification][dataset]:
+                    if ref_model in reference_data:
+                        if classification in reference_data[ref_model]:
+                            if dataset in reference_data[ref_model][classification]:
+                                for result in reference_data[ref_model][classification][dataset]:
                                     competitors.append(result)
                 
                 # 進行排名
@@ -252,7 +275,9 @@ def analyze_gnn_enhancement(results_folder, datasets_folder, output_folder):
             f.write("說明：\n")
             f.write(f"- 比較 {model} 模型的原始表現與GNN增強變體\n")
             f.write("- 包含5個參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）\n")
-            f.write("- 共17個競爭者：大訓練集原始(1) + 小訓練集6變體(6) + 參考模型兩種ratio(10)\n")
+            f.write("- 共17個競爭者：\n")
+            f.write(f"  * {model}的7個配置：大訓練集baseline(1) + 小訓練集6變體(6)\n")
+            f.write("  * 5個參考模型的兩種ratio：每個模型2個配置(10)\n")
             f.write("- 排名越小表示表現越好\n\n")
             
             for classification in sorted(model_rankings.keys()):
