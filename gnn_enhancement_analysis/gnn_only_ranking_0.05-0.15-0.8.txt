@@ -1,0 +1,533 @@
+====================================================================================================
+GNN增強模型專屬排名 - Train/Val/Test Ratio: 0.05/0.15/0.8
+====================================================================================================
+
+說明：
+- 只包含9個可插入GNN的模型的GNN增強變體
+- Train/Val/Test 比例: 0.05/0.15/0.8
+- 共 45 個競爭者：
+  * 9個模型：excelformer, fttransformer, resnet, tabnet, tabtransformer, trompt, vime, scarf, subtab
+  * 5種GNN插入階段：start, materialize, encoding, columnwise, decoding
+  * 不包含原始模型（none階段）和參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
+- 排名越小表示表現越好
+
+
+====================================================================================================
+分類: large_datasets+binclass+numerical (包含 6 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     25.33       54        
+2       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       27.33       54        
+3       resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     36.00       54        
+4       resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       37.00       54        
+5       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          46.67       54        
+6       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       48.67       54        
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         48.67       54        
+8       resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       49.33       54        
+9       excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                50.17       54        
+10      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       53.83       54        
+11      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  54.50       54        
+12      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    57.17       54        
+13      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  60.83       54        
+14      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      61.17       54        
+15      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            61.67       54        
+16      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    61.67       54        
+17      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   63.17       54        
+18      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          63.50       54        
+19      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         63.67       54        
+20      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               65.67       54        
+21      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                66.83       54        
+22      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              67.00       54        
+23      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          67.50       54        
+24      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    70.33       54        
+25      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             76.50       54        
+26      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     79.50       54        
+27      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               80.00       54        
+28      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               84.50       54        
+29      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  86.50       54        
+30      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             87.50       54        
+31      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       89.00       54        
+32      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            89.17       54        
+33      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       89.83       54        
+34      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     90.50       54        
+35      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        92.50       54        
+36      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      92.67       54        
+37      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       93.33       54        
+38      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        94.17       54        
+39      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     94.17       54        
+40      subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    96.50       54        
+41      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           96.67       54        
+42      subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          96.83       54        
+43      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                105.17      54        
+44      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     112.67      54        
+45      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       113.00      54        
+
+====================================================================================================
+分類: large_datasets+multiclass+numerical (包含 3 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       32.67       27        
+2       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     36.33       27        
+3       resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       48.67       27        
+4       excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  48.67       27        
+5       resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     49.67       27        
+6       excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                53.00       27        
+7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               56.67       27        
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             56.67       27        
+9       resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       58.67       27        
+10      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         59.33       27        
+11      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    61.00       27        
+12      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       62.00       27        
+13      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          63.00       27        
+14      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     70.00       27        
+15      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       72.00       27        
+16      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          73.67       27        
+17      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               73.67       27        
+18      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              74.00       27        
+19      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    75.00       27        
+20      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            76.33       27        
+21      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  76.67       27        
+22      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                77.33       27        
+23      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     79.00       27        
+24      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               80.00       27        
+25      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         81.00       27        
+26      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       83.00       27        
+27      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      83.33       27        
+28      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            84.00       27        
+29      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  86.00       27        
+30      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          86.33       27        
+31      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   90.00       27        
+32      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    91.00       27        
+33      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             93.00       27        
+34      subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    93.00       27        
+35      subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          94.33       27        
+36      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        98.00       27        
+37      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     98.00       27        
+38      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       99.33       27        
+39      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           99.33       27        
+40      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      101.67      27        
+41      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        103.00      27        
+42      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                111.33      27        
+43      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       113.00      27        
+44      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       114.33      27        
+45      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     115.67      27        
+
+====================================================================================================
+分類: large_datasets+regression+categorical (包含 1 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             1.00        9         
+2       resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       4.00        9         
+3       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       6.00        9         
+4       tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       8.00        9         
+5       tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     10.00       9         
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            15.00       9         
+7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               17.00       9         
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               18.00       9         
+9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  23.00       9         
+10      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       24.00       9         
+11      subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    27.00       9         
+12      subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          28.00       9         
+13      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        29.00       9         
+14      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       31.00       9         
+15      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     34.00       9         
+16      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             36.00       9         
+17      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         38.00       9         
+18      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        39.00       9         
+19      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                42.00       9         
+20      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     44.00       9         
+21      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                45.00       9         
+22      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           49.00       9         
+23      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    53.00       9         
+24      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    54.00       9         
+25      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    56.00       9         
+26      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              58.00       9         
+27      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      59.00       9         
+28      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  61.00       9         
+29      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            64.00       9         
+30      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      66.00       9         
+31      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       67.00       9         
+32      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         68.00       9         
+33      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          75.00       9         
+34      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   77.00       9         
+35      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          81.00       9         
+36      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     82.00       9         
+37      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          85.00       9         
+38      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     88.00       9         
+39      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       89.00       9         
+40      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       96.00       9         
+41      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               99.00       9         
+42      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       100.00      9         
+43      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     102.00      9         
+44      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                111.00      9         
+45      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  112.00      9         
+
+====================================================================================================
+分類: large_datasets+regression+numerical (包含 10 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       7.60        90        
+2       tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     8.70        90        
+3       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       13.10       90        
+4       scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      21.60       90        
+5       scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        21.90       90        
+6       scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        24.30       90        
+7       subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          24.40       90        
+8       subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    24.60       90        
+9       scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     26.00       90        
+10      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           27.30       90        
+11      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            31.70       90        
+12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  32.30       90        
+13      resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       33.10       90        
+14      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       33.10       90        
+15      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       33.50       90        
+16      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     33.60       90        
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             34.10       90        
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               34.20       90        
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               35.50       90        
+20      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                37.10       90        
+21      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            41.00       90        
+22      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      42.20       90        
+23      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   42.80       90        
+24      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             43.40       90        
+25      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         49.60       90        
+26      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         49.90       90        
+27      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          50.60       90        
+28      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       51.40       90        
+29      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    51.70       90        
+30      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                52.90       90        
+31      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              53.90       90        
+32      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    56.70       90        
+33      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          60.20       90        
+34      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          62.70       90        
+35      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    62.70       90        
+36      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     64.10       90        
+37      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               67.50       90        
+38      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     81.90       90        
+39      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     85.40       90        
+40      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       86.10       90        
+41      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       86.40       90        
+42      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  89.80       90        
+43      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                91.90       90        
+44      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  96.60       90        
+45      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       105.40      90        
+
+====================================================================================================
+分類: small_datasets+binclass+balanced (包含 14 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     56.00       126       
+2       tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       58.86       126       
+3       scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     59.93       126       
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       60.86       126       
+5       scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           61.29       126       
+6       tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          61.50       126       
+7       resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          62.00       126       
+8       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       62.29       126       
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         62.29       126       
+10      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          62.57       126       
+11      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               63.79       126       
+12      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         65.86       126       
+13      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       66.50       126       
+14      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     67.21       126       
+15      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       69.14       126       
+16      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       69.57       126       
+17      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                69.64       126       
+18      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      69.71       126       
+19      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  70.71       126       
+20      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     72.50       126       
+21      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               72.50       126       
+22      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        72.57       126       
+23      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    72.79       126       
+24      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       73.57       126       
+25      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    73.93       126       
+26      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     74.36       126       
+27      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             74.93       126       
+28      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    75.00       126       
+29      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   76.79       126       
+30      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      77.29       126       
+31      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               78.71       126       
+32      subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          79.57       126       
+33      subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    80.14       126       
+34      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  81.93       126       
+35      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             82.21       126       
+36      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            82.57       126       
+37      resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       83.93       126       
+38      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  84.43       126       
+39      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            85.86       126       
+40      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              87.14       126       
+41      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                93.64       126       
+42      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        94.43       126       
+43      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                102.14      126       
+44      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     106.79      126       
+45      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       109.57      126       
+
+====================================================================================================
+分類: small_datasets+binclass+categorical (包含 7 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       26.29       63        
+2       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     26.57       63        
+3       excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     40.43       63        
+4       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          45.86       63        
+5       excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                50.29       63        
+6       resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    53.00       63        
+7       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   55.00       63        
+8       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             55.86       63        
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         59.43       63        
+10      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      59.71       63        
+11      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     61.86       63        
+12      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         62.00       63        
+13      subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    62.86       63        
+14      subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          63.00       63        
+15      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  63.43       63        
+16      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    63.57       63        
+17      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            64.00       63        
+18      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           64.00       63        
+19      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       64.86       63        
+20      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     67.00       63        
+21      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       67.14       63        
+22      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       67.14       63        
+23      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          68.43       63        
+24      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     69.43       63        
+25      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       69.86       63        
+26      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        73.00       63        
+27      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       74.29       63        
+28      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  74.71       63        
+29      resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       75.29       63        
+30      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       75.43       63        
+31      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          75.71       63        
+32      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              76.43       63        
+33      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    77.43       63        
+34      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               80.00       63        
+35      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                84.14       63        
+36      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      86.57       63        
+37      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             87.43       63        
+38      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               88.00       63        
+39      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        91.43       63        
+40      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            93.71       63        
+41      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  97.71       63        
+42      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               99.14       63        
+43      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       107.71      63        
+44      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                108.29      63        
+45      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     111.29      63        
+
+====================================================================================================
+分類: small_datasets+binclass+numerical (包含 28 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       54.00       252       
+2       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         55.39       252       
+3       trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     58.21       252       
+4       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       58.46       252       
+5       tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       63.68       252       
+6       trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          63.96       252       
+7       subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     66.46       252       
+8       excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                66.54       252       
+9       trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    67.39       252       
+10      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    70.25       252       
+11      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     70.50       252       
+12      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     71.00       252       
+13      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           71.25       252       
+14      subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       71.50       252       
+15      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          71.71       252       
+16      subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          71.75       252       
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               71.82       252       
+18      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  72.21       252       
+19      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          73.04       252       
+20      subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    73.14       252       
+21      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      73.25       252       
+22      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            73.29       252       
+23      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    73.39       252       
+24      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       73.46       252       
+25      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         73.75       252       
+26      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   75.04       252       
+27      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               77.29       252       
+28      resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       77.39       252       
+29      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             78.96       252       
+30      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       79.61       252       
+31      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        81.57       252       
+32      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             82.50       252       
+33      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      83.43       252       
+34      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     84.32       252       
+35      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               84.89       252       
+36      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              86.50       252       
+37      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       86.86       252       
+38      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  87.46       252       
+39      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                88.43       252       
+40      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  88.46       252       
+41      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        92.21       252       
+42      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            95.54       252       
+43      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                102.64      252       
+44      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       106.54      252       
+45      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     108.36      252       
+
+====================================================================================================
+分類: small_datasets+regression+balanced (包含 6 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    14.17       54        
+2       subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     14.33       54        
+3       subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          16.50       54        
+4       subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       16.67       54        
+5       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              21.67       54        
+6       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                22.33       54        
+7       resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       26.33       54        
+8       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                32.67       54        
+9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            36.50       54        
+10      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       38.17       54        
+11      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          39.33       54        
+12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               42.17       54        
+13      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       45.33       54        
+14      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  45.67       54        
+15      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    50.67       54        
+16      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   50.83       54        
+17      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       51.00       54        
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               51.00       54        
+19      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             52.67       54        
+20      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         53.33       54        
+21      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       55.00       54        
+22      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     55.50       54        
+23      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               55.50       54        
+24      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        57.50       54        
+25      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     57.67       54        
+26      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            58.83       54        
+27      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  58.83       54        
+28      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      60.17       54        
+29      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    60.83       54        
+30      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       61.83       54        
+31      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  62.67       54        
+32      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         63.50       54        
+33      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          63.50       54        
+34      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       64.50       54        
+35      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     67.50       54        
+36      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    68.33       54        
+37      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             68.67       54        
+38      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          71.17       54        
+39      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                72.33       54        
+40      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       74.17       54        
+41      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     80.17       54        
+42      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        86.17       54        
+43      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      86.17       54        
+44      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           86.67       54        
+45      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     89.00       54        
+
+====================================================================================================
+分類: small_datasets+regression+categorical (包含 5 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          15.00       45        
+2       subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    15.80       45        
+3       subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       20.00       45        
+4       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             20.00       45        
+5       resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       21.20       45        
+6       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                24.40       45        
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         27.80       45        
+8       resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          28.20       45        
+9       tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       28.80       45        
+10      subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     29.20       45        
+11      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                30.80       45        
+12      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    32.60       45        
+13      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               33.60       45        
+14      trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       34.20       45        
+15      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   34.80       45        
+16      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                36.00       45        
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               36.20       45        
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             37.60       45        
+19      tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     38.80       45        
+20      tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       39.20       45        
+21      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              40.80       45        
+22      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            41.60       45        
+23      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         43.20       45        
+24      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    43.20       45        
+25      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            43.80       45        
+26      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       44.20       45        
+27      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       44.20       45        
+28      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      45.00       45        
+29      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    45.20       45        
+30      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               45.60       45        
+31      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          46.40       45        
+32      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  47.00       45        
+33      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     47.80       45        
+34      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  48.00       45        
+35      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     48.40       45        
+36      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  49.00       45        
+37      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          53.80       45        
+38      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       56.40       45        
+39      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        58.00       45        
+40      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       62.80       45        
+41      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     65.20       45        
+42      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           77.80       45        
+43      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     83.60       45        
+44      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        86.60       45        
+45      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      87.80       45        
+
+====================================================================================================
+分類: small_datasets+regression+numerical (包含 36 個資料集)
+====================================================================================================
+
+排名      競爭者                                                                   平均排名        出現次數      
+----------------------------------------------------------------------------------------------------
+1       subtab(ratio=0.05/0.15/0.8, gnn_stage=start)                          16.67       324       
+2       subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    16.69       324       
+3       subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     18.64       324       
+4       subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       19.36       324       
+5       resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       19.47       324       
+6       trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       23.83       324       
+7       fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                24.83       324       
+8       tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     28.72       324       
+9       tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       31.39       324       
+10      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      36.08       324       
+11      resnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     37.00       324       
+12      scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)                        37.94       324       
+13      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         38.08       324       
+14      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                38.19       324       
+15      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            38.33       324       
+16      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)              38.36       324       
+17      excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)                  39.17       324       
+18      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       39.19       324       
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               39.42       324       
+20      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             39.61       324       
+21      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  40.75       324       
+22      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            42.17       324       
+23      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               43.06       324       
+24      resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    43.28       324       
+25      resnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          44.25       324       
+26      tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       46.53       324       
+27      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         46.58       324       
+28      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)             47.28       324       
+29      subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)                       47.42       324       
+30      tabnet(ratio=0.05/0.15/0.8, gnn_stage=start)                          47.44       324       
+31      fttransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                   48.00       324       
+32      resnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       49.50       324       
+33      tabnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    50.08       324       
+34      excelformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)               52.89       324       
+35      excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)                     54.47       324       
+36      trompt(ratio=0.05/0.15/0.8, gnn_stage=start)                          56.47       324       
+37      trompt(ratio=0.05/0.15/0.8, gnn_stage=materialize)                    58.58       324       
+38      trompt(ratio=0.05/0.15/0.8, gnn_stage=encoding)                       62.19       324       
+39      scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                      64.47       324       
+40      excelformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)                  65.44       324       
+41      trompt(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                     66.06       324       
+42      scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)                        66.53       324       
+43      excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                67.94       324       
+44      scarf(ratio=0.05/0.15/0.8, gnn_stage=start)                           76.36       324       
+45      scarf(ratio=0.05/0.15/0.8, gnn_stage=materialize)                     77.11       324       
