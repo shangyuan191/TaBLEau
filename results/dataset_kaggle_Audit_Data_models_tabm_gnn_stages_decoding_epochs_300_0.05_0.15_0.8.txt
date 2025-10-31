@@ -1,0 +1,8 @@
+dataset: kaggle_Audit_Data
+  模型: tabm
+    GNN階段: decoding
+          Best val metric: 0.9829060435295105
+          Best test metric: 0.945249617099762
+          早停輪數: 300
+          GNN早停輪數: 19
+          耗時: 5.84 秒

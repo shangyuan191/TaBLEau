@@ -1,0 +1,38 @@
+dataset: kaggle_Audit_Data
+  模型: tabm
+    GNN階段: none
+          Best val metric: 0.9316239953041077
+          Best test metric: 0.9275362491607666
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 2.06 秒
+    GNN階段: start
+          Best val metric: 0.7094017267227173
+          Best test metric: 0.7632850408554077
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.12 秒
+    GNN階段: materialize
+          Best val metric: 0.8632479310035706
+          Best test metric: 0.8647342920303345
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.18 秒
+    GNN階段: encoding
+          Best val metric: 0.6068376302719116
+          Best test metric: 0.6070853471755981
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.44 秒
+    GNN階段: columnwise
+          Best val metric: 0.6068376302719116
+          Best test metric: 0.6070853471755981
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.36 秒
+    GNN階段: decoding
+          Best val metric: 0.9829060435295105
+          Best test metric: 0.9516908526420593
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 0.49 秒
