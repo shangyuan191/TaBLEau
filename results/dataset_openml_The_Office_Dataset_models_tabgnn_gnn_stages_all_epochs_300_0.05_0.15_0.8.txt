@@ -1,0 +1,7 @@
+dataset: openml_The_Office_Dataset
+  模型: tabgnn
+    GNN階段: none
+          Best val metric: 1.3808188446480099
+          Best test metric: 1.2061148086471174
+          GNN早停輪數: 26
+          耗時: 2.87 秒

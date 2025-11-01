@@ -3,13 +3,13 @@
 分析GNN增強效果：比較每個可插入GNN的模型的原始表現與GNN增強變體
 
 比較模式：
-1. 'single_model' (預設): 17個競爭者
+1. 'single_model' (預設): 19個競爭者
    - 目標模型的7個配置（大訓練集baseline + 小訓練集6變體）
-   - 5個參考模型的兩種ratio（10個配置）
+   - 6個參考模型的兩種ratio（12個配置）
 
-2. 'all_models': 118個競爭者
-   - 9個可插入GNN的模型 × 6個變體 × 2種ratio = 108個
-   - 5個參考模型 × 2種ratio = 10個
+2. 'all_models': 132個競爭者
+   - 10個可插入GNN的模型 × 6個變體 × 2種ratio = 120個
+   - 6個參考模型 × 2種ratio = 12個
 
 使用方法：
     python analyze_gnn_enhancement_flexible.py [mode]
@@ -26,11 +26,11 @@ from collections import defaultdict
 # 可以插入GNN的模型
 GNN_INSERTABLE_MODELS = [
     'excelformer', 'fttransformer', 'resnet', 'tabnet', 
-    'tabtransformer', 'trompt', 'vime', 'scarf', 'subtab'
+    'tabtransformer', 'trompt', 'vime', 'scarf', 'subtab', 'tabm'
 ]
 
 # 參考模型（無法插入GNN）
-REFERENCE_MODELS = ['t2g-former', 'tabpfn', 'xgboost', 'catboost', 'lightgbm']
+REFERENCE_MODELS = ['t2g-former', 'tabpfn', 'xgboost', 'catboost', 'lightgbm', 'tabgnn']
 
 # GNN插入階段
 GNN_STAGES = ['none', 'start', 'materialize', 'encoding', 'columnwise', 'decoding']
@@ -192,13 +192,16 @@ def analyze_gnn_enhancement(results_folder, datasets_folder, output_folder, comp
     print(f"比較模式: {comparison_mode}")
     
     if comparison_mode == 'single_model':
-        expected_competitors = 17
+        # now: 7 configs for the target model + 6 reference models * 2 ratios = 7 + 12 = 19
+        expected_competitors = 19
         print("  - 目標模型: 7個配置（大訓練集baseline + 小訓練集6變體）")
-        print("  - 參考模型: 10個配置（5個模型 × 2種ratio）")
+        print("  - 參考模型: 12個配置（6個模型 × 2種ratio）")
     else:  # all_models
-        expected_competitors = 118
-        print("  - 可插入GNN模型: 108個配置（9個模型 × 6變體 × 2種ratio）")
-        print("  - 參考模型: 10個配置（5個模型 × 2種ratio）")
+        # now: 10 insertable models × 6 variants × 2 ratios = 120
+        # plus 6 reference models × 2 ratios = 12 -> total 132
+        expected_competitors = 132
+        print("  - 可插入GNN的模型: 120個配置（10個模型 × 6變體 × 2種ratio）")
+        print("  - 參考模型: 12個配置（6個模型 × 2種ratio）")
     
     # 組織資料：按模型、分類、資料集分組
     organized_data = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
@@ -466,7 +469,7 @@ def analyze_gnn_enhancement(results_folder, datasets_folder, output_folder, comp
 
 if __name__ == "__main__":
     # 從命令列參數獲取比較模式
-    comparison_mode = 'single_model'
+    comparison_mode = 'all_models'
     if len(sys.argv) > 1:
         mode_arg = sys.argv[1].lower()
         if mode_arg in ['single_model', 'all_models']:

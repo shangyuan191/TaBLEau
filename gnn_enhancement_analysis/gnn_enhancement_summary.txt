@@ -2,6 +2,9 @@
 GNN增強效果總體摘要
 ====================================================================================================
 
+比較模式: single_model
+競爭者數量: 19
+
 
 ====================================================================================================
 模型: EXCELFORMER
@@ -9,9 +12,9 @@ GNN增強效果總體摘要
 
 分類: large_datasets+binclass+numerical
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.17
-  最佳配置: excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 12.17
+  Baseline (0.8/0.15/0.05, none): 平均排名 13.00
+  最佳配置: excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
+  最佳平均排名: 13.00
   改善: +0.00 ✗
 
 分類: large_datasets+multiclass+numerical
@@ -23,59 +26,59 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 17.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 19.00
   最佳配置: excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.00
+  最佳平均排名: 5.00
   改善: +14.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 13.90
+  Baseline (0.8/0.15/0.05, none): 平均排名 15.90
   最佳配置: excelformer(ratio=0.05/0.15/0.8, gnn_stage=start)
-  最佳平均排名: 3.80
-  改善: +10.10 ✓
+  最佳平均排名: 5.70
+  改善: +10.20 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 5.64
+  Baseline (0.8/0.15/0.05, none): 平均排名 6.21
   最佳配置: excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 5.64
+  最佳平均排名: 6.21
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.57
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.29
   最佳配置: excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 7.57
+  最佳平均排名: 8.29
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.54
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.07
   最佳配置: excelformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.54
+  最佳平均排名: 7.07
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.83
+  Baseline (0.8/0.15/0.05, none): 平均排名 11.50
   最佳配置: excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 5.50
-  改善: +4.33 ✓
+  最佳平均排名: 6.67
+  改善: +4.83 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 13.20
+  Baseline (0.8/0.15/0.05, none): 平均排名 15.20
   最佳配置: excelformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
-  最佳平均排名: 3.40
-  改善: +9.80 ✓
+  最佳平均排名: 4.80
+  改善: +10.40 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.67
+  Baseline (0.8/0.15/0.05, none): 平均排名 14.42
   最佳配置: excelformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 5.06
-  改善: +7.61 ✓
+  最佳平均排名: 5.92
+  改善: +8.50 ✓
 
 
 ====================================================================================================
@@ -84,16 +87,16 @@ GNN增強效果總體摘要
 
 分類: large_datasets+binclass+numerical
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.17
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.50
   最佳配置: fttransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 7.17
+  最佳平均排名: 7.50
   改善: +0.00 ✗
 
 分類: large_datasets+multiclass+numerical
   資料集數: 3
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.67
   最佳配置: fttransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 8.00
+  最佳平均排名: 8.67
   改善: +0.00 ✗
 
 分類: large_datasets+regression+categorical
@@ -105,52 +108,52 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.80
   最佳配置: fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 5.00
-  改善: +6.00 ✓
+  最佳平均排名: 6.00
+  改善: +6.80 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.29
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.00
   最佳配置: fttransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.29
+  最佳平均排名: 7.00
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.14
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.29
   最佳配置: fttransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 8.14
+  最佳平均排名: 9.29
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 5.29
+  Baseline (0.8/0.15/0.05, none): 平均排名 5.71
   最佳配置: fttransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 5.29
+  最佳平均排名: 5.71
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.00
-  最佳配置: fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)
-  最佳平均排名: 3.17
-  改善: +4.83 ✓
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.83
+  最佳配置: fttransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
+  最佳平均排名: 3.67
+  改善: +5.17 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.80
+  Baseline (0.8/0.15/0.05, none): 平均排名 13.60
   最佳配置: fttransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)
-  最佳平均排名: 2.80
-  改善: +9.00 ✓
+  最佳平均排名: 3.80
+  改善: +9.80 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.08
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.69
   最佳配置: fttransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.92
-  改善: +7.17 ✓
+  最佳平均排名: 4.58
+  改善: +8.11 ✓
 
 
 ====================================================================================================
@@ -173,59 +176,59 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 17.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 19.00
   最佳配置: resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)
   最佳平均排名: 1.00
-  改善: +16.00 ✓
+  改善: +18.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.60
-  最佳配置: resnet(ratio=0.05/0.15/0.8, gnn_stage=materialize)
-  最佳平均排名: 4.30
-  改善: +8.30 ✓
+  Baseline (0.8/0.15/0.05, none): 平均排名 14.60
+  最佳配置: resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)
+  最佳平均排名: 5.70
+  改善: +8.90 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.79
   最佳配置: resnet(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 7.00
+  最佳平均排名: 7.79
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.43
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.29
   最佳配置: resnet(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 8.43
+  最佳平均排名: 9.29
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 4.82
+  Baseline (0.8/0.15/0.05, none): 平均排名 5.25
   最佳配置: resnet(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 4.82
+  最佳平均排名: 5.25
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.17
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.50
   最佳配置: resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 4.00
-  改善: +5.17 ✓
+  最佳平均排名: 4.33
+  改善: +6.17 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 10.80
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.80
   最佳配置: resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 2.20
-  改善: +8.60 ✓
+  最佳平均排名: 3.00
+  改善: +9.80 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.97
+  Baseline (0.8/0.15/0.05, none): 平均排名 14.75
   最佳配置: resnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 2.94
-  改善: +10.03 ✓
+  最佳平均排名: 3.39
+  改善: +11.36 ✓
 
 
 ====================================================================================================
@@ -248,59 +251,59 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 13.00
   最佳配置: tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)
   最佳平均排名: 1.00
-  改善: +10.00 ✓
+  改善: +12.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 13.40
+  Baseline (0.8/0.15/0.05, none): 平均排名 15.40
   最佳配置: tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)
-  最佳平均排名: 1.90
-  改善: +11.50 ✓
+  最佳平均排名: 2.00
+  改善: +13.40 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.57
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.50
   最佳配置: tabnet(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.57
+  最佳平均排名: 7.50
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.86
   最佳配置: tabnet(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 8.00
+  最佳平均排名: 8.86
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 5.75
+  Baseline (0.8/0.15/0.05, none): 平均排名 6.32
   最佳配置: tabnet(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 5.75
+  最佳平均排名: 6.32
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.67
   最佳配置: tabnet(ratio=0.05/0.15/0.8, gnn_stage=encoding)
-  最佳平均排名: 6.33
-  改善: +2.67 ✓
+  最佳平均排名: 7.17
+  改善: +3.50 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.20
+  Baseline (0.8/0.15/0.05, none): 平均排名 14.20
   最佳配置: tabnet(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.20
-  改善: +9.00 ✓
+  最佳平均排名: 4.20
+  改善: +10.00 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.08
+  Baseline (0.8/0.15/0.05, none): 平均排名 13.78
   最佳配置: tabnet(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
-  最佳平均排名: 4.64
-  改善: +7.44 ✓
+  最佳平均排名: 5.47
+  改善: +8.31 ✓
 
 
 ====================================================================================================
@@ -330,52 +333,52 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.90
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.80
   最佳配置: tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)
-  最佳平均排名: 4.70
-  改善: +4.20 ✓
+  最佳平均排名: 6.40
+  改善: +4.40 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.50
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.14
   最佳配置: tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.50
+  最佳平均排名: 7.14
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.71
+  Baseline (0.8/0.15/0.05, none): 平均排名 11.29
   最佳配置: tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 9.71
+  最佳平均排名: 11.29
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.14
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.04
   最佳配置: tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 8.14
+  最佳平均排名: 9.04
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 10.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 11.67
   最佳配置: tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)
-  最佳平均排名: 4.50
-  改善: +5.50 ✓
+  最佳平均排名: 5.50
+  改善: +6.17 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 10.40
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.40
   最佳配置: tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)
-  最佳平均排名: 3.40
-  改善: +7.00 ✓
+  最佳平均排名: 5.00
+  改善: +7.40 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.44
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.94
   最佳配置: tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
-  最佳平均排名: 5.42
-  改善: +4.03 ✓
+  最佳平均排名: 6.44
+  改善: +4.50 ✓
 
 
 ====================================================================================================
@@ -384,9 +387,9 @@ GNN增強效果總體摘要
 
 分類: large_datasets+binclass+numerical
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 6.33
   最佳配置: trompt(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.00
+  最佳平均排名: 6.33
   改善: +0.00 ✗
 
 分類: large_datasets+multiclass+numerical
@@ -398,59 +401,59 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 17.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 19.00
   最佳配置: trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)
   最佳平均排名: 1.00
-  改善: +16.00 ✓
+  改善: +18.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 15.60
+  Baseline (0.8/0.15/0.05, none): 平均排名 17.60
   最佳配置: trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 2.50
-  改善: +13.10 ✓
+  最佳平均排名: 3.20
+  改善: +14.40 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.57
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.29
   最佳配置: trompt(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 7.57
+  最佳平均排名: 8.29
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.29
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.00
   最佳配置: trompt(ratio=0.05/0.15/0.8, gnn_stage=none)
-  最佳平均排名: 6.86
-  改善: +0.43 ✓
+  最佳平均排名: 7.43
+  改善: +0.57 ✓
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 3.93
+  Baseline (0.8/0.15/0.05, none): 平均排名 4.14
   最佳配置: trompt(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 3.93
+  最佳平均排名: 4.14
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.17
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.83
   最佳配置: trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 4.33
-  改善: +4.83 ✓
+  最佳平均排名: 5.33
+  改善: +5.50 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 14.40
+  Baseline (0.8/0.15/0.05, none): 平均排名 16.40
   最佳配置: trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.60
-  改善: +10.80 ✓
+  最佳平均排名: 4.80
+  改善: +11.60 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 12.89
+  Baseline (0.8/0.15/0.05, none): 平均排名 14.67
   最佳配置: trompt(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.25
-  改善: +9.64 ✓
+  最佳平均排名: 3.89
+  改善: +10.78 ✓
 
 
 ====================================================================================================
@@ -473,59 +476,59 @@ GNN增強效果總體摘要
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 13.00
   最佳配置: vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.00
+  最佳平均排名: 5.00
   改善: +8.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 10.10
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.10
   最佳配置: vime(ratio=0.05/0.15/0.8, gnn_stage=start)
-  最佳平均排名: 3.80
-  改善: +6.30 ✓
+  最佳平均排名: 5.70
+  改善: +6.40 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 5.36
+  Baseline (0.8/0.15/0.05, none): 平均排名 5.93
   最佳配置: vime(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 5.36
+  最佳平均排名: 5.93
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.57
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.29
   最佳配置: vime(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 9.57
+  最佳平均排名: 10.29
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 3.93
+  Baseline (0.8/0.15/0.05, none): 平均排名 4.18
   最佳配置: vime(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 3.93
+  最佳平均排名: 4.18
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.83
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.50
   最佳配置: vime(ratio=0.05/0.15/0.8, gnn_stage=start)
-  最佳平均排名: 6.67
+  最佳平均排名: 8.33
   改善: +2.17 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 10.80
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.80
   最佳配置: vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 4.60
-  改善: +6.20 ✓
+  最佳平均排名: 5.40
+  改善: +7.40 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.08
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.81
   最佳配置: vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)
-  最佳平均排名: 4.89
-  改善: +6.19 ✓
+  最佳平均排名: 6.08
+  改善: +6.72 ✓
 
 
 ====================================================================================================
@@ -534,73 +537,73 @@ GNN增強效果總體摘要
 
 分類: large_datasets+binclass+numerical
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 15.67
+  Baseline (0.8/0.15/0.05, none): 平均排名 17.17
   最佳配置: scarf(ratio=0.05/0.15/0.8, gnn_stage=none)
-  最佳平均排名: 12.50
+  最佳平均排名: 14.00
   改善: +3.17 ✓
 
 分類: large_datasets+multiclass+numerical
   資料集數: 3
-  Baseline (0.8/0.15/0.05, none): 平均排名 14.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 16.00
   最佳配置: scarf(ratio=0.05/0.15/0.8, gnn_stage=encoding)
-  最佳平均排名: 12.67
+  最佳平均排名: 14.67
   改善: +1.33 ✓
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.00
   最佳配置: scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.00
+  最佳平均排名: 5.00
   改善: +5.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.80
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.50
   最佳配置: scarf(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
-  最佳平均排名: 4.40
+  最佳平均排名: 6.10
   改善: +3.40 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.64
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.14
   最佳配置: scarf(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.64
+  最佳平均排名: 7.14
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 5.71
+  Baseline (0.8/0.15/0.05, none): 平均排名 6.14
   最佳配置: scarf(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 5.71
+  最佳平均排名: 6.14
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.39
+  Baseline (0.8/0.15/0.05, none): 平均排名 6.89
   最佳配置: scarf(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.39
+  最佳平均排名: 6.89
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 2.83
+  Baseline (0.8/0.15/0.05, none): 平均排名 3.17
   最佳配置: scarf(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 2.83
+  最佳平均排名: 3.17
   改善: +0.00 ✗
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.80
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.20
   最佳配置: scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 4.60
-  改善: +3.20 ✓
+  最佳平均排名: 6.20
+  改善: +3.00 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.58
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.58
   最佳配置: scarf(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.78
-  改善: +4.81 ✓
+  最佳平均排名: 4.94
+  改善: +4.64 ✓
 
 
 ====================================================================================================
@@ -609,71 +612,146 @@ GNN增強效果總體摘要
 
 分類: large_datasets+binclass+numerical
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 11.33
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.33
   最佳配置: subtab(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 11.33
+  最佳平均排名: 12.33
   改善: +0.00 ✗
 
 分類: large_datasets+multiclass+numerical
   資料集數: 3
-  Baseline (0.8/0.15/0.05, none): 平均排名 10.33
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.00
   最佳配置: subtab(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 10.33
+  最佳平均排名: 12.00
   改善: +0.00 ✗
 
 分類: large_datasets+regression+categorical
   資料集數: 1
-  Baseline (0.8/0.15/0.05, none): 平均排名 9.00
+  Baseline (0.8/0.15/0.05, none): 平均排名 11.00
   最佳配置: subtab(ratio=0.05/0.15/0.8, gnn_stage=decoding)
-  最佳平均排名: 3.00
+  最佳平均排名: 5.00
   改善: +6.00 ✓
 
 分類: large_datasets+regression+numerical
   資料集數: 10
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.50
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.20
   最佳配置: subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)
-  最佳平均排名: 3.60
-  改善: +3.90 ✓
+  最佳平均排名: 5.20
+  改善: +4.00 ✓
 
 分類: small_datasets+binclass+balanced
   資料集數: 14
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.14
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.71
   最佳配置: subtab(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 8.14
+  最佳平均排名: 8.71
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+categorical
   資料集數: 7
-  Baseline (0.8/0.15/0.05, none): 平均排名 7.86
+  Baseline (0.8/0.15/0.05, none): 平均排名 8.71
   最佳配置: subtab(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 7.86
+  最佳平均排名: 8.71
   改善: +0.00 ✗
 
 分類: small_datasets+binclass+numerical
   資料集數: 28
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.36
+  Baseline (0.8/0.15/0.05, none): 平均排名 6.82
   最佳配置: subtab(ratio=0.8/0.15/0.05, gnn_stage=none)
-  最佳平均排名: 6.36
+  最佳平均排名: 6.82
   改善: +0.00 ✗
 
 分類: small_datasets+regression+balanced
   資料集數: 6
-  Baseline (0.8/0.15/0.05, none): 平均排名 6.33
-  最佳配置: subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
+  Baseline (0.8/0.15/0.05, none): 平均排名 7.17
+  最佳配置: subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)
   最佳平均排名: 3.50
-  改善: +2.83 ✓
+  改善: +3.67 ✓
 
 分類: small_datasets+regression+categorical
   資料集數: 5
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.20
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.60
   最佳配置: subtab(ratio=0.05/0.15/0.8, gnn_stage=materialize)
-  最佳平均排名: 2.80
-  改善: +5.40 ✓
+  最佳平均排名: 3.40
+  改善: +6.20 ✓
 
 分類: small_datasets+regression+numerical
   資料集數: 36
-  Baseline (0.8/0.15/0.05, none): 平均排名 8.94
+  Baseline (0.8/0.15/0.05, none): 平均排名 10.06
   最佳配置: subtab(ratio=0.05/0.15/0.8, gnn_stage=start)
+  最佳平均排名: 4.31
+  改善: +5.75 ✓
+
+
+====================================================================================================
+模型: TABM
+====================================================================================================
+
+分類: large_datasets+binclass+numerical
+  資料集數: 6
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.00
+  最佳配置: tabm(ratio=0.8/0.15/0.05, gnn_stage=none)
+  最佳平均排名: 12.00
+  改善: +0.00 ✗
+
+分類: large_datasets+multiclass+numerical
+  資料集數: 3
+  Baseline (0.8/0.15/0.05, none): 平均排名 2.67
+  最佳配置: tabm(ratio=0.8/0.15/0.05, gnn_stage=none)
+  最佳平均排名: 2.67
+  改善: +0.00 ✗
+
+分類: large_datasets+regression+categorical
+  資料集數: 1
+  Baseline (0.8/0.15/0.05, none): 平均排名 15.00
+  最佳配置: tabm(ratio=0.05/0.15/0.8, gnn_stage=encoding)
+  最佳平均排名: 1.00
+  改善: +14.00 ✓
+
+分類: large_datasets+regression+numerical
+  資料集數: 10
+  Baseline (0.8/0.15/0.05, none): 平均排名 17.20
+  最佳配置: tabm(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
+  最佳平均排名: 6.90
+  改善: +10.30 ✓
+
+分類: small_datasets+binclass+balanced
+  資料集數: 14
+  Baseline (0.8/0.15/0.05, none): 平均排名 11.57
+  最佳配置: tabm(ratio=0.05/0.15/0.8, gnn_stage=none)
+  最佳平均排名: 11.00
+  改善: +0.57 ✓
+
+分類: small_datasets+binclass+categorical
+  資料集數: 7
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.57
+  最佳配置: tabm(ratio=0.8/0.15/0.05, gnn_stage=none)
+  最佳平均排名: 9.57
+  改善: +0.00 ✗
+
+分類: small_datasets+binclass+numerical
+  資料集數: 28
+  Baseline (0.8/0.15/0.05, none): 平均排名 9.39
+  最佳配置: tabm(ratio=0.8/0.15/0.05, gnn_stage=none)
+  最佳平均排名: 9.39
+  改善: +0.00 ✗
+
+分類: small_datasets+regression+balanced
+  資料集數: 6
+  Baseline (0.8/0.15/0.05, none): 平均排名 12.33
+  最佳配置: tabm(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
+  最佳平均排名: 6.83
+  改善: +5.50 ✓
+
+分類: small_datasets+regression+categorical
+  資料集數: 5
+  Baseline (0.8/0.15/0.05, none): 平均排名 15.40
+  最佳配置: tabm(ratio=0.05/0.15/0.8, gnn_stage=encoding)
   最佳平均排名: 4.00
-  改善: +4.94 ✓
+  改善: +11.40 ✓
+
+分類: small_datasets+regression+numerical
+  資料集數: 36
+  Baseline (0.8/0.15/0.05, none): 平均排名 15.17
+  最佳配置: tabm(ratio=0.05/0.15/0.8, gnn_stage=columnwise)
+  最佳平均排名: 5.28
+  改善: +9.89 ✓
 

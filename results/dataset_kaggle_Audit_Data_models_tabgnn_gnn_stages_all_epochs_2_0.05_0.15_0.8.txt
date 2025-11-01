@@ -1,0 +1,4 @@
+dataset: kaggle_Audit_Data
+  模型: tabgnn
+    GNN階段: none
+          錯誤: ModelRunner.run_model() missing 1 required positional argument: 'gnn_stage'

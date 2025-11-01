@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-生成GNN增強模型相對排名 - 重新計算在45個GNN變體之間的排名
-從原始實驗結果重新讀取每個數據集的性能指標，只在45個GNN變體中重新排名
+生成GNN增強模型相對排名 - 重新計算在50個GNN變體之間的排名
+從原始實驗結果重新讀取每個數據集的性能指標，只在50個GNN變體中重新排名
 """
 
 import json
@@ -11,7 +11,7 @@ from collections import defaultdict
 # 可以插入GNN的模型
 GNN_INSERTABLE_MODELS = [
     'excelformer', 'fttransformer', 'resnet', 'tabnet', 
-    'tabtransformer', 'trompt', 'vime', 'scarf', 'subtab'
+    'tabtransformer', 'trompt', 'vime', 'scarf', 'subtab', 'tabm'
 ]
 
 # GNN插入階段（排除none）
@@ -19,60 +19,96 @@ GNN_STAGES_ONLY = ['start', 'materialize', 'encoding', 'columnwise', 'decoding']
 
 def load_experiment_results(results_folder):
     """載入所有實驗結果"""
+    # The summary files are plain text reports placed in summary_results.
+    # We'll parse all .txt files and extract dataset / model / ratio / gnn_stage / Best test metric.
     results = defaultdict(lambda: defaultdict(dict))
     results_path = Path(results_folder)
-    
-    for json_file in results_path.glob("*.json"):
-        try:
-            with open(json_file, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                
-            # 解析文件名獲取模型、ratio和stage信息
-            filename = json_file.stem
-            parts = filename.split('_')
-            
-            # 找到模型名
-            model_name = None
-            for model in GNN_INSERTABLE_MODELS:
-                if model in filename:
-                    model_name = model
+
+    import re
+
+    def parse_txt_file(fp):
+        """Parse a summary .txt file and return list of records.
+
+        Each record: {'dataset', 'model', 'gnn_stage', 'ratio', 'test_metric', 'task_type'}
+        """
+        txt = fp.read_text(encoding='utf-8', errors='ignore')
+        records = []
+
+        # infer ratio and model from filename
+        name = fp.stem
+        # filename pattern contains model and ratio at end like ..._0.05_0.15_0.8.txt
+        ratio_match = re.search(r'(\d+\.\d+)_(\d+\.\d+)_(\d+\.\d+)$', name)
+        ratio = None
+        if ratio_match:
+            ratio = f"{ratio_match.group(1)}/{ratio_match.group(2)}/{ratio_match.group(3)}"
+
+        # try to extract model name (one of insertable models or others)
+        model_name = None
+        for m in GNN_INSERTABLE_MODELS:
+            if m in name:
+                model_name = m
+                break
+        # also consider tabgnn or reference models may be in filename
+        if not model_name:
+            for m in ['tabgnn','t2gformer','tabpfn','xgboost','catboost','lightgbm']:
+                if m in name:
+                    model_name = m
                     break
-            
-            if not model_name:
-                continue
-                
-            # 解析ratio和stage
-            ratio = None
-            stage = None
-            
-            for i, part in enumerate(parts):
-                if part == 'ratio':
-                    ratio = f"{parts[i+1]}/{parts[i+2]}/{parts[i+3]}"
-                elif part == 'stage':
-                    stage = parts[i+1]
-            
-            if not ratio or not stage or stage == 'none':
-                continue
-            
-            # 只保留GNN階段
-            if stage not in GNN_STAGES_ONLY:
-                continue
-            
-            # 存儲每個數據集的結果
-            for dataset_name, dataset_results in data.items():
-                if isinstance(dataset_results, dict) and 'test_metric' in dataset_results:
-                    competitor_key = f"{model_name}(ratio={ratio}, gnn_stage={stage})"
-                    results[dataset_name][competitor_key] = {
-                        'metric': dataset_results['test_metric'],
-                        'task': dataset_results.get('task', 'unknown'),
+
+        # split into dataset blocks by 'dataset:' markers
+        parts = re.split(r'dataset:\s*(\S+)', txt)[1:]
+        for i in range(0, len(parts), 2):
+            ds = parts[i].strip()
+            block = parts[i+1]
+            # detect task type if present
+            task_match = re.search(r'任務類型:\s*(\w+)', block)
+            task = task_match.group(1) if task_match else 'unknown'
+
+            # find each GNN stage block
+            stage_blocks = re.split(r'GNN階段:\s*(\S+)', block)[1:]
+            for j in range(0, len(stage_blocks), 2):
+                stage = stage_blocks[j].strip()
+                content = stage_blocks[j+1]
+                # find Best test metric
+                m = re.search(r'Best test metric:\s*([0-9\.eE+-]+)', content)
+                if m:
+                    try:
+                        metric = float(m.group(1))
+                    except:
+                        continue
+                    rec = {
+                        'dataset': ds,
                         'model': model_name,
+                        'gnn_stage': stage,
                         'ratio': ratio,
-                        'stage': stage
+                        'test_metric': metric,
+                        'task_type': task
                     }
+                    records.append(rec)
+        return records
+
+    for txt_file in results_path.glob('*.txt'):
+        try:
+            recs = parse_txt_file(txt_file)
+            for r in recs:
+                # only consider insertable models and their GNN stages (exclude none)
+                if r['model'] not in GNN_INSERTABLE_MODELS:
+                    continue
+                if r['gnn_stage'] not in GNN_STAGES_ONLY:
+                    continue
+                # store
+                competitor_key = f"{r['model']}(ratio={r['ratio']}, gnn_stage={r['gnn_stage']})"
+                results[r['dataset']][competitor_key] = {
+                    'metric': r['test_metric'],
+                    'task': r['task_type'],
+                    'model': r['model'],
+                    'ratio': r['ratio'],
+                    'stage': r['gnn_stage']
+                }
         except Exception as e:
-            print(f"警告: 無法處理文件 {json_file}: {e}")
+            print(f"警告: 無法處理文件 {txt_file}: {e}")
             continue
-    
+
     return results
 
 def classify_dataset(dataset_name, results):
@@ -191,33 +227,41 @@ def generate_relative_ranking(results_folder, target_ratio, output_folder, datas
     return output_file
 
 def load_dataset_classifications():
-    """載入數據集分類信息"""
-    # 從現有JSON文件中提取數據集分類
-    json_file = "/home/shangyuan/ModelComparison/TaBLEau/gnn_enhancement_analysis/gnn_enhancement_all_models_all_models.json"
-    
+    """載入數據集分類信息
+
+    掃描 datasets 目錄結構：
+    datasets/<size>/<task>/<feature>/<dataset_name>
+    並返回一個 mapping: dataset_name -> "<size>+<task>+<feature>"
+    """
     classifications = {}
-    
-    try:
-        with open(json_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        
-        # 從任一模型的數據中提取分類信息
-        if data:
-            first_model = list(data.keys())[0]
-            model_data = data[first_model]
-            
-            for classification, class_data in model_data.items():
-                # 從rankings中提取數據集名稱
-                # 注意：這裡需要有實際的數據集名稱，暫時先跳過
-                pass
-    except Exception as e:
-        print(f"警告: 無法載入數據集分類: {e}")
-    
+    base = Path('/home/shangyuan/ModelComparison/TaBLEau/datasets')
+    if not base.exists():
+        return classifications
+
+    for size_dir in base.iterdir():
+        if not size_dir.is_dir():
+            continue
+        size = size_dir.name
+        for task_dir in size_dir.iterdir():
+            if not task_dir.is_dir():
+                continue
+            task = task_dir.name
+            for feature_dir in task_dir.iterdir():
+                if not feature_dir.is_dir():
+                    continue
+                feature = feature_dir.name
+                for dataset_dir in feature_dir.iterdir():
+                    if not dataset_dir.is_dir():
+                        continue
+                    dataset_name = dataset_dir.name
+                    classifications[dataset_name] = f"{size}+{task}+{feature}"
+
     return classifications
 
 def main():
     # 路徑設置
-    results_folder = "/home/shangyuan/ModelComparison/TaBLEau/results"
+    # summary_results contains the per-model text reports generated earlier
+    results_folder = "/home/shangyuan/ModelComparison/TaBLEau/summary_results"
     output_folder = "/home/shangyuan/ModelComparison/TaBLEau/gnn_enhancement_analysis"
     
     print("="*100)
@@ -232,10 +276,10 @@ def main():
     print("\n生成GNN相對排名報告...")
     
     # 1. 大訓練集 (0.8/0.15/0.05)
-    # generate_relative_ranking(results_folder, '0.8/0.15/0.05', output_folder, dataset_classifications)
+    generate_relative_ranking(results_folder, '0.8/0.15/0.05', output_folder, dataset_classifications)
     
     # 2. 小訓練集 (0.05/0.15/0.8)
-    # generate_relative_ranking(results_folder, '0.05/0.15/0.8', output_folder, dataset_classifications)
+    generate_relative_ranking(results_folder, '0.05/0.15/0.8', output_folder, dataset_classifications)
     
     print("\n注意: 此腳本需要訪問原始實驗結果文件才能重新計算排名")
     print("請確保 results 資料夾中包含所有實驗結果的JSON文件")

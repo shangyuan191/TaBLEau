@@ -1,0 +1,63 @@
+{
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced": {
+    "dataset_dir": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced",
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_QSAR_Bioconcentration_classes_dataset/UCI_QSAR_Bioconcentration_classes_dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 779,
+    "value_counts": {
+      "0": 460,
+      "1": 319
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical": {
+    "dataset_dir": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical",
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/UCI_Early_stage_diabetes_risk_prediction_dataset/UCI_Early_stage_diabetes_risk_prediction_dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 520,
+    "value_counts": {
+      "0": 320,
+      "1": 200
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical": {
+    "dataset_dir": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical",
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Audit_Data/UCI_Audit_Data.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 776,
+    "value_counts": {
+      "0": 471,
+      "1": 305
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical": {
+    "dataset_dir": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical",
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/MagicTelescope/MagicTelescope.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 13376,
+    "value_counts": {
+      "0": 6688,
+      "1": 6688
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical": {
+    "dataset_dir": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical",
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/eye/eye.csv",
+    "target_col": "target",
+    "n_unique": 3,
+    "n_rows": 10936,
+    "value_counts": {
+      "1": 4262,
+      "0": 3804,
+      "2": 2870
+    },
+    "note": "ok"
+  }
+}

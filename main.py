@@ -299,7 +299,8 @@ def run_experiment(args):
                 logger.info(f"模型 {model_name} 是 comparison 類型，跳過 GNN 階段")
                 try:
                     # 傳入 train_df, val_df, test_df
-                    result = model_runner.run_model(model_name, train_df, val_df, test_df, dataset_results, experiment_config, model_type)
+                    # comparison 類型模型沒有 GNN 階段，需要傳入 'none' 作為 gnn_stage 參數
+                    result = model_runner.run_model(model_name, train_df, val_df, test_df, dataset_results, experiment_config, model_type, 'none')
                     model_results['none'] = result  # 將結果存儲在 'none' 階段
                 except Exception as e:
                     logger.error(f"運行 {model_name} 模型時出錯: {str(e)}")

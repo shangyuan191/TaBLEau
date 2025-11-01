@@ -28,12 +28,14 @@ GNN增強效果分析 - 模型: VIME
 9       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.83        6         
 10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.00        6         
 11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.83        6         
-12      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             13.00       6         
-13      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       13.00       6         
-14      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         13.00       6         
-15      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         15.17       6         
-16      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      15.50       6         
-17      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            16.17       6         
+12      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       13.00       6         
+13      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         13.00       6         
+14      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             13.17       6         
+15      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         15.50       6         
+16      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      15.83       6         
+17      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            16.67       6         
+18      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           17.17       6         
+19      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           18.50       6         
 
 ====================================================================================================
 分類: large_datasets+multiclass+numerical (包含 3 個資料集)
@@ -47,17 +49,19 @@ GNN增強效果分析 - 模型: VIME
 4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.67        3         
 5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.33        3         
 6       vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             7.67        3         
-7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.67        3         
-8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.00        3         
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.00        3         
-10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.33        3         
-11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.00       3         
-12      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         12.33       3         
-13      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       13.67       3         
-14      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             14.00       3         
-15      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         15.00       3         
-16      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      15.67       3         
-17      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            16.33       3         
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.00        3         
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.33        3         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.33        3         
+10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.67        3         
+11      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           10.33       3         
+12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.33       3         
+13      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           14.00       3         
+14      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         14.00       3         
+15      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       15.33       3         
+16      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             15.67       3         
+17      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         17.00       3         
+18      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      17.67       3         
+19      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            18.33       3         
 
 ====================================================================================================
 分類: large_datasets+regression+categorical (包含 1 個資料集)
@@ -67,21 +71,23 @@ GNN增強效果分析 - 模型: VIME
 ----------------------------------------------------------------------------------------------------
 1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.00        1         
 2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.00        1         
-3       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         3.00        1         
-4       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            4.00        1         
-5       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      5.00        1         
-6       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       6.00        1         
-7       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         7.00        1         
-8       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             8.00        1         
-9       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.00        1         
-10      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       10.00       1         
-11      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             11.00       1         
-12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.00       1         
-13      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.00       1         
-14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          14.00       1         
-15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.00       1         
-16      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         16.00       1         
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.00       1         
+3       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.00        1         
+4       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.00        1         
+5       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         5.00        1         
+6       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            6.00        1         
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      7.00        1         
+8       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       8.00        1         
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         9.00        1         
+10      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             10.00       1         
+11      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       11.00       1         
+12      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       12.00       1         
+13      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             13.00       1         
+14      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.00       1         
+15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.00       1         
+16      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          16.00       1         
+17      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          17.00       1         
+18      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         18.00       1         
+19      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         19.00       1         
 
 ====================================================================================================
 分類: large_datasets+regression+numerical (包含 10 個資料集)
@@ -89,23 +95,25 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.50        10        
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.60        10        
-3       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            3.80        10        
-4       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      4.10        10        
-5       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         6.30        10        
-6       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             6.40        10        
-7       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         6.70        10        
-8       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       7.30        10        
-9       vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             10.10       10        
-10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.60       10        
-11      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       11.20       10        
-12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.90       10        
-13      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.10       10        
-14      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       13.90       10        
-15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.70       10        
-16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.10       10        
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.70       10        
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.60        10        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           1.70        10        
+3       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.30        10        
+4       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.20        10        
+5       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            5.70        10        
+6       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      6.00        10        
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         8.20        10        
+8       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             8.30        10        
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         8.50        10        
+10      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       9.20        10        
+11      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             12.10       10        
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.60       10        
+13      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.20       10        
+14      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         13.90       10        
+15      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.10       10        
+16      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       15.90       10        
+17      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.70       10        
+18      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          17.10       10        
+19      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.70       10        
 
 ====================================================================================================
 分類: small_datasets+binclass+balanced (包含 14 個資料集)
@@ -113,23 +121,25 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.36        14        
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           5.14        14        
-3       vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             5.36        14        
-4       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       5.43        14        
-5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.29        14        
-6       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         6.50        14        
-7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.07        14        
-8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.64        14        
-9       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             10.57       14        
-10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.64       14        
-11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.71       14        
-12      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       10.71       14        
-13      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         10.71       14        
-14      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         10.71       14        
-15      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.86       14        
-16      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      13.21       14        
-17      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            14.07       14        
+1       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.50        14        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           5.57        14        
+3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       5.71        14        
+4       vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             5.93        14        
+5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.57        14        
+6       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         6.93        14        
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.64        14        
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       10.29       14        
+9       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           11.29       14        
+10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.43       14        
+11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.50       14        
+12      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             11.50       14        
+13      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       11.71       14        
+14      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         11.79       14        
+15      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.00       14        
+16      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         12.00       14        
+17      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           12.14       14        
+18      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      14.86       14        
+19      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            15.64       14        
 
 ====================================================================================================
 分類: small_datasets+binclass+categorical (包含 7 個資料集)
@@ -137,23 +147,25 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.86        7         
-2       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         5.14        7         
-3       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       6.14        7         
-4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.71        7         
-5       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.71        7         
-6       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.14        7         
-7       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.14        7         
-8       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.71        7         
-9       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.14        7         
-10      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.00        7         
-11      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             9.57        7         
-12      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         10.43       7         
-13      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             11.14       7         
-14      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         11.57       7         
-15      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       12.29       7         
-16      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            13.14       7         
-17      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      16.14       7         
+1       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       5.57        7         
+2       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         5.86        7         
+3       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       7.00        7         
+4       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.29        7         
+5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          7.43        7         
+6       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.00        7         
+7       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          8.00        7         
+8       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.57        7         
+9       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.71        7         
+10      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.71        7         
+11      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.86        7         
+12      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             10.29       7         
+13      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.71       7         
+14      vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         11.57       7         
+15      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             12.57       7         
+16      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         13.14       7         
+17      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       13.71       7         
+18      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            14.14       7         
+19      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      17.86       7         
 
 ====================================================================================================
 分類: small_datasets+binclass+numerical (包含 28 個資料集)
@@ -161,23 +173,25 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.25        28        
-2       vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             3.93        28        
-3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.04        28        
-4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          4.93        28        
-5       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.00        28        
-6       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.54        28        
-7       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.50        28        
-8       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         9.75        28        
-9       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.07       28        
-10      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             10.50       28        
-11      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       10.57       28        
-12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.71       28        
-13      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.32       28        
-14      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         13.25       28        
-15      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            13.46       28        
-16      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      13.57       28        
-17      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          13.61       28        
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.32        28        
+2       vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             4.18        28        
+3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.32        28        
+4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.11        28        
+5       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.18        28        
+6       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.68        28        
+7       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       10.21       28        
+8       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         10.57       28        
+9       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           10.82       28        
+10      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             11.36       28        
+11      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       11.36       28        
+12      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           11.46       28        
+13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.57       28        
+14      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.11       28        
+15      vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         14.36       28        
+16      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           14.39       28        
+17      vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            14.57       28        
+18      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          14.64       28        
+19      vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      14.79       28        
 
 ====================================================================================================
 分類: small_datasets+regression+balanced (包含 6 個資料集)
@@ -185,23 +199,25 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.17        6         
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.67        6         
-3       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            6.67        6         
-4       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      6.67        6         
-5       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         7.33        6         
-6       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         8.00        6         
-7       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.33        6         
-8       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             8.33        6         
-9       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       8.50        6         
-10      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             8.83        6         
-11      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.00        6         
-12      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          9.33        6         
-13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.33        6         
-14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.50        6         
-15      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.33       6         
-16      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       14.33       6         
-17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       14.67       6         
+1       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           2.33        6         
+2       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.00        6         
+3       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.83        6         
+4       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.17        6         
+5       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            8.33        6         
+6       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      8.33        6         
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         8.67        6         
+8       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.67        6         
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         9.67        6         
+10      vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             10.00       6         
+11      vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       10.17       6         
+12      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             10.50       6         
+13      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          10.67       6         
+14      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         10.67       6         
+15      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.00       6         
+16      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.17       6         
+17      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         13.00       6         
+18      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       16.17       6         
+19      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       16.67       6         
 
 ====================================================================================================
 分類: small_datasets+regression+categorical (包含 5 個資料集)
@@ -209,23 +225,25 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           2.40        5         
-2       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         4.60        5         
-3       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         5.20        5         
-4       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             5.20        5         
-5       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       5.60        5         
-6       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            5.80        5         
-7       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      6.40        5         
-8       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         6.40        5         
-9       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.40        5         
-10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.40        5         
-11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.20       5         
-12      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             10.80       5         
-13      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.40       5         
-14      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.60       5         
-15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.80       5         
-16      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       15.20       5         
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.60       5         
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.80        5         
+2       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           4.00        5         
+3       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         5.40        5         
+4       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.00        5         
+5       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         6.60        5         
+6       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             6.60        5         
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       7.00        5         
+8       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            7.20        5         
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      7.80        5         
+10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.80        5         
+11      tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.80        5         
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.80       5         
+13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.80       5         
+14      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             12.80       5         
+15      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       15.40       5         
+16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.60       5         
+17      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.80       5         
+18      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       17.20       5         
+19      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.60       5         
 
 ====================================================================================================
 分類: small_datasets+regression+numerical (包含 36 個資料集)
@@ -233,20 +251,22 @@ GNN增強效果分析 - 模型: VIME
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           2.89        36        
-2       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      4.89        36        
-3       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            5.67        36        
-4       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         5.75        36        
-5       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       6.33        36        
-6       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             6.44        36        
-7       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.86        36        
-8       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         7.50        36        
-9       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          8.67        36        
-10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.81        36        
-11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.89        36        
-12      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             11.08       36        
-13      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.11       36        
-14      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.22       36        
-15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.50       36        
-16      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.56       36        
-17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       14.83       36        
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.64        36        
+2       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.92        36        
+3       vime(ratio=0.05/0.15/0.8, gnn_stage=materialize)                      6.08        36        
+4       vime(ratio=0.05/0.15/0.8, gnn_stage=start)                            6.89        36        
+5       vime(ratio=0.05/0.15/0.8, gnn_stage=encoding)                         6.92        36        
+6       vime(ratio=0.05/0.15/0.8, gnn_stage=columnwise)                       7.50        36        
+7       vime(ratio=0.05/0.15/0.8, gnn_stage=none)                             7.61        36        
+8       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.69        36        
+9       vime(ratio=0.05/0.15/0.8, gnn_stage=decoding)                         8.83        36        
+10      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.00        36        
+11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.17       36        
+12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.31       36        
+13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.42       36        
+14      vime(ratio=0.8/0.15/0.05, gnn_stage=none)                             12.81       36        
+15      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.83       36        
+16      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       15.08       36        
+17      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.22       36        
+18      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.31       36        
+19      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       16.78       36        

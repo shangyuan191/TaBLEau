@@ -5,11 +5,11 @@ GNN增強模型整體排名 - Train/Val/Test Ratio: 0.8/0.15/0.05
 說明：
 - 整體排名：跨所有數據集的平均表現（不區分數據集分類）
 - Train/Val/Test 比例: 0.8/0.15/0.05
-- 共 45 個競爭者：
-  * 9個模型：excelformer, fttransformer, resnet, tabnet, tabtransformer, trompt, vime, scarf, subtab
+- 共 50 個競爭者：
+  * 10個模型：excelformer, fttransformer, resnet, tabnet, tabtransformer, trompt, vime, scarf, subtab, tabm
   * 5種GNN插入階段：start, materialize, encoding, columnwise, decoding
-  * 不包含原始模型（none階段）和參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
-- 排名計算：只在這45個GNN變體之間重新計算相對排名（排名範圍: 1-45）
+  * 不包含原始模型（none階段）與參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm, tabgnn）
+- 排名計算：只在這50個GNN變體之間重新計算相對排名（排名範圍: 1-50）
 - 數據集總數: 116 個（涵蓋 10 種分類）
 - 排名越小表示表現越好
 
@@ -19,51 +19,56 @@ GNN增強模型整體排名 - Train/Val/Test Ratio: 0.8/0.15/0.05
 
 排名      競爭者                                                                        平均排名        最佳      最差      數據集數      
 ------------------------------------------------------------------------------------------------------------------------
-1       resnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            15.78       1       44      116       
-2       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            17.91       1       45      116       
-3       subtab(ratio=0.8/0.15/0.05, gnn_stage=start)                               18.45       1       43      116       
-4       subtab(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          19.03       1       42      116       
-5       scarf(ratio=0.8/0.15/0.05, gnn_stage=materialize)                          19.40       1       45      116       
-6       scarf(ratio=0.8/0.15/0.05, gnn_stage=start)                                19.48       1       45      116       
-7       subtab(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         19.59       1       44      116       
-8       subtab(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            19.68       1       42      116       
-9       vime(ratio=0.8/0.15/0.05, gnn_stage=encoding)                              20.63       1       38      116       
-10      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                     20.66       1       45      116       
-11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                    20.83       2       44      116       
-12      resnet(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          20.84       1       45      116       
-13      vime(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                            20.89       1       40      116       
-14      resnet(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            21.29       1       44      116       
-15      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                        21.32       1       45      116       
-16      vime(ratio=0.8/0.15/0.05, gnn_stage=start)                                 21.64       2       43      116       
-17      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                  21.72       2       44      116       
-18      vime(ratio=0.8/0.15/0.05, gnn_stage=decoding)                              21.75       2       45      116       
-19      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                   22.01       2       45      116       
-20      vime(ratio=0.8/0.15/0.05, gnn_stage=materialize)                           22.03       2       41      116       
-21      resnet(ratio=0.8/0.15/0.05, gnn_stage=start)                               22.50       3       43      116       
-22      scarf(ratio=0.8/0.15/0.05, gnn_stage=decoding)                             22.77       1       44      116       
-23      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                    22.95       1       45      116       
-24      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                  23.22       1       45      116       
-25      subtab(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            23.27       4       45      116       
-26      tabnet(ratio=0.8/0.15/0.05, gnn_stage=start)                               23.59       2       42      116       
-27      trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            23.68       1       45      116       
-28      resnet(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         23.76       1       44      116       
-29      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         23.83       1       45      116       
-30      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          23.91       1       44      116       
-31      trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                               24.18       1       44      116       
-32      tabnet(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         24.47       2       44      116       
-33      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                 24.50       4       45      116       
-34      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                       24.61       4       45      116       
-35      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                          25.02       1       45      116       
-36      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       25.30       1       45      116       
-37      tabnet(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            25.79       1       45      116       
-38      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    26.27       1       45      116       
-39      tabnet(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          26.61       2       45      116       
-40      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       27.28       1       45      116       
-41      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     27.28       1       45      116       
-42      tabnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            28.16       2       45      116       
-43      scarf(ratio=0.8/0.15/0.05, gnn_stage=encoding)                             28.73       1       45      116       
-44      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                     28.79       1       45      116       
-45      scarf(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                           29.63       1       45      116       
+1       resnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            17.28       1       49      116       
+2       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            19.46       1       50      116       
+3       subtab(ratio=0.8/0.15/0.05, gnn_stage=start)                               20.08       1       48      116       
+4       subtab(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          20.72       1       47      116       
+5       scarf(ratio=0.8/0.15/0.05, gnn_stage=materialize)                          20.93       1       50      116       
+6       scarf(ratio=0.8/0.15/0.05, gnn_stage=start)                                21.09       1       50      116       
+7       subtab(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         21.13       1       49      116       
+8       subtab(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            21.40       1       47      116       
+9       vime(ratio=0.8/0.15/0.05, gnn_stage=encoding)                              22.39       1       43      116       
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                    22.64       2       49      116       
+11      vime(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                            22.69       1       45      116       
+12      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                     22.69       1       50      116       
+13      resnet(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          22.84       1       50      116       
+14      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                        23.19       1       50      116       
+15      vime(ratio=0.8/0.15/0.05, gnn_stage=start)                                 23.53       2       48      116       
+16      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                  23.57       2       49      116       
+17      vime(ratio=0.8/0.15/0.05, gnn_stage=decoding)                              23.66       2       50      116       
+18      resnet(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            23.70       1       49      116       
+19      vime(ratio=0.8/0.15/0.05, gnn_stage=materialize)                           23.85       2       45      116       
+20      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                   24.36       2       50      116       
+21      resnet(ratio=0.8/0.15/0.05, gnn_stage=start)                               24.45       3       48      116       
+22      scarf(ratio=0.8/0.15/0.05, gnn_stage=decoding)                             24.74       1       49      116       
+23      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                    24.99       1       50      116       
+24      subtab(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            25.22       4       50      116       
+25      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                  25.29       1       50      116       
+26      tabnet(ratio=0.8/0.15/0.05, gnn_stage=start)                               25.78       2       47      116       
+27      resnet(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         25.84       1       49      116       
+28      trompt(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            26.03       1       50      116       
+29      trompt(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         26.04       1       50      116       
+30      trompt(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          26.18       1       49      116       
+31      tabm(ratio=0.8/0.15/0.05, gnn_stage=encoding)                              26.28       2       46      116       
+32      trompt(ratio=0.8/0.15/0.05, gnn_stage=start)                               26.38       1       49      116       
+33      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                 26.64       4       50      116       
+34      tabnet(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         26.73       2       49      116       
+35      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=start)                       26.88       4       50      116       
+36      excelformer(ratio=0.8/0.15/0.05, gnn_stage=start)                          27.35       1       50      116       
+37      tabm(ratio=0.8/0.15/0.05, gnn_stage=decoding)                              27.54       2       49      116       
+38      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       28.03       1       50      116       
+39      tabm(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                            28.16       3       47      116       
+40      tabnet(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            28.63       1       50      116       
+41      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    28.94       1       50      116       
+42      tabnet(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          29.44       2       50      116       
+43      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       29.97       1       50      116       
+44      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     30.14       1       50      116       
+45      tabm(ratio=0.8/0.15/0.05, gnn_stage=start)                                 30.52       1       48      116       
+46      tabm(ratio=0.8/0.15/0.05, gnn_stage=materialize)                           30.68       2       46      116       
+47      tabnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            30.97       2       50      116       
+48      scarf(ratio=0.8/0.15/0.05, gnn_stage=encoding)                             31.48       1       50      116       
+49      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                     31.91       1       50      116       
+50      scarf(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                           32.56       1       50      116       
 
 ========================================================================================================================
 統計分析
@@ -73,25 +78,26 @@ GNN增強模型整體排名 - Train/Val/Test Ratio: 0.8/0.15/0.05
 
 排名      模型                  平均排名           變體數量      
 ------------------------------------------------------------
-1       subtab              20.01          5         
-2       resnet              20.83          5         
-3       vime                21.39          5         
-4       trompt              22.70          5         
-5       fttransformer       22.90          5         
-6       tabtransformer      23.22          5         
-7       scarf               24.00          5         
-8       tabnet              25.72          5         
-9       excelformer         26.23          5         
+1       subtab              21.71          5         
+2       resnet              22.82          5         
+3       vime                23.22          5         
+4       trompt              24.82          5         
+5       fttransformer       25.14          5         
+6       tabtransformer      25.29          5         
+7       scarf               26.16          5         
+8       tabnet              28.31          5         
+9       tabm                28.64          5         
+10      excelformer         28.89          5         
 
 各GNN階段的平均表現（所有模型的平均）：
 
 排名      GNN階段               平均排名           變體數量      
 ------------------------------------------------------------
-1       start               22.31          9         
-2       materialize         22.84          9         
-3       decoding            22.95          9         
-4       encoding            23.19          9         
-5       columnwise          23.71          9         
+1       start               24.92          10        
+2       decoding            25.34          10        
+3       materialize         25.44          10        
+4       encoding            25.56          10        
+5       columnwise          26.24          10        
 
 ========================================================================================================================
 Top 10 最佳配置
@@ -99,16 +105,16 @@ Top 10 最佳配置
 
 排名      競爭者                                                                        平均排名           
 ----------------------------------------------------------------------------------------------------
-1       resnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            15.78          
-2       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            17.91          
-3       subtab(ratio=0.8/0.15/0.05, gnn_stage=start)                               18.45          
-4       subtab(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          19.03          
-5       scarf(ratio=0.8/0.15/0.05, gnn_stage=materialize)                          19.40          
-6       scarf(ratio=0.8/0.15/0.05, gnn_stage=start)                                19.48          
-7       subtab(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         19.59          
-8       subtab(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            19.68          
-9       vime(ratio=0.8/0.15/0.05, gnn_stage=encoding)                              20.63          
-10      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                     20.66          
+1       resnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            17.28          
+2       trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            19.46          
+3       subtab(ratio=0.8/0.15/0.05, gnn_stage=start)                               20.08          
+4       subtab(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          20.72          
+5       scarf(ratio=0.8/0.15/0.05, gnn_stage=materialize)                          20.93          
+6       scarf(ratio=0.8/0.15/0.05, gnn_stage=start)                                21.09          
+7       subtab(ratio=0.8/0.15/0.05, gnn_stage=materialize)                         21.13          
+8       subtab(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            21.40          
+9       vime(ratio=0.8/0.15/0.05, gnn_stage=encoding)                              22.39          
+10      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                    22.64          
 
 ========================================================================================================================
 Bottom 10 最差配置
@@ -116,13 +122,13 @@ Bottom 10 最差配置
 
 排名      競爭者                                                                        平均排名           
 ----------------------------------------------------------------------------------------------------
-36      excelformer(ratio=0.8/0.15/0.05, gnn_stage=encoding)                       25.30          
-37      tabnet(ratio=0.8/0.15/0.05, gnn_stage=encoding)                            25.79          
-38      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    26.27          
-39      tabnet(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          26.61          
-40      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       27.28          
-41      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     27.28          
-42      tabnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            28.16          
-43      scarf(ratio=0.8/0.15/0.05, gnn_stage=encoding)                             28.73          
-44      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                     28.79          
-45      scarf(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                           29.63          
+41      excelformer(ratio=0.8/0.15/0.05, gnn_stage=materialize)                    28.94          
+42      tabnet(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                          29.44          
+43      excelformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                       29.97          
+44      excelformer(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                     30.14          
+45      tabm(ratio=0.8/0.15/0.05, gnn_stage=start)                                 30.52          
+46      tabm(ratio=0.8/0.15/0.05, gnn_stage=materialize)                           30.68          
+47      tabnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)                            30.97          
+48      scarf(ratio=0.8/0.15/0.05, gnn_stage=encoding)                             31.48          
+49      fttransformer(ratio=0.8/0.15/0.05, gnn_stage=decoding)                     31.91          
+50      scarf(ratio=0.8/0.15/0.05, gnn_stage=columnwise)                           32.56          

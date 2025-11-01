@@ -28,12 +28,14 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 9       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.50        6         
 10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.33        6         
 11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   10.50       6         
-12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               12.67       6         
-13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   14.17       6         
-14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               14.33       6         
-15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             15.00       6         
-16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            15.17       6         
-17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  15.50       6         
+12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               12.83       6         
+13      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           14.17       6         
+14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   15.00       6         
+15      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           15.33       6         
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               15.83       6         
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             16.67       6         
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            16.83       6         
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  17.17       6         
 
 ====================================================================================================
 分類: large_datasets+multiclass+numerical (包含 3 個資料集)
@@ -47,17 +49,19 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.00        3         
 5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.33        3         
 6       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   5.67        3         
-7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.00        3         
-8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.33        3         
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.33        3         
-10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.67        3         
-11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.33       3         
-12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               12.67       3         
-13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   13.00       3         
-14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             13.33       3         
-15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               15.67       3         
-16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            16.00       3         
-17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  16.33       3         
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.33        3         
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.67        3         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.67        3         
+10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.00       3         
+11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.67       3         
+12      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           11.00       3         
+13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               14.00       3         
+14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             14.33       3         
+15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   14.33       3         
+16      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           14.67       3         
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               17.67       3         
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            18.00       3         
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  18.33       3         
 
 ====================================================================================================
 分類: large_datasets+regression+categorical (包含 1 個資料集)
@@ -73,15 +77,17 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               6.00        1         
 7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   7.00        1         
 8       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   8.00        1         
-9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  9.00        1         
-10      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       10.00       1         
-11      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       11.00       1         
-12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.00       1         
-13      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.00       1         
-14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          14.00       1         
-15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.00       1         
-16      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         16.00       1         
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.00       1         
+9       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           9.00        1         
+10      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           10.00       1         
+11      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  11.00       1         
+12      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       12.00       1         
+13      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       13.00       1         
+14      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.00       1         
+15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.00       1         
+16      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          16.00       1         
+17      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          17.00       1         
+18      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         18.00       1         
+19      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         19.00       1         
 
 ====================================================================================================
 分類: large_datasets+regression+numerical (包含 10 個資料集)
@@ -89,23 +95,25 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.50        10        
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.00        10        
-3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            4.70        10        
-4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  5.30        10        
-5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               5.30        10        
-6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             5.40        10        
-7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               6.10        10        
-8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   6.20        10        
-9       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   8.90        10        
-10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.60       10        
-11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.00       10        
-12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.20       10        
-13      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       12.40       10        
-14      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.70       10        
-15      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       14.90       10        
-16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.10       10        
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.70       10        
+1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           1.60        10        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           2.10        10        
+3       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.90        10        
+4       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.80        10        
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            6.40        10        
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  7.00        10        
+7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               7.00        10        
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             7.10        10        
+9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               7.80        10        
+10      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   7.90        10        
+11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   10.80       10        
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.60       10        
+13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.00       10        
+14      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         14.20       10        
+15      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       14.40       10        
+16      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.70       10        
+17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       16.90       10        
+18      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          17.10       10        
+19      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.70       10        
 
 ====================================================================================================
 分類: small_datasets+binclass+balanced (包含 14 個資料集)
@@ -113,23 +121,25 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.79        14        
-2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.43        14        
-3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.57        14        
-4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.50        14        
-5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          5.71        14        
-6       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   6.50        14        
-7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.43        14        
-8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.79        14        
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.79        14        
-10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.79        14        
-11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.36       14        
-12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               11.64       14        
-13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               11.71       14        
-14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   12.64       14        
-15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             13.43       14        
-16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            13.43       14        
-17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  13.50       14        
+1       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         3.93        14        
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.86        14        
+3       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.86        14        
+4       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.93        14        
+5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.00        14        
+6       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   7.14        14        
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.00        14        
+8       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.43        14        
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.57       14        
+10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.57       14        
+11      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           11.21       14        
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.50       14        
+13      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           11.79       14        
+14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               12.71       14        
+15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               12.93       14        
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   13.93       14        
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  14.86       14        
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             14.86       14        
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            14.93       14        
 
 ====================================================================================================
 分類: small_datasets+binclass+categorical (包含 7 個資料集)
@@ -137,23 +147,25 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       4.57        7         
-2       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         5.43        7         
-3       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           5.57        7         
-4       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       6.29        7         
-5       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          6.43        7         
-6       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.71        7         
-7       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         6.86        7         
-8       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.00        7         
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.29        7         
-10      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         7.86        7         
-11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   9.71        7         
-12      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   11.14       7         
-13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  12.71       7         
-14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               13.29       7         
-15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               13.57       7         
-16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             13.86       7         
-17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            14.71       7         
+1       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       5.29        7         
+2       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.14        7         
+3       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         6.14        7         
+4       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          7.14        7         
+5       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       7.14        7         
+6       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         7.43        7         
+7       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.57        7         
+8       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          7.86        7         
+9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         8.14        7         
+10      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.57        7         
+11      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.43        7         
+12      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           9.86        7         
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   11.29       7         
+14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   12.43       7         
+15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  14.00       7         
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               14.86       7         
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               15.14       7         
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             15.29       7         
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            16.29       7         
 
 ====================================================================================================
 分類: small_datasets+binclass+numerical (包含 28 個資料集)
@@ -161,23 +173,25 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.04        28        
-2       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       3.32        28        
-3       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          4.39        28        
-4       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.71        28        
-5       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.32        28        
-6       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   8.14        28        
-7       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       8.29        28        
-8       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           8.61        28        
-9       catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.11        28        
-10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.25        28        
-11      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               11.07       28        
-12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          11.36       28        
-13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             12.61       28        
-14      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   12.71       28        
-15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  13.18       28        
-16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               13.32       28        
-17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            14.57       28        
+1       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           3.11        28        
+2       t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       3.61        28        
+3       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          4.57        28        
+4       catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         4.89        28        
+5       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         5.46        28        
+6       t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       9.00        28        
+7       tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   9.04        28        
+8       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           9.36        28        
+9       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.86        28        
+10      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.96        28        
+11      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.04       28        
+12      tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           12.14       28        
+13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               12.36       28        
+14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.39       28        
+15      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             14.14       28        
+16      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   14.21       28        
+17      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  14.79       28        
+18      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               14.82       28        
+19      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            16.25       28        
 
 ====================================================================================================
 分類: small_datasets+regression+balanced (包含 6 個資料集)
@@ -185,23 +199,25 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            4.50        6         
-2       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               4.67        6         
-3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   5.33        6         
-4       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.67        6         
-5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               6.67        6         
-6       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.50        6         
-7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  8.17        6         
-8       lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         8.50        6         
-9       xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          9.33        6         
-10      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.83        6         
-11      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             9.83        6         
-12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   10.00       6         
-13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.33       6         
-14      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.50       6         
-15      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.50       6         
-16      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       14.67       6         
-17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       15.00       6         
+1       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.17        6         
+2       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            5.50        6         
+3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               5.83        6         
+4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   6.00        6         
+5       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           7.50        6         
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               8.17        6         
+7       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.67        6         
+8       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.50        6         
+9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  9.67        6         
+10      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         9.83        6         
+11      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          10.67       6         
+12      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         11.50       6         
+13      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             11.50       6         
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   11.67       6         
+15      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         12.00       6         
+16      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          12.17       6         
+17      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         13.17       6         
+18      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       16.50       6         
+19      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       17.00       6         
 
 ====================================================================================================
 分類: small_datasets+regression+categorical (包含 5 個資料集)
@@ -209,23 +225,25 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   3.40        5         
-2       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           4.80        5         
-3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               5.00        5         
-4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             5.60        5         
-5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               5.80        5         
-6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            6.00        5         
-7       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         6.40        5         
-8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  6.60        5         
-9       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           8.00        5         
-10      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          9.40        5         
-11      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.40        5         
-12      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   10.40       5         
-13      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.40       5         
-14      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.60       5         
-15      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.60       5         
-16      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       15.20       5         
-17      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.40       5         
+1       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           3.80        5         
+2       tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           4.80        5         
+3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   5.00        5         
+4       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           6.20        5         
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               6.20        5         
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             7.20        5         
+7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               7.40        5         
+8       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            7.60        5         
+9       lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         7.80        5         
+10      tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  8.20        5         
+11      tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.40        5         
+12      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.80       5         
+13      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.00       5         
+14      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   12.40       5         
+15      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       15.40       5         
+16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.60       5         
+17      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         16.60       5         
+18      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       17.20       5         
+19      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         17.40       5         
 
 ====================================================================================================
 分類: small_datasets+regression+numerical (包含 36 個資料集)
@@ -233,20 +251,22 @@ GNN增強效果分析 - 模型: TABTRANSFORMER
 
 排名      競爭者                                                                   平均排名        資料集數      
 ----------------------------------------------------------------------------------------------------
-1       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           4.42        36        
-2       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             5.42        36        
-3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               5.81        36        
-4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  6.00        36        
-5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   6.11        36        
-6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               6.42        36        
-7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            6.64        36        
-8       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           6.67        36        
-9       xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          8.67        36        
-10      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         9.31        36        
-11      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   9.44        36        
-12      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.17       36        
-13      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.06       36        
-14      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       13.28       36        
-15      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          13.36       36        
-16      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         13.39       36        
-17      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       14.86       36        
+1       tabgnn(ratio=0.05/0.15/0.8, gnn_stage=none)                           4.56        36        
+2       tabpfn(ratio=0.05/0.15/0.8, gnn_stage=none)                           5.17        36        
+3       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=columnwise)             6.44        36        
+4       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=decoding)               6.97        36        
+5       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=start)                  7.11        36        
+6       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=none)                   7.19        36        
+7       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=encoding)               7.50        36        
+8       tabpfn(ratio=0.8/0.15/0.05, gnn_stage=none)                           7.50        36        
+9       tabtransformer(ratio=0.05/0.15/0.8, gnn_stage=materialize)            7.78        36        
+10      tabgnn(ratio=0.8/0.15/0.05, gnn_stage=none)                           9.22        36        
+11      xgboost(ratio=0.05/0.15/0.8, gnn_stage=none)                          10.17       36        
+12      lightgbm(ratio=0.05/0.15/0.8, gnn_stage=none)                         10.81       36        
+13      tabtransformer(ratio=0.8/0.15/0.05, gnn_stage=none)                   10.94       36        
+14      catboost(ratio=0.05/0.15/0.8, gnn_stage=none)                         11.69       36        
+15      lightgbm(ratio=0.8/0.15/0.05, gnn_stage=none)                         14.78       36        
+16      xgboost(ratio=0.8/0.15/0.05, gnn_stage=none)                          15.08       36        
+17      t2g-former(ratio=0.05/0.15/0.8, gnn_stage=none)                       15.14       36        
+18      catboost(ratio=0.8/0.15/0.05, gnn_stage=none)                         15.14       36        
+19      t2g-former(ratio=0.8/0.15/0.05, gnn_stage=none)                       16.81       36        

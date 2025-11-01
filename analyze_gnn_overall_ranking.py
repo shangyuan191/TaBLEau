@@ -11,7 +11,7 @@ from collections import defaultdict
 # 可以插入GNN的模型
 GNN_INSERTABLE_MODELS = [
     'excelformer', 'fttransformer', 'resnet', 'tabnet', 
-    'tabtransformer', 'trompt', 'vime', 'scarf', 'subtab'
+    'tabtransformer', 'trompt', 'vime', 'scarf', 'subtab', 'tabm'
 ]
 
 # GNN插入階段（排除none）
@@ -59,7 +59,7 @@ def generate_overall_ranking(data, target_ratio, output_folder):
             for competitor, rank_data in rankings.items():
                 # 只保留：特定ratio + GNN階段（排除none）
                 if f'ratio={target_ratio}' in competitor and 'gnn_stage=none' not in competitor:
-                    # 確認競爭者屬於9個可插入GNN的模型
+                    # 確認競爭者屬於10個可插入GNN的模型
                     is_gnn_model = any(f'{m}(' in competitor for m in GNN_INSERTABLE_MODELS)
                     if is_gnn_model:
                         # 收集所有排名（跨所有分類）
@@ -68,8 +68,8 @@ def generate_overall_ranking(data, target_ratio, output_folder):
     # 計算總數據集數量
     total_datasets = sum(classification_dataset_counts.values())
     
-    # 第二步：為每個數據集重新計算45個GNN變體之間的相對排名
-    print("  重新計算45個GNN變體之間的相對排名...")
+    # 第二步：為每個數據集重新計算50個GNN變體之間的相對排名
+    print("  重新計算50個GNN變體之間的相對排名...")
     
     # 按數據集索引組織排名
     dataset_raw_ranks = defaultdict(dict)
@@ -131,10 +131,10 @@ def generate_overall_ranking(data, target_ratio, output_folder):
         f.write("- 整體排名：跨所有數據集的平均表現（不區分數據集分類）\n")
         f.write(f"- Train/Val/Test 比例: {target_ratio}\n")
         f.write(f"- 共 {len(all_competitors)} 個競爭者：\n")
-        f.write("  * 9個模型：excelformer, fttransformer, resnet, tabnet, tabtransformer, trompt, vime, scarf, subtab\n")
+        f.write("  * 10個模型：excelformer, fttransformer, resnet, tabnet, tabtransformer, trompt, vime, scarf, subtab, tabm\n")
         f.write("  * 5種GNN插入階段：start, materialize, encoding, columnwise, decoding\n")
-        f.write("  * 不包含原始模型（none階段）和參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）\n")
-        f.write("- 排名計算：只在這45個GNN變體之間重新計算相對排名（排名範圍: 1-45）\n")
+        f.write("  * 不包含原始模型（none階段）與參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm, tabgnn）\n")
+        f.write("- 排名計算：只在這50個GNN變體之間重新計算相對排名（排名範圍: 1-50）\n")
         f.write(f"- 數據集總數: {total_datasets} 個（涵蓋 {len(classification_dataset_counts)} 種分類）\n")
         f.write("- 排名越小表示表現越好\n\n")
         

@@ -1,0 +1,741 @@
+{
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_Z_Alizadeh_Sani/UCI_Z_Alizadeh_Sani.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_Z_Alizadeh_Sani/UCI_Z_Alizadeh_Sani.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 303,
+    "value_counts": {
+      "1": 87,
+      "0": 216
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/openml_Heart_disease_classification/openml_Heart_disease_classification.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/openml_Heart_disease_classification/openml_Heart_disease_classification.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 296,
+    "value_counts": {
+      "0": 159,
+      "1": 137
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_extention_of_Z_Alizadeh_sani_dataset/UCI_extention_of_Z_Alizadeh_sani_dataset.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_extention_of_Z_Alizadeh_sani_dataset/UCI_extention_of_Z_Alizadeh_sani_dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 303,
+    "value_counts": {
+      "1": 87,
+      "0": 216
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_Heart_failure_clinical_records/UCI_Heart_failure_clinical_records.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_Heart_failure_clinical_records/UCI_Heart_failure_clinical_records.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 299,
+    "value_counts": {
+      "1": 96,
+      "0": 203
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Analytics_Vidhya_Loan_Prediction/kaggle_Analytics_Vidhya_Loan_Prediction.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Analytics_Vidhya_Loan_Prediction/kaggle_Analytics_Vidhya_Loan_Prediction.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 614,
+    "value_counts": {
+      "1": 192,
+      "0": 422
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Store_Data_Performance/kaggle_Store_Data_Performance.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Store_Data_Performance/kaggle_Store_Data_Performance.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 135,
+    "value_counts": {
+      "1": 38,
+      "0": 97
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Automobiles/kaggle_Automobiles.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Automobiles/kaggle_Automobiles.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 201,
+    "value_counts": {
+      "0.0": 103,
+      "1.0": 98
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Customer_Classification/kaggle_Customer_Classification.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Customer_Classification/kaggle_Customer_Classification.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 1000,
+    "value_counts": {
+      "0": 719,
+      "1": 281
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Credit_Card_Approval/kaggle_Credit_Card_Approval.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Credit_Card_Approval/kaggle_Credit_Card_Approval.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 590,
+    "value_counts": {
+      "0": 358,
+      "1": 232
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_Absenteeism_at_work/UCI_Absenteeism_at_work.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_Absenteeism_at_work/UCI_Absenteeism_at_work.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 740,
+    "value_counts": {
+      "0": 532,
+      "1": 208
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_QSAR_Bioconcentration_classes_dataset/UCI_QSAR_Bioconcentration_classes_dataset.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/UCI_QSAR_Bioconcentration_classes_dataset/UCI_QSAR_Bioconcentration_classes_dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 779,
+    "value_counts": {
+      "0": 460,
+      "1": 319
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Campus_Recruitment/kaggle_Campus_Recruitment.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Campus_Recruitment/kaggle_Campus_Recruitment.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 215,
+    "value_counts": {
+      "0": 148,
+      "1": 67
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/openml_analcatdata_creditscore/openml_analcatdata_creditscore.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/openml_analcatdata_creditscore/openml_analcatdata_creditscore.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 100,
+    "value_counts": {
+      "1": 73,
+      "0": 27
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Bigg_Boss_India/kaggle_Bigg_Boss_India.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/balanced/kaggle_Bigg_Boss_India/kaggle_Bigg_Boss_India.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 567,
+    "value_counts": {
+      "0.0": 536,
+      "1.0": 31
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/kaggle_The_Estonia_Disaster_Passenger_List/kaggle_The_Estonia_Disaster_Passenger_List.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/kaggle_The_Estonia_Disaster_Passenger_List/kaggle_The_Estonia_Disaster_Passenger_List.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 989,
+    "value_counts": {
+      "0": 852,
+      "1": 137
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/openml_The_Estonia_Disaster_Passenger_List/openml_The_Estonia_Disaster_Passenger_List.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/openml_The_Estonia_Disaster_Passenger_List/openml_The_Estonia_Disaster_Passenger_List.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 989,
+    "value_counts": {
+      "0": 852,
+      "1": 137
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/openml_DiabeticMellitus/openml_DiabeticMellitus.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/openml_DiabeticMellitus/openml_DiabeticMellitus.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 281,
+    "value_counts": {
+      "0": 99,
+      "1": 182
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/openml_student_grade_pass_or_fail_prediction/openml_student_grade_pass_or_fail_prediction.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/openml_student_grade_pass_or_fail_prediction/openml_student_grade_pass_or_fail_prediction.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 395,
+    "value_counts": {
+      "1": 265,
+      "0": 130
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/UCI_Early_stage_diabetes_risk_prediction_dataset/UCI_Early_stage_diabetes_risk_prediction_dataset.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/UCI_Early_stage_diabetes_risk_prediction_dataset/UCI_Early_stage_diabetes_risk_prediction_dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 520,
+    "value_counts": {
+      "1": 200,
+      "0": 320
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/kaggle_Horse_Colic_Dataset__with_test_file_/kaggle_Horse_Colic_Dataset__with_test_file_.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/kaggle_Horse_Colic_Dataset__with_test_file_/kaggle_Horse_Colic_Dataset__with_test_file_.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 299,
+    "value_counts": {
+      "0": 178,
+      "1": 121
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/kaggle_Startup_Success_Prediction/kaggle_Startup_Success_Prediction.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/categorical/kaggle_Startup_Success_Prediction/kaggle_Startup_Success_Prediction.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 923,
+    "value_counts": {
+      "1": 326,
+      "0": 597
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Quality_Assessment_of_Digital_Colposcopies/UCI_Quality_Assessment_of_Digital_Colposcopies.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Quality_Assessment_of_Digital_Colposcopies/UCI_Quality_Assessment_of_Digital_Colposcopies.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 97,
+    "value_counts": {
+      "0": 82,
+      "1": 15
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Audit_Data/UCI_Audit_Data.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Audit_Data/UCI_Audit_Data.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 776,
+    "value_counts": {
+      "0": 471,
+      "1": 305
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Collection_of_Classification___Regression_Datasets_House_Price_/kaggle_Collection_of_Classification___Regression_Datasets_House_Price_.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Collection_of_Classification___Regression_Datasets_House_Price_/kaggle_Collection_of_Classification___Regression_Datasets_House_Price_.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 506,
+    "value_counts": {
+      "1.0": 215,
+      "0.0": 291
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_User_Knowledge_Modeling/UCI_User_Knowledge_Modeling.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_User_Knowledge_Modeling/UCI_User_Knowledge_Modeling.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 258,
+    "value_counts": {
+      "0": 170,
+      "1": 88
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Development_Index/kaggle_Development_Index.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Development_Index/kaggle_Development_Index.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 225,
+    "value_counts": {
+      "0": 136,
+      "1": 89
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_analcatdata_lawsuit/openml_analcatdata_lawsuit.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_analcatdata_lawsuit/openml_analcatdata_lawsuit.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 264,
+    "value_counts": {
+      "1": 19,
+      "0": 245
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Pokmon_Legendary_Data/openml_Pokmon_Legendary_Data.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Pokmon_Legendary_Data/openml_Pokmon_Legendary_Data.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 801,
+    "value_counts": {
+      "0": 731,
+      "1": 70
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Breast_Cancer_Coimbra/UCI_Breast_Cancer_Coimbra.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Breast_Cancer_Coimbra/UCI_Breast_Cancer_Coimbra.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 116,
+    "value_counts": {
+      "1": 52,
+      "0": 64
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_tokyo1/openml_tokyo1.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_tokyo1/openml_tokyo1.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 959,
+    "value_counts": {
+      "0": 346,
+      "1": 613
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Audit_Data/kaggle_Audit_Data.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Audit_Data/kaggle_Audit_Data.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 776,
+    "value_counts": {
+      "0": 471,
+      "1": 305
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Cervical_cancer__Risk_Factors_/UCI_Cervical_cancer__Risk_Factors_.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Cervical_cancer__Risk_Factors_/UCI_Cervical_cancer__Risk_Factors_.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 858,
+    "value_counts": {
+      "0": 803,
+      "1": 55
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_hungarian/openml_hungarian.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_hungarian/openml_hungarian.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 294,
+    "value_counts": {
+      "1.0": 106,
+      "0.0": 188
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Real_Estate_DataSet/kaggle_Real_Estate_DataSet.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Real_Estate_DataSet/kaggle_Real_Estate_DataSet.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 511,
+    "value_counts": {
+      "1.0": 216,
+      "0.0": 295
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_chronic_kidney_disease/kaggle_chronic_kidney_disease.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_chronic_kidney_disease/kaggle_chronic_kidney_disease.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 400,
+    "value_counts": {
+      "0": 250,
+      "1": 150
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Intersectional_Bias_Assessment__Testing_Data_/openml_Intersectional_Bias_Assessment__Testing_Data_.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Intersectional_Bias_Assessment__Testing_Data_/openml_Intersectional_Bias_Assessment__Testing_Data_.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 1000,
+    "value_counts": {
+      "0": 412,
+      "1": 588
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Breast_Cancer_Dataset/kaggle_Breast_Cancer_Dataset.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Breast_Cancer_Dataset/kaggle_Breast_Cancer_Dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 569,
+    "value_counts": {
+      "0": 357,
+      "1": 212
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Climate_Model_Simulation_Crashes/UCI_Climate_Model_Simulation_Crashes.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Climate_Model_Simulation_Crashes/UCI_Climate_Model_Simulation_Crashes.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 540,
+    "value_counts": {
+      "0": 494,
+      "1": 46
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Pima_Indians_Diabetes/openml_Pima_Indians_Diabetes.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Pima_Indians_Diabetes/openml_Pima_Indians_Diabetes.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 768,
+    "value_counts": {
+      "1": 268,
+      "0": 500
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Swiss_banknote_conterfeit_detection/openml_Swiss_banknote_conterfeit_detection.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Swiss_banknote_conterfeit_detection/openml_Swiss_banknote_conterfeit_detection.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 200,
+    "value_counts": {
+      "0": 100,
+      "1": 100
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_HCV_data/UCI_HCV_data.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_HCV_data/UCI_HCV_data.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 615,
+    "value_counts": {
+      "0": 533,
+      "1": 82
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Parkinson_Dataset_with_replicated_acoustic_features/UCI_Parkinson_Dataset_with_replicated_acoustic_features.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/UCI_Parkinson_Dataset_with_replicated_acoustic_features/UCI_Parkinson_Dataset_with_replicated_acoustic_features.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 240,
+    "value_counts": {
+      "0": 120,
+      "1": 120
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Diabetes_Data_Set/openml_Diabetes_Data_Set.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Diabetes_Data_Set/openml_Diabetes_Data_Set.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 768,
+    "value_counts": {
+      "1": 268,
+      "0": 500
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_nki70.arff/openml_nki70.arff.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_nki70.arff/openml_nki70.arff.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 144,
+    "value_counts": {
+      "0": 96,
+      "1": 48
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Pima_Indians_Diabetes_with_null_values/kaggle_Pima_Indians_Diabetes_with_null_values.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Pima_Indians_Diabetes_with_null_values/kaggle_Pima_Indians_Diabetes_with_null_values.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 768,
+    "value_counts": {
+      "1": 268,
+      "0": 500
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds/openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds/openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 583,
+    "value_counts": {
+      "1": 416,
+      "0": 167
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Penguins_Classified/kaggle_Penguins_Classified.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Penguins_Classified/kaggle_Penguins_Classified.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 344,
+    "value_counts": {
+      "1": 152,
+      "0": 192
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_fitbit_dataset/kaggle_fitbit_dataset.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_fitbit_dataset/kaggle_fitbit_dataset.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 457,
+    "value_counts": {
+      "0.0": 254,
+      "1.0": 203
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Compositions_of_Glass/kaggle_Compositions_of_Glass.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/small_datasets/binclass/numerical/kaggle_Compositions_of_Glass/kaggle_Compositions_of_Glass.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 214,
+    "value_counts": {
+      "0": 138,
+      "1": 76
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/MagicTelescope/MagicTelescope.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/MagicTelescope/MagicTelescope.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 13376,
+    "value_counts": {
+      "0": 6688,
+      "1": 6688
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/credit/credit.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/credit/credit.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 16714,
+    "value_counts": {
+      "1": 8357,
+      "0": 8357
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/higgs_small/higgs_small.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/higgs_small/higgs_small.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 98049,
+    "value_counts": {
+      "0": 46223,
+      "1": 51826
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/binarized_pol/binarized_pol.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/binarized_pol/binarized_pol.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 15000,
+    "value_counts": {
+      "0": 5041,
+      "1": 9959
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/road_safety/road_safety.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/road_safety/road_safety.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 111762,
+    "value_counts": {
+      "1": 55881,
+      "0": 55881
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/bank_marketing/bank_marketing.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/binclass/numerical/bank_marketing/bank_marketing.csv",
+    "target_col": "target",
+    "n_unique": 2,
+    "n_rows": 10578,
+    "value_counts": {
+      "0": 5289,
+      "1": 5289
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/helena/helena.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/helena/helena.csv",
+    "target_col": "target",
+    "n_unique": 100,
+    "n_rows": 65196,
+    "value_counts": {
+      "53": 1794,
+      "57": 382,
+      "67": 500,
+      "40": 337,
+      "7": 541,
+      "72": 142,
+      "39": 316,
+      "86": 1002,
+      "97": 1822,
+      "66": 2172,
+      "88": 351,
+      "76": 4005,
+      "94": 180,
+      "77": 1274,
+      "13": 845,
+      "9": 2210,
+      "87": 1856,
+      "5": 385,
+      "37": 145,
+      "96": 1188,
+      "75": 1827,
+      "56": 1096,
+      "55": 1302,
+      "32": 2216,
+      "6": 321,
+      "24": 581,
+      "81": 374,
+      "92": 1811,
+      "38": 600,
+      "2": 111,
+      "18": 719,
+      "51": 3063,
+      "44": 212,
+      "62": 168,
+      "14": 310,
+      "91": 1939,
+      "36": 179,
+      "35": 2992,
+      "34": 439,
+      "41": 588,
+      "93": 411,
+      "33": 2623,
+      "19": 737,
+      "89": 797,
+      "30": 183,
+      "26": 119,
+      "70": 567,
+      "1": 291,
+      "43": 822,
+      "84": 765,
+      "21": 264,
+      "0": 466,
+      "15": 262,
+      "47": 397,
+      "63": 439,
+      "61": 680,
+      "60": 952,
+      "48": 551,
+      "8": 358,
+      "25": 230,
+      "71": 299,
+      "10": 224,
+      "28": 116,
+      "99": 417,
+      "31": 339,
+      "23": 257,
+      "59": 190,
+      "82": 232,
+      "42": 196,
+      "68": 297,
+      "64": 535,
+      "58": 453,
+      "74": 544,
+      "3": 479,
+      "16": 509,
+      "83": 177,
+      "22": 846,
+      "27": 122,
+      "12": 141,
+      "85": 443,
+      "69": 326,
+      "65": 236,
+      "4": 436,
+      "17": 227,
+      "95": 162,
+      "79": 214,
+      "29": 129,
+      "78": 188,
+      "73": 121,
+      "52": 121,
+      "11": 132,
+      "80": 166,
+      "46": 190,
+      "45": 272,
+      "90": 128,
+      "20": 327,
+      "98": 305,
+      "54": 212,
+      "49": 146,
+      "50": 133
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/jannis/jannis.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/jannis/jannis.csv",
+    "target_col": "target",
+    "n_unique": 4,
+    "n_rows": 83733,
+    "value_counts": {
+      "1": 28790,
+      "3": 38522,
+      "2": 14734,
+      "0": 1687
+    },
+    "note": "ok"
+  },
+  "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/eye/eye.csv": {
+    "chosen_csv": "/home/shangyuan/ModelComparison/TaBLEau/datasets/large_datasets/multiclass/numerical/eye/eye.csv",
+    "target_col": "target",
+    "n_unique": 3,
+    "n_rows": 10936,
+    "value_counts": {
+      "1": 4262,
+      "0": 3804,
+      "2": 2870
+    },
+    "note": "ok"
+  }
+}
