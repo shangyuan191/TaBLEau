@@ -1,0 +1,241 @@
+GNN增強效果分析 - 模型: SUBTAB
+
+說明：
+- 比較 subtab 模型的原始表現與GNN增強變體
+- 包含5個參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
+- 共17個競爭者：
+  * subtab的7個配置：大訓練集baseline(1) + 小訓練集6變體(6)
+  * 5個參考模型的兩種ratio：每個模型2個配置(10)
+- 排名越小表示表現越好
+
+
+* #### 分類: large_datasets+binclass+numerical (包含 6 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.83 | 6 |
+| 2 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.67 | 6 |
+| 3 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.33 | 6 |
+| 4 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.33 | 6 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.17 | 6 |
+| 6 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.83 | 6 |
+| 7 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.67 | 6 |
+| 8 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.67 | 6 |
+| 9 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | 6 |
+| 10 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.17 | 6 |
+| 11 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.33 | 6 |
+| 12 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.67 | 6 |
+| 13 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.50 | 6 |
+| 14 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 13.83 | 6 |
+| 15 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 15.00 | 6 |
+| 16 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.50 | 6 |
+| 17 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 15.50 | 6 |
+| 18 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 18.17 | 6 |
+| 19 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 18.50 | 6 |
+* #### 分類: large_datasets+multiclass+numerical (包含 3 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.33 | 3 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.67 | 3 |
+| 3 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.33 | 3 |
+| 4 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | 3 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.00 | 3 |
+| 6 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.67 | 3 |
+| 7 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.67 | 3 |
+| 8 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | 3 |
+| 9 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | 3 |
+| 10 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.33 | 3 |
+| 11 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | 3 |
+| 12 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | 3 |
+| 13 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.33 | 3 |
+| 14 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.33 | 3 |
+| 15 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.67 | 3 |
+| 16 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 16.00 | 3 |
+| 17 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 17.33 | 3 |
+| 18 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 17.67 | 3 |
+| 19 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 19.00 | 3 |
+* #### 分類: large_datasets+regression+categorical (包含 1 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 1.00 | 1 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.00 | 1 |
+| 3 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.00 | 1 |
+| 4 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | 1 |
+| 5 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 5.00 | 1 |
+| 6 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | 1 |
+| 7 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.00 | 1 |
+| 8 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 8.00 | 1 |
+| 9 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | 1 |
+| 10 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 10.00 | 1 |
+| 11 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | 1 |
+| 12 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | 1 |
+| 13 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | 1 |
+| 14 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | 1 |
+| 15 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | 1 |
+| 16 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | 1 |
+| 17 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | 1 |
+| 18 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 18.00 | 1 |
+| 19 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 19.00 | 1 |
+* #### 分類: large_datasets+regression+numerical (包含 10 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 2.80 | 10 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.90 | 10 |
+| 3 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 4.60 | 10 |
+| 4 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.90 | 10 |
+| 5 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 5.20 | 10 |
+| 6 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 5.40 | 10 |
+| 7 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 7.50 | 10 |
+| 8 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.60 | 10 |
+| 9 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 7.90 | 10 |
+| 10 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.00 | 10 |
+| 11 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.20 | 10 |
+| 12 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.80 | 10 |
+| 13 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.10 | 10 |
+| 14 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.30 | 10 |
+| 15 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.40 | 10 |
+| 16 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.70 | 10 |
+| 17 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.90 | 10 |
+| 18 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.10 | 10 |
+| 19 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.70 | 10 |
+* #### 分類: small_datasets+binclass+balanced (包含 14 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.14 | 14 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.29 | 14 |
+| 3 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.29 | 14 |
+| 4 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | 14 |
+| 5 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.57 | 14 |
+| 6 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | 14 |
+| 7 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.71 | 14 |
+| 8 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.36 | 14 |
+| 9 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.50 | 14 |
+| 10 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.86 | 14 |
+| 11 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.14 | 14 |
+| 12 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.36 | 14 |
+| 13 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.57 | 14 |
+| 14 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.64 | 14 |
+| 15 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 12.21 | 14 |
+| 16 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 12.36 | 14 |
+| 17 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.07 | 14 |
+| 18 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 15.43 | 14 |
+| 19 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 15.50 | 14 |
+* #### 分類: small_datasets+binclass+categorical (包含 7 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.71 | 7 |
+| 2 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.00 | 7 |
+| 3 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.86 | 7 |
+| 4 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.14 | 7 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.43 | 7 |
+| 6 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.71 | 7 |
+| 7 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.14 | 7 |
+| 8 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.29 | 7 |
+| 9 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.71 | 7 |
+| 10 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.00 | 7 |
+| 11 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | 7 |
+| 12 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.00 | 7 |
+| 13 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.86 | 7 |
+| 14 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 12.86 | 7 |
+| 15 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 13.29 | 7 |
+| 16 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.71 | 7 |
+| 17 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.57 | 7 |
+| 18 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.86 | 7 |
+| 19 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.86 | 7 |
+* #### 分類: small_datasets+binclass+numerical (包含 28 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.21 | 28 |
+| 2 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.46 | 28 |
+| 3 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.79 | 28 |
+| 4 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.14 | 28 |
+| 5 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.82 | 28 |
+| 6 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.82 | 28 |
+| 7 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.96 | 28 |
+| 8 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.57 | 28 |
+| 9 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.07 | 28 |
+| 10 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.32 | 28 |
+| 11 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.54 | 28 |
+| 12 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.54 | 28 |
+| 13 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 12.11 | 28 |
+| 14 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 13.18 | 28 |
+| 15 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.18 | 28 |
+| 16 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.75 | 28 |
+| 17 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 13.75 | 28 |
+| 18 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.82 | 28 |
+| 19 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 13.96 | 28 |
+* #### 分類: small_datasets+regression+balanced (包含 6 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 3.50 | 6 |
+| 2 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 3.83 | 6 |
+| 3 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 3.83 | 6 |
+| 4 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 4.00 | 6 |
+| 5 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 4.50 | 6 |
+| 6 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.83 | 6 |
+| 7 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.17 | 6 |
+| 8 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.17 | 6 |
+| 9 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | 6 |
+| 10 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 11.17 | 6 |
+| 11 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.33 | 6 |
+| 12 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.33 | 6 |
+| 13 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | 6 |
+| 14 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.17 | 6 |
+| 15 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.17 | 6 |
+| 16 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.50 | 6 |
+| 17 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.17 | 6 |
+| 18 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.50 | 6 |
+| 19 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.83 | 6 |
+* #### 分類: small_datasets+regression+categorical (包含 5 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 3.40 | 5 |
+| 2 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 3.60 | 5 |
+| 3 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 4.40 | 5 |
+| 4 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 5.80 | 5 |
+| 5 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 6.00 | 5 |
+| 6 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.20 | 5 |
+| 7 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.80 | 5 |
+| 8 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.60 | 5 |
+| 9 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.20 | 5 |
+| 10 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.60 | 5 |
+| 11 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.00 | 5 |
+| 12 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 10.80 | 5 |
+| 13 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.80 | 5 |
+| 14 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | 5 |
+| 15 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.60 | 5 |
+| 16 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.60 | 5 |
+| 17 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.80 | 5 |
+| 18 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.20 | 5 |
+| 19 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.60 | 5 |
+* #### 分類: small_datasets+regression+numerical (包含 36 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 4.31 | 36 |
+| 2 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 4.61 | 36 |
+| 3 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 4.72 | 36 |
+| 4 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 4.89 | 36 |
+| 5 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 4.89 | 36 |
+| 6 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.11 | 36 |
+| 7 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.33 | 36 |
+| 8 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.28 | 36 |
+| 9 | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 10.03 | 36 |
+| 10 | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.06 | 36 |
+| 11 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.53 | 36 |
+| 12 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.08 | 36 |
+| 13 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.17 | 36 |
+| 14 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.17 | 36 |
+| 15 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.81 | 36 |
+| 16 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.08 | 36 |
+| 17 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.58 | 36 |
+| 18 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.67 | 36 |
+| 19 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.69 | 36 |
