@@ -47,9 +47,6 @@
 - columnwise: `if gnn_stage == 'columnwise'` 已在程式中預留（目前為 noop / x = x），若啟用會在 backbone 後對 columns-as-nodes 做 GNN，與 backbone/encoder joint-train。
 - decoding: `gnn_decoding_eval` 會把 `encoder+backbone` 的 pooled embeddings（row-level）收集成 all_emb，對 rows 建 KNN graph 並用 supervised loss（依 task 選擇 BCE / CE / MSE）訓練 GNN（early stop based on val），把 GNN 當作 post-hoc decoder。
 
-### 五、訓練語意比較與注意事項
-
-- 風險與建議：
 
 ---
 
