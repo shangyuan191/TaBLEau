@@ -1,0 +1,241 @@
+GNN增強效果分析 - 模型: VIME
+
+說明：
+- 比較 vime 模型的原始表現與GNN增強變體
+- 包含5個參考模型（t2gformer, tabpfn, xgboost, catboost, lightgbm）
+- 共17個競爭者：
+  * vime的7個配置：大訓練集baseline(1) + 小訓練集6變體(6)
+  * 5個參考模型的兩種ratio：每個模型2個配置(10)
+- 排名越小表示表現越好
+
+
+* #### 分類: large_datasets+binclass+numerical (包含 6 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.83 | 6 |
+| 2 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.67 | 6 |
+| 3 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.33 | 6 |
+| 4 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.33 | 6 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.33 | 6 |
+| 6 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.17 | 6 |
+| 7 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.17 | 6 |
+| 8 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.67 | 6 |
+| 9 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.83 | 6 |
+| 10 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | 6 |
+| 11 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.83 | 6 |
+| 12 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.00 | 6 |
+| 13 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.00 | 6 |
+| 14 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.17 | 6 |
+| 15 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 15.50 | 6 |
+| 16 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 15.83 | 6 |
+| 17 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 16.67 | 6 |
+| 18 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.17 | 6 |
+| 19 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 18.50 | 6 |
+* #### 分類: large_datasets+multiclass+numerical (包含 3 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.33 | 3 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.67 | 3 |
+| 3 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.33 | 3 |
+| 4 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | 3 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.33 | 3 |
+| 6 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.67 | 3 |
+| 7 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | 3 |
+| 8 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | 3 |
+| 9 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | 3 |
+| 10 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.67 | 3 |
+| 11 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.33 | 3 |
+| 12 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.33 | 3 |
+| 13 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | 3 |
+| 14 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 14.00 | 3 |
+| 15 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 15.33 | 3 |
+| 16 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.67 | 3 |
+| 17 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 17.00 | 3 |
+| 18 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 17.67 | 3 |
+| 19 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 18.33 | 3 |
+* #### 分類: large_datasets+regression+categorical (包含 1 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 1.00 | 1 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.00 | 1 |
+| 3 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.00 | 1 |
+| 4 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | 1 |
+| 5 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 5.00 | 1 |
+| 6 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 6.00 | 1 |
+| 7 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 7.00 | 1 |
+| 8 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 8.00 | 1 |
+| 9 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 9.00 | 1 |
+| 10 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | 1 |
+| 11 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | 1 |
+| 12 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | 1 |
+| 13 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | 1 |
+| 14 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | 1 |
+| 15 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | 1 |
+| 16 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | 1 |
+| 17 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | 1 |
+| 18 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 18.00 | 1 |
+| 19 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 19.00 | 1 |
+* #### 分類: large_datasets+regression+numerical (包含 10 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 1.60 | 10 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 1.70 | 10 |
+| 3 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.30 | 10 |
+| 4 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.20 | 10 |
+| 5 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 5.70 | 10 |
+| 6 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | 10 |
+| 7 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 8.20 | 10 |
+| 8 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.30 | 10 |
+| 9 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.50 | 10 |
+| 10 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 9.20 | 10 |
+| 11 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.10 | 10 |
+| 12 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.60 | 10 |
+| 13 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.20 | 10 |
+| 14 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.90 | 10 |
+| 15 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.10 | 10 |
+| 16 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.90 | 10 |
+| 17 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.70 | 10 |
+| 18 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.10 | 10 |
+| 19 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.70 | 10 |
+* #### 分類: small_datasets+binclass+balanced (包含 14 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.50 | 14 |
+| 2 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.57 | 14 |
+| 3 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.71 | 14 |
+| 4 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.93 | 14 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.57 | 14 |
+| 6 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.93 | 14 |
+| 7 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.64 | 14 |
+| 8 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.29 | 14 |
+| 9 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.29 | 14 |
+| 10 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.43 | 14 |
+| 11 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.50 | 14 |
+| 12 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.50 | 14 |
+| 13 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 11.71 | 14 |
+| 14 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 11.79 | 14 |
+| 15 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | 14 |
+| 16 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 12.00 | 14 |
+| 17 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.14 | 14 |
+| 18 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 14.86 | 14 |
+| 19 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 15.64 | 14 |
+* #### 分類: small_datasets+binclass+categorical (包含 7 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.57 | 7 |
+| 2 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 5.86 | 7 |
+| 3 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | 7 |
+| 4 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.29 | 7 |
+| 5 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.43 | 7 |
+| 6 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | 7 |
+| 7 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | 7 |
+| 8 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.57 | 7 |
+| 9 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.71 | 7 |
+| 10 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.71 | 7 |
+| 11 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.86 | 7 |
+| 12 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.29 | 7 |
+| 13 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.71 | 7 |
+| 14 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 11.57 | 7 |
+| 15 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.57 | 7 |
+| 16 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 13.14 | 7 |
+| 17 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.71 | 7 |
+| 18 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 14.14 | 7 |
+| 19 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 17.86 | 7 |
+* #### 分類: small_datasets+binclass+numerical (包含 28 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.32 | 28 |
+| 2 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.18 | 28 |
+| 3 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.32 | 28 |
+| 4 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.11 | 28 |
+| 5 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.18 | 28 |
+| 6 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.68 | 28 |
+| 7 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.21 | 28 |
+| 8 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 10.57 | 28 |
+| 9 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.82 | 28 |
+| 10 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.36 | 28 |
+| 11 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 11.36 | 28 |
+| 12 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.46 | 28 |
+| 13 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.57 | 28 |
+| 14 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.11 | 28 |
+| 15 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.36 | 28 |
+| 16 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.39 | 28 |
+| 17 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 14.57 | 28 |
+| 18 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.64 | 28 |
+| 19 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 14.79 | 28 |
+* #### 分類: small_datasets+regression+balanced (包含 6 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 2.33 | 6 |
+| 2 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | 6 |
+| 3 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.83 | 6 |
+| 4 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.17 | 6 |
+| 5 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 8.33 | 6 |
+| 6 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 8.33 | 6 |
+| 7 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.67 | 6 |
+| 8 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.67 | 6 |
+| 9 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 9.67 | 6 |
+| 10 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | 6 |
+| 11 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 10.17 | 6 |
+| 12 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.50 | 6 |
+| 13 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.67 | 6 |
+| 14 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.67 | 6 |
+| 15 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | 6 |
+| 16 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.17 | 6 |
+| 17 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | 6 |
+| 18 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.17 | 6 |
+| 19 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.67 | 6 |
+* #### 分類: small_datasets+regression+categorical (包含 5 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.80 | 5 |
+| 2 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 4.00 | 5 |
+| 3 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 5.40 | 5 |
+| 4 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | 5 |
+| 5 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 6.60 | 5 |
+| 6 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.60 | 5 |
+| 7 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 7.00 | 5 |
+| 8 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.20 | 5 |
+| 9 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 7.80 | 5 |
+| 10 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.80 | 5 |
+| 11 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.80 | 5 |
+| 12 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.80 | 5 |
+| 13 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.80 | 5 |
+| 14 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.80 | 5 |
+| 15 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.40 | 5 |
+| 16 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.60 | 5 |
+| 17 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.80 | 5 |
+| 18 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.20 | 5 |
+| 19 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.60 | 5 |
+* #### 分類: small_datasets+regression+numerical (包含 36 個資料集)
+
+| 排名 | 競爭者 | 平均排名 | 資料集數 |
+|---:|---|---:|---:|
+| 1 | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.64 | 36 |
+| 2 | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.92 | 36 |
+| 3 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.08 | 36 |
+| 4 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 6.89 | 36 |
+| 5 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 6.92 | 36 |
+| 6 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 7.50 | 36 |
+| 7 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.61 | 36 |
+| 8 | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.69 | 36 |
+| 9 | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.83 | 36 |
+| 10 | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.00 | 36 |
+| 11 | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.17 | 36 |
+| 12 | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.31 | 36 |
+| 13 | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.42 | 36 |
+| 14 | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.81 | 36 |
+| 15 | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.83 | 36 |
+| 16 | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.08 | 36 |
+| 17 | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.22 | 36 |
+| 18 | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.31 | 36 |
+| 19 | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.78 | 36 |
