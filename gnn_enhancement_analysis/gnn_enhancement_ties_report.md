@@ -1,0 +1,461 @@
+# GNN enhancement ties verification report
+
+Assumptions:
+- Treat `ratio=0.05/0.15/0.8, gnn_stage=none` of the focal model as the 'few-shot original model' for the strict-beats rule.
+- Numeric ties are detected as exact float equality after parsing; small formatting differences (8.50 vs 8.5) are normalized.
+
+
+Report format: file | focal_variant | target_entry | avg_rank | few_shot_original? | counts_as_beat_per_rule
+
+
+## Detected ties
+
+
+| File | Focal variant | Target entry | avg_rank | few-shot-original? | counts_as_beat (per rule) |
+|---|---|---:|---:|---|
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | excelformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 13.17 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.17 | Yes | No (tie, few-shot strict) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 17.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 18.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 18.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 8.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | Yes | No (tie, few-shot strict) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 11.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 17.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 18.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 18.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 11.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 11.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 11.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | Yes | No (tie, few-shot strict) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.10 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.21 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 12.71 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.29 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.86 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.86 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.86 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.86 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 12.71 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.71 | Yes | No (tie, few-shot strict) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.71 | Yes | No (tie, few-shot strict) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 18.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 18.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.33 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.50 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.50 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.33 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.33 | Yes | No (tie, few-shot strict) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.33 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 9.33 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.67 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.67 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.50 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.80 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 7.80 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 8.00 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.86 | No | Yes (tie) |
+| excelformer_gnn_enhancement.md | excelformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.75 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.50 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 13.50 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.50 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.50 | Yes | No (tie, few-shot strict) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.50 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.83 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 18.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 15.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.00 | Yes | No (tie, few-shot strict) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 10.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 7.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 14.64 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.64 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.29 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.29 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.57 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.64 | Yes | No (tie, few-shot strict) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.64 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.50 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | Yes | No (tie, few-shot strict) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| fttransformer_gnn_enhancement.md | fttransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.20 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.83 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.33 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.17 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.33 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.33 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.67 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 18.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | Yes | No (tie, few-shot strict) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.20 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.20 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 13.29 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.71 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.71 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 15.29 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.71 | Yes | No (tie, few-shot strict) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 11.71 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 15.29 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 15.29 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 15.29 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 13.29 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.43 | Yes | No (tie, few-shot strict) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 13.43 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.33 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.50 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.50 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 3.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| resnet_gnn_enhancement.md | resnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.20 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 14.67 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.67 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 15.33 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.33 | Yes | No (tie, few-shot strict) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 6.20 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.50 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 13.50 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 13.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.00 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.93 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.50 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.50 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.50 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.50 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 6.20 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.40 | No | Yes (tie) |
+| scarf_gnn_enhancement.md | scarf<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.33 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.33 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.33 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 15.50 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 15.50 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.50 | Yes | No (tie, few-shot strict) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 15.50 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 19.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 5.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 6.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.60 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 8.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.20 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.50 | Yes | No (tie, few-shot strict) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 15.50 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.86 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.86 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.54 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.18 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 13.18 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.75 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 3.83 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 3.83 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.17 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 4.89 | Yes | No (tie, few-shot strict) |
+| subtab_gnn_enhancement.md | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | subtab<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 4.89 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | Yes | No (tie, few-shot strict) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 14.67 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.67 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 10.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.33 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 19.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | Yes | No (tie, few-shot strict) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | Yes | No (tie, few-shot strict) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 15.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.90 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 6.90 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | Yes | No (tie, few-shot strict) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.50 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.29 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.86 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.39 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 12.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.71 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.83 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| tabm_gnn_enhancement.md | tabm<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.80 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 18.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 19.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 2.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 2.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 7.80 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.80 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.50 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.50 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.36 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 17.71 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.36 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 17.71 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 8.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.83 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.83 | Yes | No (tie, few-shot strict) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 10.33 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.33 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.67 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.83 | No | Yes (tie) |
+| tabnet_gnn_enhancement.md | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabnet<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 8.83 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 14.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.33 | Yes | No (tie, few-shot strict) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.33 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 18.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 4.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 5.00 | Yes | No (tie, few-shot strict) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.00 | Yes | No (tie, few-shot strict) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | Yes | No (tie, few-shot strict) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | Yes | No (tie, few-shot strict) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 7.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.80 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.80 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.14 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.14 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.86 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.86 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 14.86 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 14.86 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 14.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 14.86 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 14.86 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.14 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.14 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 6.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.50 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.50 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 5.00 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.20 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.50 | No | Yes (tie) |
+| tabtransformer_gnn_enhancement.md | tabtransformer<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabpfn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 7.50 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.83 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.83 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 10.50 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 18.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.67 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | catboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.33 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.33 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 16.67 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | trompt<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 19.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 6.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 12.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 13.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 19.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 3.20 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.80 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.79 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 11.79 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 8.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | trompt<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 12.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 15.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.43 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | Yes | No (tie, few-shot strict) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.17 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.72 | No | Yes (tie) |
+| trompt_gnn_enhancement.md | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | trompt<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 10.50 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | 8.67 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 16.67 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabgnn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 14.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 17.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 6.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 7.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 13.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 6.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | tabgnn<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 6.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.50 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 12.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.29 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.57 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | 11.36 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 11.36 | Yes | No (tie, few-shot strict) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 8.33 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | catboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.33 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=start) | 8.33 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | vime<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 8.67 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 9.67 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | lightgbm<br>(ratio=0.8/0.15/0.05, gnn_stage=none) | 9.67 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | xgboost<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 10.17 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 6.60 | Yes | No (tie, few-shot strict) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=encoding) | 6.60 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | 7.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=columnwise) | tabpfn<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.00 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=materialize) | lightgbm<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 7.80 | No | Yes (tie) |
+| vime_gnn_enhancement.md | vime<br>(ratio=0.05/0.15/0.8, gnn_stage=decoding) | t2g-former<br>(ratio=0.05/0.15/0.8, gnn_stage=none) | 8.83 | No | Yes (tie) |
