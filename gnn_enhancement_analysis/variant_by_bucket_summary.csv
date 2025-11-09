@@ -1,7 +1,0 @@
-variant,2_compact,3-10_compact,>10_compact
-"resnet(ratio=0.8/0.15/0.05, gnn_stage=decoding)","n=55, mean=43.564, med=30.0","n=2, mean=35.5, med=35.5","n=1, mean=74.0, med=74.0"
-"subtab(ratio=0.05/0.15/0.8, gnn_stage=columnwise)","n=55, mean=69.655, med=70.0","n=2, mean=86.0, med=86.0","n=1, mean=65.0, med=65.0"
-"subtab(ratio=0.05/0.15/0.8, gnn_stage=encoding)","n=55, mean=72.055, med=71.0","n=2, mean=89.0, med=89.0","n=1, mean=71.0, med=71.0"
-"subtab(ratio=0.05/0.15/0.8, gnn_stage=start)","n=55, mean=75.364, med=81.0","n=2, mean=95.5, med=95.5","n=1, mean=92.0, med=92.0"
-"subtab(ratio=0.8/0.15/0.05, gnn_stage=start)","n=55, mean=55.345, med=45.0","n=2, mean=71.5, med=71.5","n=1, mean=80.0, med=80.0"
-"trompt(ratio=0.8/0.15/0.05, gnn_stage=decoding)","n=55, mean=53.073, med=48.0","n=2, mean=98.0, med=98.0","n=1, mean=97.0, med=97.0"
