@@ -1,0 +1,38 @@
+dataset: openml_The_Office_Dataset
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.983794661917399
+          Best test metric: 1.2428424476121207
+          早停輪數: 18
+          GNN早停輪數: 0
+          耗時: 3.98 秒
+    GNN階段: start
+          Best val metric: 0.8576072892113221
+          Best test metric: 0.9801412088488844
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 1.77 秒
+    GNN階段: materialize
+          Best val metric: 0.8554867607554844
+          Best test metric: 1.463903018240609
+          早停輪數: 12
+          GNN早停輪數: 0
+          耗時: 1.64 秒
+    GNN階段: encoding
+          Best val metric: 1.0029043697738578
+          Best test metric: 1.0254525302183726
+          早停輪數: 29
+          GNN早停輪數: 0
+          耗時: 1.12 秒
+    GNN階段: columnwise
+          Best val metric: 0.9786632373203599
+          Best test metric: 1.2580338751230156
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.55 秒
+    GNN階段: decoding
+          Best val metric: 1.0364973545074463
+          Best test metric: 1.0857632160186768
+          早停輪數: 38
+          GNN早停輪數: 24
+          耗時: 1.88 秒

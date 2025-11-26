@@ -1,0 +1,38 @@
+dataset: credit
+  模型: fttransformer
+    GNN階段: none
+          Best val metric: 0.844452440738678
+          Best test metric: 0.8427658081054688
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 11.58 秒
+    GNN階段: start
+          Best val metric: 0.8426660299301147
+          Best test metric: 0.8387902975082397
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 14.52 秒
+    GNN階段: materialize
+          Best val metric: 0.8425418138504028
+          Best test metric: 0.8427647352218628
+          早停輪數: 23
+          GNN早停輪數: 0
+          耗時: 18.55 秒
+    GNN階段: encoding
+          Best val metric: 0.8469319343566895
+          Best test metric: 0.8416361808776855
+          早停輪數: 29
+          GNN早停輪數: 0
+          耗時: 12.66 秒
+    GNN階段: columnwise
+          Best val metric: 0.8448539972305298
+          Best test metric: 0.8387364149093628
+          早停輪數: 28
+          GNN早停輪數: 0
+          耗時: 9.84 秒
+    GNN階段: decoding
+          Best val metric: 0.8431728482246399
+          Best test metric: 0.8443617820739746
+          早停輪數: 26
+          GNN早停輪數: 22
+          耗時: 12.14 秒

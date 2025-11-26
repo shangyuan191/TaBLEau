@@ -304,21 +304,30 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
 
 
     # 取得所有 row 的 embedding
-def get_all_embeddings_and_targets(loader,  encode_batch, process_batch_interaction):
+def get_all_embeddings_and_targets(loader, encoder, backbone, decoder=None, mode: str = 'percol_mean'):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     all_embeds, all_targets = [], []
     for tf in loader:
         tf = tf.to(device)
-        x = encode_batch(tf)
-        feature_outputs, reg = process_batch_interaction(x, return_reg=True)
-        # feature_outputs 是一個列表，需要先合併再處理
-        if isinstance(feature_outputs, list):
-            # 將列表中的所有特徵合併
-            combined_features = sum(feature_outputs)  # 按元素相加
+        x = encoder(tf)
+        # mode handling:
+        # - 'decoder': flatten features, run backbone then decoder
+        # - 'mean': mean over columns -> per-row feature mean
+        # - 'percol_mean': mean over channels -> per-column mean
+        if mode == 'decoder' and decoder is not None:
+            flat_x = x.flatten(start_dim=1)
+            emb = decoder(backbone(flat_x))
+        elif mode == 'mean':
+            emb = x.mean(dim=1)
+        elif mode == 'percol_mean':
+            emb = x.mean(dim=2)
         else:
-            combined_features = feature_outputs
-        all_embeds.append(combined_features.detach().cpu())
+            # fallback: flatten + backbone
+            emb = backbone(x.flatten(start_dim=1))
+
+        all_embeds.append(emb.detach().cpu())
         all_targets.append(tf.y.detach().cpu())
+
     return torch.cat(all_embeds, dim=0), torch.cat(all_targets, dim=0)
 
 
@@ -331,9 +340,27 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
     all_emb = torch.cat([train_emb, val_emb, test_emb], dim=0)  # (total_rows, num_cols)
     all_y = torch.cat([train_y, val_y, test_y], dim=0)
     # print(f"all_emb shape: {all_emb.shape}, all_y shape: {all_y.shape}")
-    # 合併成 DataFrame
-    all_df = pd.DataFrame(all_emb.numpy())
-    all_df['target'] = all_y.numpy()
+    # 當使用 row-level embedding 模式時，為每個 split 建立帶有前綴欄位名稱的 DataFrame
+    feat_mode = config.get('gnn_feature_mode', 'percol_mean')
+    if feat_mode in ('mean', 'percol_mean', 'decoder'):
+        feat_dim = int(train_emb.shape[1]) if train_emb.numel() > 0 else 0
+        prefix = 'GNN_feat' if feat_mode == 'mean' else ('GNN_percol' if feat_mode == 'percol_mean' else 'GNN_dec')
+        emb_cols = [f"{prefix}_{i}" for i in range(feat_dim)]
+
+        train_df_gnn = pd.DataFrame(train_emb.numpy(), columns=emb_cols)
+        train_df_gnn['target'] = train_y.numpy()
+
+        val_df_gnn = pd.DataFrame(val_emb.numpy(), columns=emb_cols)
+        val_df_gnn['target'] = val_y.numpy()
+
+        test_df_gnn = pd.DataFrame(test_emb.numpy(), columns=emb_cols)
+        test_df_gnn['target'] = test_y.numpy()
+
+        all_df = pd.concat([train_df_gnn, val_df_gnn, test_df_gnn], axis=0, ignore_index=True)
+    else:
+        # fallback: plain numeric columns
+        all_df = pd.DataFrame(all_emb.numpy())
+        all_df['target'] = all_y.numpy()
     # print(f"all_df shape: {all_df.shape}")
     # print(f"all_df head:\n{all_df.head()}")
     # print(f"all_df columns: {all_df.columns}")

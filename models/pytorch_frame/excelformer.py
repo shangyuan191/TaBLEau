@@ -373,23 +373,78 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
             dataset, train_tensor_frame, val_tensor_frame, test_tensor_frame, gnn_early_stop_epochs)
 
 # 取得所有 row 的 embedding
-def get_all_embeddings_and_targets(loader, encoder, convs):
+def get_all_embeddings_and_targets(loader, encoder, convs, decoder=None, mode: str = 'percol_mean'):
+    """Extract row-level features and targets from a loader.
+
+    Modes:
+      - 'decoder' (default): use `decoder(x)` -> shape [batch, out_channels]
+      - 'mean': mean-pool columns -> x.mean(dim=1) -> shape [batch, channels]
+      - 'percol_mean': mean-pool channels -> x.mean(dim=2) -> shape [batch, num_cols]
+
+    Returns:
+      (embeddings_tensor, targets_tensor) where embeddings_tensor has shape
+      [num_rows_total, feat_dim] according to chosen mode.
+    """
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     all_embeds, all_targets = [], []
-    for tf in loader:
+    # collect TensorFrame items in order, prefer loader.tensor_frame to preserve original order
+    tfs = []
+    if hasattr(loader, 'tensor_frame'):
+        dataset_len = len(loader.tensor_frame)
+        for i in range(dataset_len):
+            tfs.append(loader.tensor_frame[i])
+    else:
+        # loader yields TensorFrame objects
+        for tf in loader:
+            tfs.append(tf)
+
+    # process each TensorFrame the same way
+    for tf in tfs:
         tf = tf.to(device)
-        x, _ = encoder(tf)
+        x, _ = encoder(tf)  # x: [batch, num_cols, channels]
         for conv in convs:
             x = conv(x)
-        x_pooled = x.mean(dim=2)  # (batch_size, num_cols)
-        all_embeds.append(x_pooled.detach().cpu())
+
+        if mode == 'decoder':
+            if decoder is None:
+                raise ValueError("decoder required when mode == 'decoder'")
+            emb = decoder(x)  # expected shape [batch, out_channels]
+        elif mode == 'mean':
+            # Pool columns to get one vector per row: [batch, channels]
+            emb = x.mean(dim=1)
+        elif mode == 'percol_mean':
+            # Pool channels to get per-column scalars -> [batch, num_cols]
+            emb = x.mean(dim=2)
+        else:
+            raise ValueError(f"Unknown embedding mode: {mode}")
+
+        all_embeds.append(emb.detach().cpu())
         all_targets.append(tf.y.detach().cpu())
+
     return torch.cat(all_embeds, dim=0), torch.cat(all_targets, dim=0)
-def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer,encoder, convs):
+def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, convs, decoder):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    train_emb, train_y = get_all_embeddings_and_targets(train_loader, encoder, convs)
-    val_emb, val_y = get_all_embeddings_and_targets(val_loader, encoder, convs)
-    test_emb, test_y = get_all_embeddings_and_targets(test_loader, encoder, convs)
+    # choose embedding mode for GNN features
+    feat_mode = config.get('gnn_feature_mode', 'percol_mean')  # 'decoder' | 'mean' | 'percol_mean'
+    train_emb, train_y = get_all_embeddings_and_targets(train_loader, encoder, convs, decoder=decoder, mode=feat_mode)
+    val_emb, val_y = get_all_embeddings_and_targets(val_loader, encoder, convs, decoder=decoder, mode=feat_mode)
+    test_emb, test_y = get_all_embeddings_and_targets(test_loader, encoder, convs, decoder=decoder, mode=feat_mode)
+
+    # If requested, build DataFrames for the whole dataset from the extracted embeddings.
+    train_df_gnn = val_df_gnn = test_df_gnn = None
+    if feat_mode in ('mean', 'percol_mean', 'decoder'):
+        # embeddings shape: (N_rows, feat_dim)
+        feat_dim = train_emb.shape[1]
+        # choose name prefix by mode (optional)
+        prefix = 'GNN_feat' if feat_mode == 'mean' else ('GNN_percol' if feat_mode == 'percol_mean' else 'GNN_dec')
+        emb_cols = [f'{prefix}_{i}' for i in range(feat_dim)]
+        train_df_gnn = pd.DataFrame(train_emb.numpy(), columns=emb_cols)
+        val_df_gnn = pd.DataFrame(val_emb.numpy(), columns=emb_cols)
+        test_df_gnn = pd.DataFrame(test_emb.numpy(), columns=emb_cols)
+        # attach targets
+        train_df_gnn['target'] = train_y.numpy()
+        val_df_gnn['target'] = val_y.numpy()
+        test_df_gnn['target'] = test_y.numpy()
     # 合併
     all_emb = torch.cat([train_emb, val_emb, test_emb], dim=0)  # (total_rows, num_cols)
     all_y = torch.cat([train_y, val_y, test_y], dim=0)
@@ -498,7 +553,11 @@ def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, 
             early_stop_epoch = epoch + 1
             print(f"GNN Early stopping at epoch {early_stop_epoch}")
             break
-    return best_val_metric, test_metric, early_stop_epoch
+    gnn_df_dict = None
+    if feat_mode == 'mean' and train_df_gnn is not None:
+        gnn_df_dict = {'train': train_df_gnn, 'val': val_df_gnn, 'test': test_df_gnn}
+
+    return best_val_metric, test_metric, early_stop_epoch, gnn_df_dict
 def feature_mixup(
     x: Tensor,
     y: Tensor,
@@ -914,8 +973,16 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
     test_metric = None
     if gnn_stage == 'decoding':
         # 確保gnn在gnn_decoding_eval作用域可見
-        best_val_metric, test_metric, gnn_early_stop_epochs = gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, convs)
+        # 傳入 decoder，讓 GNN 使用 decoder 的 row-level outputs 或其他 mode 作為 features
+        best_val_metric, test_metric, gnn_early_stop_epochs, gnn_df_dict = gnn_decoding_eval(
+            train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, convs, decoder
+        )
         final_metric = best_val_metric
+        # 如果 gnn_decoding_eval 回傳了 DataFrame，將其加入結果中
+        if gnn_df_dict is not None:
+            material_outputs['train_df_gnn'] = gnn_df_dict.get('train')
+            material_outputs['val_df_gnn'] = gnn_df_dict.get('val')
+            material_outputs['test_df_gnn'] = gnn_df_dict.get('test')
     else:
         final_metric = best_val_metric
         print(f'Best Val {metric}: {final_metric:.4f}')
@@ -941,6 +1008,9 @@ def excelformer_core_fn(material_outputs, config, task_type, gnn_stage=None):
         'metric': metric,
         'early_stop_epochs': early_stop_epochs,
         'gnn_early_stop_epochs': 0 if gnn_stage != 'decoding' else gnn_early_stop_epochs,
+        'train_df_gnn': material_outputs.get('train_df_gnn'),
+        'val_df_gnn': material_outputs.get('val_df_gnn'),
+        'test_df_gnn': material_outputs.get('test_df_gnn'),
     }
 
 
@@ -1002,3 +1072,10 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             'error': str(e),
         }
     return results
+
+
+#  python main.py --dataset kaggle_Audit_Data --models excelformer --gnn_stages all --epochs 2
+#  python main.py --dataset eye --models excelformer --gnn_stages all --epochs 2
+#  python main.py --dataset house --models excelformer --gnn_stages all --epochs 2
+#  python main.py --dataset credit --models excelformer --gnn_stages all --epochs 2
+#  python main.py --dataset openml_The_Office_Dataset --models excelformer --gnn_stages all --epochs 2
