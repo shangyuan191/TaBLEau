@@ -5,6 +5,106 @@ import csv
 from pathlib import Path
 import pandas as pd
 
+# Helper: parse baseline-split markdown and produce nested dict
+def _parse_baseline_md(path: str):
+    text = open(path, 'r', encoding='utf-8').read()
+    sections = re.split(r"\n## Baseline: ", text)
+    data = {}
+    for sec in sections[1:]:
+        lines = sec.splitlines()
+        if not lines:
+            continue
+        baseline = lines[0].strip()
+        rest = "\n".join(lines[1:])
+        eps_blocks = re.split(r"\n### eps = ", rest)
+        data.setdefault(baseline, {})
+        for eb in eps_blocks[1:]:
+            eb_lines = eb.splitlines()
+            if not eb_lines:
+                continue
+            eps_line = eb_lines[0].strip()
+            try:
+                eps = float(eps_line.split()[0])
+            except Exception:
+                try:
+                    eps = float(eps_line)
+                except Exception:
+                    continue
+            # find table header
+            table_start = None
+            for i, l in enumerate(eb_lines[1:], start=1):
+                if l.strip().startswith('|') and 'Injection' in l:
+                    table_start = i
+                    break
+            if table_start is None:
+                continue
+            header = eb_lines[table_start].strip()
+            cols = [c.strip() for c in header.strip('|').split('|')]
+            colnames = cols[1:]
+            # parse rows
+            idx = table_start+2
+            while idx < len(eb_lines):
+                row = eb_lines[idx]
+                if not row.strip():
+                    break
+                parts = [p.strip() for p in row.strip('|').split('|')]
+                if not parts:
+                    idx += 1
+                    continue
+                inj = parts[0]
+                data[baseline].setdefault(eps, {}).setdefault(inj, {})
+                for ci, col in enumerate(colnames, start=1):
+                    if ci >= len(parts):
+                        continue
+                    cell = parts[ci]
+                    m = re.search(r"(\d+)\/(\d+)\/(\d+)", cell)
+                    if not m:
+                        continue
+                    bs = int(m.group(1)); ties = int(m.group(2)); tot = int(m.group(3))
+                    data[baseline][eps][inj][col] = {'bs':bs,'ties':ties,'tot':tot}
+                idx += 1
+    return data
+
+
+def _write_grouped_md(src_data, out_path, grouped_map, eps_list, columns_order, title):
+    with open(out_path, 'w', encoding='utf-8') as f:
+        f.write(title + '\n\n')
+        f.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
+        for g in grouped_map.keys():
+            f.write(f"## Baseline: {g}\n\n")
+            for eps in eps_list:
+                f.write(f"### eps = {eps}\n\n")
+                hdr = "| Injection "
+                for c in columns_order:
+                    hdr += f"| {c} "
+                hdr += "|\n"
+                sep = "|---" + "|---" * len(columns_order) + "|\n"
+                f.write(hdr)
+                f.write(sep)
+                inj_order = ['columnwise','none','decoding','encoding','start','materialize']
+                for inj in inj_order:
+                    line = f"| {inj} "
+                    for col in columns_order:
+                        cell = '-'
+                        try:
+                            bs_sum = ties_sum = tot_sum = 0
+                            for lbl in grouped_map[g]:
+                                v = src_data.get(lbl, {}).get(eps, {}).get(inj, {}).get(col)
+                                if v:
+                                    bs_sum += int(v.get('bs',0))
+                                    ties_sum += int(v.get('ties',0))
+                                    tot_sum += int(v.get('tot',0))
+                            if tot_sum and tot_sum>0:
+                                prop = (bs_sum + ties_sum) / tot_sum if tot_sum>0 else 0.0
+                                cell = f"{bs_sum}/{ties_sum}/{tot_sum} ({prop:.3f})"
+                        except Exception:
+                            cell = '-'
+                        line += f"| {cell} "
+                    line += "|\n"
+                    f.write(line)
+                f.write("\n")
+    return out_path
+
 # This script aggregates the per-category avg_rank tables that were
 # produced under `gnn_injection_analysis/per_model_result/*.txt` and
 # computes a dataset-weighted combined average rank across all categories
@@ -852,73 +952,82 @@ if __name__ == '__main__':
 
                     # --- New: aggregate (cross-category) and split by baseline (columns = primaries)
                     try:
-                        # group_agg_by_primary holds per-primary combined aggregates: {primary: {(eps,inj,opp): {'beats_strict', 'ties','total'}}}
-                        # Build canonical baseline list (exclude per-primary opponent labels like 'excelformer_few')
+                        # Prefer to build grouped baseline file by parsing the ungrouped
+                        # baseline-split markdown (if it exists) and summing the
+                        # canonical tree/gnn labels into grouped columns. This mirrors
+                        # the logic in group_baseline_postprocess.py.
+                        candidate_src = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_category_split_baseline_{metric_name}.md')
                         trees = ['xgboost','catboost','lightgbm']
                         gnn_refs = ['t2g-former','tabgnn']
-                        ref_models = trees + gnn_refs + ['tabpfn']
-                        baseline_list = []
-                        # primary group baselines
-                        baseline_list.extend(['primary_few','primary_full'])
-                        # add per-ref few/full baselines (e.g., xgboost_few)
-                        for r in ref_models:
-                            baseline_list.append(f"{r}_few")
-                            baseline_list.append(f"{r}_full")
+                        grouped_map = {
+                            'primary_few':['primary_few'],
+                            'primary_full':['primary_full'],
+                            'tree_few':[f"{t}_few" for t in trees],
+                            'tree_full':[f"{t}_full" for t in trees],
+                            'gnn_few':[f"{g}_few" for g in gnn_refs],
+                            'gnn_full':[f"{g}_full" for g in gnn_refs],
+                            'tabpfn_few':['tabpfn_few'],
+                            'tabpfn_full':['tabpfn_full']
+                        }
 
                         out_path1 = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_category_split_baseline_{metric_name}_group_level.md')
-                        with open(out_path1, 'w', encoding='utf-8') as out1:
-                            out1.write(f"# All primaries — aggregate categories, split by baseline (metric={metric_name})\n\n")
-                            out1.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
-                            for baseline in baseline_list:
-                                out1.write(f"## Baseline: {baseline}\n\n")
-                                for eps in eps_list:
-                                    out1.write(f"### eps = {eps}\n\n")
-                                    # header: Injection + primaries
-                                    hdr = "| Injection "
-                                    for p in primaries_list:
-                                        hdr += f"| {p} "
-                                    hdr += "|\n"
-                                    sep = "|---" + "|---" * len(primaries_list) + "|\n"
-                                    out1.write(hdr)
-                                    out1.write(sep)
-                                    # use canonical injection stages order
-                                    inj_order = ['columnwise','none','decoding','encoding','start','materialize']
-                                    for inj in inj_order:
-                                        line = f"| {inj} "
-                                        for p in primaries_list:
-                                            agg = group_agg_by_primary.get(p, {})
-                                            # determine which opponent labels to sum for this baseline
-                                            opp_labels = []
-                                            if baseline == 'primary_few':
-                                                opp_labels = [f"{p}_few"]
-                                            elif baseline == 'primary_full':
-                                                opp_labels = [f"{p}_full"]
-                                            elif baseline.endswith('_few') and baseline.split('_')[0] in ref_models:
-                                                opp_labels = [baseline]
-                                            elif baseline.endswith('_full') and baseline.split('_')[0] in ref_models:
-                                                opp_labels = [baseline]
-                                            else:
-                                                opp_labels = [baseline]
 
-                                            # sum across opp_labels
-                                            bs_sum = 0; ties_sum = 0; tot_sum = 0
-                                            for opp in opp_labels:
-                                                key = (float(eps), inj, opp)
-                                                v = agg.get(key)
-                                                if v:
-                                                    bs_sum += int(v.get('beats_strict',0))
-                                                    ties_sum += int(v.get('ties',0))
-                                                    tot_sum += int(v.get('total',0))
-                                            if tot_sum <= 0:
-                                                cell = '-'
-                                            else:
-                                                prop = (bs_sum + ties_sum) / tot_sum if tot_sum>0 else 0.0
-                                                cell = f"{bs_sum}/{ties_sum}/{tot_sum} ({prop:.3f})"
-                                            line += f"| {cell} "
-                                        line += "|\n"
-                                        out1.write(line)
-                                    out1.write("\n")
-                        print('Wrote aggregate-category-split-by-baseline markdown:', out_path1)
+                        if os.path.exists(candidate_src):
+                            src_data = _parse_baseline_md(candidate_src)
+                            # collect eps list and union of column names
+                            all_eps = sorted({eps for b in src_data for eps in src_data[b].keys()})
+                            cols = sorted({c for b in src_data for eps in src_data[b] for inj in src_data[b][eps] for c in src_data[b][eps][inj].keys()})
+                            title = f"# All primaries — aggregate categories, split by grouped baseline (metric={metric_name})"
+                            _write_grouped_md(src_data, out_path1, grouped_map, all_eps, cols, title)
+                            print('Wrote grouped aggregate-category-split-by-baseline markdown:', out_path1)
+                        else:
+                            # fallback: previous behavior (per-primary aggregation stored in group_agg_by_primary)
+                            ref_models = trees + gnn_refs + ['tabpfn']
+                            baseline_list = ['primary_few','primary_full'] + [f"{r}_few" for r in ref_models] + [f"{r}_full" for r in ref_models]
+                            with open(out_path1, 'w', encoding='utf-8') as out1:
+                                out1.write(f"# All primaries — aggregate categories, split by baseline (metric={metric_name})\n\n")
+                                out1.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
+                                for baseline in baseline_list:
+                                    out1.write(f"## Baseline: {baseline}\n\n")
+                                    for eps in eps_list:
+                                        out1.write(f"### eps = {eps}\n\n")
+                                        hdr = "| Injection "
+                                        for p in primaries_list:
+                                            hdr += f"| {p} "
+                                        hdr += "|\n"
+                                        sep = "|---" + "|---" * len(primaries_list) + "|\n"
+                                        out1.write(hdr)
+                                        out1.write(sep)
+                                        inj_order = ['columnwise','none','decoding','encoding','start','materialize']
+                                        for inj in inj_order:
+                                            line = f"| {inj} "
+                                            for p in primaries_list:
+                                                agg = group_agg_by_primary.get(p, {})
+                                                opp_labels = []
+                                                if baseline == 'primary_few':
+                                                    opp_labels = [f"{p}_few"]
+                                                elif baseline == 'primary_full':
+                                                    opp_labels = [f"{p}_full"]
+                                                else:
+                                                    opp_labels = [baseline]
+                                                bs_sum = ties_sum = tot_sum = 0
+                                                for opp in opp_labels:
+                                                    key = (float(eps), inj, opp)
+                                                    v = agg.get(key)
+                                                    if v:
+                                                        bs_sum += int(v.get('beats_strict',0))
+                                                        ties_sum += int(v.get('ties',0))
+                                                        tot_sum += int(v.get('total',0))
+                                                if tot_sum <= 0:
+                                                    cell = '-'
+                                                else:
+                                                    prop = (bs_sum + ties_sum) / tot_sum if tot_sum>0 else 0.0
+                                                    cell = f"{bs_sum}/{ties_sum}/{tot_sum} ({prop:.3f})"
+                                                line += f"| {cell} "
+                                            line += "|\n"
+                                            out1.write(line)
+                                        out1.write("\n")
+                            print('Wrote fallback aggregate-category-split-by-baseline markdown:', out_path1)
                     except Exception as e:
                         print('Failed to write aggregate-category-split-baseline file:', e)
 
@@ -1108,6 +1217,29 @@ if __name__ == '__main__':
                                         out2.write(line)
                                     out2.write("\n")
                         print('Wrote aggregate-primary-split-by-baseline markdown:', out_path2)
+                        # Attempt to rewrite this file as grouped baselines (tree/gnn merged)
+                        try:
+                            if os.path.exists(out_path2):
+                                src_data2 = _parse_baseline_md(out_path2)
+                                trees = ['xgboost','catboost','lightgbm']
+                                gnn_refs = ['t2g-former','tabgnn']
+                                grouped_map2 = {
+                                    'primary_few':['primary_few'],
+                                    'primary_full':['primary_full'],
+                                    'tree_few':[f"{t}_few" for t in trees],
+                                    'tree_full':[f"{t}_full" for t in trees],
+                                    'gnn_few':[f"{g}_few" for g in gnn_refs],
+                                    'gnn_full':[f"{g}_full" for g in gnn_refs],
+                                    'tabpfn_few':['tabpfn_few'],
+                                    'tabpfn_full':['tabpfn_full']
+                                }
+                                all_eps2 = sorted({eps for b in src_data2 for eps in src_data2[b].keys()})
+                                cols2 = sorted({c for b in src_data2 for eps in src_data2[b] for inj in src_data2[b][eps] for c in src_data2[b][eps][inj].keys()})
+                                title2 = f"# All primaries aggregated — split by grouped baseline across dataset categories (metric={metric_name})"
+                                _write_grouped_md(src_data2, out_path2, grouped_map2, all_eps2, cols2, title2)
+                                print('Rewrote grouped aggregate-primary-split-by-baseline markdown (merged tree/gnn):', out_path2)
+                        except Exception:
+                            pass
                     except Exception as e:
                         print('Failed to write aggregate-primary-split-baseline file:', e)
 
