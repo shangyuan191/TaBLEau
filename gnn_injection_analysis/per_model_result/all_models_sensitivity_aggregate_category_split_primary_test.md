@@ -1,6 +1,6 @@
 # All primaries — combined all categories sensitivity (metric=test)
 
-<!-- START excelformer_sensitivity_all_categories_test.md -->
+<!-- START excelformer_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: excelformer (metric=test)
 
@@ -18,9 +18,9 @@ eps values: 0.01
 | start | 41/10/116 (0.440) | 21/3/116 (0.207) | 43/7/116 (0.431) | 16/2/116 (0.155) | 35/5/116 (0.345) | 14/2/116 (0.138) | 42/5/116 (0.405) | 17/2/116 (0.164) | 22/7/116 (0.250) | 14/3/116 (0.147) | 80/2/116 (0.707) | 55/2/116 (0.491) | 59/5/116 (0.552) | 45/2/116 (0.405) |
 
 
-<!-- END excelformer_sensitivity_all_categories_test.md -->
+<!-- END excelformer_sensitivity_aggregate_category_test.md -->
 
-<!-- START fttransformer_sensitivity_all_categories_test.md -->
+<!-- START fttransformer_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: fttransformer (metric=test)
 
@@ -38,9 +38,9 @@ eps values: 0.01
 | start | 69/5/116 (0.638) | 27/2/116 (0.250) | 36/7/116 (0.371) | 15/1/116 (0.138) | 27/7/116 (0.293) | 13/0/116 (0.112) | 29/4/116 (0.284) | 16/2/116 (0.155) | 16/5/116 (0.181) | 10/1/116 (0.095) | 73/2/116 (0.647) | 53/1/116 (0.466) | 55/6/116 (0.526) | 39/2/116 (0.353) |
 
 
-<!-- END fttransformer_sensitivity_all_categories_test.md -->
+<!-- END fttransformer_sensitivity_aggregate_category_test.md -->
 
-<!-- START resnet_sensitivity_all_categories_test.md -->
+<!-- START resnet_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: resnet (metric=test)
 
@@ -58,9 +58,9 @@ eps values: 0.01
 | start | 48/7/116 (0.474) | 12/3/116 (0.129) | 32/6/116 (0.328) | 12/2/116 (0.121) | 17/8/116 (0.216) | 10/2/116 (0.103) | 25/9/116 (0.293) | 13/2/116 (0.129) | 16/7/116 (0.198) | 13/2/116 (0.129) | 76/4/116 (0.690) | 54/4/116 (0.500) | 48/6/116 (0.466) | 40/3/116 (0.371) |
 
 
-<!-- END resnet_sensitivity_all_categories_test.md -->
+<!-- END resnet_sensitivity_aggregate_category_test.md -->
 
-<!-- START scarf_sensitivity_all_categories_test.md -->
+<!-- START scarf_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: scarf (metric=test)
 
@@ -78,9 +78,9 @@ eps values: 0.01
 | start | 45/7/116 (0.448) | 17/5/116 (0.190) | 56/3/116 (0.509) | 19/0/116 (0.164) | 48/2/116 (0.431) | 20/0/116 (0.172) | 55/1/116 (0.483) | 20/1/116 (0.181) | 27/2/116 (0.250) | 18/1/116 (0.164) | 75/4/116 (0.681) | 60/2/116 (0.534) | 70/2/116 (0.621) | 51/0/116 (0.440) |
 
 
-<!-- END scarf_sensitivity_all_categories_test.md -->
+<!-- END scarf_sensitivity_aggregate_category_test.md -->
 
-<!-- START subtab_sensitivity_all_categories_test.md -->
+<!-- START subtab_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: subtab (metric=test)
 
@@ -98,9 +98,9 @@ eps values: 0.01
 | start | 34/22/116 (0.483) | 18/2/116 (0.172) | 24/1/116 (0.216) | 7/0/116 (0.060) | 16/3/116 (0.164) | 6/2/116 (0.069) | 20/2/116 (0.190) | 9/1/116 (0.086) | 10/6/116 (0.138) | 8/1/116 (0.078) | 41/2/116 (0.371) | 35/1/116 (0.310) | 28/8/116 (0.310) | 20/1/116 (0.181) |
 
 
-<!-- END subtab_sensitivity_all_categories_test.md -->
+<!-- END subtab_sensitivity_aggregate_category_test.md -->
 
-<!-- START tabm_sensitivity_all_categories_test.md -->
+<!-- START tabm_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: tabm (metric=test)
 
@@ -118,9 +118,9 @@ eps values: 0.01
 | start | 30/31/116 (0.526) | 23/4/116 (0.233) | 47/8/116 (0.474) | 16/1/116 (0.147) | 29/4/116 (0.284) | 14/0/116 (0.121) | 31/7/116 (0.328) | 18/0/116 (0.155) | 20/0/116 (0.172) | 12/0/116 (0.103) | 80/9/116 (0.767) | 56/4/116 (0.517) | 61/10/116 (0.612) | 44/1/116 (0.388) |
 
 
-<!-- END tabm_sensitivity_all_categories_test.md -->
+<!-- END tabm_sensitivity_aggregate_category_test.md -->
 
-<!-- START tabnet_sensitivity_all_categories_test.md -->
+<!-- START tabnet_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: tabnet (metric=test)
 
@@ -138,9 +138,9 @@ eps values: 0.01
 | start | 38/17/116 (0.474) | 20/1/116 (0.181) | 41/6/116 (0.405) | 14/0/116 (0.121) | 31/4/116 (0.302) | 12/0/116 (0.103) | 30/11/116 (0.353) | 14/0/116 (0.121) | 16/4/116 (0.172) | 12/0/116 (0.103) | 81/2/116 (0.716) | 58/2/116 (0.517) | 63/6/116 (0.595) | 41/2/116 (0.371) |
 
 
-<!-- END tabnet_sensitivity_all_categories_test.md -->
+<!-- END tabnet_sensitivity_aggregate_category_test.md -->
 
-<!-- START tabtransformer_sensitivity_all_categories_test.md -->
+<!-- START tabtransformer_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: tabtransformer (metric=test)
 
@@ -158,9 +158,9 @@ eps values: 0.01
 | start | 60/7/116 (0.578) | 26/4/116 (0.259) | 22/6/116 (0.241) | 13/1/116 (0.121) | 12/6/116 (0.155) | 10/1/116 (0.095) | 15/5/116 (0.172) | 11/3/116 (0.121) | 5/4/116 (0.078) | 3/2/116 (0.043) | 63/5/116 (0.586) | 40/1/116 (0.353) | 50/7/116 (0.491) | 35/2/116 (0.319) |
 
 
-<!-- END tabtransformer_sensitivity_all_categories_test.md -->
+<!-- END tabtransformer_sensitivity_aggregate_category_test.md -->
 
-<!-- START trompt_sensitivity_all_categories_test.md -->
+<!-- START trompt_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: trompt (metric=test)
 
@@ -178,9 +178,9 @@ eps values: 0.01
 | start | 33/15/116 (0.414) | 16/3/116 (0.164) | 47/15/116 (0.534) | 17/2/116 (0.164) | 31/6/116 (0.319) | 14/2/116 (0.138) | 40/11/116 (0.440) | 17/3/116 (0.172) | 20/9/116 (0.250) | 18/2/116 (0.172) | 94/2/116 (0.828) | 62/2/116 (0.552) | 62/15/116 (0.664) | 44/2/116 (0.397) |
 
 
-<!-- END trompt_sensitivity_all_categories_test.md -->
+<!-- END trompt_sensitivity_aggregate_category_test.md -->
 
-<!-- START vime_sensitivity_all_categories_test.md -->
+<!-- START vime_sensitivity_aggregate_category_test.md -->
 
 # Combined (all categories) sensitivity — primary: vime (metric=test)
 
@@ -198,5 +198,5 @@ eps values: 0.01
 | start | 29/24/116 (0.457) | 16/3/116 (0.164) | 31/9/116 (0.345) | 12/0/116 (0.103) | 23/5/116 (0.241) | 10/0/116 (0.086) | 23/7/116 (0.259) | 13/0/116 (0.112) | 9/6/116 (0.129) | 8/0/116 (0.069) | 79/2/116 (0.698) | 50/0/116 (0.431) | 64/9/116 (0.629) | 35/1/116 (0.310) |
 
 
-<!-- END vime_sensitivity_all_categories_test.md -->
+<!-- END vime_sensitivity_aggregate_category_test.md -->
 

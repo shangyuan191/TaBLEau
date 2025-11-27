@@ -473,7 +473,7 @@ if __name__ == '__main__':
 
                         # If requested, produce a per-primary markdown that contains per-category wide tables
                         if args.wide_by_category:
-                            md_path = os.path.join(RESULT_DIR, f'{p}_sensitivity_by_category_{metric_name}.md')
+                            md_path = os.path.join(RESULT_DIR, f'{p}_sensitivity_split_category_{metric_name}.md')
                             cats = sorted(set(r['category'] for r in sens_rows))
                             opponents = sorted(set(r['opponent'] for r in sens_rows))
                             with open(md_path, 'w', encoding='utf-8') as md:
@@ -520,7 +520,7 @@ if __name__ == '__main__':
 
                         # Also produce a single markdown that aggregates across all categories
                         # (one combined table per eps). This shows overall beats_strict/ties/total.
-                        combined_md_path = os.path.join(RESULT_DIR, f'{p}_sensitivity_all_categories_{metric_name}.md')
+                        combined_md_path = os.path.join(RESULT_DIR, f'{p}_sensitivity_aggregate_category_{metric_name}.md')
                         # aggregate across categories
                         combined_agg = {}
                         for r in sens_rows:
@@ -573,7 +573,7 @@ if __name__ == '__main__':
 
                     # end per-primary loop: after generating combined md per primary, create an overall file
                 if combined_md_paths_all_primaries:
-                    overall_path = os.path.join(RESULT_DIR, f'all_models_sensitivity_all_categories_{metric_name}.md')
+                    overall_path = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_category_split_primary_{metric_name}.md')
                     with open(overall_path, 'w', encoding='utf-8') as outf_all:
                         outf_all.write(f"# All primaries — combined all categories sensitivity (metric={metric_name})\n\n")
                         for p_md in combined_md_paths_all_primaries:
@@ -589,7 +589,7 @@ if __name__ == '__main__':
 
                     # --- write group-level combined markdown for all primaries
                     # columns: Injection, {primary}_few, {primary}_full, tree_few, tree_full, gnn_few, gnn_full, tabpfn_few, tabpfn_full
-                    group_md_path = os.path.join(RESULT_DIR, f'all_models_sensitivity_all_categories_{metric_name}_group_level.md')
+                    group_md_path = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_category_split_primary_{metric_name}_group_level.md')
                     with open(group_md_path, 'w', encoding='utf-8') as gmd:
                         gmd.write(f"# All primaries — group-level combined (metric={metric_name})\n\n")
                         gmd.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
@@ -695,7 +695,7 @@ if __name__ == '__main__':
                                 cell['total'] += tot
 
                         # write aggregated markdown
-                        out_cat_md = os.path.join(RESULT_DIR, f'all_models_sensitivity_by_category_{metric_name}.md')
+                        out_cat_md = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_primary_split_category_{metric_name}.md')
                         # compute dataset counts per category from dataset_category_map
                         counts_by_category = {}
                         try:
@@ -741,12 +741,12 @@ if __name__ == '__main__':
 
                     # --- produce group-level per-category aggregation from the combined-by-category file
                     try:
-                        src_cat_md = os.path.join(RESULT_DIR, f'all_models_sensitivity_by_category_{metric_name}.md')
+                        src_cat_md = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_primary_split_category_{metric_name}.md')
                         if os.path.exists(src_cat_md):
                             text = open(src_cat_md, 'r', encoding='utf-8').read()
                             # parse categories
                             cat_sections = re.split(r"\n## Category: ", text)
-                            group_md_path = os.path.join(RESULT_DIR, f'all_models_sensitivity_by_categories_{metric_name}_group_level.md')
+                            group_md_path = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_primary_split_category_{metric_name}_group_level.md')
                             with open(group_md_path, 'w', encoding='utf-8') as gfm:
                                 gfm.write(f"# All models — group-level by category (metric={metric_name})\n\n")
                                 gfm.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
@@ -849,6 +849,267 @@ if __name__ == '__main__':
                             print('Wrote group-level by-category markdown:', group_md_path)
                     except Exception as e:
                         print('Failed to create group-level by-category markdown:', e)
+
+                    # --- New: aggregate (cross-category) and split by baseline (columns = primaries)
+                    try:
+                        # group_agg_by_primary holds per-primary combined aggregates: {primary: {(eps,inj,opp): {'beats_strict', 'ties','total'}}}
+                        # Build canonical baseline list (exclude per-primary opponent labels like 'excelformer_few')
+                        trees = ['xgboost','catboost','lightgbm']
+                        gnn_refs = ['t2g-former','tabgnn']
+                        ref_models = trees + gnn_refs + ['tabpfn']
+                        baseline_list = []
+                        # primary group baselines
+                        baseline_list.extend(['primary_few','primary_full'])
+                        # add per-ref few/full baselines (e.g., xgboost_few)
+                        for r in ref_models:
+                            baseline_list.append(f"{r}_few")
+                            baseline_list.append(f"{r}_full")
+
+                        out_path1 = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_category_split_baseline_{metric_name}_group_level.md')
+                        with open(out_path1, 'w', encoding='utf-8') as out1:
+                            out1.write(f"# All primaries — aggregate categories, split by baseline (metric={metric_name})\n\n")
+                            out1.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
+                            for baseline in baseline_list:
+                                out1.write(f"## Baseline: {baseline}\n\n")
+                                for eps in eps_list:
+                                    out1.write(f"### eps = {eps}\n\n")
+                                    # header: Injection + primaries
+                                    hdr = "| Injection "
+                                    for p in primaries_list:
+                                        hdr += f"| {p} "
+                                    hdr += "|\n"
+                                    sep = "|---" + "|---" * len(primaries_list) + "|\n"
+                                    out1.write(hdr)
+                                    out1.write(sep)
+                                    # use canonical injection stages order
+                                    inj_order = ['columnwise','none','decoding','encoding','start','materialize']
+                                    for inj in inj_order:
+                                        line = f"| {inj} "
+                                        for p in primaries_list:
+                                            agg = group_agg_by_primary.get(p, {})
+                                            # determine which opponent labels to sum for this baseline
+                                            opp_labels = []
+                                            if baseline == 'primary_few':
+                                                opp_labels = [f"{p}_few"]
+                                            elif baseline == 'primary_full':
+                                                opp_labels = [f"{p}_full"]
+                                            elif baseline.endswith('_few') and baseline.split('_')[0] in ref_models:
+                                                opp_labels = [baseline]
+                                            elif baseline.endswith('_full') and baseline.split('_')[0] in ref_models:
+                                                opp_labels = [baseline]
+                                            else:
+                                                opp_labels = [baseline]
+
+                                            # sum across opp_labels
+                                            bs_sum = 0; ties_sum = 0; tot_sum = 0
+                                            for opp in opp_labels:
+                                                key = (float(eps), inj, opp)
+                                                v = agg.get(key)
+                                                if v:
+                                                    bs_sum += int(v.get('beats_strict',0))
+                                                    ties_sum += int(v.get('ties',0))
+                                                    tot_sum += int(v.get('total',0))
+                                            if tot_sum <= 0:
+                                                cell = '-'
+                                            else:
+                                                prop = (bs_sum + ties_sum) / tot_sum if tot_sum>0 else 0.0
+                                                cell = f"{bs_sum}/{ties_sum}/{tot_sum} ({prop:.3f})"
+                                            line += f"| {cell} "
+                                        line += "|\n"
+                                        out1.write(line)
+                                    out1.write("\n")
+                        print('Wrote aggregate-category-split-by-baseline markdown:', out_path1)
+                    except Exception as e:
+                        print('Failed to write aggregate-category-split-baseline file:', e)
+
+                    # --- New: aggregate (cross-primary) and split by baseline (columns = dataset categories)
+                    try:
+                        # Try candidate source files in order; if none exist build per_cat from per-primary CSVs
+                        candidate_agg = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_primary_split_category_{metric_name}.md')
+                        candidate_bycat = os.path.join(RESULT_DIR, f'all_models_sensitivity_by_category_{metric_name}.md')
+                        per_cat = {}
+                        if os.path.exists(candidate_agg):
+                            text = open(candidate_agg, 'r', encoding='utf-8').read()
+                            cat_sections = re.split(r"\n## Category: ", text)
+                            for sec in cat_sections[1:]:
+                                lines = sec.splitlines()
+                                if not lines:
+                                    continue
+                                cat_line = lines[0].strip()
+                                m = re.match(r"(.+?)\s*\((\d+)\)$", cat_line)
+                                if m:
+                                    cat_name = m.group(1).strip()
+                                else:
+                                    cat_name = cat_line
+                                rest = "\n".join(lines[1:])
+                                eps_blocks = re.split(r"\n### eps = ", rest)
+                                for eb in eps_blocks[1:]:
+                                    eb_lines = eb.splitlines()
+                                    if not eb_lines:
+                                        continue
+                                    eps_val_line = eb_lines[0].strip()
+                                    try:
+                                        eps_val = float(eps_val_line.split()[0])
+                                    except Exception:
+                                        try:
+                                            eps_val = float(eps_val_line)
+                                        except Exception:
+                                            continue
+                                    table_start_idx = None
+                                    for i, l in enumerate(eb_lines[1:], start=1):
+                                        if l.strip().startswith('|') and 'Injection' in l:
+                                            table_start_idx = i
+                                            break
+                                    if table_start_idx is None:
+                                        continue
+                                    header_line = eb_lines[table_start_idx].strip()
+                                    cols = [c.strip() for c in header_line.strip('|').split('|')]
+                                    data_lines = []
+                                    for dl in eb_lines[table_start_idx+2:]:
+                                        if not dl.strip():
+                                            break
+                                        data_lines.append(dl)
+                                    for row in data_lines:
+                                        parts = [p.strip() for p in row.strip('|').split('|')]
+                                        if not parts:
+                                            continue
+                                        inj = parts[0]
+                                        per_cat.setdefault(cat_name, {}).setdefault(float(eps_val), {}).setdefault(inj, {})
+                                        for ci, colname in enumerate(cols[1:], start=1):
+                                            if ci >= len(parts):
+                                                continue
+                                            cell = parts[ci]
+                                            m = re.search(r"(\d+)\/(\d+)\/(\d+)", cell)
+                                            if not m:
+                                                continue
+                                            bs = int(m.group(1)); ties = int(m.group(2)); tot = int(m.group(3))
+                                            per_cat[cat_name][float(eps_val)][inj][colname] = {'bs':bs,'ties':ties,'tot':tot}
+                        elif os.path.exists(candidate_bycat):
+                            text = open(candidate_bycat, 'r', encoding='utf-8').read()
+                            cat_sections = re.split(r"\n## Category: ", text)
+                            for sec in cat_sections[1:]:
+                                lines = sec.splitlines()
+                                if not lines:
+                                    continue
+                                cat_name = lines[0].strip()
+                                rest = "\n".join(lines[1:])
+                                eps_blocks = re.split(r"\n### eps = ", rest)
+                                for eb in eps_blocks[1:]:
+                                    eb_lines = eb.splitlines()
+                                    if not eb_lines:
+                                        continue
+                                    eps_val_line = eb_lines[0].strip()
+                                    try:
+                                        eps_val = float(eps_val_line.split()[0])
+                                    except Exception:
+                                        try:
+                                            eps_val = float(eps_val_line)
+                                        except Exception:
+                                            continue
+                                    table_start_idx = None
+                                    for i, l in enumerate(eb_lines[1:], start=1):
+                                        if l.strip().startswith('|') and 'Injection' in l:
+                                            table_start_idx = i
+                                            break
+                                    if table_start_idx is None:
+                                        continue
+                                    header_line = eb_lines[table_start_idx].strip()
+                                    cols = [c.strip() for c in header_line.strip('|').split('|')]
+                                    data_lines = []
+                                    for dl in eb_lines[table_start_idx+2:]:
+                                        if not dl.strip():
+                                            break
+                                        data_lines.append(dl)
+                                    for row in data_lines:
+                                        parts = [p.strip() for p in row.strip('|').split('|')]
+                                        if not parts:
+                                            continue
+                                        inj = parts[0]
+                                        per_cat.setdefault(cat_name, {}).setdefault(float(eps_val), {}).setdefault(inj, {})
+                                        for ci, colname in enumerate(cols[1:], start=1):
+                                            if ci >= len(parts):
+                                                continue
+                                            cell = parts[ci]
+                                            m = re.search(r"(\d+)\/(\d+)\/(\d+)", cell)
+                                            if not m:
+                                                continue
+                                            bs = int(m.group(1)); ties = int(m.group(2)); tot = int(m.group(3))
+                                            per_cat[cat_name][float(eps_val)][inj][colname] = {'bs':bs,'ties':ties,'tot':tot}
+                        else:
+                            # fallback: build per_cat directly from per-primary CSVs
+                            per_cat = {}
+                            csv_pattern = f"_sensitivity_{metric_name}.csv"
+                            csv_files = [os.path.join(RESULT_DIR, fn) for fn in os.listdir(RESULT_DIR) if fn.endswith(csv_pattern) and not fn.startswith('all_models')]
+                            for cf in csv_files:
+                                try:
+                                    df = pd.read_csv(cf)
+                                except Exception:
+                                    continue
+                                for _, r in df.iterrows():
+                                    try:
+                                        eps_val = float(r['eps'])
+                                    except Exception:
+                                        continue
+                                    cat = r['category']
+                                    inj = r['injection']
+                                    opp = r['opponent']
+                                    bs = int(r.get('beats_strict', 0))
+                                    ties = int(r.get('ties', 0))
+                                    tot = int(r.get('total', 0))
+                                    per_cat.setdefault(cat, {}).setdefault(eps_val, {}).setdefault(inj, {})
+                                    per_cat[cat][eps_val][inj].setdefault(opp, {'bs':0,'ties':0,'tot':0})
+                                    cell = per_cat[cat][eps_val][inj][opp]
+                                    cell['bs'] += bs
+                                    cell['ties'] += ties
+                                    cell['tot'] += tot
+
+                        # Now produce file per baseline where columns are categories
+                        baseline_set = set()
+                        for cat, epsd in per_cat.items():
+                            for epsv, injd in epsd.items():
+                                for inj, colsmap in injd.items():
+                                    for cname in colsmap.keys():
+                                        baseline_set.add(cname)
+                        baseline_list = sorted(baseline_set)
+
+                        out_path2 = os.path.join(RESULT_DIR, f'all_models_sensitivity_aggregate_primary_split_baseline_{metric_name}_group_level.md')
+                        with open(out_path2, 'w', encoding='utf-8') as out2:
+                            out2.write(f"# All primaries aggregated — split by baseline across dataset categories (metric={metric_name})\n\n")
+                            out2.write(f"eps values: {', '.join(str(e) for e in eps_list)}\n\n")
+                            categories = sorted(per_cat.keys())
+                            for baseline in baseline_list:
+                                out2.write(f"## Baseline: {baseline}\n\n")
+                                for eps in eps_list:
+                                    out2.write(f"### eps = {eps}\n\n")
+                                    # header: Injection + categories
+                                    hdr = "| Injection "
+                                    for cat in categories:
+                                        hdr += f"| {cat} "
+                                    hdr += "|\n"
+                                    sep = "|---" + "|---" * len(categories) + "|\n"
+                                    out2.write(hdr)
+                                    out2.write(sep)
+                                    inj_order = ['columnwise','none','decoding','encoding','start','materialize']
+                                    for inj in inj_order:
+                                        line = f"| {inj} "
+                                        for cat in categories:
+                                            cell = '-'
+                                            try:
+                                                cmap = per_cat.get(cat, {}).get(float(eps), {}).get(inj, {})
+                                                v = cmap.get(baseline)
+                                                if v and int(v.get('tot',0))>0:
+                                                    bs = int(v.get('bs',0)); ties = int(v.get('ties',0)); tot = int(v.get('tot',0))
+                                                    prop = (bs + ties) / tot if tot>0 else 0.0
+                                                    cell = f"{bs}/{ties}/{tot} ({prop:.3f})"
+                                            except Exception:
+                                                cell = '-'
+                                            line += f"| {cell} "
+                                        line += "|\n"
+                                        out2.write(line)
+                                    out2.write("\n")
+                        print('Wrote aggregate-primary-split-by-baseline markdown:', out_path2)
+                    except Exception as e:
+                        print('Failed to write aggregate-primary-split-baseline file:', e)
 
             # After computing for both metrics, run the comparison generator for test
             # (embed the logic from generate_comparisons_by_test.py)
