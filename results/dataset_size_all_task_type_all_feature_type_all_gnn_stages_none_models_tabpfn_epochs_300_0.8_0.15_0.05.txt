@@ -1,0 +1,580 @@
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Audit_Data
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_User_Knowledge_Modeling
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Development_Index
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_analcatdata_lawsuit
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Pokmon_Legendary_Data
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_tokyo1
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Audit_Data
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_hungarian
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Real_Estate_DataSet
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_chronic_kidney_disease
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Pima_Indians_Diabetes
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_HCV_data
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Diabetes_Data_Set
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_nki70.arff
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Penguins_Classified
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_fitbit_dataset
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Compositions_of_Glass
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_DiabeticMellitus
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Startup_Success_Prediction
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Z_Alizadeh_Sani
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Heart_disease_classification
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Heart_failure_clinical_records
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Store_Data_Performance
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Automobiles
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Customer_Classification
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Credit_Card_Approval
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_Absenteeism_at_work
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Campus_Recruitment
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_analcatdata_creditscore
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: kaggle_Bigg_Boss_India
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_disclosure_z
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_DEE
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_disclosure_x_tampered
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_liver_disorders
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_fishcatch
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_wisconsin
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_strikes
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_boston_corrected
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_machine_cpu
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_yacht_hydrodynamics
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_no2
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_auto_price
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_ELE_1
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_residential_building
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_pm10
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_bodyfat
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_disclosure_x_noise
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Forest_Fire_Area
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Boston_house_price_data
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_disclosure_x_bias
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_echoMonths
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_cpu
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_HappinessRank_2015
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_meta
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_lungcancer_shedden
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_visualizing_environmental
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_autoPrice
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_rmftsa_ladata
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_boston
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_forest_fires
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Fish_market
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_EgyptianSkulls
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_weather_ankara
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_cps_85_wages
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_analcatdata_vineyard
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_The_Office_Dataset
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_pharynx
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_lowbwt
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_analcatdata_homerun
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_Reading_Hydro
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_cleveland
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_cholesterol
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_cloud
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: openml_fruitfly
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: MagicTelescope
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: credit
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: higgs_small
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: binarized_pol
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: road_safety
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: bank_marketing
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: helena
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: jannis
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: eye
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: california
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: medical_charges
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: diamonds
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: house_sales
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: nyc_taxi_green_dec_2016
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: sulfur
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: house
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: Brazilian_houses
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: Ailerons
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: pol
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒
+dataset: SGEMM_GPU_kernel_performance
+  模型: tabpfn
+    GNN階段: none
+          錯誤: main() takes 5 positional arguments but 6 were given
+          耗時: 0.00 秒

@@ -1,0 +1,725 @@
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.923076868057251
+          Best test metric: 1.0
+          耗時: 4.99 秒
+dataset: UCI_Audit_Data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          耗時: 1.10 秒
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9957386255264282
+          Best test metric: 0.9999999403953552
+          耗時: 1.09 秒
+dataset: UCI_User_Knowledge_Modeling
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9319525957107544
+          Best test metric: 1.0
+          耗時: 0.97 秒
+dataset: kaggle_Development_Index
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9999999403953552
+          耗時: 0.96 秒
+dataset: openml_analcatdata_lawsuit
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9819819927215576
+          Best test metric: 1.0
+          耗時: 0.96 秒
+dataset: openml_Pokmon_Legendary_Data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9972727298736572
+          Best test metric: 1.0
+          耗時: 1.25 秒
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8125
+          Best test metric: 0.8888888359069824
+          耗時: 1.05 秒
+dataset: openml_tokyo1
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9776338338851929
+          Best test metric: 0.9411764740943909
+          耗時: 1.62 秒
+dataset: kaggle_Audit_Data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          耗時: 1.11 秒
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6952479481697083
+          Best test metric: 0.5416666865348816
+          耗時: 1.26 秒
+dataset: openml_hungarian
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9590517282485962
+          Best test metric: 1.0
+          耗時: 1.08 秒
+dataset: kaggle_Real_Estate_DataSet
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9345730543136597
+          Best test metric: 0.9818181395530701
+          耗時: 1.02 秒
+dataset: kaggle_chronic_kidney_disease
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9999999403953552
+          耗時: 1.16 秒
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.998900294303894
+          Best test metric: 1.0
+          耗時: 1.07 秒
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.999421238899231
+          Best test metric: 1.0
+          耗時: 1.11 秒
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9768339991569519
+          Best test metric: 1.0
+          耗時: 1.09 秒
+dataset: openml_Pima_Indians_Diabetes
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8111841678619385
+          Best test metric: 0.8771429061889648
+          耗時: 1.05 秒
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9999999403953552
+          Best test metric: 1.0
+          耗時: 1.01 秒
+dataset: UCI_HCV_data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9979424476623535
+          Best test metric: 1.0
+          耗時: 1.10 秒
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9043209552764893
+          Best test metric: 0.9722222089767456
+          耗時: 1.20 秒
+dataset: openml_Diabetes_Data_Set
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8111841678619385
+          Best test metric: 0.8771429061889648
+          耗時: 1.10 秒
+dataset: openml_nki70.arff
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9523809552192688
+          Best test metric: 0.6666666865348816
+          耗時: 1.28 秒
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8138157725334167
+          Best test metric: 0.8942856788635254
+          耗時: 1.16 秒
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7631745934486389
+          Best test metric: 0.8835979104042053
+          耗時: 0.95 秒
+dataset: kaggle_Penguins_Classified
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          耗時: 0.96 秒
+dataset: kaggle_fitbit_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8705433011054993
+          Best test metric: 0.9461538791656494
+          耗時: 1.00 秒
+dataset: kaggle_Compositions_of_Glass
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9404761791229248
+          Best test metric: 0.9642857313156128
+          耗時: 0.96 秒
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8459821343421936
+          Best test metric: 0.6478404998779297
+          耗時: 1.04 秒
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8459821343421936
+          Best test metric: 0.6478404998779297
+          耗時: 1.03 秒
+dataset: openml_DiabeticMellitus
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9999999403953552
+          Best test metric: 1.0
+          耗時: 1.34 秒
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9999999403953552
+          耗時: 1.15 秒
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          耗時: 1.09 秒
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.853909432888031
+          Best test metric: 0.7592592239379883
+          耗時: 1.42 秒
+dataset: kaggle_Startup_Success_Prediction
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.823356032371521
+          Best test metric: 0.7509803771972656
+          耗時: 1.28 秒
+dataset: UCI_Z_Alizadeh_Sani
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9510489702224731
+          Best test metric: 0.9454545974731445
+          耗時: 1.24 秒
+dataset: openml_Heart_disease_classification
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.908730149269104
+          Best test metric: 0.8571428656578064
+          耗時: 0.98 秒
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          耗時: 1.23 秒
+dataset: UCI_Heart_failure_clinical_records
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8986175656318665
+          Best test metric: 0.9800000190734863
+          耗時: 1.04 秒
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6449353694915771
+          Best test metric: 0.6190476417541504
+          耗時: 1.03 秒
+dataset: kaggle_Store_Data_Performance
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8222222328186035
+          Best test metric: 0.5
+          耗時: 1.04 秒
+dataset: kaggle_Automobiles
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9600000381469727
+          Best test metric: 0.9666666388511658
+          耗時: 1.08 秒
+dataset: kaggle_Customer_Classification
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7477954030036926
+          Best test metric: 0.5535714626312256
+          耗時: 1.15 秒
+dataset: kaggle_Credit_Card_Approval
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9137566089630127
+          Best test metric: 0.9722222089767456
+          耗時: 1.16 秒
+dataset: UCI_Absenteeism_at_work
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8006048202514648
+          Best test metric: 0.8148148059844971
+          耗時: 1.65 秒
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8109903335571289
+          Best test metric: 0.8505434989929199
+          耗時: 2.17 秒
+dataset: kaggle_Campus_Recruitment
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9739130735397339
+          Best test metric: 1.0
+          耗時: 1.12 秒
+dataset: openml_analcatdata_creditscore
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          耗時: 2.01 秒
+dataset: kaggle_Bigg_Boss_India
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9975000023841858
+          Best test metric: 1.0
+          耗時: 1.15 秒
+dataset: openml_disclosure_z
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9159125817097049
+          Best test metric: 0.8170450440156286
+          耗時: 3.27 秒
+dataset: openml_DEE
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.431308394085973
+          Best test metric: 0.3105388496369597
+          耗時: 3.29 秒
+dataset: openml_disclosure_x_tampered
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8935571889373286
+          Best test metric: 0.8928721671883928
+          耗時: 1.95 秒
+dataset: openml_liver_disorders
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7445982879847483
+          Best test metric: 1.0488885332893139
+          耗時: 3.18 秒
+dataset: openml_fishcatch
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.12613464756986678
+          Best test metric: 0.14368697318917595
+          耗時: 2.02 秒
+dataset: openml_wisconsin
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8845979308476528
+          Best test metric: 0.8059506548147773
+          耗時: 3.63 秒
+dataset: openml_strikes
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9254514533324415
+          Best test metric: 2.9406897899531774
+          耗時: 2.08 秒
+dataset: openml_boston_corrected
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.36363467590661047
+          Best test metric: 0.5927736637422988
+          耗時: 2.43 秒
+dataset: openml_machine_cpu
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.33314586250221234
+          Best test metric: 0.39889346940888554
+          耗時: 1.90 秒
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.010979387620913838
+          Best test metric: 0.006557778877418678
+          耗時: 2.08 秒
+dataset: openml_yacht_hydrodynamics
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.018372677456714618
+          Best test metric: 0.04845539404683712
+          耗時: 2.03 秒
+dataset: openml_no2
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6637622603309635
+          Best test metric: 0.7487028746509864
+          耗時: 2.16 秒
+dataset: openml_auto_price
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.3899280625106331
+          Best test metric: 2.8991403884186524
+          耗時: 2.24 秒
+dataset: openml_ELE_1
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6294619788230976
+          Best test metric: 0.470923597691301
+          耗時: 1.97 秒
+dataset: openml_residential_building
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.08287895804101225
+          Best test metric: 0.05050505206478061
+          耗時: 4.96 秒
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.010490123397866561
+          Best test metric: 0.006722596302629647
+          耗時: 2.08 秒
+dataset: openml_pm10
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.885818764132254
+          Best test metric: 0.5939562589871639
+          耗時: 2.28 秒
+dataset: openml_bodyfat
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.030780359894631595
+          Best test metric: 0.007224063999163767
+          耗時: 2.27 秒
+dataset: openml_disclosure_x_noise
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9124489587069136
+          Best test metric: 0.8770339690668694
+          耗時: 2.04 秒
+dataset: openml_Forest_Fire_Area
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.4108947463331715
+          Best test metric: 0.7627037917287346
+          耗時: 2.29 秒
+dataset: openml_Boston_house_price_data
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.21499770457129158
+          Best test metric: 0.5555054449952791
+          耗時: 2.24 秒
+dataset: openml_disclosure_x_bias
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8719445081233262
+          Best test metric: 0.8373096292401953
+          耗時: 2.05 秒
+dataset: openml_echoMonths
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6528365278410142
+          Best test metric: 0.47838769876527254
+          耗時: 2.04 秒
+dataset: openml_cpu
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6073994279743198
+          Best test metric: 0.025104298668142705
+          耗時: 2.50 秒
+dataset: openml_HappinessRank_2015
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.04102107846244911
+          Best test metric: 0.018194774363036154
+          耗時: 3.04 秒
+dataset: openml_meta
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.09817691762068682
+          Best test metric: 0.11351520943877363
+          耗時: 4.75 秒
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.2015260892702077
+          Best test metric: 0.011863247289002926
+          耗時: 2.21 秒
+dataset: openml_lungcancer_shedden
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9941828031154982
+          Best test metric: 0.630652827886116
+          耗時: 4.48 秒
+dataset: openml_visualizing_environmental
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.1366157616173043
+          Best test metric: 0.7349042000261633
+          耗時: 2.14 秒
+dataset: openml_autoPrice
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.39012390421230986
+          Best test metric: 3.2735812717811883
+          耗時: 2.24 秒
+dataset: openml_rmftsa_ladata
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6203671409697904
+          Best test metric: 0.6636887564485121
+          耗時: 2.68 秒
+dataset: openml_boston
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.21499770457129158
+          Best test metric: 0.5555054449952791
+          耗時: 2.31 秒
+dataset: openml_forest_fires
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.4108947463331715
+          Best test metric: 0.7627037917287346
+          耗時: 2.28 秒
+dataset: openml_Fish_market
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.08457388628044674
+          Best test metric: 0.16349188027576558
+          耗時: 1.93 秒
+dataset: openml_EgyptianSkulls
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.903394046557852
+          Best test metric: 0.9723747489508126
+          耗時: 1.88 秒
+dataset: openml_weather_ankara
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.08047466256354442
+          Best test metric: 0.11759157848380643
+          耗時: 2.04 秒
+dataset: openml_cps_85_wages
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7192742053226115
+          Best test metric: 0.617258309274013
+          耗時: 2.06 秒
+dataset: openml_analcatdata_vineyard
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.3493990771778216
+          Best test metric: 0.27295207122786247
+          耗時: 1.90 秒
+dataset: openml_The_Office_Dataset
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.4631606815147492
+          Best test metric: 0.2864138164030676
+          耗時: 1.96 秒
+dataset: openml_pharynx
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6067037722703424
+          Best test metric: 0.4967219212884696
+          耗時: 2.00 秒
+dataset: openml_lowbwt
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.6205231306558522
+          Best test metric: 0.6925577607148895
+          耗時: 1.96 秒
+dataset: openml_analcatdata_homerun
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.012703258222053
+          Best test metric: 1.2206849608023573
+          耗時: 2.29 秒
+dataset: openml_Reading_Hydro
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.14958807840985366
+          Best test metric: 0.13032561662695646
+          耗時: 2.52 秒
+dataset: openml_cleveland
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.621271335956922
+          Best test metric: 0.9280493271929613
+          耗時: 2.09 秒
+dataset: openml_cholesterol
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.09027074837224
+          Best test metric: 1.003568124789922
+          耗時: 2.10 秒
+dataset: openml_cloud
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.26934177538967524
+          Best test metric: 0.38649132331569086
+          耗時: 1.90 秒
+dataset: openml_fruitfly
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 1.081091793150605
+          Best test metric: 1.0754526715543353
+          耗時: 1.89 秒
+dataset: MagicTelescope
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.9474673867225647
+          Best test metric: 0.9469032287597656
+          耗時: 12.81 秒
+dataset: credit
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.857305109500885
+          Best test metric: 0.8521840572357178
+          耗時: 16.12 秒
+dataset: higgs_small
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+          耗時: 4.01 秒
+dataset: binarized_pol
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.999347448348999
+          Best test metric: 0.999721109867096
+          耗時: 28.48 秒
+dataset: road_safety
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+          耗時: 3.17 秒
+dataset: bank_marketing
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.8921927213668823
+          Best test metric: 0.8852344751358032
+          耗時: 6.75 秒
+dataset: helena
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.0
+          Best test metric: 0.0
+          錯誤: No module named 'tabpfn_extensions'
+          耗時: 0.16 秒
+dataset: jannis
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+          耗時: 7.70 秒
+dataset: eye
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.7848872542381287
+          Best test metric: 0.8153564929962158
+          耗時: 24.14 秒
+dataset: california
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 468.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 287.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 1.12 GiB memory in use. Process 2078566 has 14.68 GiB memory in use. Of the allocated memory 754.42 MiB is allocated by PyTorch, and 21.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 2.99 秒
+dataset: medical_charges
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 772.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 321.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 910.00 MiB memory in use. Process 2078566 has 14.88 GiB memory in use. Of the allocated memory 316.42 MiB is allocated by PyTorch, and 217.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 2.94 秒
+dataset: diamonds
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 526.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 61.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 910.00 MiB memory in use. Process 2078566 has 15.13 GiB memory in use. Of the allocated memory 232.34 MiB is allocated by PyTorch, and 301.66 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 2.16 秒
+dataset: house_sales
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 600.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 305.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 910.00 MiB memory in use. Process 2078566 has 14.89 GiB memory in use. Of the allocated memory 258.46 MiB is allocated by PyTorch, and 275.54 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 3.35 秒
+dataset: nyc_taxi_green_dec_2016
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 2.04 GiB. GPU 0 has a total capacity of 31.74 GiB of which 909.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 998.00 MiB memory in use. Process 2078566 has 14.22 GiB memory in use. Of the allocated memory 526.59 MiB is allocated by PyTorch, and 95.41 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 8.67 秒
+dataset: sulfur
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 214.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 137.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 1.19 GiB memory in use. Process 2078566 has 14.76 GiB memory in use. Of the allocated memory 426.06 MiB is allocated by PyTorch, and 411.94 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 1.86 秒
+dataset: house
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 684.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 441.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 910.00 MiB memory in use. Process 2078566 has 14.76 GiB memory in use. Of the allocated memory 286.91 MiB is allocated by PyTorch, and 247.09 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 3.75 秒
+dataset: Brazilian_houses
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 302.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 165.12 MiB is free. Process 2886747 has 13.68 GiB memory in use. Process 2894818 has 1.97 GiB memory in use. Including non-PyTorch memory, this process has 1.26 GiB memory in use. Process 2078566 has 14.66 GiB memory in use. Of the allocated memory 581.78 MiB is allocated by PyTorch, and 332.22 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 2.57 秒
+dataset: Ailerons
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.3839035445829463
+          Best test metric: 0.39723225231148934
+          耗時: 105.05 秒
+dataset: pol
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: 0.13653413706097783
+          Best test metric: 0.1144659274430445
+          耗時: 56.64 秒
+dataset: SGEMM_GPU_kernel_performance
+  模型: tabpfn
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA error: invalid configuration argument
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+          耗時: 4.23 秒

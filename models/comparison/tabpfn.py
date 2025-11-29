@@ -1,102 +1,5 @@
-# # import argparse
-# # import os.path as osp
 
-# # import numpy as np
-# # import torch
-# # from tabpfn import TabPFNClassifier
-# # # Please run `pip install tabpfn` to install the package
-# # from tqdm import tqdm
-
-# # from torch_frame.data import DataLoader
-# # from torch_frame.datasets import (
-# #     ForestCoverType,
-# #     KDDCensusIncome,
-# #     Mushroom,
-# #     Titanic,
-# # )
-
-# # parser = argparse.ArgumentParser(
-# #     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-# # parser.add_argument(
-# #     '--dataset', type=str, default="Titanic",
-# #     choices=["Titanic", "Mushroom", "ForestCoverType", "KDDCensusIncome"])
-# # parser.add_argument('--train_batch_size', type=int, default=4096)
-# # parser.add_argument('--test_batch_size', type=int, default=128)
-# # parser.add_argument('--seed', type=int, default=0)
-# # args = parser.parse_args()
-
-# # torch.manual_seed(args.seed)
-
-# # # Prepare datasets
-# # path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data',
-# #                 args.dataset)
-
-# # if args.dataset == "Titanic":
-# #     dataset = Titanic(root=path)
-# # elif args.dataset == "ForestCoverType":
-# #     dataset = ForestCoverType(root=path)
-# # elif args.dataset == "KDDCensusIncome":
-# #     dataset = KDDCensusIncome(root=path)
-# # else:
-# #     dataset = Mushroom(root=path)
-
-# # dataset.materialize()
-# # assert dataset.task_type.is_classification
-# # dataset = dataset.shuffle()
-# # train_dataset, test_dataset = dataset[:0.9], dataset[0.9:]
-# # train_tensor_frame = train_dataset.tensor_frame
-# # test_tensor_frame = test_dataset.tensor_frame
-# # train_loader = DataLoader(
-# #     train_tensor_frame,
-# #     batch_size=args.train_batch_size,
-# #     shuffle=True,
-# # )
-# # X_train = []
-# # train_data = next(iter(train_loader))
-# # for stype in train_data.stypes:
-# #     X_train.append(train_data.feat_dict[stype])
-# # X_train: torch.Tensor = torch.cat(X_train, dim=1)
-# # clf = TabPFNClassifier()
-# # clf.fit(X_train, train_data.y)
-# # test_loader = DataLoader(test_tensor_frame, batch_size=args.test_batch_size)
-
-
-# # @torch.no_grad()
-# # def test() -> float:
-# #     accum = total_count = 0
-# #     for test_data in tqdm(test_loader):
-# #         X_test = []
-# #         for stype in train_data.stypes:
-# #             X_test.append(test_data.feat_dict[stype])
-# #         X_test = torch.cat(X_test, dim=1)
-# #         pred: np.ndarray = clf.predict_proba(X_test)
-# #         pred_class = pred.argmax(axis=-1)
-# #         accum += float((test_data.y.numpy() == pred_class).sum())
-# #         total_count += len(test_data.y)
-
-# #     return accum / total_count
-
-
-# # acc = test()
-# # print(f"Accuracy: {acc:.4f}")
-
-# def main(df, dataset_results, config):
-#     """
-#     主函數，運行TabPFN模型並返回結果
-#     Args:
-#         df: 資料集DataFrame
-#         dataset_results: 資料集結果
-#         config: 實驗配置
-#     Returns:
-#         dict: 實驗結果
-#     """
-#     # 這裡可以添加TabPFN模型的運行邏輯
-#     # 例如，使用TabPFNClassifier進行訓練和預測
-#     print("Running TabPFN model...")
-#     print(f"df: {df.shape}")
-#     # print(f"dataset_results: {dataset_results}")
-#     print(f"config: {config}")
-def main(train_df, val_df, test_df, dataset_results, config):
+def main(train_df, val_df, test_df, dataset_results, config,gnn_stage=None):
     """
     TabPFN主函數: 運行TabPFN模型，根據任務類型自動選擇評估指標
     
@@ -127,10 +30,49 @@ def main(train_df, val_df, test_df, dataset_results, config):
         y_val = val_df[target_col].values
         X_test = test_df.drop(columns=[target_col]).values
         y_test = test_df[target_col].values
+
+        # helper: subsample large training sets to avoid TabPFN sample-limit warnings
+        def _maybe_subsample(X, y, max_samples=10000, is_classification=True, random_state=42):
+            """Return (X_sub, y_sub). If len(X) <= max_samples, return originals.
+
+            For classification we perform stratified sampling to preserve class proportions.
+            For regression we bin targets into quantiles and stratify by bins.
+            """
+            n = len(X)
+            if n <= max_samples:
+                return X, y
+            try:
+                from sklearn.model_selection import train_test_split
+            except Exception:
+                # if sklearn not available, simple random subsample
+                import numpy as _np
+                idx = _np.random.RandomState(random_state).permutation(n)[:max_samples]
+                return X[idx], y[idx]
+
+            if is_classification:
+                # stratify by class labels
+                X_sub, _, y_sub, _ = train_test_split(X, y, train_size=max_samples, stratify=y, random_state=random_state)
+                return X_sub, y_sub
+            else:
+                # regression: bin targets into quantiles for approximate stratification
+                import numpy as _np
+                try:
+                    n_bins = min(50, max(2, int(max_samples ** 0.25)))
+                    bins = _np.quantile(y, q=_np.linspace(0, 1, n_bins + 1))
+                    # digitize may produce 0..n_bins; map to 0..n_bins-1
+                    y_binned = _np.digitize(y, bins[1:-1], right=True)
+                    X_sub, _, y_sub, _ = train_test_split(X, y, train_size=max_samples, stratify=y_binned, random_state=random_state)
+                    return X_sub, y_sub
+                except Exception:
+                    idx = _np.random.RandomState(random_state).permutation(n)[:max_samples]
+                    return X[idx], y[idx]
         
         # 任務類型
+                # determine max samples (config may be dict)
+                max_samples = config.get('tabpfn_max_samples', 10000) if isinstance(config, dict) else getattr(config, 'tabpfn_max_samples', 10000)
+
         task_type = dataset_results['info']['task_type']
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        device = config.get('device', torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
         print(f"Using device: {device}")
         
         # 分類/回歸
@@ -139,7 +81,31 @@ def main(train_df, val_df, test_df, dataset_results, config):
             try:
                 from tabpfn import TabPFNClassifier
                 clf = TabPFNClassifier(device=device, ignore_pretraining_limits=True)
-                clf.fit(X_train, y_train)
+                # TabPFN has a recommended maximum number of training samples (e.g. 10000).
+                # Compute local max_samples to avoid NameError if outer var missing.
+                ms = config.get('tabpfn_max_samples', 10000) if isinstance(config, dict) else getattr(config, 'tabpfn_max_samples', 10000)
+                X_fit, y_fit = _maybe_subsample(X_train, y_train, max_samples=ms, is_classification=True)
+                if len(X_fit) < len(X_train):
+                    print(f"TabPFN: subsampled training set from {len(X_train)} to {len(X_fit)} samples to respect model limits.")
+                # Attempt to fit; if TabPFN raises about too many classes, try to use ManyClassClassifier wrapper
+                try:
+                    clf.fit(X_fit, y_fit)
+                except Exception as e_fit:
+                    msg = str(e_fit)
+                    if 'exceeds the maximal number of classes' in msg or 'Number of classes' in msg and 'exceeds' in msg:
+                        print('TabPFN reported too many classes. Attempting to use tabpfn_extensions.many_class.ManyClassClassifier as a wrapper...')
+                        try:
+                            from tabpfn_extensions.many_class import ManyClassClassifier
+                            mc = ManyClassClassifier(estimator=clf)
+                            mc.fit(X_fit, y_fit)
+                            clf = mc
+                            print('ManyClassClassifier wrapper fitted successfully and will be used for prediction.')
+                        except Exception as e_wrap:
+                            print('Failed to use ManyClassClassifier wrapper:', e_wrap)
+                            # re-raise original exception so caller sees the root cause
+                            raise
+                    else:
+                        raise
                 
                 # 分類型任務
                 n_classes = len(np.unique(y_train))
@@ -164,39 +130,59 @@ def main(train_df, val_df, test_df, dataset_results, config):
                         metric.reset()
                         metric.update(pred_class, y_tensor)
                         return metric.compute().item()
-            except ImportError:
-                print("TabPFN package not found. Please run `pip install tabpfn` to install it.")
+            except Exception as e:
+                # capture detailed import error for easier debugging in logs
+                import traceback
+                tb = traceback.format_exc()
+                print("TabPFN import or init failed:", e)
+                print(tb)
                 return {
                     'train_metrics': [],
                     'val_metrics': [],
                     'test_metrics': [],
                     'best_val_metric': 0.0,
                     'best_test_metric': 0.0,
-                    'error': "TabPFN package not installed"
+                    'error': str(e),
+                    'error_trace': tb,
                 }
         else:
-            # 迴歸任務
-            class PlaceholderRegressor:
-                def __init__(self):
-                    self.mean = 0
-                
-                def fit(self, X, y):
-                    self.mean = y.mean()
-                
-                def predict(self, X):
-                    return np.ones(len(X)) * self.mean
-            
-            clf = PlaceholderRegressor()
-            clf.fit(X_train, y_train)
+            # 迴歸任務 - 優先使用 TabPFNRegressor，若不可用則退回到簡單 placeholder
+            try:
+                from tabpfn import TabPFNRegressor
+                # TabPFNRegressor may accept device args in newer versions; keep defaults
+                clf = TabPFNRegressor()
+                # Subsample large training sets for regressor too
+                ms = config.get('tabpfn_max_samples', 10000) if isinstance(config, dict) else getattr(config, 'tabpfn_max_samples', 10000)
+                X_fit, y_fit = _maybe_subsample(X_train, y_train, max_samples=ms, is_classification=False)
+                if len(X_fit) < len(X_train):
+                    print(f"TabPFNRegressor: subsampled training set from {len(X_train)} to {len(X_fit)} samples to respect model limits.")
+                # fit on training data
+                clf.fit(X_fit, y_fit)
+            except Exception:
+                # fallback simple regressor (keeps previous behaviour if tabpfn not installed)
+                class PlaceholderRegressor:
+                    def __init__(self):
+                        self.mean = 0
+                    def fit(self, X, y):
+                        self.mean = y.mean()
+                    def predict(self, X):
+                        return np.ones(len(X)) * self.mean
+
+                clf = PlaceholderRegressor()
+                clf.fit(X_train, y_train)
+
             metric = MeanSquaredError().to(device)
             metric_name = 'RMSE'
-            
+
             def eval_metric(X, y):
+                # Ensure predictions are numpy-like then convert to tensor for metric
+                preds = clf.predict(X)
+                preds = np.asarray(preds)
                 X_tensor = torch.tensor(X, dtype=torch.float32).to(device)
                 y_tensor = torch.tensor(y, dtype=torch.float32).to(device)
-                pred = torch.tensor(clf.predict(X), dtype=torch.float32).to(device)
+                pred_tensor = torch.tensor(preds, dtype=torch.float32).to(device)
                 metric.reset()
-                metric.update(pred, y_tensor)
+                metric.update(pred_tensor, y_tensor)
                 return metric.compute().item() ** 0.5
         
         # 計算metric
