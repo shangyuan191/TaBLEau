@@ -1,0 +1,38 @@
+dataset: credit
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.7588040828704834
+          Best test metric: 0.7402552366256714
+          早停輪數: 24
+          GNN早停輪數: 0
+          耗時: 27.63 秒
+    GNN階段: start
+          Best val metric: 0.6669868230819702
+          Best test metric: 0.6680632829666138
+          早停輪數: 30
+          GNN早停輪數: 16
+          耗時: 26.88 秒
+    GNN階段: materialize
+          Best val metric: 0.6637358665466309
+          Best test metric: 0.6626019477844238
+          早停輪數: 15
+          GNN早停輪數: 13
+          耗時: 17.00 秒
+    GNN階段: encoding
+          Best val metric: 0.8274610042572021
+          Best test metric: 0.830392599105835
+          早停輪數: 76
+          GNN早停輪數: 0
+          耗時: 45.74 秒
+    GNN階段: columnwise
+          Best val metric: 0.7485358715057373
+          Best test metric: 0.6915758848190308
+          早停輪數: 20
+          GNN早停輪數: 0
+          耗時: 16.72 秒
+    GNN階段: decoding
+          Best val metric: 0.814345121383667
+          Best test metric: 0.7901170253753662
+          早停輪數: 33
+          GNN早停輪數: 0
+          耗時: 21.30 秒

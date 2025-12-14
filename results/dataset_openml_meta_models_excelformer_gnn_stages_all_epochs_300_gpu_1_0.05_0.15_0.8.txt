@@ -1,0 +1,38 @@
+dataset: openml_meta
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.11884143267645988
+          Best test metric: 0.9164372106397003
+          早停輪數: 20
+          GNN早停輪數: 0
+          耗時: 6.03 秒
+    GNN階段: start
+          Best val metric: 0.133512343036544
+          Best test metric: 0.9015782068956977
+          早停輪數: 19
+          GNN早停輪數: 22
+          耗時: 6.36 秒
+    GNN階段: materialize
+          Best val metric: 0.10726791098785028
+          Best test metric: 0.9011683218844196
+          早停輪數: 45
+          GNN早停輪數: 25
+          耗時: 4.36 秒
+    GNN階段: encoding
+          Best val metric: 0.09724756555770837
+          Best test metric: 0.8958375878935333
+          早停輪數: 29
+          GNN早停輪數: 0
+          耗時: 3.50 秒
+    GNN階段: columnwise
+          Best val metric: 0.12015087539175959
+          Best test metric: 0.8923877538092122
+          早停輪數: 15
+          GNN早停輪數: 0
+          耗時: 2.01 秒
+    GNN階段: decoding
+          Best val metric: 0.3280362508733668
+          Best test metric: 0.9477989032800193
+          早停輪數: 22
+          GNN早停輪數: 0
+          耗時: 3.62 秒

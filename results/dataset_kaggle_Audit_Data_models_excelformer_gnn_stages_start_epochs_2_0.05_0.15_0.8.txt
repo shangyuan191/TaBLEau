@@ -1,0 +1,7 @@
+dataset: kaggle_Audit_Data
+  模型: excelformer
+    GNN階段: start
+          Best val metric: 0.8300673961639404
+          Best test metric: 0.8650476336479187
+          早停輪數: 0
+          耗時: 5.56 秒

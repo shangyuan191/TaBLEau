@@ -63,11 +63,11 @@ def parse_args():
                         help='GNN插入階段列表 (用空格分隔多個階段名稱)')
     
     # 實驗相關參數
-    parser.add_argument('--train_ratio', type=float, default=0.80,
+    parser.add_argument('--train_ratio', type=float, default=0.05,
                         help='訓練集比例')
     parser.add_argument('--val_ratio', type=float, default=0.15,
                         help='驗證集比例')
-    parser.add_argument('--test_ratio', type=float, default=0.05,
+    parser.add_argument('--test_ratio', type=float, default=0.80,
                         help='測試集比例')
     parser.add_argument('--few_shot', action='store_true',
                         help='是否使用few-shot學習設置')
@@ -231,13 +231,16 @@ def run_experiment(args):
         'few_shot': args.few_shot,
         'few_shot_ratio': args.few_shot_ratio,
         'epochs': args.epochs,
+        'gnn_epochs': args.epochs,  # 假設GNN使用相同的訓練輪數
         'batch_size': args.batch_size,
         'lr': args.lr,
         'weight_decay': args.weight_decay,
         'patience': args.patience,
         'device': torch.device(f"cuda:{args.gpu}" if args.gpu >= 0 and torch.cuda.is_available() else "cpu"),
+        'gpu': args.gpu,  # 新增：將 GPU ID 也放入 config 供 resolve_device 使用
         'seed': args.seed,
         'debug_metrics': args.debug_metrics,
+        'dgm_k': 10  # 固定 dgm_k 為 10
     }
     
     # 準備GNN配置
@@ -342,7 +345,7 @@ def run_experiment(args):
     split_str = f"{args.train_ratio}_{args.val_ratio}_{args.test_ratio}"
     results_file_name = f"{cmd_str}_{split_str}.txt"
     print(f"results_file_name: {results_file_name}")
-    with open(f'./results/{results_file_name}', 'w') as f:
+    with open(f'./results/{results_file_name}', 'w', encoding='utf-8') as f:
         for result in all_results:
             f.write(f"dataset: {result['dataset']}\n")
             for model_name, model_results in result['models'].items():
@@ -653,6 +656,7 @@ def main():
     
     # 記錄設備信息
     device = f"cuda:{args.gpu}" if args.gpu >= 0 and torch.cuda.is_available() else "cpu"
+    print(f"使用設備: {device}")
     logger.info(f"使用設備: {device}")
     
     # 運行實驗

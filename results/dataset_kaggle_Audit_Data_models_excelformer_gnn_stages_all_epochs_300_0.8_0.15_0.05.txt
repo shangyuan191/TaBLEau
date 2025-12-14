@@ -1,0 +1,32 @@
+dataset: kaggle_Audit_Data
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9957134127616882
+          Best test metric: 1.0
+          早停輪數: 17
+          耗時: 6.58 秒
+    GNN階段: start
+          Best val metric: 0.9908144474029541
+          Best test metric: 0.9861111640930176
+          早停輪數: 14
+          耗時: 8.86 秒
+    GNN階段: materialize
+          Best val metric: 0.9853031635284424
+          Best test metric: 1.0
+          早停輪數: 26
+          耗時: 10.75 秒
+    GNN階段: encoding
+          Best val metric: 0.9917330741882324
+          Best test metric: 1.0
+          早停輪數: 42
+          耗時: 21.62 秒
+    GNN階段: columnwise
+          Best val metric: 0.9954072833061218
+          Best test metric: 1.0
+          早停輪數: 60
+          耗時: 30.55 秒
+    GNN階段: decoding
+          Best val metric: 0.9911206364631653
+          Best test metric: 1.0
+          早停輪數: 16
+          耗時: 8.73 秒
