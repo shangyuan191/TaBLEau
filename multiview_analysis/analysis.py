@@ -221,7 +221,7 @@ if __name__ == '__main__':
         # CLI args: allow per-dataset wins and eps sensitivity
         parser = argparse.ArgumentParser()
         parser.add_argument('--per-dataset-wins', action='store_true', help='Compute per-dataset wins and write CSVs')
-        parser.add_argument('--eps-list', default='0.1', help='Comma-separated eps values for tie sensitivity (e.g. 0.1,0.05,0.01)')
+        parser.add_argument('--eps-list', default='0.01', help='Comma-separated eps values for tie sensitivity (e.g. 0.1,0.05,0.01)')
         parser.add_argument('--eps-mode', choices=['absolute','relative'], default='relative', help='Whether eps is absolute difference or relative fraction (relative uses denominator |b|+tiny)')
         parser.add_argument('--eps-behavior', choices=['symmetric','asymmetric'], default='asymmetric', help='Tie/beat decision behavior: symmetric (measure compared to ±eps) or asymmetric (any improvement -> strict beat; small losses within eps -> tie)')
         parser.add_argument('--make-wide-sensitivity', action='store_true', help='Generate wide-format sensitivity CSVs (one per eps)')

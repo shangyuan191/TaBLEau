@@ -66,7 +66,7 @@ from sklearn.neighbors import NearestNeighbors
 import pandas as pd
 import sys
 import numpy as np
-sys.path.insert(0, '/home/shangyuan/ModelComparison/DGM_pytorch')
+sys.path.insert(0, '/home/skyler/ModelComparison/DGM_pytorch')
 from DGMlib.layers import DGM_d
 
 # 統一的裝置選擇函式：從 config 選擇 GPU，否則回退到可用裝置
@@ -209,42 +209,7 @@ def knn_graph(x, k, directed=False):
     return edge_index
 
 
-def row_level_embedding(x, mode='mean'):
-    """
-    將 [batch, num_cols, channels] 聚合為行級別嵌入
-    
-    Args:
-        x: [batch, num_cols, channels]
-        mode: 聚合模式
-            - 'mean': 按欄位平均 (dim=1) → [batch, channels]
-              語義：每個樣本的多列聚合成一個向量
-            - 'percol_mean': 按通道平均 (dim=2) → [batch, num_cols]
-              語義：每列的多個通道聚合成一個標量
-    
-    Returns:
-        row_emb: [batch, channels] 若 mode='mean'
-                 [batch, num_cols] 若 mode='percol_mean'
-    
-    Example:
-        Input x: [64, 20, 128]  (batch=64, num_cols=20, channels=128)
-        
-        mode='mean':
-            x.mean(dim=1) → [64, 128]
-            含義：64 個樣本，每個樣本 20 列聚合為 128 維向量
-        
-        mode='percol_mean':
-            x.mean(dim=2) → [64, 20]
-            含義：64 個樣本，20 列各自 128 個通道聚合為 1 個標量
-    """
-    if mode == 'mean':
-        # 按欄位平均：合併 num_cols 維度
-        return x.mean(dim=1)  # [batch, channels]
-    elif mode == 'percol_mean':
-        # 按通道平均：合併 channels 維度
-        return x.mean(dim=2)  # [batch, num_cols]
-    else:
-        raise ValueError(f"Unknown mode: {mode}. Choose 'mean' or 'percol_mean'")
-    
+
     
 # 統一的圖前處理與輔助函式（不依資料集調參）
 def _standardize(x: torch.Tensor, dim: int = 0, eps: float = 1e-6) -> torch.Tensor:
@@ -296,11 +261,7 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     else:
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"[START-GNN-DGM] Using device: {device}")
-    # 合併三個df 以計算數據集規模
-    all_df = pd.concat([train_df, val_df, test_df], axis=0, ignore_index=True)
-    num_samples = len(all_df)
-    feature_cols = [c for c in all_df.columns if c != 'target']
-    num_features = len(feature_cols)
+
     
     # 參數設定：統一固定 dgm_k（為公平比較），並在後續以樣本數做安全上限
     dgm_k = int(config.get('dgm_k', 10))

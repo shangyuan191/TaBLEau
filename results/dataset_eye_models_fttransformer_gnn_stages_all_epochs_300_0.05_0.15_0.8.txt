@@ -1,38 +1,38 @@
 dataset: eye
   模型: fttransformer
     GNN階段: none
-          Best val metric: 0.47166362404823303
-          Best test metric: 0.46771058440208435
-          早停輪數: 24
+          Best val metric: 0.47044485807418823
+          Best test metric: 0.48382672667503357
+          早停輪數: 47
           GNN早停輪數: 0
-          耗時: 7.36 秒
+          耗時: 13.32 秒
     GNN階段: start
-          Best val metric: 0.47653868794441223
-          Best test metric: 0.4407360851764679
-          早停輪數: 22
-          GNN早停輪數: 0
-          耗時: 7.35 秒
+          Best val metric: 0.4156002402305603
+          Best test metric: 0.4062178432941437
+          早停輪數: 23
+          GNN早停輪數: 21
+          耗時: 8.98 秒
     GNN階段: materialize
+          Best val metric: 0.4046313166618347
+          Best test metric: 0.4106754958629608
+          早停輪數: 21
+          GNN早停輪數: 14
+          耗時: 11.21 秒
+    GNN階段: encoding
           Best val metric: 0.38939669728279114
           Best test metric: 0.389758825302124
-          早停輪數: 11
+          早停輪數: 19
           GNN早停輪數: 0
-          耗時: 9.20 秒
-    GNN階段: encoding
-          Best val metric: 0.4881170094013214
-          Best test metric: 0.4685106873512268
+          耗時: 13.86 秒
+    GNN階段: columnwise
+          Best val metric: 0.4960390031337738
+          Best test metric: 0.49022746086120605
           早停輪數: 28
           GNN早停輪數: 0
-          耗時: 7.27 秒
-    GNN階段: columnwise
-          Best val metric: 0.38939669728279114
-          Best test metric: 0.389758825302124
-          早停輪數: 12
-          GNN早停輪數: 0
-          耗時: 4.66 秒
+          耗時: 15.70 秒
     GNN階段: decoding
-          Best val metric: 0.38939669728279114
-          Best test metric: 0.389758825302124
-          早停輪數: 14
-          GNN早停輪數: 11
-          耗時: 5.68 秒
+          Best val metric: 0.4363193213939667
+          Best test metric: 0.4538804292678833
+          早停輪數: 28
+          GNN早停輪數: 0
+          耗時: 15.08 秒
