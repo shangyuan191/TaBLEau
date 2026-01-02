@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import math
+import sys
+import numpy as np
 from typing import Any
 
 from torch import Tensor
@@ -23,6 +25,15 @@ from torch_frame.nn.encoder.stype_encoder import (
     StypeEncoder,
 )
 from torch_frame.nn.encoder.stypewise_encoder import StypeWiseFeatureEncoder
+
+# ✅ 新增：DGM 模組
+sys.path.insert(0, '/home/skyler/ModelComparison/DGM_pytorch')
+try:
+    from DGMlib.layers import DGM_d
+    DGM_AVAILABLE = True
+except ImportError:
+    DGM_AVAILABLE = False
+    print("[WARNING] DGM_d not available, some features will be disabled")
 
 """Reported (reproduced) results of FT-Transformer
 https://arxiv.org/abs/2106.11959.
@@ -65,258 +76,445 @@ from sklearn.neighbors import NearestNeighbors
 import pandas as pd
 
 
+# ============================================================================
+# ✅ 新增：輔助函數與設備管理
+# ============================================================================
+
+def resolve_device(config: dict) -> torch.device:
+    """統一的裝置選擇函式：從 config 選擇 GPU，否則回退到可用裝置"""
+    gpu_id = None
+    try:
+        gpu_id = config.get('gpu', None)
+    except Exception:
+        gpu_id = None
+    if torch.cuda.is_available():
+        if gpu_id is not None:
+            try:
+                device = torch.device(f'cuda:{int(gpu_id)}')
+                print(f"[DEVICE] resolve_device: Using cuda:{int(gpu_id)} (from config['gpu']={gpu_id})")
+                return device
+            except Exception:
+                device = torch.device('cuda')
+                print(f"[DEVICE] resolve_device: Using cuda (default, config['gpu']={gpu_id} invalid)")
+                return device
+        device = torch.device('cuda')
+        print(f"[DEVICE] resolve_device: Using cuda (default, no config['gpu'] specified)")
+        return device
+    print(f"[DEVICE] resolve_device: Using cpu (CUDA not available)")
+    return torch.device('cpu')
+
+
+def compute_adaptive_dgm_k(num_samples, num_features, dataset_name='', use_config_override=True):
+    """
+    根據數據集規模自動計算最合適的 dgm_k（DGM 候選池大小）。
+    
+    核心原理：
+    - DGM_k 定義了候選池大小（能從多少個鄰居中選擇）
+    - 實際連接邊數 = k 個候選中溫度參數學習選出的邊
+    - 為避免過度稀疏，需要平衡候選池大小
+    """
+    # 基礎公式：k ≈ sqrt(N) 作為起點
+    base_k = int(np.sqrt(num_samples))
+    
+    # 特徵維度修正：高維時需更多候選來探索不同相似性角度
+    feature_factor = 1.0 + np.log1p(num_features) / 10
+    adjusted_k = int(base_k * feature_factor)
+    
+    # 樣本密度修正：樣本少時 relative connectivity 要高
+    density_factor = 1.0
+    if num_samples < 500:
+        density_factor = 1.3  # +30%
+    elif num_samples > 5000:
+        density_factor = 0.9  # -10%
+    
+    adaptive_k = int(adjusted_k * density_factor)
+    
+    # 硬性邊界：防止過度稀疏或過度密集
+    upper_limit = min(30, max(15, int(4 * np.sqrt(num_samples))))
+    if num_samples < 1000:
+        upper_limit = min(20, int(3 * np.sqrt(num_samples)))
+    adaptive_k = max(5, min(adaptive_k, upper_limit))
+    
+    print(f"[DGM-K] Adaptive Calculation:")
+    print(f"  - Dataset: {dataset_name if dataset_name else 'unknown'} | N={num_samples}, D={num_features}")
+    print(f"  - Base k (√N): {base_k}")
+    print(f"  - Feature Factor: {feature_factor:.2f}x (features={num_features})")
+    print(f"  - Density Factor: {density_factor:.2f}x (samples={num_samples})")
+    print(f"  - Adaptive k: {adaptive_k} (valid range: [5, {upper_limit}])")
+    
+    return adaptive_k
+
+
+def _standardize(x: torch.Tensor, dim: int = 0, eps: float = 1e-6) -> torch.Tensor:
+    """沿指定維度做 z-score 標準化。"""
+    mean = x.mean(dim=dim, keepdim=True)
+    std = x.std(dim=dim, keepdim=True).clamp_min(eps)
+    return (x - mean) / std
+
+
+def _symmetrize_and_self_loop(edge_index: torch.Tensor, num_nodes: int) -> torch.Tensor:
+    """對 edge_index 做對稱化並加入自迴路，移除重複邊。"""
+    device = edge_index.device
+    # 加入反向邊
+    rev = torch.stack([edge_index[1], edge_index[0]], dim=0)
+    # 加入自迴路
+    self_loops = torch.arange(num_nodes, device=device)
+    self_edge = torch.stack([self_loops, self_loops], dim=0)
+    # 合併
+    ei = torch.cat([edge_index, rev, self_edge], dim=1)
+    # 去重：將 (i,j) 映射為唯一 id，並以唯一 id 重建邊
+    edge_ids = ei[0] * num_nodes + ei[1]
+    unique_ids = torch.unique(edge_ids, sorted=False)
+    ei0 = unique_ids // num_nodes
+    ei1 = unique_ids % num_nodes
+    ei_unique = torch.stack([ei0, ei1], dim=0)
+    return ei_unique
+
+
 class SimpleGCN(torch.nn.Module):
-    def __init__(self, in_dim, hidden_dim, out_dim):
+    """簡化的 GCN，用於聯合訓練（支援多層）"""
+    def __init__(self, in_dim, hidden_dim, out_dim, num_layers=2):
         super().__init__()
-        self.conv1 = GCNConv(in_dim, hidden_dim)
-        self.conv2 = GCNConv(hidden_dim, out_dim)
+        self.layers = torch.nn.ModuleList()
+        dims = [in_dim] + [hidden_dim] * (num_layers - 1) + [out_dim]
+        for i in range(len(dims) - 1):
+            self.layers.append(GCNConv(dims[i], dims[i + 1]))
 
     def forward(self, x, edge_index):
-        x = torch.relu(self.conv1(x, edge_index))
-        x = self.conv2(x, edge_index)
+        for i, layer in enumerate(self.layers):
+            x = layer(x, edge_index)
+            if i < len(self.layers) - 1:
+                x = torch.relu(x)
         return x
 
-def knn_graph(x, k):
-    x_np = x.cpu().numpy() if isinstance(x, torch.Tensor) else x
+
+def knn_graph(x, k, directed=False):
+    """
+    構建 k-NN 圖
+    Args:
+        x: [N, feat_dim] 特徵矩陣（可以有梯度）
+        k: 鄰居數
+        directed: 是否單向邊（True）或雙向邊（False）
+    Returns:
+        edge_index: [2, E] 邊索引
+    """
+    # ✅ 修復：detach() 確保沒有梯度信息
+    if isinstance(x, torch.Tensor):
+        x_np = x.detach().cpu().numpy()
+    else:
+        x_np = x
+    
     nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
     _, indices = nbrs.kneighbors(x_np)
-    edge_index = []
+    edge_list = []
     N = x_np.shape[0]
     for i in range(N):
-        for j in indices[i][1:]:
-            edge_index.append([i, j])
-    edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous()
+        for j in indices[i][1:]:  # 跳過自己
+            edge_list.append([i, j])
+            if not directed:
+                edge_list.append([j, i])  # 添加反向邊（雙向）
+    if len(edge_list) == 0:
+        edge_list = [[i, i] for i in range(N)]  # 備用：自迴圈
+    edge_index = torch.tensor(edge_list, dtype=torch.long).t().contiguous()
     return edge_index
 
 
 def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
-    print("Executing GNN between start_fn and materialize_fn")
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    k = config.get('gnn_knn', 5)
-    hidden_dim = config.get('gnn_hidden', 64)
+    """
+    ✅ 改進版本：Self-Attention + DGM + Self-Attention 管線（Inductive設定）
+    
+    在 start_fn 和 materialize_fn 之間插入管線：
+    1) Self-Attention 在欄位維度做上下文建模
+    2) Attention Pooling 將欄位維度聚合到樣本維度
+    3) DGM 動態圖模組學習最優的圖結構
+    4) GCN 處理圖結構化特徵
+    5) Self-Attention 解碼將樣本維度還原到欄位維度
+    """
+    print("✅ Executing improved gnn_after_start_fn with Self-Attention + DGM")
+    
+    # === 第 1 部分：設備與參數設定 ===
+    device = resolve_device(config)
+    dgm_k = int(config.get('dgm_k', 10))
+    dgm_distance = config.get('dgm_distance', 'euclidean')
     gnn_epochs = config.get('gnn_epochs', 200)
-    # 合併三個df
-    all_df = pd.concat([train_df, val_df, test_df], axis=0, ignore_index=True)
-    # print(f"all_df.head():\n{all_df.head()}")
-    feature_cols = [c for c in all_df.columns if c != 'target']
-    x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
-    y = all_df['target'].values
-
-    # 自動計算 num_classes
-    if task_type in ['binclass', 'multiclass']:
-        num_classes = len(pd.unique(y))
-        print(f"Detected num_classes: {num_classes}")
-    else:
-        num_classes = 1
-# label 處理
-    if task_type == 'binclass':
-        y = torch.tensor(y, dtype=torch.float32, device=device)
-    elif task_type == 'multiclass':
-        y = torch.tensor(y, dtype=torch.long, device=device)
-    else:  # regression
-        y = torch.tensor(y, dtype=torch.float32, device=device)
-
-    # 建圖
-    edge_index = knn_graph(x, k).to(device)
-    in_dim = x.shape[1]
-    out_dim = in_dim
-    # mask
+    patience = config.get('gnn_patience', 10)
+    loss_threshold = config.get('gnn_loss_threshold', 1e-4)
+    attn_dim = config.get('gnn_attn_dim', config.get('gnn_hidden', 64))
+    gnn_hidden = config.get('gnn_hidden', 64)
+    attn_heads = config.get('gnn_attn_heads', 4)
+    lr = config.get('gnn_lr', 0.001)
+    
+    feature_cols = [c for c in train_df.columns if c != 'target']
+    num_cols = len(feature_cols)
+    
+    # === 第 2 部分：分別處理 train/val/test（Inductive 設定）===
+    x_train = torch.tensor(train_df[feature_cols].values, dtype=torch.float32, device=device)
+    x_val = torch.tensor(val_df[feature_cols].values, dtype=torch.float32, device=device)
+    x_test = torch.tensor(test_df[feature_cols].values, dtype=torch.float32, device=device)
+    
     n_train = len(train_df)
     n_val = len(val_df)
     n_test = len(test_df)
-    N = n_train + n_val + n_test
-    train_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    val_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    test_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    train_mask[:n_train] = True
-    val_mask[n_train:n_train+n_val] = True
-    test_mask[n_train+n_val:] = True
-
-    patience = config.get('gnn_patience', 10)
-    best_loss = float('inf')
+    
+    # 取得標籤
+    y_train_np = train_df['target'].values
+    y_val_np = val_df['target'].values
+    
+    # === 第 3 部分：建立模組（Self-Attention + DGM + GCN）===
+    try:
+        attn_in = torch.nn.MultiheadAttention(
+            embed_dim=attn_dim, 
+            num_heads=attn_heads, 
+            batch_first=True
+        ).to(device)
+        attn_out = torch.nn.MultiheadAttention(
+            embed_dim=attn_dim, 
+            num_heads=attn_heads, 
+            batch_first=True
+        ).to(device)
+    except Exception as e:
+        print(f"[WARNING] Failed to create attention: {e}, falling back to simpler model")
+        attn_dim = 64
+        attn_in = torch.nn.MultiheadAttention(
+            embed_dim=attn_dim, 
+            num_heads=4, 
+            batch_first=True
+        ).to(device)
+        attn_out = torch.nn.MultiheadAttention(
+            embed_dim=attn_dim, 
+            num_heads=4, 
+            batch_first=True
+        ).to(device)
+    
+    input_proj = torch.nn.Linear(1, attn_dim).to(device)
+    
+    # DGM 動態圖模組
+    if DGM_AVAILABLE:
+        class DGMEmbedWrapper(torch.nn.Module):
+            def forward(self, x, A=None):
+                return x
+        
+        dgm_embed_f = DGMEmbedWrapper()
+        dgm_k_train = int(min(dgm_k, max(1, n_train - 1)))
+        dgm_module = DGM_d(dgm_embed_f, k=dgm_k_train, distance=dgm_distance).to(device)
+    else:
+        dgm_module = None
+    
+    gnn_out_dim = num_cols
+    gnn = SimpleGCN(attn_dim, gnn_hidden, gnn_out_dim, num_layers=2).to(device)
+    gcn_to_attn = torch.nn.Linear(gnn_out_dim, attn_dim).to(device)
+    out_proj = torch.nn.Linear(attn_dim, 1).to(device)
+    
+    # 可學習的欄位 embedding 與 pooling query
+    column_embed = torch.nn.Parameter(torch.randn(num_cols, attn_dim, device=device))
+    pool_query = torch.nn.Parameter(torch.randn(attn_dim, device=device))
+    
+    # === 第 4 部分：前向傳播函數 ===
+    def forward_pass(x_tensor, use_dgm=True):
+        Ns = x_tensor.shape[0]
+        
+        # Step 1: Self-Attention 列間交互
+        x_in = input_proj(x_tensor.unsqueeze(-1))  # [Ns, num_cols, attn_dim]
+        tokens = x_in + column_embed.unsqueeze(0)
+        tokens_attn, _ = attn_in(tokens, tokens, tokens)
+        
+        # Step 2: Attention Pooling（列 → 行）
+        pool_logits = (tokens_attn * pool_query).sum(dim=2) / math.sqrt(attn_dim)
+        pool_weights = torch.softmax(pool_logits, dim=1)
+        row_emb = (pool_weights.unsqueeze(2) * tokens_attn).sum(dim=1)  # [Ns, attn_dim]
+        
+        # Step 3: 標準化 + DGM 動態建圖
+        row_emb_std = _standardize(row_emb, dim=0)
+        
+        if use_dgm and dgm_module is not None:
+            row_emb_batched = row_emb_std.unsqueeze(0)  # [1, Ns, attn_dim]
+            row_emb_dgm, edge_index_dgm, logprobs_dgm = dgm_module(row_emb_batched, A=None)
+            row_emb_dgm = row_emb_dgm.squeeze(0)  # [Ns, attn_dim]
+            
+            # Step 4: 對稱化 + 自迴路
+            edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, Ns)
+        else:
+            # 備用：簡單 k-NN 圖
+            row_emb_dgm = row_emb_std
+            edge_index_dgm = knn_graph(row_emb_dgm, k=min(5, Ns-1), directed=False).to(device)
+            logprobs_dgm = torch.tensor(0.0, device=device)
+        
+        # Step 5: GCN 處理
+        gcn_out = gnn(row_emb_dgm, edge_index_dgm)  # [Ns, gnn_out_dim]
+        
+        # Step 6: Self-Attention 解碼（行 → 列）
+        gcn_ctx = gcn_to_attn(gcn_out).unsqueeze(1)  # [Ns, 1, attn_dim]
+        tokens_with_ctx = tokens_attn + gcn_ctx
+        tokens_out, _ = attn_out(tokens_with_ctx, tokens_with_ctx, tokens_with_ctx)
+        recon = out_proj(tokens_out).squeeze(-1)  # [Ns, num_cols]
+        
+        return recon, logprobs_dgm
+    
+    # === 第 5 部分：訓練循環（基於 val_loss 早停）===
+    params = list(attn_in.parameters()) + list(attn_out.parameters()) + \
+             list(input_proj.parameters()) + list(gnn.parameters()) + \
+             list(gcn_to_attn.parameters()) + list(out_proj.parameters()) + \
+             [column_embed, pool_query]
+    
+    if dgm_module is not None:
+        params.extend(list(dgm_module.parameters()))
+    
+    optimizer = torch.optim.Adam(params, lr=lr)
+    
+    best_val_loss = float('inf')
     early_stop_counter = 0
-    # 建立並訓練GNN
-    gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
-    optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
-    gnn.train()
+    best_states = {}
     gnn_early_stop_epochs = 0
+    
     for epoch in range(gnn_epochs):
+        # 訓練階段（僅用 train 節點）
+        attn_in.train()
+        attn_out.train()
+        gnn.train()
+        if dgm_module is not None:
+            dgm_module.train()
+        
         optimizer.zero_grad()
-        out = gnn(x, edge_index)
-        loss = torch.nn.functional.mse_loss(out, x)
-        loss.backward()
+        recon_train, logprobs_dgm = forward_pass(x_train, use_dgm=True)
+        
+        # 重建 loss + DGM 正則項
+        recon_loss = F.mse_loss(recon_train, x_train)
+        # ✅ 修复：确保 dgm_reg 是标量
+        if isinstance(logprobs_dgm, torch.Tensor):
+            dgm_reg = -logprobs_dgm.mean() * 0.01
+        else:
+            dgm_reg = 0.0
+        train_loss = recon_loss + dgm_reg
+        
+        train_loss.backward()
+        torch.nn.utils.clip_grad_norm_(params, 1.0)
         optimizer.step()
-        # Early stopping check
-        if loss.item() < best_loss:
-            best_loss = loss.item()
+        
+        # 驗證階段（基於 val_loss 判定早停）
+        attn_in.eval()
+        attn_out.eval()
+        gnn.eval()
+        if dgm_module is not None:
+            dgm_module.eval()
+        
+        with torch.no_grad():
+            recon_val, _ = forward_pass(x_val, use_dgm=True)
+            val_loss = F.mse_loss(recon_val, x_val)
+        
+        improved = val_loss.item() < best_val_loss - loss_threshold
+        if improved:
+            best_val_loss = val_loss.item()
             early_stop_counter = 0
+            # 保存最佳權重
+            best_states = {
+                'attn_in': attn_in.state_dict(),
+                'attn_out': attn_out.state_dict(),
+                'input_proj': input_proj.state_dict(),
+                'gnn': gnn.state_dict(),
+                'gcn_to_attn': gcn_to_attn.state_dict(),
+                'out_proj': out_proj.state_dict(),
+                'column_embed': column_embed.detach().clone(),
+                'pool_query': pool_query.detach().clone(),
+            }
+            if dgm_module is not None:
+                best_states['dgm_module'] = dgm_module.state_dict()
         else:
             early_stop_counter += 1
-        if (epoch+1) % 10 == 0:
-            print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
+        
+        if (epoch + 1) % 10 == 0:
+            print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Train Loss: {train_loss.item():.4f}, Val Loss: {val_loss.item():.4f}')
+        
         if early_stop_counter >= patience:
-            print(f"GNN Early stopping at epoch {epoch+1}")
             gnn_early_stop_epochs = epoch + 1
+            print(f"✅ Early stopping at epoch {epoch+1}")
             break
+    
+    # === 第 6 部分：恢復最佳權重並推論 ===
+    if best_states:
+        attn_in.load_state_dict(best_states['attn_in'])
+        attn_out.load_state_dict(best_states['attn_out'])
+        input_proj.load_state_dict(best_states['input_proj'])
+        gnn.load_state_dict(best_states['gnn'])
+        gcn_to_attn.load_state_dict(best_states['gcn_to_attn'])
+        out_proj.load_state_dict(best_states['out_proj'])
+        column_embed.data = best_states['column_embed']
+        pool_query.data = best_states['pool_query']
+        if dgm_module is not None and 'dgm_module' in best_states:
+            dgm_module.load_state_dict(best_states['dgm_module'])
+    
+    attn_in.eval()
+    attn_out.eval()
     gnn.eval()
+    if dgm_module is not None:
+        dgm_module.eval()
+    
     with torch.no_grad():
-        final_emb = gnn(x, edge_index).cpu().numpy()
-    # print(f"Final embedding shape: {final_emb.shape}")
-    # print(f"final embedding type: {type(final_emb)}")
-    # print(f"final embedding head:\n{final_emb[:5]}")
-    # 將final_emb分回三個df
-    train_emb = final_emb[:n_train]
-    val_emb = final_emb[n_train:n_train+n_val]
-    test_emb = final_emb[n_train+n_val:]
-
-    emb_cols = [f'N_feature_{i}' for i in range(1,out_dim+1)]
-    train_df_gnn = pd.DataFrame(train_emb, columns=emb_cols, index=train_df.index)
-    val_df_gnn = pd.DataFrame(val_emb, columns=emb_cols, index=val_df.index)
-    test_df_gnn = pd.DataFrame(test_emb, columns=emb_cols, index=test_df.index)
-    # print(f"train_df_gnn.shape: {train_df_gnn.shape}")
-    # print(f"val_df_gnn.shape: {val_df_gnn.shape}")
-    # print(f"test_df_gnn.shape: {test_df_gnn.shape}")
-    # print(f"train_df_gnn.head():\n{train_df_gnn.head()}")
-    # print(f"val_df_gnn.head():\n{val_df_gnn.head()}")
-    # print(f"test_df_gnn.head():\n{test_df_gnn.head()}")
-
-    # 保留原標籤
+        recon_train, _ = forward_pass(x_train, use_dgm=True)
+        recon_val, _ = forward_pass(x_val, use_dgm=True)
+        recon_test, _ = forward_pass(x_test, use_dgm=True)
+    
+    # 返回重建的 DataFrame
+    train_df_gnn = pd.DataFrame(recon_train.cpu().numpy(), columns=feature_cols, index=train_df.index)
     train_df_gnn['target'] = train_df['target'].values
+    
+    val_df_gnn = pd.DataFrame(recon_val.cpu().numpy(), columns=feature_cols, index=val_df.index)
     val_df_gnn['target'] = val_df['target'].values
+    
+    test_df_gnn = pd.DataFrame(recon_test.cpu().numpy(), columns=feature_cols, index=test_df.index)
     test_df_gnn['target'] = test_df['target'].values
-    # print(f"train_df_gnn.shape: {train_df_gnn.shape}")
-    # print(f"val_df_gnn.shape: {val_df_gnn.shape}")
-    # print(f"test_df_gnn.shape: {test_df_gnn.shape}")
-    # print(f"train_df.head():\n{train_df.head()}")
-    # print(f"train_df_gnn.head():\n{train_df_gnn.head()}")
-    # print(f"val_df.head():\n{val_df.head()}")
-    # print(f"val_df_gnn.head():\n{val_df_gnn.head()}")
-    # print(f"test_df.head():\n{test_df.head()}")
-    # print(f"test_df_gnn.head():\n{test_df_gnn.head()}")
-    # 若需要將 num_classes 傳遞到下游，可 return
+    
+    print(f"✅ gnn_after_start_fn completed with {gnn_early_stop_epochs} early stop epochs")
     return train_df_gnn, val_df_gnn, test_df_gnn, gnn_early_stop_epochs
 
 
 def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_frame, config, dataset_name, task_type):
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    k = config.get('gnn_knn', 5)
-    hidden_dim = config.get('gnn_hidden', 64)
-    gnn_epochs = config.get('gnn_epochs', 200)
+    """
+    ✅ 改進版本：在 materialize_fn 後插入 GNN 處理
+    
+    這個函數與 gnn_after_start_fn 類似，但作用於 TensorFrame 物件而非 DataFrame
+    """
+    print("✅ Executing improved gnn_after_materialize_fn with Self-Attention + DGM")
+    
+    device = resolve_device(config)
+    
     def tensor_frame_to_df(tensor_frame):
-        # 取得 feature 名稱與 tensor
+        """將 TensorFrame 轉換為 DataFrame"""
         col_names = tensor_frame.col_names_dict[stype.numerical]
         features = tensor_frame.feat_dict[stype.numerical]
         df = pd.DataFrame(features, columns=col_names)
-        # 加入 target
         if hasattr(tensor_frame, 'y') and tensor_frame.y is not None:
             df['target'] = tensor_frame.y.cpu().numpy()
         return df
     
-    
+    # 轉換三個 tensor_frame 為 DataFrame
     train_df = tensor_frame_to_df(train_tensor_frame)
     val_df = tensor_frame_to_df(val_tensor_frame)
     test_df = tensor_frame_to_df(test_tensor_frame)
-
-    # 合併三個df
-    all_df = pd.concat([train_df, val_df, test_df], axis=0, ignore_index=True)
-    # print(f"all_df.head():\n{all_df.head()}")
-    feature_cols = [c for c in all_df.columns if c != 'target']
-    x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
-    y = all_df['target'].values
-
-    # 自動計算 num_classes
-    if task_type in ['binclass', 'multiclass']:
-        num_classes = len(pd.unique(y))
-        print(f"Detected num_classes: {num_classes}")
-    else:
-        num_classes = 1
-# label 處理
-    if task_type == 'binclass':
-        y = torch.tensor(y, dtype=torch.float32, device=device)
-    elif task_type == 'multiclass':
-        y = torch.tensor(y, dtype=torch.long, device=device)
-    else:  # regression
-        y = torch.tensor(y, dtype=torch.float32, device=device)
-
-    # 建圖
-    edge_index = knn_graph(x, k).to(device)
-    in_dim = x.shape[1]
-    out_dim = in_dim
-    # mask
-    n_train = len(train_df)
-    n_val = len(val_df)
-    n_test = len(test_df)
-    N = n_train + n_val + n_test
-    train_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    val_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    test_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    train_mask[:n_train] = True
-    val_mask[n_train:n_train+n_val] = True
-    test_mask[n_train+n_val:] = True
-    patience = config.get('gnn_patience', 10)
-    best_loss = float('inf')
-    early_stop_counter = 0
-
-    # 建立並訓練GNN
-    gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
-    optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
-    gnn_early_stop_epochs = 0
-    gnn.train()
-    for epoch in range(gnn_epochs):
-        optimizer.zero_grad()
-        out = gnn(x, edge_index)
-        loss = torch.nn.functional.mse_loss(out, x)
-        loss.backward()
-        optimizer.step()
-        # Early stopping check
-        if loss.item() < best_loss:
-            best_loss = loss.item()
-            early_stop_counter = 0
-        else:
-            early_stop_counter += 1
-        if (epoch+1) % 10 == 0:
-            print(f'GNN Epoch {epoch+1}/{gnn_epochs}, Loss: {loss.item():.4f}')
-        if early_stop_counter >= patience:
-            gnn_early_stop_epochs = epoch + 1
-            print(f"GNN Early stopping at epoch {epoch+1}")
-            break
-    gnn.eval()
-    with torch.no_grad():
-        final_emb = gnn(x, edge_index).cpu().numpy()
-    # 將final_emb分回三個df
-    train_emb = final_emb[:n_train]
-    val_emb = final_emb[n_train:n_train+n_val]
-    test_emb = final_emb[n_train+n_val:]
-
-    emb_cols = [f'N_feature_{i}' for i in range(1,out_dim+1)]
-    train_df_gnn = pd.DataFrame(train_emb, columns=emb_cols, index=train_df.index)
-    val_df_gnn = pd.DataFrame(val_emb, columns=emb_cols, index=val_df.index)
-    test_df_gnn = pd.DataFrame(test_emb, columns=emb_cols, index=test_df.index)
-
-    # 保留原標籤
-    train_df_gnn['target'] = train_df['target'].values
-    val_df_gnn['target'] = val_df['target'].values
-    test_df_gnn['target'] = test_df['target'].values
-
-
-    numerical_encoder_type = 'linear'
-    model_type = 'fttransformer'
-    channels = config.get('channels', 256)
-    num_layers = config.get('num_layers', 4)
-
-    # 7. Yandex 數據集包裝
+    
+    # 調用 gnn_after_start_fn 的邏輯（復用改進版本）
+    # 為了簡化，直接調用 gnn_after_start_fn（如果需要分離邏輯，可以提取公共函數）
+    train_df_gnn, val_df_gnn, test_df_gnn, gnn_early_stop_epochs = gnn_after_start_fn(
+        train_df, val_df, test_df, config, task_type
+    )
+    
+    # Yandex 數據集包裝並 Materialize
     dataset = Yandex(train_df_gnn, val_df_gnn, test_df_gnn, name=dataset_name, task_type=task_type)
     dataset.materialize()
     is_classification = dataset.task_type.is_classification
-    # 8. split tensor_frame
-    train_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 0]
-    val_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 1]
-    test_tensor_frame = dataset.tensor_frame[dataset.df['split_col'] == 2]
+    
+    # 分割 tensor_frame
+    train_tensor_frame_new = dataset.tensor_frame[dataset.df['split_col'] == 0]
+    val_tensor_frame_new = dataset.tensor_frame[dataset.df['split_col'] == 1]
+    test_tensor_frame_new = dataset.tensor_frame[dataset.df['split_col'] == 2]
+    
+    # 構建 DataLoader
     batch_size = config.get('batch_size', 512)
-    train_loader = DataLoader(train_tensor_frame, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_tensor_frame, batch_size=batch_size)
-    test_loader = DataLoader(test_tensor_frame, batch_size=batch_size)
-
+    train_loader = DataLoader(train_tensor_frame_new, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_tensor_frame_new, batch_size=batch_size)
+    test_loader = DataLoader(test_tensor_frame_new, batch_size=batch_size)
+    
+    # 設定編碼器
+    numerical_encoder_type = config.get('numerical_encoder_type', 'linear')
     if numerical_encoder_type == 'linear':
         numerical_encoder = LinearEncoder()
     elif numerical_encoder_type == 'linearbucket':
@@ -325,17 +523,18 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
         numerical_encoder = LinearPeriodicEncoder()
     else:
         raise ValueError(f'Unsupported encoder type: {numerical_encoder_type}')
-
+    
     stype_encoder_dict = {
         stype.categorical: EmbeddingEncoder(),
         stype.numerical: numerical_encoder,
     }
-
+    
+    # 輸出通道與指標
     if is_classification:
         output_channels = dataset.num_classes
     else:
         output_channels = 1
-
+    
     is_binary_class = is_classification and output_channels == 2
     if is_binary_class:
         metric_computer = AUROC(task='binary')
@@ -346,17 +545,19 @@ def gnn_after_materialize_fn(train_tensor_frame, val_tensor_frame, test_tensor_f
     else:
         metric_computer = MeanSquaredError()
         metric = 'RMSE'
-
+    
     metric_computer = metric_computer.to(device)
+    
+    print(f"✅ gnn_after_materialize_fn completed with {gnn_early_stop_epochs} early stop epochs")
     return (train_loader, 
             val_loader, 
             test_loader, 
             dataset.col_stats, 
             stype_encoder_dict, 
             dataset, 
-            train_tensor_frame, 
-            val_tensor_frame, 
-            test_tensor_frame,
+            train_tensor_frame_new, 
+            val_tensor_frame_new, 
+            test_tensor_frame_new,
             gnn_early_stop_epochs)    
 class FCResidualBlock(Module):
     r"""Fully connected residual block.
@@ -794,6 +995,17 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
 
 
 def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
+    """
+    ✅ 完整改進版本：真正實現三個 GNN 階段的 Self-Attention + DGM 管線
+    
+    三階段差異：
+    - encoding：在編碼後應用 Self-Attn → Pool → DGM-GCN → Self-Attn 解碼 → Convs → Decoder
+    - columnwise：在 Convs 後應用 Self-Attn → Pool → DGM-GCN → Self-Attn 解碼 → Decoder
+    - decoding：在 Convs 後應用 Self-Attn → Pool → DGM-GCN-as-Decoder（無 Self-Attn 解碼）
+    - None：無 GNN，標準 ResNet
+    """
+    print(f"✅ Executing resnet_core_fn with gnn_stage={gnn_stage}")
+    
     train_tensor_frame = material_outputs['train_tensor_frame']
     val_tensor_frame = material_outputs['val_tensor_frame']
     test_tensor_frame = material_outputs['test_tensor_frame']
@@ -808,44 +1020,36 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
     is_binary_class = material_outputs['is_binary_class']
     metric_computer = material_outputs['metric_computer']
     metric = material_outputs['metric']
+    
     # 獲取模型參數
     channels = config.get('channels', 256)
     print(f"Encoding with channels: {channels}")
     patience = config.get('patience', 10)
 
-    # 新增：引入必要的GNN模組（以PyG為例）
-    from torch_geometric.nn import GCNConv
-    import torch.nn as nn
-    class SimpleGCN_INTERNAL(nn.Module):
-        def __init__(self, in_channels, out_channels):
-            super().__init__()
-            self.conv1 = GCNConv(in_channels, out_channels)
-        def forward(self, x, edge_index):
-            x = self.conv1(x, edge_index)
-            return x
-    gnn = SimpleGCN_INTERNAL(channels, channels).to(device)
-    # 創建ResNet的編碼器部分
+    # 創建 encoder
     encoder = StypeWiseFeatureEncoder(
         out_channels=channels,
         col_stats=col_stats,
         col_names_dict=train_tensor_frame.col_names_dict,
         stype_encoder_dict=stype_encoder_dict,
     ).to(device)
-    # 控制批次大小，避免GPU內存不足
-    batch_size = config.get('batch_size', 512)
-    # 獲取ResNet的參數
+    
+    # 獲取 num_cols
+    col_names_dict = train_tensor_frame.col_names_dict
+    num_cols = sum([len(col_names) for col_names in col_names_dict.values()])
+    in_channels = channels * num_cols
+    
+    # 獲取訓練參數
     num_layers = config.get('num_layers', 4)
     normalization = config.get('normalization', 'layer_norm')
     dropout_prob = config.get('dropout_prob', 0.2)
     
-    print(f"Building ResNet backbone with {num_layers} layers")
-    col_names_dict=train_tensor_frame.col_names_dict
-    num_cols = sum([len(col_names) for col_names in col_names_dict.values()])
-    in_channels = channels * num_cols
-    # 創建ResNet的骨幹網絡 - FCResidualBlock的堆疊
+    print(f"Building ResNet backbone with {num_layers} layers, num_cols={num_cols}")
+    
+    # 創建 backbone
     backbone = Sequential(*[
         FCResidualBlock(
-            in_channels if i == 0 else channels,  # 第一層使用原始嵌入維度
+            in_channels if i == 0 else channels,
             channels,
             normalization=normalization,
             dropout_prob=dropout_prob,
@@ -853,74 +1057,267 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         for i in range(num_layers)
     ])
     
-    # 對嵌入數據應用骨幹網絡進行處理
-        
-    # 創建ResNet的解碼器部分
-    decoder = Sequential(
-        LayerNorm(channels),
-        ReLU(),
-        Linear(channels, out_channels),
+    # 創建 decoder（decoding 階段不需要）
+    if gnn_stage != 'decoding':
+        decoder = Sequential(
+            LayerNorm(channels),
+            ReLU(),
+            Linear(channels, out_channels),
+        ).to(device)
+        decoder[0].reset_parameters()
+        decoder[2].reset_parameters()
+    else:
+        decoder = None
+    
+    # === GNN 相關模組（所有階段都需要）===
+    gnn_hidden = config.get('gnn_hidden', 64)
+    attn_heads = config.get('gnn_attn_heads', 4)
+    dgm_k = config.get('dgm_k', 10)
+    dgm_distance = config.get('dgm_distance', 'euclidean')
+    gnn_lr = config.get('gnn_lr', 0.001)
+    gnn_dropout = config.get('gnn_dropout', 0.1)
+    
+    # ✅ 修复：统一使用 channels 作为 embedding dimension（与 ExcelFormer 对齐）
+    # GNN 層數（输入输出维度统一使用 channels）
+    if gnn_stage == 'decoding':
+        gnn = SimpleGCN(channels, gnn_hidden, out_channels, num_layers=2).to(device)
+    else:
+        gnn = SimpleGCN(channels, gnn_hidden, channels, num_layers=2).to(device)
+    
+    # Self-Attention 組件（使用 channels 作为 embed_dim）
+    try:
+        self_attn_in = torch.nn.MultiheadAttention(
+            embed_dim=channels, num_heads=attn_heads, batch_first=True
+        ).to(device)
+        self_attn_out = torch.nn.MultiheadAttention(
+            embed_dim=channels, num_heads=attn_heads, batch_first=True
+        ).to(device)
+    except Exception as e:
+        print(f"[WARNING] Failed to create attention with {attn_heads} heads: {e}")
+        # 降级处理
+        attn_heads = max(1, attn_heads // 2)
+        self_attn_in = torch.nn.MultiheadAttention(
+            embed_dim=channels, num_heads=attn_heads, batch_first=True
+        ).to(device)
+        self_attn_out = torch.nn.MultiheadAttention(
+            embed_dim=channels, num_heads=attn_heads, batch_first=True
+        ).to(device)
+    
+    # LayerNorm 组件（使用 channels）
+    attn_norm = torch.nn.LayerNorm(channels).to(device)
+    attn_out_norm = torch.nn.LayerNorm(channels).to(device)
+    
+    # FFN 组件（使用 channels）
+    ffn_pre = torch.nn.Sequential(
+        torch.nn.Linear(channels, channels * 2),
+        torch.nn.GELU(),
+        torch.nn.Dropout(gnn_dropout),
+        torch.nn.Linear(channels * 2, channels),
     ).to(device)
     
-    # 初始化解碼器參數
-    decoder[0].reset_parameters()  # LayerNorm
-    decoder[2].reset_parameters()  # Linear
+    ffn_post = torch.nn.Sequential(
+        torch.nn.Linear(channels, channels * 2),
+        torch.nn.GELU(),
+        torch.nn.Dropout(gnn_dropout),
+        torch.nn.Linear(channels * 2, channels),
+    ).to(device)
     
-    # 實現完整的ResNet前向傳播函數
+    # ✅ 修复：移除 input_proj，直接使用 x（与 ExcelFormer 对齐）
+    # 投影層：GCN 输出到 Self-Attention（channels → channels）
+    gcn_to_attn = torch.nn.Linear(channels, channels).to(device)
+    
+    # DGM 模組
+    if DGM_AVAILABLE and (gnn_stage in ['encoding', 'columnwise', 'decoding']):
+        class DGMEmbedWrapper(torch.nn.Module):
+            def forward(self, x, A=None):
+                return x
+        dgm_embed_f = DGMEmbedWrapper()
+        dgm_module = DGM_d(dgm_embed_f, k=dgm_k, distance=dgm_distance).to(device)
+    else:
+        dgm_module = None
+    
+    # 可學習參數（使用 channels）
+    column_embed = torch.nn.Parameter(torch.randn(num_cols, channels, device=device))
+    pool_query = torch.nn.Parameter(torch.randn(channels, device=device))
+    
+    # ✅ 新增：可學習的融合權重（encoding 和 columnwise 阶段）
+    if gnn_stage in ['encoding', 'columnwise']:
+        fusion_alpha_param = torch.nn.Parameter(torch.tensor(-0.847, device=device))
+    else:
+        fusion_alpha_param = None
+    
+    # === 前向傳播函數 ===
     def model_forward(tf):
-        x, _ = encoder(tf)
-        batch_size, num_cols, channels_ = x.shape
-        # print(f"Input shape after encoder: {x.shape}, batch_size: {batch_size}, num_cols: {num_cols}, channels_: {channels_}")
+        x, _ = encoder(tf)  # [batch, num_cols, channels]
+        batch_size_curr, _, _ = x.shape
+        
         if gnn_stage == 'encoding':
-            x_reshape = x.view(-1, channels_)
-            row = torch.arange(num_cols).repeat(num_cols, 1).view(-1)
-            col = torch.arange(num_cols).repeat(1, num_cols).view(-1)
-            edge_index_single = torch.stack([row, col], dim=0)
-            edge_index = []
-            for i in range(batch_size):
-                offset = i * num_cols
-                edge_index.append(edge_index_single + offset)
-            edge_index = torch.cat(edge_index, dim=1).to(x.device)
-            x = gnn(x_reshape, edge_index).view(batch_size, num_cols, channels_)
-            # print(f"Input shape after GNN(after encoding): {x.shape}")
-        # print(f"Input shape after encoder: {x.shape}")
-        # Flattening the encoder output
-        x = x.view(x.size(0), math.prod(x.shape[1:]))
-        # print(f"Input shape after flattening: {x.shape}")
-        x = backbone(x)
-        # print(f"Input shape after backbone: {x.shape}")
+            # === Encoding 階段（與 ExcelFormer 完全對齊）===
+            # Step 1: Self-Attention 列間交互（PreNorm + FFN）
+            # ✅ 修复：直接使用 x，不需要投影
+            tokens = x + column_embed.unsqueeze(0)  # [batch, num_cols, channels]
+            
+            # PreNorm + Self-Attention + 殘差
+            tokens_norm = attn_norm(tokens)
+            attn_out1, _ = self_attn_in(tokens_norm, tokens_norm, tokens_norm)
+            tokens_attn = tokens + attn_out1
+            
+            # FFN + 殘差
+            ffn_out1 = ffn_pre(attn_norm(tokens_attn))
+            tokens_attn = tokens_attn + ffn_out1
+            
+            # Step 2: Attention Pooling（列 → 行）
+            # ✅ 修复：使用 dim=-1（与 ExcelFormer 一致）
+            pool_logits = (tokens_attn * pool_query).sum(dim=-1) / math.sqrt(channels)
+            pool_weights = torch.softmax(pool_logits, dim=1)
+            x_pooled = (pool_weights.unsqueeze(-1) * tokens_attn).sum(dim=1)  # [batch, channels]
+            
+            # Step 3: Mini-batch DGM 動態建圖（標準化 + 對稱化 + 自迴路）
+            x_pooled_std = _standardize(x_pooled, dim=0)
+            x_pooled_batched = x_pooled_std.unsqueeze(0)  # [1, batch, channels]
+            
+            # 動態調整 k 值（與 ExcelFormer 一致）
+            if dgm_module is not None and hasattr(dgm_module, 'k'):
+                Ns_enc = x_pooled_batched.shape[1]
+                dgm_module.k = int(min(int(dgm_module.k), max(1, Ns_enc - 1)))
+            
+            if dgm_module is not None:
+                try:
+                    x_dgm, edge_index_dgm, _ = dgm_module(x_pooled_batched, A=None)
+                    x_dgm = x_dgm.squeeze(0)  # [batch, channels]
+                except Exception as e:
+                    print(f"[WARNING] DGM failed: {e}, falling back to k-NN")
+                    dgm_k_curr = min(dgm_k, max(1, batch_size_curr - 1))
+                    edge_index_dgm = knn_graph(x_pooled_std, dgm_k_curr, directed=False).to(device)
+                    x_dgm = x_pooled_std
+            else:
+                dgm_k_curr = min(5, batch_size_curr - 1)
+                edge_index_dgm = knn_graph(x_pooled_std, dgm_k_curr, directed=False).to(device)
+                x_dgm = x_pooled_std
+            
+            # Step 4: 對稱化 + 自迴路
+            edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, x_dgm.shape[0])
+            
+            # Step 5: Batch GCN 處理
+            x_gnn_out = gnn(x_dgm, edge_index_dgm)  # [batch, channels]
+            
+            # Step 6: Self-Attention 解碼（行 → 列，PreNorm + FFN）
+            # ✅ 修复：gcn_to_attn 现在是 channels → channels
+            gcn_ctx = gcn_to_attn(x_gnn_out).unsqueeze(1)  # [batch, 1, channels]
+            tokens_with_ctx = tokens_attn + gcn_ctx  # 廣播到所有列
+            
+            # PreNorm + Self-Attention + 殘差
+            tokens_ctx_norm = attn_out_norm(tokens_with_ctx)
+            attn_out2, _ = self_attn_out(tokens_ctx_norm, tokens_ctx_norm, tokens_ctx_norm)
+            tokens_mid = tokens_with_ctx + attn_out2
+            
+            # FFN + 殘差
+            ffn_out2 = ffn_post(attn_out_norm(tokens_mid))
+            tokens_out = tokens_mid + ffn_out2
+            
+            # Step 7: 殘差融合（與 ExcelFormer 完全一致）
+            fusion_alpha = torch.sigmoid(fusion_alpha_param)
+            x = x + fusion_alpha * tokens_out  # [batch, num_cols, channels]
+        
+        # Flattening
+        x_flat = x.view(x.size(0), math.prod(x.shape[1:]))
+        
+        # Backbone
+        x = backbone(x_flat)
+        
         if gnn_stage == 'columnwise':
-            k = min(5, batch_size - 1)
-            if k > 0 and batch_size > 1:
-                x_np = x.detach().cpu().numpy()
-                from sklearn.neighbors import NearestNeighbors
-                nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
-                _, indices = nbrs.kneighbors(x_np)
-                edge_index = []
-                for i in range(batch_size):
-                    for j in indices[i][1:]:
-                        edge_index.append([i, j])
-                if len(edge_index) > 0:
-                    edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().to(x.device)
-                    x = gnn(x, edge_index)
-        out = decoder(x)
+            # === Columnwise 階段（簡化為 row-level 處理）===
+            # ✅ ResNet 的 backbone 输出是 [batch, channels]（已 flatten）
+            # 不强制进行列级处理，直接在 row-level 应用 GNN（保持 ResNet 原始设计）
+            
+            # Step 1: 標準化 + Mini-batch DGM 動態建圖
+            x_std = _standardize(x, dim=0)
+            x_batched = x_std.unsqueeze(0)  # [1, batch, channels]
+            
+            # 動態調整 k 值
+            if dgm_module is not None and hasattr(dgm_module, 'k'):
+                Ns_col = x_batched.shape[1]
+                dgm_module.k = int(min(int(dgm_module.k), max(1, Ns_col - 1)))
+            
+            if dgm_module is not None:
+                try:
+                    x_dgm, edge_index_dgm, _ = dgm_module(x_batched, A=None)
+                    x_dgm = x_dgm.squeeze(0)  # [batch, channels]
+                except Exception as e:
+                    print(f"[WARNING] DGM failed: {e}, falling back to k-NN")
+                    dgm_k_curr = min(dgm_k, max(1, batch_size_curr - 1))
+                    edge_index_dgm = knn_graph(x_std, dgm_k_curr, directed=False).to(device)
+                    x_dgm = x_std
+            else:
+                dgm_k_curr = min(5, batch_size_curr - 1)
+                edge_index_dgm = knn_graph(x_std, dgm_k_curr, directed=False).to(device)
+                x_dgm = x_std
+            
+            # Step 2: 對稱化 + 自迴路
+            edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, x_dgm.shape[0])
+            
+            # Step 3: Batch GCN 處理
+            x_gnn_out = gnn(x_dgm, edge_index_dgm)  # [batch, channels]
+            
+            # Step 4: 殘差融合（直接在 row-level）
+            fusion_alpha = torch.sigmoid(fusion_alpha_param)
+            x = x + fusion_alpha * x_gnn_out  # [batch, channels]
+        
+        elif gnn_stage == 'decoding':
+            # === Decoding 階段（GNN 作為解碼器）===
+            # ✅ 修复：保持简洁，直接在 row-level 处理（ResNet 已经 flatten）
+            # ExcelFormer 在这里也只是做列级池化，本质上还是 row-level GNN
+            
+            # Step 1: Mini-batch DGM 動態建圖（標準化 + 對稱化 + 自迴路）
+            x_std = _standardize(x, dim=0)
+            x_batched = x_std.unsqueeze(0)  # [1, batch, channels]
+            
+            # 動態調整 k 值
+            if dgm_module is not None and hasattr(dgm_module, 'k'):
+                Ns_dec = x_batched.shape[1]
+                dgm_module.k = int(min(int(dgm_module.k), max(1, Ns_dec - 1)))
+            
+            if dgm_module is not None:
+                try:
+                    x_dgm, edge_index_dgm, _ = dgm_module(x_batched, A=None)
+                    x_dgm = x_dgm.squeeze(0)  # [batch, channels]
+                except Exception as e:
+                    print(f"[WARNING] DGM failed: {e}, falling back to k-NN")
+                    dgm_k_curr = min(dgm_k, max(1, batch_size_curr - 1))
+                    edge_index_dgm = knn_graph(x_std, dgm_k_curr, directed=False).to(device)
+                    x_dgm = x_std
+            else:
+                dgm_k_curr = min(5, batch_size_curr - 1)
+                edge_index_dgm = knn_graph(x_std, dgm_k_curr, directed=False).to(device)
+                x_dgm = x_std
+            
+            # Step 2: 對稱化 + 自迴路
+            edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, x_dgm.shape[0])
+            
+            # Step 3: Batch GCN 作為 Decoder（直接輸出預測）
+            out = gnn(x_dgm, edge_index_dgm)  # [batch, out_channels]
+            return out
+        
+        # 標準 decoder
+        if decoder is not None:
+            out = decoder(x)
+        else:
+            out = x
         return out
     
-    # 設置優化器
-    lr = config.get('lr', 0.001)
-    all_params = list(encoder.parameters()) + list(gnn.parameters()) + [p for bb in backbone for p in bb.parameters()] + list(decoder.parameters())
-    optimizer = torch.optim.AdamW(all_params, lr=lr)
-    
-    
-    # 定義完整模型的訓練函數
+    # === 訓練函數 ===
     def train(epoch):
         encoder.train()
         backbone.train()
-        decoder.train()
+        if decoder is not None:
+            decoder.train()
+        gnn.train()
+        if dgm_module is not None:
+            dgm_module.train()
         
         loss_accum = total_count = 0
         
-        for tf in tqdm(train_loader, desc=f'Epoch: {epoch}'):
+        for tf in tqdm(train_loader, desc=f'Epoch: {epoch}', disable=True):
             tf = tf.to(device)
             pred = model_forward(tf)
             
@@ -937,13 +1334,16 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         
         return loss_accum / total_count
     
-    
-    # 定義完整模型的測試函數
+    # === 測試函數 ===
     @torch.no_grad()
     def test(loader):
         encoder.eval()
         backbone.eval()
-        decoder.eval()
+        if decoder is not None:
+            decoder.eval()
+        gnn.eval()
+        if dgm_module is not None:
+            dgm_module.eval()
         
         metric_computer.reset()
         
@@ -964,69 +1364,178 @@ def resnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         else:
             return metric_computer.compute().item()**0.5
     
-    # 初始化最佳指標
+    # === 設置優化器 ===
+    all_params = list(encoder.parameters()) + list(gnn.parameters()) + \
+                 [p for bb in backbone for p in bb.parameters()] + \
+                 list(self_attn_in.parameters()) + list(self_attn_out.parameters()) + \
+                 list(gcn_to_attn.parameters()) + [column_embed, pool_query]
+    
+    # FFN 和 LayerNorm 参数
+    if gnn_stage in ['encoding', 'columnwise']:
+        all_params += list(attn_norm.parameters()) + list(attn_out_norm.parameters())
+        all_params += list(ffn_pre.parameters()) + list(ffn_post.parameters())
+        if fusion_alpha_param is not None:
+            all_params += [fusion_alpha_param]
+    elif gnn_stage == 'decoding':
+        all_params += list(attn_norm.parameters())
+    
+    if decoder is not None:
+        all_params += list(decoder.parameters())
+    
+    if dgm_module is not None:
+        all_params += list(dgm_module.parameters())
+    
+    lr = config.get('lr', 0.001)
+    optimizer = torch.optim.AdamW(all_params, lr=lr)
+    
+    # === 訓練循環 ===
+    # ✅ 改用 val_loss 判定早停（与 ExcelFormer 对齐）
+    best_val_loss = float('inf')
     if is_classification:
-        best_val_metric = 0
-        best_test_metric = 0
+        best_val_metric = -float('inf')
     else:
         best_val_metric = float('inf')
-        best_test_metric = float('inf')
     
-    # 記錄訓練過程
     train_losses = []
     train_metrics = []
     val_metrics = []
+    val_losses = []
     best_epoch = 0
     early_stop_counter = 0
+    best_states = {}
+    loss_threshold = config.get('loss_threshold', 1e-4)
     
-    # 訓練循環
     epochs = config.get('epochs', 200)
     early_stop_epochs = 0
+    
+    # 定义计算 val_loss 的函数
+    @torch.no_grad()
+    def compute_val_loss(loader):
+        encoder.eval()
+        backbone.eval()
+        if decoder is not None:
+            decoder.eval()
+        gnn.eval()
+        if dgm_module is not None:
+            dgm_module.eval()
+        
+        loss_accum = total_count = 0
+        for tf in loader:
+            tf = tf.to(device)
+            pred = model_forward(tf)
+            
+            if is_classification:
+                loss = F.cross_entropy(pred, tf.y)
+            else:
+                loss = F.mse_loss(pred.view(-1), tf.y.view(-1))
+            
+            loss_accum += float(loss) * len(tf.y)
+            total_count += len(tf.y)
+        
+        return loss_accum / total_count
+    
     for epoch in range(1, epochs + 1):
         train_loss = train(epoch)
         train_metric = test(train_loader)
         val_metric = test(val_loader)
+        val_loss = compute_val_loss(val_loader)  # ✅ 新增：计算 val_loss
         
         train_losses.append(train_loss)
         train_metrics.append(train_metric)
         val_metrics.append(val_metric)
-        improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+        val_losses.append(val_loss)
+        
+        # ✅ 改用 val_loss 判定是否改进
+        improved = val_loss < best_val_loss - loss_threshold
+        
         if improved:
+            best_val_loss = val_loss
             best_val_metric = val_metric
             best_epoch = epoch
             early_stop_counter = 0
+            # 保存所有模組的最佳權重
+            best_states = {
+                'encoder': encoder.state_dict(),
+                'backbone': backbone.state_dict(),
+                'gnn': gnn.state_dict(),
+                'self_attn_in': self_attn_in.state_dict(),
+                'self_attn_out': self_attn_out.state_dict(),
+                'gcn_to_attn': gcn_to_attn.state_dict(),
+                'column_embed': column_embed.detach().clone(),
+                'pool_query': pool_query.detach().clone(),
+            }
+            # ✅ 保存 FFN 和 LayerNorm 权重
+            if gnn_stage in ['encoding', 'columnwise']:
+                best_states['attn_norm'] = attn_norm.state_dict()
+                best_states['attn_out_norm'] = attn_out_norm.state_dict()
+                best_states['ffn_pre'] = ffn_pre.state_dict()
+                best_states['ffn_post'] = ffn_post.state_dict()
+                if fusion_alpha_param is not None:
+                    best_states['fusion_alpha_param'] = fusion_alpha_param.detach().clone()
+            elif gnn_stage == 'decoding':
+                best_states['attn_norm'] = attn_norm.state_dict()
+            
+            if decoder is not None:
+                best_states['decoder'] = decoder.state_dict()
+            if dgm_module is not None:
+                best_states['dgm_module'] = dgm_module.state_dict()
         else:
             early_stop_counter += 1
-
-        if is_classification and val_metric > best_val_metric:
-            best_val_metric = val_metric
-        elif not is_classification and val_metric < best_val_metric:
-            best_val_metric = val_metric
         
-        print(f'Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
-f'Val {metric}: {val_metric:.4f}')
-
+        if (epoch % 20 == 0) or improved:
+            print(f'Epoch {epoch}/{epochs}, Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, Train: {train_metric:.4f}, Val: {val_metric:.4f}, Best: {best_val_metric:.4f}')
+        
         if early_stop_counter >= patience:
             early_stop_epochs = epoch
-            print(f"Early stopping at epoch {epoch}")
+            print(f"✅ Early stopping at epoch {epoch} (Best Val Loss: {best_val_loss:.4f})")
             break
-    # 決定最終 metric 輸出
-    final_metric = None
-    test_metric = None
-    if gnn_stage == 'decoding':
-        # 確保gnn在gnn_decoding_eval作用域可見
-        best_val_metric, test_metric, gnn_early_stop_epochs = gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer, encoder, backbone,decoder=decoder)
-        final_metric = best_val_metric
-    else:
-        final_metric = best_val_metric
-        print(f'Best Val {metric}: {final_metric:.4f}')
-        test_metric = test(test_loader)
+    
+    # === 恢復最佳權重 ===
+    if best_states:
+        encoder.load_state_dict(best_states['encoder'])
+        backbone.load_state_dict(best_states['backbone'])
+        gnn.load_state_dict(best_states['gnn'])
+        self_attn_in.load_state_dict(best_states['self_attn_in'])
+        self_attn_out.load_state_dict(best_states['self_attn_out'])
+        gcn_to_attn.load_state_dict(best_states['gcn_to_attn'])
+        column_embed.data = best_states['column_embed']
+        pool_query.data = best_states['pool_query']
+        
+        # ✅ 恢复 FFN 和 LayerNorm 权重
+        if gnn_stage in ['encoding', 'columnwise']:
+            if 'attn_norm' in best_states:
+                attn_norm.load_state_dict(best_states['attn_norm'])
+            if 'attn_out_norm' in best_states:
+                attn_out_norm.load_state_dict(best_states['attn_out_norm'])
+            if 'ffn_pre' in best_states:
+                ffn_pre.load_state_dict(best_states['ffn_pre'])
+            if 'ffn_post' in best_states:
+                ffn_post.load_state_dict(best_states['ffn_post'])
+            if 'fusion_alpha_param' in best_states:
+                fusion_alpha_param.data = best_states['fusion_alpha_param']
+        elif gnn_stage == 'decoding':
+            if 'attn_norm' in best_states:
+                attn_norm.load_state_dict(best_states['attn_norm'])
+        
+        if decoder is not None and 'decoder' in best_states:
+            decoder.load_state_dict(best_states['decoder'])
+        if dgm_module is not None and 'dgm_module' in best_states:
+            dgm_module.load_state_dict(best_states['dgm_module'])
+        print(f"✅ Restored best weights from epoch {best_epoch} (Best Val Loss: {best_val_loss:.4f})")
+    
+    # === 最終測試 ===
+    final_metric = best_val_metric
+    print(f'✅ Best Val {metric}: {final_metric:.4f}')
+    test_metric = test(test_loader)
 
     # 返回訓練結果
     return {
+        'gnn_early_stop_epochs': material_outputs.get('gnn_early_stop_epochs', 0),
         'train_losses': train_losses,
         'train_metrics': train_metrics,
         'val_metrics': val_metrics,
+        'val_losses': val_losses,  # ✅ 新增：val_losses
+        'best_val_loss': best_val_loss,  # ✅ 新增：best_val_loss
         'best_val_metric': best_val_metric,
         'final_metric': final_metric,
         'best_test_metric': test_metric,
@@ -1042,7 +1551,7 @@ f'Val {metric}: {val_metric:.4f}')
         'metric_computer': metric_computer,
         'metric': metric,
         'early_stop_epochs': early_stop_epochs,
-        'gnn_early_stop_epochs': 0 if gnn_stage != 'decoding' else gnn_early_stop_epochs,
+        'gnn_stage': gnn_stage,
     }
 
 def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):

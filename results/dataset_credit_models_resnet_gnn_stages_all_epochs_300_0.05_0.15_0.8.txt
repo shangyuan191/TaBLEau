@@ -1,38 +1,36 @@
 dataset: credit
   模型: resnet
     GNN階段: none
-          Best val metric: 0.8381619453430176
-          Best test metric: 0.8278548121452332
-          早停輪數: 18
-          GNN早停輪數: 0
-          耗時: 5.28 秒
-    GNN階段: start
-          Best val metric: 0.8359814882278442
-          Best test metric: 0.8167201280593872
-          早停輪數: 16
-          GNN早停輪數: 0
-          耗時: 5.84 秒
-    GNN階段: materialize
-          Best val metric: 0.8365123271942139
-          Best test metric: 0.824238121509552
-          早停輪數: 20
-          GNN早停輪數: 0
-          耗時: 7.37 秒
-    GNN階段: encoding
-          Best val metric: 0.8423382043838501
-          Best test metric: 0.8350178003311157
-          早停輪數: 17
-          GNN早停輪數: 0
-          耗時: 4.07 秒
-    GNN階段: columnwise
-          Best val metric: 0.8410803079605103
-          Best test metric: 0.8423233032226562
-          早停輪數: 23
-          GNN早停輪數: 0
-          耗時: 29.12 秒
-    GNN階段: decoding
-          Best val metric: 0.8414646983146667
-          Best test metric: 0.8381038904190063
+          Best val metric: 0.8407585620880127
+          Best test metric: 0.83559250831604
           早停輪數: 19
-          GNN早停輪數: 23
-          耗時: 4.79 秒
+          GNN早停輪數: 0
+          耗時: 15.07 秒
+    GNN階段: start
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'gcc_to_attn' is not defined
+          耗時: 2.80 秒
+    GNN階段: materialize
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'gcc_to_attn' is not defined
+          耗時: 29.28 秒
+    GNN階段: encoding
+          Best val metric: 0.8357205390930176
+          Best test metric: 0.8376483917236328
+          早停輪數: 54
+          GNN早停輪數: 0
+          耗時: 151.33 秒
+    GNN階段: columnwise
+          Best val metric: 0.8381047248840332
+          Best test metric: 0.8373656272888184
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 61.76 秒
+    GNN階段: decoding
+          Best val metric: 0.7611802220344543
+          Best test metric: 0.8221874833106995
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 44.43 秒

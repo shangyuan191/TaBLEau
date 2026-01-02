@@ -1,38 +1,38 @@
 dataset: kaggle_Audit_Data
   模型: resnet
     GNN階段: none
-          Best val metric: 0.9874464273452759
-          Best test metric: 0.9760729670524597
-          早停輪數: 35
-          GNN早停輪數: 0
-          耗時: 3.14 秒
-    GNN階段: start
-          Best val metric: 0.9917330145835876
-          Best test metric: 0.9724474549293518
-          早停輪數: 15
-          GNN早停輪數: 0
-          耗時: 1.50 秒
-    GNN階段: materialize
-          Best val metric: 0.9773423075675964
-          Best test metric: 0.958467423915863
-          早停輪數: 17
-          GNN早停輪數: 0
-          耗時: 1.69 秒
-    GNN階段: encoding
-          Best val metric: 0.9880588054656982
-          Best test metric: 0.975866436958313
+          Best val metric: 0.9868340492248535
+          Best test metric: 0.9796712398529053
           早停輪數: 39
           GNN早停輪數: 0
-          耗時: 1.42 秒
-    GNN階段: columnwise
-          Best val metric: 0.9857624173164368
-          Best test metric: 0.9697623252868652
-          早停輪數: 44
+          耗時: 7.44 秒
+    GNN階段: start
+          Best val metric: 0.8857929706573486
+          Best test metric: 0.92438143491745
+          早停輪數: 14
+          GNN早停輪數: 55
+          耗時: 11.86 秒
+    GNN階段: materialize
+          Best val metric: 0.9507042169570923
+          Best test metric: 0.9219571352005005
+          早停輪數: 12
+          GNN早停輪數: 17
+          耗時: 4.80 秒
+    GNN階段: encoding
+          Best val metric: 0.838640570640564
+          Best test metric: 0.8397073745727539
+          早停輪數: 35
           GNN早停輪數: 0
-          耗時: 7.46 秒
+          耗時: 16.64 秒
+    GNN階段: columnwise
+          Best val metric: 0.9846907258033752
+          Best test metric: 0.9796820878982544
+          早停輪數: 36
+          GNN早停輪數: 0
+          耗時: 16.49 秒
     GNN階段: decoding
-          Best val metric: 0.9875994920730591
-          Best test metric: 0.9611905813217163
-          早停輪數: 47
-          GNN早停輪數: 11
-          耗時: 1.60 秒
+          Best val metric: 0.9807103276252747
+          Best test metric: 0.9863895177841187
+          早停輪數: 43
+          GNN早停輪數: 0
+          耗時: 14.98 秒
