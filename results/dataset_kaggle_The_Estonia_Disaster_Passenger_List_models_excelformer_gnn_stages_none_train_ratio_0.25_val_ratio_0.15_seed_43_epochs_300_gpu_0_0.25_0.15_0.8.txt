@@ -1,0 +1,8 @@
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.6492187976837158
+          Best test metric: 0.7397893667221069
+          早停輪數: 21
+          GNN早停輪數: 0
+          耗時: 257.90 秒

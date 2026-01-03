@@ -1,0 +1,7 @@
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: excelformer
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: [Errno 32] Broken pipe
+          耗時: 219.67 秒

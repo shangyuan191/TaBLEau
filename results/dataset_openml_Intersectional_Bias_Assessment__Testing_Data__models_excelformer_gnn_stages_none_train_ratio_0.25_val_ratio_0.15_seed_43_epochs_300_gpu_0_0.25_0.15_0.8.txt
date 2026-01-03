@@ -1,0 +1,8 @@
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.9941349029541016
+          Best test metric: 0.9839684367179871
+          早停輪數: 44
+          GNN早停輪數: 0
+          耗時: 487.65 秒

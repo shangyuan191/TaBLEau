@@ -1,0 +1,7 @@
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: excelformer
+    GNN階段: columnwise
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: [Errno 32] Broken pipe
+          耗時: 559.69 秒

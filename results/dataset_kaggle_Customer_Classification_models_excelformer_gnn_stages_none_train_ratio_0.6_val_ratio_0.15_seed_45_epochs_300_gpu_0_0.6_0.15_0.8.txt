@@ -1,0 +1,8 @@
+dataset: kaggle_Customer_Classification
+  模型: excelformer
+    GNN階段: none
+          Best val metric: 0.592476487159729
+          Best test metric: 0.5375574827194214
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 178.57 秒

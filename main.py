@@ -83,7 +83,7 @@ def parse_args():
                         help='GNN Dropout比率')
     
     # 訓練相關參數
-    parser.add_argument('--epochs', type=int, default=200,
+    parser.add_argument('--epochs', type=int, default=300,
                         help='訓練輪數')
     parser.add_argument('--batch_size', type=int, default=256,
                         help='批次大小')
@@ -305,6 +305,9 @@ def run_experiment(args):
                     # comparison 類型模型沒有 GNN 階段，需要傳入 'none' 作為 gnn_stage 參數
                     result = model_runner.run_model(model_name, train_df, val_df, test_df, dataset_results, experiment_config, model_type, 'none')
                     model_results['none'] = result  # 將結果存儲在 'none' 階段
+                    # 輸出最佳測試指標供 quick_columnwise_run.py 解析
+                    if 'best_test_metric' in result:
+                        print(f"[RESULT] Best test metric: {result['best_test_metric']}")
                 except Exception as e:
                     logger.error(f"運行 {model_name} 模型時出錯: {str(e)}")
                     model_results['none'] = {'error': str(e)}
@@ -321,6 +324,9 @@ def run_experiment(args):
                     try:
                         result = model_runner.run_model(model_name, train_df, val_df, test_df, dataset_results, experiment_config, model_type, gnn_stage)
                         model_results[gnn_stage] = result
+                        # 輸出最佳測試指標供 quick_columnwise_run.py 解析
+                        if 'best_test_metric' in result:
+                            print(f"[RESULT] Best test metric: {result['best_test_metric']}")
                     except Exception as e:
                         logger.error(f"運行 {model_name} 模型的 {gnn_stage} 階段時出錯: {str(e)}")
                         # print(f"運行 {model_name} 模型的 {gnn_stage} 階段時出錯: {str(e)}")
