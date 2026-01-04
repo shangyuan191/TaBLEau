@@ -55,230 +55,115 @@ from torch_geometric.nn import GCNConv
 from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics import roc_auc_score
 import pandas as pd
+import numpy as np
 import math
+import sys
+
+# 引入 DGM 模組
+sys.path.insert(0, '/home/skyler/ModelComparison/DGM_pytorch')
+from DGMlib.layers import DGM_d
+
+# 統一的裝置選擇函式
+def resolve_device(config: dict) -> torch.device:
+    """從 config 選擇 GPU，否則回退到可用裝置"""
+    gpu_id = None
+    try:
+        gpu_id = config.get('gpu', None)
+    except Exception:
+        gpu_id = None
+    if torch.cuda.is_available():
+        if gpu_id is not None:
+            try:
+                device = torch.device(f'cuda:{int(gpu_id)}')
+                print(f"[DEVICE] resolve_device: Using cuda:{int(gpu_id)} (from config['gpu']={gpu_id})")
+                return device
+            except Exception:
+                device = torch.device('cuda')
+                print(f"[DEVICE] resolve_device: Using cuda (default, config['gpu']={gpu_id} invalid)")
+                return device
+        device = torch.device('cuda')
+        print(f"[DEVICE] resolve_device: Using cuda (default, no config['gpu'] specified)")
+        return device
+    print(f"[DEVICE] resolve_device: Using cpu (CUDA not available)")
+    return torch.device('cpu')
+
+def compute_adaptive_dgm_k(num_samples, num_features, dataset_name='', use_config_override=True):
+    """根據數據集規模自動計算最合適的 dgm_k（DGM 候選池大小）"""
+    base_k = int(np.sqrt(num_samples))
+    feature_factor = 1.0 + np.log1p(num_features) / 10
+    adjusted_k = int(base_k * feature_factor)
+    density_factor = 1.0
+    if num_samples < 500:
+        density_factor = 1.3
+    elif num_samples > 5000:
+        density_factor = 0.9
+    adaptive_k = int(adjusted_k * density_factor)
+    upper_limit = min(30, max(15, int(4 * np.sqrt(num_samples))))
+    if num_samples < 1000:
+        upper_limit = min(20, int(3 * np.sqrt(num_samples)))
+    adaptive_k = max(5, min(adaptive_k, upper_limit))
+    print(f"[DGM-K] Adaptive Calculation:")
+    print(f"  - Dataset: {dataset_name if dataset_name else 'unknown'} | N={num_samples}, D={num_features}")
+    print(f"  - Base k (√N): {base_k}")
+    print(f"  - Adaptive k: {adaptive_k} (valid range: [5, {upper_limit}])")
+    return adaptive_k
+
+def _standardize(x: torch.Tensor, dim: int = 0, eps: float = 1e-6) -> torch.Tensor:
+    """沿指定維度做 z-score 標準化"""
+    mean = x.mean(dim=dim, keepdim=True)
+    std = x.std(dim=dim, keepdim=True).clamp_min(eps)
+    return (x - mean) / std
+
+def _symmetrize_and_self_loop(edge_index: torch.Tensor, num_nodes: int) -> torch.Tensor:
+    """對 edge_index 做對稱化並加入自迴路，移除重複邊"""
+    device = edge_index.device
+    rev = torch.stack([edge_index[1], edge_index[0]], dim=0)
+    self_loops = torch.arange(num_nodes, device=device)
+    self_edge = torch.stack([self_loops, self_loops], dim=0)
+    ei = torch.cat([edge_index, rev, self_edge], dim=1)
+    edge_ids = ei[0] * num_nodes + ei[1]
+    unique_ids = torch.unique(edge_ids, sorted=False)
+    ei0 = unique_ids // num_nodes
+    ei1 = unique_ids % num_nodes
+    ei_unique = torch.stack([ei0, ei1], dim=0)
+    return ei_unique
 
 # GNN 相關類和函數
 class SimpleGCN(torch.nn.Module):
-    def __init__(self, in_dim, hidden_dim, out_dim):
+    """簡化的 GCN，用於聯合訓練"""
+    def __init__(self, in_dim, hidden_dim, out_dim, num_layers=2):
         super().__init__()
-        self.conv1 = GCNConv(in_dim, hidden_dim)
-        self.conv2 = GCNConv(hidden_dim, out_dim)
+        self.layers = torch.nn.ModuleList()
+        dims = [in_dim] + [hidden_dim] * (num_layers - 1) + [out_dim]
+        for i in range(len(dims) - 1):
+            self.layers.append(GCNConv(dims[i], dims[i + 1]))
 
     def forward(self, x, edge_index):
-        x = torch.relu(self.conv1(x, edge_index))
-        x = self.conv2(x, edge_index)
+        for i, layer in enumerate(self.layers):
+            x = layer(x, edge_index)
+            if i < len(self.layers) - 1:
+                x = torch.relu(x)
         return x
 
-def knn_graph(x, k):
-    x_np = x.cpu().numpy() if isinstance(x, torch.Tensor) else x
+def knn_graph(x, k, directed=False):
+    """構建 k-NN 圖"""
+    if isinstance(x, torch.Tensor):
+        x_np = x.detach().cpu().numpy()
+    else:
+        x_np = x
     nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
     _, indices = nbrs.kneighbors(x_np)
-    edge_index = []
+    edge_list = []
     N = x_np.shape[0]
     for i in range(N):
         for j in indices[i][1:]:
-            edge_index.append([i, j])
-    edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous()
+            edge_list.append([i, j])
+            if not directed:
+                edge_list.append([j, i])
+    if len(edge_list) == 0:
+        edge_list = [[i, i] for i in range(N)]
+    edge_index = torch.tensor(edge_list, dtype=torch.long).t().contiguous()
     return edge_index
-
-
-def gnn_decoding_eval(train_loader, val_loader, test_loader, config, task_type, metric_computer,
-                      encoders, trompt_convs, trompt_decoder, x_prompt, num_layers, device):
-    """
-    TromPT 的 GNN decoding 評估函數 - 參考 ExcelFormer 模式
-    """
-    print("[TromPT GNN Decoder] Starting evaluation...")
-    
-    def get_all_embeddings_and_targets_trompt(loader, encoders, trompt_convs, x_prompt, num_layers):
-        """提取所有 embeddings 和 targets"""
-        all_embeds, all_targets = [], []
-        
-        # 設置為評估模式
-        for encoder in encoders:
-            encoder.eval()
-        for conv in trompt_convs:
-            conv.eval()
-        
-        with torch.no_grad():
-            for tf in loader:
-                tf = tf.to(device)
-                batch_size = len(tf)
-                
-                # 編碼特徵 - 獲取所有層的輸出
-                layer_outputs = []
-                for encoder in encoders:
-                    x, _ = encoder(tf)  # [batch_size, num_cols, channels]
-                    layer_outputs.append(x)
-                
-                # 拓展提示向量以匹配批次大小
-                x_prompt_batch = x_prompt.repeat(batch_size, 1, 1)
-                
-                # 通過 TromptConv 層進行處理
-                prompts_outputs = []
-                for i in range(num_layers):
-                    x = layer_outputs[i]
-                    if i == 0:
-                        prompt = x_prompt_batch
-                    else:
-                        prompt = prompts_outputs[-1]
-                    
-                    updated_prompt = trompt_convs[i](x, prompt)
-                    prompts_outputs.append(updated_prompt)
-                
-                # 使用最後一層的提示向量作為 embedding
-                final_prompt = prompts_outputs[-1]  # [batch_size, num_prompts, channels]
-                # 展平為 [batch_size, num_prompts * channels]
-                embeddings = final_prompt.reshape(batch_size, -1)
-                
-                all_embeds.append(embeddings.cpu())
-                all_targets.append(tf.y.cpu())
-        
-        if all_embeds:
-            return torch.cat(all_embeds, dim=0), torch.cat(all_targets, dim=0)
-        else:
-            return torch.empty(0, 1), torch.empty(0)
-    
-    # 提取所有 embeddings
-    train_emb, train_y = get_all_embeddings_and_targets_trompt(
-        train_loader, encoders, trompt_convs, x_prompt, num_layers)
-    val_emb, val_y = get_all_embeddings_and_targets_trompt(
-        val_loader, encoders, trompt_convs, x_prompt, num_layers)
-    test_emb, test_y = get_all_embeddings_and_targets_trompt(
-        test_loader, encoders, trompt_convs, x_prompt, num_layers)
-    
-    # 合併所有數據
-    all_emb = torch.cat([train_emb, val_emb, test_emb], dim=0)
-    all_y = torch.cat([train_y, val_y, test_y], dim=0)
-    
-    print(f"[TromPT GNN Decoder] All embeddings shape: {all_emb.shape}, targets: {all_y.shape}")
-    
-    # 轉換為 DataFrame 並建立 GNN
-    all_df = pd.DataFrame(all_emb.numpy())
-    all_df['target'] = all_y.numpy()
-    
-    feature_cols = [c for c in all_df.columns if c != 'target']
-    x = torch.tensor(all_df[feature_cols].values, dtype=torch.float32, device=device)
-    y = all_df['target'].values
-    
-    # 自動計算 num_classes
-    if task_type in ['binclass', 'multiclass']:
-        num_classes = len(pd.unique(y))
-        print(f"[TromPT GNN Decoder] Detected num_classes: {num_classes}")
-    else:
-        num_classes = 1
-    
-    # 標籤處理
-    if task_type == 'binclass':
-        y = torch.tensor(y, dtype=torch.float32, device=device)
-    elif task_type == 'multiclass':
-        y = torch.tensor(y, dtype=torch.long, device=device)
-    else:  # regression
-        y = torch.tensor(y, dtype=torch.float32, device=device)
-    
-    # 建立 KNN 圖
-    k = config.get('gnn_knn', 5)
-    print(f"[TromPT GNN Decoder] Building KNN graph with k={k}")
-    edge_index = knn_graph(x, k).to(device)
-    
-    # 數據分割 mask
-    n_train = len(train_emb)
-    n_val = len(val_emb)
-    n_test = len(test_emb)
-    N = n_train + n_val + n_test
-    
-    train_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    val_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    test_mask = torch.zeros(N, dtype=torch.bool, device=device)
-    
-    train_mask[:n_train] = True
-    val_mask[n_train:n_train+n_val] = True
-    test_mask[n_train+n_val:] = True
-    
-    # 創建 GNN 模型
-    hidden_dim = config.get('gnn_hidden', 64)
-    gnn_epochs = config.get('gnn_epochs', 200)
-    in_dim = x.shape[1]
-    out_dim = 1 if (task_type == 'regression' or task_type == "binclass") else num_classes
-    
-    gnn = SimpleGCN(in_dim, hidden_dim, out_dim).to(device)
-    optimizer = torch.optim.Adam(gnn.parameters(), lr=0.01)
-    
-    # 訓練 GNN
-    gnn.train()
-    best_val_metric = None
-    best_test_metric = None
-    best_val = -float('inf') if (task_type == "binclass" or task_type == "multiclass") else float('inf')
-    is_binary_class = task_type == 'binclass'
-    is_classification = task_type in ['binclass', 'multiclass']
-    best_epoch = 0
-    early_stop_counter = 0
-    patience = config.get('gnn_patience', 10)
-    
-    print(f"[TromPT GNN Decoder] Training GNN for {gnn_epochs} epochs...")
-    
-    for epoch in range(gnn_epochs):
-        optimizer.zero_grad()
-        out = gnn(x, edge_index)
-        
-        # 計算損失
-        if task_type == 'binclass':
-            loss = F.binary_cross_entropy_with_logits(out[train_mask].squeeze(), y[train_mask])
-        elif task_type == 'multiclass':
-            loss = F.cross_entropy(out[train_mask], y[train_mask])
-        else:  # regression
-            loss = F.mse_loss(out[train_mask].squeeze(), y[train_mask])
-        
-        loss.backward()
-        optimizer.step()
-        
-        # 每10個epoch評估一次
-        if (epoch + 1) % 10 == 0:
-            gnn.eval()
-            with torch.no_grad():
-                pred = gnn(x, edge_index)
-                
-                # 計算驗證指標
-                if is_binary_class:
-                    val_probs = torch.sigmoid(pred[val_mask].squeeze())
-                    val_metric = roc_auc_score(y[val_mask].cpu(), val_probs.cpu())
-                    
-                    test_probs = torch.sigmoid(pred[test_mask].squeeze())
-                    test_metric = roc_auc_score(y[test_mask].cpu(), test_probs.cpu())
-                elif is_classification:
-                    val_pred = pred[val_mask].argmax(dim=1)
-                    val_metric = (val_pred == y[val_mask]).float().mean().item()
-                    
-                    test_pred = pred[test_mask].argmax(dim=1)
-                    test_metric = (test_pred == y[test_mask]).float().mean().item()
-                else:
-                    val_metric = F.mse_loss(pred[val_mask].squeeze(), y[val_mask]).sqrt().item()
-                    test_metric = F.mse_loss(pred[test_mask].squeeze(), y[test_mask]).sqrt().item()
-                
-                # 更新最佳指標
-                improved = (val_metric > best_val) if is_classification else (val_metric < best_val)
-                if improved:
-                    best_val = val_metric
-                    best_val_metric = val_metric
-                    best_test_metric = test_metric
-                    best_epoch = epoch + 1
-                    early_stop_counter = 0
-                else:
-                    early_stop_counter += 1
-                
-                print(f'[TromPT GNN Decoder] Epoch {epoch + 1}: Loss: {loss:.4f}, '
-                      f'Val Metric: {val_metric:.4f}, Test Metric: {test_metric:.4f}')
-                
-                # 早停檢查
-                if early_stop_counter >= patience:
-                    print(f"[TromPT GNN Decoder] Early stopping at epoch {epoch + 1}")
-                    break
-            
-            gnn.train()
-    
-    print(f"[TromPT GNN Decoder] Best Val Metric: {best_val_metric:.4f}")
-    print(f"[TromPT GNN Decoder] Best Test Metric: {best_test_metric:.4f}")
-    
-    return best_val_metric, best_test_metric, best_epoch
 
 
 # class Trompt(Module):
@@ -420,31 +305,6 @@ import torch
 from torch_geometric.nn import GCNConv
 from sklearn.neighbors import NearestNeighbors
 import pandas as pd
-
-
-
-class SimpleGCN(torch.nn.Module):
-    def __init__(self, in_dim, hidden_dim, out_dim):
-        super().__init__()
-        self.conv1 = GCNConv(in_dim, hidden_dim)
-        self.conv2 = GCNConv(hidden_dim, out_dim)
-
-    def forward(self, x, edge_index):
-        x = torch.relu(self.conv1(x, edge_index))
-        x = self.conv2(x, edge_index)
-        return x
-
-def knn_graph(x, k):
-    x_np = x.cpu().numpy() if isinstance(x, torch.Tensor) else x
-    nbrs = NearestNeighbors(n_neighbors=k+1, algorithm='auto').fit(x_np)
-    _, indices = nbrs.kneighbors(x_np)
-    edge_index = []
-    N = x_np.shape[0]
-    for i in range(N):
-        for j in indices[i][1:]:
-            edge_index.append([i, j])
-    edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous()
-    return edge_index
 
 
 def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
@@ -791,18 +651,75 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
     x_prompt = Parameter(torch.empty(num_prompts, channels, device=device).normal_(std=0.01))
     torch.nn.init.normal_(x_prompt, std=0.01)
     
-    # 根據 GNN 階段創建 GNN 模型 - 參考 ExcelFormer 模式
+    # GNN 組件初始化（對齊 ExcelFormer）
     gnn = None
-    if gnn_stage in ['encoding', 'columnwise']:
-        class SimpleGCN_INTERNAL(torch.nn.Module):
-            def __init__(self, in_channels, out_channels):
-                super().__init__()
-                self.conv1 = GCNConv(in_channels, out_channels)
-            def forward(self, x, edge_index):
-                return torch.relu(self.conv1(x, edge_index))
+    dgm_module = None
+    self_attn = None
+    self_attn_out = None
+    attn_norm = None
+    attn_out_norm = None
+    column_embed = None
+    pool_query = None
+    gcn_to_attn = None
+    ffn_pre = None
+    ffn_post = None
+    fusion_alpha_param = None
+    gnn_hidden = config.get('gnn_hidden', 64)
+    
+    if gnn_stage in ['encoding', 'columnwise', 'decoding']:
+        # 1. Multi-Head Self-Attention (列間交互)
+        gnn_num_heads = config.get('gnn_num_heads', 4)
+        self_attn = torch.nn.MultiheadAttention(embed_dim=channels, num_heads=gnn_num_heads, batch_first=True).to(device)
+        attn_norm = torch.nn.LayerNorm(channels).to(device)
         
-        gnn = SimpleGCN_INTERNAL(channels, channels).to(device)
-        print(f"[TromPT Core] Created GNN for {gnn_stage} stage")
+        # 2. Column embedding (可學習的列位置編碼)
+        column_embed = torch.nn.Parameter(torch.randn(num_cols, channels, device=device))
+        
+        # 3. Attention pooling query (用於將 self-attention 後的結果聚合為 row-level)
+        pool_query = torch.nn.Parameter(torch.randn(channels, device=device))
+        
+        # 4. DGM_d 動態圖模組
+        dgm_k = config.get('dgm_k', config.get('gnn_knn', 5))
+        dgm_distance = config.get('dgm_distance', 'euclidean')
+        
+        class DGMEmbedWrapper(torch.nn.Module):
+            def forward(self, x, A=None):
+                return x
+        
+        dgm_embed_f = DGMEmbedWrapper()
+        dgm_module = DGM_d(dgm_embed_f, k=dgm_k, distance=dgm_distance).to(device)
+        
+        # 5. Batch GCN
+        if gnn_stage == 'decoding':
+            gnn = SimpleGCN(channels, gnn_hidden, out_channels, num_layers=2).to(device)
+        else:
+            gnn = SimpleGCN(channels, gnn_hidden, channels, num_layers=2).to(device)
+        
+        # 6. Self-Attention 解碼層（encoding/columnwise 需要）
+        if gnn_stage in ['encoding', 'columnwise']:
+            self_attn_out = torch.nn.MultiheadAttention(embed_dim=channels, num_heads=gnn_num_heads, batch_first=True).to(device)
+            gcn_to_attn = torch.nn.Linear(channels, channels).to(device)
+            attn_out_norm = torch.nn.LayerNorm(channels).to(device)
+            gnn_dropout = config.get('gnn_dropout', 0.1)
+            ffn_pre = torch.nn.Sequential(
+                torch.nn.Linear(channels, channels * 2),
+                torch.nn.GELU(),
+                torch.nn.Dropout(gnn_dropout),
+                torch.nn.Linear(channels * 2, channels),
+            ).to(device)
+            ffn_post = torch.nn.Sequential(
+                torch.nn.Linear(channels, channels * 2),
+                torch.nn.GELU(),
+                torch.nn.Dropout(gnn_dropout),
+                torch.nn.Linear(channels * 2, channels),
+            ).to(device)
+            # 7. 可學習的融合權重
+            fusion_alpha_param = torch.nn.Parameter(torch.tensor(-0.847, device=device))
+        
+        print(f"[TromPT Core] Created complete GNN pipeline for {gnn_stage} stage:")
+        print(f"  - Multi-Head Self-Attention (heads={gnn_num_heads})")
+        print(f"  - DGM_d (k={dgm_k}, distance={dgm_distance})")
+        print(f"  - Batch GCN (input={channels}, hidden={gnn_hidden}, output={out_channels if gnn_stage=='decoding' else channels})")
     
     # 創建多層編碼器
     encoders = ModuleList()
@@ -847,32 +764,51 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
             if debug:
                 print(f"[TromPT] Layer {i} encoder output: {x.shape}")
             
-            # Stage: encoding GNN 處理 - 參考 ExcelFormer 模式
-            if gnn_stage == 'encoding' and gnn is not None and i == 0:  # 只在第一層應用 encoding GNN
+            # Stage: encoding GNN 處理 - 完整的 Self-Attention + DGM 管線
+            if gnn_stage == 'encoding' and dgm_module is not None and i == 0:  # 只在第一層應用 encoding GNN
                 if x.dim() == 3 and batch_size > 1:
-                    batch_size_inner, num_cols_inner, channels_inner = x.shape
-                    # 參考 ExcelFormer: 重塑為 [batch_size * num_cols, channels]
-                    x_reshape = x.view(-1, channels_inner)
+                    # Step 1: Self-Attention 列間交互
+                    tokens = x + column_embed.unsqueeze(0)  # [batch, num_cols, channels]
+                    tokens_norm = attn_norm(tokens)
+                    attn_out1, _ = self_attn(tokens_norm, tokens_norm, tokens_norm)
+                    tokens_attn = tokens + attn_out1
+                    # FFN + 殘差
+                    ffn_out1 = ffn_pre(attn_norm(tokens_attn))
+                    tokens_attn = tokens_attn + ffn_out1
                     
-                    # 建立全連接邊 (每個批次內所有節點互連)
-                    row = torch.arange(num_cols_inner).repeat(num_cols_inner, 1).view(-1)
-                    col = torch.arange(num_cols_inner).repeat(1, num_cols_inner).view(-1)
-                    edge_index_single = torch.stack([row, col], dim=0)
-                    edge_index = []
-                    for b in range(batch_size_inner):
-                        offset = b * num_cols_inner
-                        edge_index.append(edge_index_single + offset)
-                    edge_index = torch.cat(edge_index, dim=1).to(x.device)
+                    # Step 2: Attention Pooling [batch, num_cols, channels] → [batch, channels]
+                    pool_logits = (tokens_attn * pool_query).sum(dim=-1) / math.sqrt(channels)
+                    pool_weights = torch.softmax(pool_logits, dim=1)
+                    x_pooled = (pool_weights.unsqueeze(-1) * tokens_attn).sum(dim=1)
                     
-                    # 應用 GNN
-                    try:
-                        x_gnn = gnn(x_reshape, edge_index)
-                        x = x_gnn.view(batch_size_inner, num_cols_inner, channels_inner)
-                        if debug:
-                            print(f"[TromPT] After encoding GNN (layer {i}): {x.shape}")
-                    except Exception as e:
-                        if debug:
-                            print(f"[TromPT] GNN failed for layer {i}: {e}")
+                    # Step 3: Mini-batch DGM 動態建圖
+                    x_pooled_std = _standardize(x_pooled, dim=0)
+                    x_pooled_batched = x_pooled_std.unsqueeze(0)
+                    if hasattr(dgm_module, 'k'):
+                        Ns_enc = x_pooled_batched.shape[1]
+                        dgm_module.k = int(min(int(dgm_module.k), max(1, Ns_enc - 1)))
+                    x_dgm, edge_index_dgm, logprobs_dgm = dgm_module(x_pooled_batched, A=None)
+                    x_dgm = x_dgm.squeeze(0)
+                    edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, x_dgm.shape[0])
+                    
+                    # Step 4: Batch GCN 處理
+                    x_gnn_out = gnn(x_dgm, edge_index_dgm)
+                    
+                    # Step 5: Self-Attention 解碼
+                    gcn_ctx = gcn_to_attn(x_gnn_out).unsqueeze(1)
+                    tokens_with_ctx = tokens_attn + gcn_ctx
+                    tokens_ctx_norm = attn_out_norm(tokens_with_ctx)
+                    attn_out2, _ = self_attn_out(tokens_ctx_norm, tokens_ctx_norm, tokens_ctx_norm)
+                    tokens_mid = tokens_with_ctx + attn_out2
+                    ffn_out2 = ffn_post(attn_out_norm(tokens_mid))
+                    tokens_out = tokens_mid + ffn_out2
+                    
+                    # Step 6: 殘差融合
+                    fusion_alpha = torch.sigmoid(fusion_alpha_param)
+                    x = x + fusion_alpha * tokens_out
+                    
+                    if debug:
+                        print(f"[TromPT] After encoding GNN (layer {i}): {x.shape}")
             
             layer_outputs.append(x)
         
@@ -917,33 +853,56 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
             if debug:
                 print(f"[TromPT] Layer {i} TromptConv output: {updated_prompt.shape}")
             
-            # Stage: columnwise GNN 處理 - 參考 ExcelFormer 模式  
-            if gnn_stage == 'columnwise' and gnn is not None:
-                # 對提示向量應用 GNN (將提示向量看作節點特徵)
+            # Stage: columnwise GNN 處理 - 完整的 Self-Attention + DGM 管線
+            if gnn_stage == 'columnwise' and dgm_module is not None:
+                # 對提示向量應用完整的 GNN pipeline
                 if updated_prompt.dim() == 3 and batch_size > 1:
-                    batch_size_inner, num_prompts_inner, channels_inner = updated_prompt.shape
-                    # 重塑為 [batch_size * num_prompts, channels]
-                    prompt_reshape = updated_prompt.view(-1, channels_inner)
+                    # 獲取 updated_prompt 的維度信息
+                    _, num_prompts_inner, channels_inner = updated_prompt.shape
                     
-                    # 建立全連接邊
-                    row = torch.arange(num_prompts_inner).repeat(num_prompts_inner, 1).view(-1)
-                    col = torch.arange(num_prompts_inner).repeat(1, num_prompts_inner).view(-1)
-                    edge_index_single = torch.stack([row, col], dim=0)
-                    edge_index = []
-                    for b in range(batch_size_inner):
-                        offset = b * num_prompts_inner
-                        edge_index.append(edge_index_single + offset)
-                    edge_index = torch.cat(edge_index, dim=1).to(updated_prompt.device)
+                    # Step 1: Self-Attention 列間交互（對 prompts）
+                    # 這裡 prompts 相當於 columns
+                    tokens = updated_prompt + column_embed[:num_prompts_inner].unsqueeze(0) if num_prompts_inner <= num_cols else updated_prompt
+                    tokens_norm = attn_norm(tokens)
+                    attn_out1, _ = self_attn(tokens_norm, tokens_norm, tokens_norm)
+                    tokens_attn = tokens + attn_out1
+                    # FFN + 殘差
+                    ffn_out1 = ffn_pre(attn_norm(tokens_attn))
+                    tokens_attn = tokens_attn + ffn_out1
                     
-                    # 應用 GNN
-                    try:
-                        prompt_gnn = gnn(prompt_reshape, edge_index)
-                        updated_prompt = prompt_gnn.view(batch_size_inner, num_prompts_inner, channels_inner)
-                        if debug:
-                            print(f"[TromPT] After columnwise GNN (layer {i}): {updated_prompt.shape}")
-                    except Exception as e:
-                        if debug:
-                            print(f"[TromPT] Columnwise GNN failed for layer {i}: {e}")
+                    # Step 2: Attention Pooling
+                    pool_logits = (tokens_attn * pool_query).sum(dim=-1) / math.sqrt(channels_inner)
+                    pool_weights = torch.softmax(pool_logits, dim=1)
+                    prompt_pooled = (pool_weights.unsqueeze(-1) * tokens_attn).sum(dim=1)
+                    
+                    # Step 3: Mini-batch DGM 動態建圖
+                    prompt_pooled_std = _standardize(prompt_pooled, dim=0)
+                    prompt_pooled_batched = prompt_pooled_std.unsqueeze(0)
+                    if hasattr(dgm_module, 'k'):
+                        Ns_col = prompt_pooled_batched.shape[1]
+                        dgm_module.k = int(min(int(dgm_module.k), max(1, Ns_col - 1)))
+                    prompt_dgm, edge_index_dgm, logprobs_dgm = dgm_module(prompt_pooled_batched, A=None)
+                    prompt_dgm = prompt_dgm.squeeze(0)
+                    edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, prompt_dgm.shape[0])
+                    
+                    # Step 4: Batch GCN 處理
+                    prompt_gnn_out = gnn(prompt_dgm, edge_index_dgm)
+                    
+                    # Step 5: Self-Attention 解碼
+                    gcn_ctx = gcn_to_attn(prompt_gnn_out).unsqueeze(1)
+                    tokens_with_ctx = tokens_attn + gcn_ctx
+                    tokens_ctx_norm = attn_out_norm(tokens_with_ctx)
+                    attn_out2, _ = self_attn_out(tokens_ctx_norm, tokens_ctx_norm, tokens_ctx_norm)
+                    tokens_mid = tokens_with_ctx + attn_out2
+                    ffn_out2 = ffn_post(attn_out_norm(tokens_mid))
+                    tokens_out = tokens_mid + ffn_out2
+                    
+                    # Step 6: 殘差融合
+                    fusion_alpha = torch.sigmoid(fusion_alpha_param)
+                    updated_prompt = updated_prompt + fusion_alpha * tokens_out
+                    
+                    if debug:
+                        print(f"[TromPT] After columnwise GNN (layer {i}): {updated_prompt.shape}")
             
             prompts_outputs.append(updated_prompt)
         
@@ -995,23 +954,123 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
     # 定義前向傳播函數 - 平均版本
     def forward(tf, debug=False):
         """
-        前向傳播 - 返回所有層預測結果的平均
+        前向傳播 - 返回所有層預測結果的平均（或 decoding 階段的 GCN 輸出）
         """
-        stacked_out = forward_stacked(tf, debug=debug)
-        return stacked_out.mean(dim=1)
+        # Decoding 階段：使用 GCN 作為 decoder
+        if gnn_stage == 'decoding' and dgm_module is not None:
+            # 編碼特徵
+            encoded_features, batch_size = encode_batch(tf, debug=debug)
+            
+            # 通過TromptConv進行列間交互
+            prompts_outputs = process_batch_interaction(encoded_features, batch_size, debug=debug)
+            
+            # 使用最後一層的 prompts
+            final_prompts = prompts_outputs[-1]  # [batch, num_prompts, channels]
+            
+            # Step 1: Self-Attention 列間交互
+            tokens = final_prompts + column_embed[:num_prompts].unsqueeze(0) if num_prompts <= num_cols else final_prompts
+            tokens_norm = attn_norm(tokens)
+            attn_out1, _ = self_attn(tokens_norm, tokens_norm, tokens_norm)
+            tokens_attn = tokens + attn_out1
+            
+            # Step 2: Attention Pooling
+            pool_logits = (tokens_attn * pool_query).sum(dim=-1) / math.sqrt(channels)
+            pool_weights = torch.softmax(pool_logits, dim=1)
+            x_pooled = (pool_weights.unsqueeze(-1) * tokens_attn).sum(dim=1)
+            
+            # Step 3: Mini-batch DGM 動態建圖
+            x_pooled_std = _standardize(x_pooled, dim=0)
+            x_pooled_batched = x_pooled_std.unsqueeze(0)
+            if hasattr(dgm_module, 'k'):
+                Ns_dec = x_pooled_batched.shape[1]
+                dgm_module.k = int(min(int(dgm_module.k), max(1, Ns_dec - 1)))
+            x_dgm, edge_index_dgm, logprobs_dgm = dgm_module(x_pooled_batched, A=None)
+            x_dgm = x_dgm.squeeze(0)
+            edge_index_dgm = _symmetrize_and_self_loop(edge_index_dgm, x_dgm.shape[0])
+            
+            # Step 4: Batch GCN 作為 Decoder 直接輸出預測
+            out = gnn(x_dgm, edge_index_dgm)  # [batch, out_channels]
+            
+            if debug:
+                print(f"[TromPT] Decoding GCN output: {out.shape}")
+            
+            return out
+        else:
+            # 其他階段：使用標準 TromPT decoder
+            stacked_out = forward_stacked(tf, debug=debug)
+            return stacked_out.mean(dim=1)
     
     # 設置優化器和學習率調度器
     lr = config.get('lr', 0.001)
     
-    # 收集所有參數 - 包括 GNN 參數
+    # 收集所有參數 - 包括 GNN 參數（對齊 ExcelFormer）
     all_params = [x_prompt] + \
                  [p for encoder in encoders for p in encoder.parameters()] + \
                  [p for conv in trompt_convs for p in conv.parameters()] + \
                  list(trompt_decoder.parameters())
     
-    # 只在需要時添加 GNN 參數
+    # 添加 GNN 組件參數（根據階段）
     if gnn is not None:
         all_params.extend(list(gnn.parameters()))
+    if dgm_module is not None:
+        all_params.extend(list(dgm_module.parameters()))
+    
+    # encoding 階段的額外組件
+    if gnn_stage == 'encoding':
+        if self_attn is not None:
+            all_params.extend(list(self_attn.parameters()))
+        if attn_norm is not None:
+            all_params.extend(list(attn_norm.parameters()))
+        if self_attn_out is not None:
+            all_params.extend(list(self_attn_out.parameters()))
+        if attn_out_norm is not None:
+            all_params.extend(list(attn_out_norm.parameters()))
+        if column_embed is not None:
+            all_params.append(column_embed)
+        if gcn_to_attn is not None:
+            all_params.extend(list(gcn_to_attn.parameters()))
+        if ffn_pre is not None:
+            all_params.extend(list(ffn_pre.parameters()))
+        if ffn_post is not None:
+            all_params.extend(list(ffn_post.parameters()))
+        if pool_query is not None:
+            all_params.append(pool_query)
+        if fusion_alpha_param is not None:
+            all_params.append(fusion_alpha_param)
+    
+    # decoding 階段的額外組件
+    elif gnn_stage == 'decoding':
+        if self_attn is not None:
+            all_params.extend(list(self_attn.parameters()))
+        if attn_norm is not None:
+            all_params.extend(list(attn_norm.parameters()))
+        if column_embed is not None:
+            all_params.append(column_embed)
+        if pool_query is not None:
+            all_params.append(pool_query)
+    
+    # columnwise 階段的額外組件
+    elif gnn_stage == 'columnwise':
+        if self_attn is not None:
+            all_params.extend(list(self_attn.parameters()))
+        if attn_norm is not None:
+            all_params.extend(list(attn_norm.parameters()))
+        if self_attn_out is not None:
+            all_params.extend(list(self_attn_out.parameters()))
+        if attn_out_norm is not None:
+            all_params.extend(list(attn_out_norm.parameters()))
+        if column_embed is not None:
+            all_params.append(column_embed)
+        if gcn_to_attn is not None:
+            all_params.extend(list(gcn_to_attn.parameters()))
+        if ffn_pre is not None:
+            all_params.extend(list(ffn_pre.parameters()))
+        if ffn_post is not None:
+            all_params.extend(list(ffn_post.parameters()))
+        if pool_query is not None:
+            all_params.append(pool_query)
+        if fusion_alpha_param is not None:
+            all_params.append(fusion_alpha_param)
     
     optimizer = torch.optim.Adam(all_params, lr=lr)
     lr_scheduler = ExponentialLR(optimizer, gamma=0.95)
@@ -1025,9 +1084,52 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
             conv.train()
         trompt_decoder.train()
         
-        # 設置 GNN 為訓練模式
+        # 設置 GNN 組件為訓練模式（對齊 ExcelFormer）
         if gnn is not None:
             gnn.train()
+        if dgm_module is not None:
+            dgm_module.train()
+        
+        # encoding 階段的額外組件
+        if gnn_stage == 'encoding':
+            if self_attn is not None:
+                self_attn.train()
+            if attn_norm is not None:
+                attn_norm.train()
+            if self_attn_out is not None:
+                self_attn_out.train()
+            if attn_out_norm is not None:
+                attn_out_norm.train()
+            if gcn_to_attn is not None:
+                gcn_to_attn.train()
+            if ffn_pre is not None:
+                ffn_pre.train()
+            if ffn_post is not None:
+                ffn_post.train()
+        
+        # decoding 階段的額外組件
+        elif gnn_stage == 'decoding':
+            if self_attn is not None:
+                self_attn.train()
+            if attn_norm is not None:
+                attn_norm.train()
+        
+        # columnwise 階段的額外組件
+        elif gnn_stage == 'columnwise':
+            if self_attn is not None:
+                self_attn.train()
+            if attn_norm is not None:
+                attn_norm.train()
+            if self_attn_out is not None:
+                self_attn_out.train()
+            if attn_out_norm is not None:
+                attn_out_norm.train()
+            if gcn_to_attn is not None:
+                gcn_to_attn.train()
+            if ffn_pre is not None:
+                ffn_pre.train()
+            if ffn_post is not None:
+                ffn_post.train()
         
         loss_accum = total_count = 0
         first_batch = True
@@ -1037,19 +1139,14 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
             
             # 只在第一個epoch的第一個batch啟用調試
             debug = (epoch == 1 and first_batch and gnn_stage in ['encoding', 'columnwise'])
-            
-            # 使用分層前向傳播
-            out = forward_stacked(tf, debug=debug)
             first_batch = False
             
-            # 準備標籤和預測值
+            # 所有階段都使用 forward()（平均輸出），保證訓練和評估一致性
+            pred = forward(tf, debug=debug)
+            y = tf.y
             batch_size = len(tf)
-            # 展平為[batch_size * num_layers, out_channels]
-            pred = out.view(-1, out_channels)
-            # 對標籤進行重複以匹配每一層的預測
-            y = tf.y.repeat_interleave(num_layers)
             
-            # 計算多層邏輯損失
+            # 計算損失（使用平均層輸出，與評估邏輯一致）
             if is_classification:
                 loss = F.cross_entropy(pred, y)
             else:
@@ -1073,9 +1170,52 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
             conv.eval()
         trompt_decoder.eval()
         
-        # 設置 GNN 為評估模式
+        # 設置 GNN 組件為評估模式（對齊 ExcelFormer）
         if gnn is not None:
             gnn.eval()
+        if dgm_module is not None:
+            dgm_module.eval()
+        
+        # encoding 階段的額外組件
+        if gnn_stage == 'encoding':
+            if self_attn is not None:
+                self_attn.eval()
+            if attn_norm is not None:
+                attn_norm.eval()
+            if self_attn_out is not None:
+                self_attn_out.eval()
+            if attn_out_norm is not None:
+                attn_out_norm.eval()
+            if gcn_to_attn is not None:
+                gcn_to_attn.eval()
+            if ffn_pre is not None:
+                ffn_pre.eval()
+            if ffn_post is not None:
+                ffn_post.eval()
+        
+        # decoding 階段的額外組件
+        elif gnn_stage == 'decoding':
+            if self_attn is not None:
+                self_attn.eval()
+            if attn_norm is not None:
+                attn_norm.eval()
+        
+        # columnwise 階段的額外組件
+        elif gnn_stage == 'columnwise':
+            if self_attn is not None:
+                self_attn.eval()
+            if attn_norm is not None:
+                attn_norm.eval()
+            if self_attn_out is not None:
+                self_attn_out.eval()
+            if attn_out_norm is not None:
+                attn_out_norm.eval()
+            if gcn_to_attn is not None:
+                gcn_to_attn.eval()
+            if ffn_pre is not None:
+                ffn_pre.eval()
+            if ffn_post is not None:
+                ffn_post.eval()
         
         metric_computer.reset()
         
@@ -1097,160 +1237,88 @@ def trompt_core_fn(material_outputs, config, task_type, gnn_stage='start'):
         else:
             return metric_computer.compute().item()**0.5
     
-    # 如果是 decoding 階段，使用 GNN decoding 評估
-    if gnn_stage == 'decoding':
-        print("[TromPT Core] Training standard TromPT for decoding evaluation...")
-        
-        # 訓練標準 TromPT 模型
-        epochs = config.get('epochs', 300)
-        patience = config.get('patience', 10)
-        
-        # 初始化最佳指標
-        if is_classification:
-            best_val_metric = 0
-            best_test_metric = 0
-        else:
-            best_val_metric = float('inf')
-            best_test_metric = float('inf')
-        
-        best_epoch = 0
-        early_stop_counter = 0
-        
-        # 簡化的訓練循環
-        for epoch in range(1, min(epochs, 20) + 1):  # 減少訓練輪數以便快速提取特徵
-            train_loss = train(epoch)
-            val_metric = test(val_loader)
-            
-            improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
-            if improved:
-                best_val_metric = val_metric
-                best_epoch = epoch
-                early_stop_counter = 0
-            else:
-                early_stop_counter += 1
-            
-            print(f'[TromPT Core] Epoch {epoch}: Train Loss: {train_loss:.4f}, Val {metric}: {val_metric:.4f}')
-            
-            lr_scheduler.step()
-            
-            if early_stop_counter >= patience:
-                print(f"[TromPT Core] Early stopping at epoch {epoch}")
-                break
-        
-        print(f"[TromPT Core] Standard model trained. Best Val: {best_val_metric:.4f}")
-        
-        # 使用訓練好的模型進行 GNN decoding 評估
-        print("[TromPT Core] Starting GNN decoding evaluation...")
-        
-        # 為 decoding 階段優化配置
-        config.update({
-            'gnn_max_samples': 3000,
-            'gnn_knn': 5,
-            'gnn_lr': 0.001,
-            'gnn_epochs': 100,
-            'gnn_patience': 10,
-            'gnn_hidden': 128
-        })
-        
-        gnn_val_metric, gnn_test_metric, gnn_epochs = gnn_decoding_eval(
-            train_loader, val_loader, test_loader, config, task_type, metric_computer,
-            encoders, trompt_convs, trompt_decoder, x_prompt, num_layers, device
-        )
-        
-        return {
-            'train_losses': [],
-            'train_metrics': [],
-            'val_metrics': [],
-            'best_val_metric': gnn_val_metric,
-            'final_metric': gnn_val_metric,
-            'best_test_metric': gnn_test_metric,
-            'train_loader': train_loader,
-            'val_loader': val_loader,
-            'test_loader': test_loader,
-            'is_classification': is_classification,
-            'is_binary_class': is_binary_class,
-            'metric_computer': metric_computer,
-            'metric': metric,
-            'early_stop_epochs': gnn_epochs,
-            'gnn_early_stop_epochs': gnn_epochs,
-            'model_type': 'trompt_decoding_gnn',
-            'standard_val_metric': best_val_metric,
-        }
-    
-    # 標準訓練流程（用於 none, encoding, columnwise 階段）
+    # 標準訓練流程（用於所有 GNN 階段，包括 decoding）
+    # decoding 階段已在 forward() 函數中實現（使用 GNN as Decoder）
+    # 初始化最佳指標
+    if is_classification:
+        best_val_metric = -float('inf')  # Classification metrics are maximized
+        best_test_metric = -float('inf')
     else:
-        # 初始化最佳指標
-        if is_classification:
-            best_val_metric = 0
-            best_test_metric = 0
+        best_val_metric = float('inf')  # Regression metrics (RMSE) are minimized
+        best_test_metric = float('inf')
+    
+    # 記錄訓練過程
+    train_losses = []
+    train_metrics = []
+    val_metrics = []
+    test_metrics = []
+    
+    # 訓練循環
+    epochs = config.get('epochs', 300)
+    patience = config.get('patience', 10)
+    early_stop_counter = 0
+    best_epoch = 0
+    stopped_epoch = epochs  # 預設停止在最後一個 epoch
+    
+    for epoch in range(1, epochs + 1):
+        train_loss = train(epoch)
+        train_metric = test(train_loader)
+        val_metric = test(val_loader)
+        test_metric = test(test_loader)
+        
+        train_losses.append(train_loss)
+        train_metrics.append(train_metric)
+        val_metrics.append(val_metric)
+        test_metrics.append(test_metric)
+        
+        improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
+        if improved:
+            best_val_metric = val_metric
+            best_test_metric = test_metric
+            best_epoch = epoch
+            early_stop_counter = 0
+            improvement_marker = "✓"
         else:
-            best_val_metric = float('inf')
-            best_test_metric = float('inf')
+            early_stop_counter += 1
+            improvement_marker = "✗"
         
-        # 記錄訓練過程
-        train_losses = []
-        train_metrics = []
-        val_metrics = []
-        test_metrics = []
+        print(f'[TromPT Core] Epoch {epoch:3d} {improvement_marker} | Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
+              f'Val {metric}: {val_metric:.4f}, Test {metric}: {test_metric:.4f} | Early Stop: {early_stop_counter}/{patience}')
         
-        # 訓練循環
-        epochs = config.get('epochs', 300)
-        patience = config.get('patience', 10)
-        early_stop_counter = 0
-        best_epoch = 0
+        # 學習率調整
+        lr_scheduler.step()
         
-        for epoch in range(1, epochs + 1):
-            train_loss = train(epoch)
-            train_metric = test(train_loader)
-            val_metric = test(val_loader)
-            test_metric = test(test_loader)
-            
-            train_losses.append(train_loss)
-            train_metrics.append(train_metric)
-            val_metrics.append(val_metric)
-            test_metrics.append(test_metric)
-            
-            improved = (val_metric > best_val_metric) if is_classification else (val_metric < best_val_metric)
-            if improved:
-                best_val_metric = val_metric
-                best_test_metric = test_metric
-                best_epoch = epoch
-                early_stop_counter = 0
-            else:
-                early_stop_counter += 1
-            
-            print(f'[TromPT Core] Train Loss: {train_loss:.4f}, Train {metric}: {train_metric:.4f}, '
-                  f'Val {metric}: {val_metric:.4f}, Test {metric}: {test_metric:.4f}')
-            
-            # 學習率調整
-            lr_scheduler.step()
-            
-            if early_stop_counter >= patience:
-                print(f"[TromPT Core] Early stopping at epoch {epoch}")
-                break
+        if early_stop_counter >= patience:
+            stopped_epoch = epoch  # 記錄停止的 epoch 編號
+            print(f"[TromPT Core] Early stopping at epoch {epoch}")
+            break
         
         print(f'[TromPT Core] Best Val {metric}: {best_val_metric:.4f}, '
               f'Best Test {metric}: {best_test_metric:.4f}')
-        
-        return {
-            'train_losses': train_losses,
-            'train_metrics': train_metrics,
-            'val_metrics': val_metrics,
-            'test_metrics': test_metrics,
-            'best_val_metric': best_val_metric,
-            'final_metric': best_val_metric,
-            'best_test_metric': best_test_metric,
-            'train_loader': train_loader,
-            'val_loader': val_loader,
-            'test_loader': test_loader,
-            'is_classification': is_classification,
-            'is_binary_class': is_binary_class,
-            'metric_computer': metric_computer,
-            'metric': metric,
-            'early_stop_epochs': 0,
-            'gnn_early_stop_epochs': 0,
-            'model_type': f'trompt_{gnn_stage}_gnn' if gnn_stage != 'none' else 'standard_trompt'
-        }
+    
+    # 訓練完成，返回結果
+    return {
+        'train_losses': train_losses,
+        'train_metrics': train_metrics,
+        'val_metrics': val_metrics,
+        'test_metrics': test_metrics,
+        'best_val_metric': best_val_metric,
+        'final_metric': best_val_metric,
+        'best_test_metric': best_test_metric,
+        'train_loader': train_loader,
+        'val_loader': val_loader,
+        'test_loader': test_loader,
+        'is_classification': is_classification,
+        'is_binary_class': is_binary_class,
+        'metric_computer': metric_computer,
+        'metric': metric,
+        'stopped_epoch': stopped_epoch,  # 訓練停止的 epoch 編號
+        'early_stop_counter': early_stop_counter,  # 沒有改進的連續 epoch 數（距離最佳的輪數）
+        'best_epoch': best_epoch,  # 最佳驗證指標出現的 epoch
+        'early_stop_epochs': stopped_epoch,  # 早停輪數（用於結果報告）
+        'gnn_early_stop_epochs': material_outputs.get('gnn_early_stop_epochs', 0),
+        'model_type': f'trompt_{gnn_stage}_gnn' if gnn_stage != 'none' else 'standard_trompt'
+    }
     
     # 設置優化器和學習率調度器
     lr = config.get('lr', 0.001)

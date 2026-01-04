@@ -1,0 +1,168 @@
+dataset: openml_Diabetes_Data_Set
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8716666666666666
+          Best test metric: 0.8051279069767442
+          耗時: 1.28 秒
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: dgm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.98765625
+          耗時: 0.21 秒
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9905660377358492
+          Best test metric: 0.985890580008227
+          耗時: 0.20 秒
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9877199413489736
+          Best test metric: 0.9845132172791747
+          耗時: 0.22 秒
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7522580645161291
+          Best test metric: 0.7262112859127784
+          耗時: 0.19 秒
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8657670454545455
+          Best test metric: 0.8412516219183551
+          耗時: 0.19 秒
+dataset: openml_nki70.arff
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7346938775510203
+          Best test metric: 0.6843156843156843
+          耗時: 0.19 秒
+dataset: kaggle_Penguins_Classified
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9655172413793104
+          Best test metric: 0.975037257824143
+          耗時: 0.20 秒
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6153846153846154
+          Best test metric: 0.351010101010101
+          耗時: 0.40 秒
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7277992277992278
+          Best test metric: 0.4995552514539856
+          耗時: 0.23 秒
+dataset: UCI_Audit_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9856093080220453
+          Best test metric: 0.9883354350567466
+          耗時: 0.24 秒
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.845679012345679
+          Best test metric: 0.85791015625
+          耗時: 0.25 秒
+dataset: openml_Pima_Indians_Diabetes
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8716666666666666
+          Best test metric: 0.8051279069767442
+          耗時: 0.23 秒
+dataset: UCI_User_Knowledge_Modeling
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6893491124260355
+          Best test metric: 0.6495443247721624
+          耗時: 0.24 秒
+dataset: kaggle_Real_Estate_DataSet
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.884375
+          Best test metric: 0.8702973449593416
+          耗時: 0.25 秒
+dataset: kaggle_fitbit_dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8700854700854701
+          Best test metric: 0.7831152346701321
+          耗時: 0.25 秒
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.4855371900826446
+          Best test metric: 0.41075215608652627
+          耗時: 0.25 秒
+dataset: openml_analcatdata_lawsuit
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7314814814814815
+          Best test metric: 0.761590524534687
+          耗時: 0.25 秒
+dataset: kaggle_Development_Index
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8642857142857143
+          Best test metric: 0.8188396433647759
+          耗時: 0.25 秒
+dataset: openml_hungarian
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9375
+          Best test metric: 0.8712115309700039
+          耗時: 0.23 秒
+dataset: openml_Pokmon_Legendary_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8354545454545454
+          Best test metric: 0.8391636141636142
+          耗時: 0.19 秒
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8226666666666667
+          Best test metric: 0.8033023255813952
+          耗時: 0.19 秒
+dataset: kaggle_Audit_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9856093080220454
+          Best test metric: 0.9883354350567466
+          耗時: 0.19 秒
+dataset: kaggle_chronic_kidney_disease
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.978468899521531
+          Best test metric: 0.9909583333333334
+          耗時: 0.19 秒
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.525
+          Best test metric: 0.641923436041083
+          耗時: 0.22 秒
+dataset: openml_tokyo1
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.963628762541806
+          Best test metric: 0.9686339673693266
+          耗時: 0.25 秒
+dataset: kaggle_Compositions_of_Glass
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8268398268398269
+          Best test metric: 0.5853640525771674
+          耗時: 0.23 秒
+dataset: UCI_HCV_data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8189300411522633
+          Best test metric: 0.8198890311566369
+          耗時: 0.24 秒

@@ -1,38 +1,32 @@
 dataset: kaggle_Audit_Data
   模型: tabtransformer
     GNN階段: none
-          Best val metric: 0.8839558959007263
-          Best test metric: 0.8933230638504028
-          早停輪數: 0
-          GNN早停輪數: 0
-          耗時: 3.13 秒
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'materialize_fn' is not defined
+          耗時: 0.24 秒
     GNN階段: start
-          Best val metric: 0.6974892616271973
-          Best test metric: 0.6034971475601196
-          早停輪數: 0
-          GNN早停輪數: 0
-          耗時: 1.33 秒
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'materialize_fn' is not defined
+          耗時: 0.70 秒
     GNN階段: materialize
-          Best val metric: 0.5842008590698242
-          Best test metric: 0.6600698232650757
-          早停輪數: 0
-          GNN早停輪數: 0
-          耗時: 1.07 秒
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'materialize_fn' is not defined
+          耗時: 0.00 秒
     GNN階段: encoding
-          Best val metric: 0.9194732904434204
-          Best test metric: 0.9106404781341553
-          早停輪數: 0
-          GNN早停輪數: 0
-          耗時: 0.64 秒
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'materialize_fn' is not defined
+          耗時: 0.00 秒
     GNN階段: columnwise
-          Best val metric: 0.8707899451255798
-          Best test metric: 0.865797758102417
-          早停輪數: 0
-          GNN早停輪數: 0
-          耗時: 0.58 秒
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'materialize_fn' is not defined
+          耗時: 0.00 秒
     GNN階段: decoding
-          Best val metric: 0.9669320269442744
-          Best test metric: 0.9437154846284297
-          早停輪數: 0
-          GNN早停輪數: 0
-          耗時: 1.63 秒
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: name 'materialize_fn' is not defined
+          耗時: 0.00 秒

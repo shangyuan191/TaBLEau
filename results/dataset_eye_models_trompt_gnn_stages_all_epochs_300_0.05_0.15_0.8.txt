@@ -1,0 +1,38 @@
+dataset: eye
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.37355270981788635
+          Best test metric: 0.3831295073032379
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 6.37 秒
+    GNN階段: start
+          Best val metric: 0.4040219485759735
+          Best test metric: 0.4002743065357208
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 7.48 秒
+    GNN階段: materialize
+          Best val metric: 0.39366239309310913
+          Best test metric: 0.39158761501312256
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 9.69 秒
+    GNN階段: encoding
+          Best val metric: 0.45216330885887146
+          Best test metric: 0.4392502009868622
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 5.79 秒
+    GNN階段: columnwise
+          Best val metric: 0.4271785616874695
+          Best test metric: 0.4261058270931244
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 8.60 秒
+    GNN階段: decoding
+          Best val metric: 0.37477147579193115
+          Best test metric: 0.37307119369506836
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 5.60 秒

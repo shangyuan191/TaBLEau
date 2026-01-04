@@ -1,0 +1,6 @@
+dataset: helena
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.17924335378323109
+          Best test metric: 0.18168222865578926
+          耗時: 157.37 秒

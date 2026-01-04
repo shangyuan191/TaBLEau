@@ -8,12 +8,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| columnwise | 59.65 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| none | 60.69 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| decoding | 95.26 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| encoding | 95.65 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| materialize | 102.23 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| start | 104.59 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| columnwise | 59.48 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| none | 60.47 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| decoding | 95.04 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| encoding | 95.37 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| materialize | 102.03 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| start | 104.36 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: fttransformer
@@ -21,12 +21,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| none | 79.30 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| columnwise | 81.12 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| encoding | 101.13 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| materialize | 102.41 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| start | 109.72 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| decoding | 110.60 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| none | 79.18 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| columnwise | 81.01 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| encoding | 101.11 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| materialize | 102.10 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| start | 109.47 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| decoding | 110.34 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: resnet
@@ -34,12 +34,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| columnwise | 71.21 | Yes | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| none | 72.78 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| encoding | 84.95 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| materialize | 91.96 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| start | 102.89 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| decoding | 107.91 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| columnwise | 71.16 | Yes | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| none | 72.57 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| encoding | 84.81 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| materialize | 91.65 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| start | 102.87 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| decoding | 107.78 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: scarf
@@ -47,12 +47,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| none | 49.30 | No | No | 2/3 | 0/3 | 1/2 | 1/2 | Yes | No |
-| materialize | 50.03 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| start | 54.03 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| columnwise | 54.53 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| encoding | 57.11 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| decoding | 93.84 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| none | 49.03 | No | No | 2/3 | 0/3 | 1/2 | 1/2 | Yes | No |
+| materialize | 49.86 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| start | 53.66 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| columnwise | 54.21 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| encoding | 56.85 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| decoding | 93.33 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: subtab
@@ -60,12 +60,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| decoding | 85.87 | Yes | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| none | 96.40 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| columnwise | 97.73 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| encoding | 99.04 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| materialize | 102.68 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| start | 102.85 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| decoding | 85.64 | Yes | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| none | 95.94 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| columnwise | 97.30 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| encoding | 98.58 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| materialize | 102.33 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| start | 102.37 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: tabm
@@ -73,12 +73,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| none | 68.08 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| start | 75.89 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| materialize | 77.68 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| decoding | 79.62 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| encoding | 84.46 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| columnwise | 90.57 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| none | 67.81 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| start | 75.53 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| materialize | 77.34 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| decoding | 79.33 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| encoding | 84.17 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| columnwise | 90.16 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: tabnet
@@ -86,12 +86,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| none | 61.40 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| encoding | 63.90 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| decoding | 64.16 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| columnwise | 64.78 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| materialize | 98.04 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
-| start | 101.81 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| encoding | 62.53 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| none | 62.68 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| columnwise | 65.05 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| decoding | 65.06 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| materialize | 99.32 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| start | 105.89 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: tabtransformer
@@ -99,12 +99,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| none | 83.73 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| decoding | 84.46 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| encoding | 84.89 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| columnwise | 85.97 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| start | 88.99 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| materialize | 95.53 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| none | 82.89 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| encoding | 83.47 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| columnwise | 86.04 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| decoding | 87.66 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| start | 98.55 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| materialize | 102.57 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: trompt
@@ -112,12 +112,12 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| columnwise | 53.59 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| encoding | 56.31 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| none | 57.53 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
-| start | 69.08 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| materialize | 70.77 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
-| decoding | 100.47 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
+| columnwise | 53.39 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| encoding | 56.16 | Yes | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| none | 57.34 | No | No | 1/3 | 0/3 | 1/2 | 1/2 | No | No |
+| start | 68.90 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| materialize | 70.56 | No | No | 0/3 | 0/3 | 1/2 | 1/2 | No | No |
+| decoding | 100.26 | No | No | 0/3 | 0/3 | 0/2 | 0/2 | No | No |
 
 
 ## Primary: vime
@@ -125,10 +125,10 @@
 
 | Injection | avg_rank | beats few-shot-non-gnn? | beats full-non-gnn? | beats few-shot tree (out of 3) | beats full tree (out of 3) | beats few-shot GNN (out of 2) | beats full GNN (out of 2) | beats few-shot tabpfn? | beats full tabpfn? |
 |---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| encoding | 79.81 | Yes | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| columnwise | 79.93 | Yes | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| none | 80.27 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| decoding | 82.68 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| materialize | 88.38 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
-| start | 89.10 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| encoding | 79.34 | Yes | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| columnwise | 79.42 | Yes | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| none | 79.82 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| decoding | 82.22 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| materialize | 87.82 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
+| start | 88.69 | No | No | 0/3 | 0/3 | 1/2 | 0/2 | No | No |
 

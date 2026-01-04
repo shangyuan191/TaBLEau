@@ -1,0 +1,7 @@
+dataset: kaggle_Audit_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: -inf
+          Best test metric: -inf
+          錯誤: The expanded size of the tensor (1) must match the existing size (776) at non-singleton dimension 2.  Target sizes: [1, 776, 1].  Tensor sizes: [1, 1, 776]
+          耗時: 0.67 秒

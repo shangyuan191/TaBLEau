@@ -1,0 +1,33 @@
+dataset: credit
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.8340423703193665
+          Best test metric: 0.8389620780944824
+          早停輪數: 10
+          GNN早停輪數: 0
+          耗時: 51.65 秒
+    GNN階段: start
+          Best val metric: 0.8317657709121704
+          Best test metric: 0.8363773226737976
+          GNN早停輪數: 0
+          耗時: 30.18 秒
+    GNN階段: materialize
+          Best val metric: 0.8224681615829468
+          Best test metric: 0.8371874690055847
+          GNN早停輪數: 0
+          耗時: 37.68 秒
+    GNN階段: encoding
+          Best val metric: 0.8388708829879761
+          Best test metric: 0.8448259830474854
+          GNN早停輪數: 0
+          耗時: 42.67 秒
+    GNN階段: columnwise
+          Best val metric: 0.8351999521255493
+          Best test metric: 0.8392478227615356
+          GNN早停輪數: 0
+          耗時: 129.82 秒
+    GNN階段: decoding
+          Best val metric: 0.790086567401886
+          Best test metric: 0.7796145677566528
+          GNN早停輪數: 0
+          耗時: 40.86 秒

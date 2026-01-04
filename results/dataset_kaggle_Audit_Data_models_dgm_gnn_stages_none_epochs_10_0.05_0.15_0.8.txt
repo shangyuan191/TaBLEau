@@ -1,0 +1,7 @@
+dataset: kaggle_Audit_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: -inf
+          Best test metric: -inf
+          錯誤: The shape of the mask [1, 1, 776] at index 1 does not match the shape of the indexed tensor [1, 776, 2] at index 1
+          耗時: 0.54 秒

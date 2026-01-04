@@ -1,0 +1,754 @@
+dataset: openml_Diabetes_Data_Set
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8393333333333333
+          Best test metric: 0.7941046511627907
+          耗時: 0.96 秒
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: dgm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.99890625
+          耗時: 0.31 秒
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9923349056603774
+          Best test metric: 0.9816947758124228
+          耗時: 0.28 秒
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9862536656891495
+          Best test metric: 0.9885622179239201
+          耗時: 0.26 秒
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7161290322580645
+          Best test metric: 0.7254269194567703
+          耗時: 0.28 秒
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8970170454545455
+          Best test metric: 0.8583191935322886
+          耗時: 0.27 秒
+dataset: openml_nki70.arff
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5816326530612245
+          Best test metric: 0.5770895770895771
+          耗時: 0.26 秒
+dataset: kaggle_Penguins_Classified
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.993730407523511
+          Best test metric: 0.9889823291462636
+          耗時: 0.27 秒
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5769230769230769
+          Best test metric: 0.4255050505050505
+          耗時: 0.27 秒
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5675675675675674
+          Best test metric: 0.6836811495039344
+          耗時: 0.27 秒
+dataset: UCI_Audit_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9865278628291487
+          Best test metric: 0.9829542983867462
+          耗時: 0.26 秒
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8425925925925926
+          Best test metric: 0.85595703125
+          耗時: 0.26 秒
+dataset: openml_Pima_Indians_Diabetes
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8393333333333333
+          Best test metric: 0.7941046511627907
+          耗時: 0.25 秒
+dataset: UCI_User_Knowledge_Modeling
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7159763313609467
+          Best test metric: 0.6902444076222038
+          耗時: 0.26 秒
+dataset: kaggle_Real_Estate_DataSet
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8729166666666667
+          Best test metric: 0.8688155187616341
+          耗時: 0.27 秒
+dataset: kaggle_fitbit_dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8564102564102564
+          Best test metric: 0.7774486989634017
+          耗時: 0.26 秒
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.4855371900826446
+          Best test metric: 0.4296090767708186
+          耗時: 0.25 秒
+dataset: openml_analcatdata_lawsuit
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6203703703703703
+          Best test metric: 0.7475465313028765
+          耗時: 0.26 秒
+dataset: kaggle_Development_Index
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8571428571428572
+          Best test metric: 0.7600465176379377
+          耗時: 0.28 秒
+dataset: openml_hungarian
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9486607142857142
+          Best test metric: 0.901051811453058
+          耗時: 0.26 秒
+dataset: openml_Pokmon_Legendary_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8527272727272728
+          Best test metric: 0.8524725274725274
+          耗時: 0.25 秒
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8056666666666666
+          Best test metric: 0.8201860465116279
+          耗時: 0.26 秒
+dataset: kaggle_Audit_Data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9865278628291487
+          Best test metric: 0.9829542983867462
+          耗時: 0.25 秒
+dataset: kaggle_chronic_kidney_disease
+  模型: dgm
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9987083333333333
+          耗時: 0.25 秒
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5625
+          Best test metric: 0.6834733893557423
+          耗時: 0.26 秒
+dataset: openml_tokyo1
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9642558528428093
+          Best test metric: 0.9673730028601469
+          耗時: 0.29 秒
+dataset: kaggle_Compositions_of_Glass
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6883116883116882
+          Best test metric: 0.5926746418549697
+          耗時: 0.25 秒
+dataset: UCI_HCV_data
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5915637860082305
+          Best test metric: 0.6594110115236876
+          耗時: 0.26 秒
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7638671875
+          Best test metric: 0.6551319648093842
+          耗時: 0.27 秒
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9340277777777778
+          Best test metric: 0.9496826171874999
+          耗時: 0.27 秒
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7640625
+          Best test metric: 0.6551319648093842
+          耗時: 0.25 秒
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7592592592592593
+          Best test metric: 0.7724749477326797
+          耗時: 0.25 秒
+dataset: kaggle_Startup_Success_Prediction
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6709470304975923
+          Best test metric: 0.7170842751567035
+          耗時: 0.26 秒
+dataset: openml_DiabeticMellitus
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6222222222222222
+          Best test metric: 0.5642448413386509
+          耗時: 0.25 秒
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9212499999999999
+          Best test metric: 0.8475598693759071
+          耗時: 0.25 秒
+dataset: kaggle_Automobiles
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9244444444444444
+          Best test metric: 0.9111831943157245
+          耗時: 0.25 秒
+dataset: UCI_Z_Alizadeh_Sani
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8293269230769231
+          Best test metric: 0.813625103220479
+          耗時: 0.25 秒
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7701149425287357
+          Best test metric: 0.7262929378313994
+          耗時: 0.25 秒
+dataset: kaggle_Store_Data_Performance
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6444444444444445
+          Best test metric: 0.4658119658119658
+          耗時: 0.25 秒
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9447115384615384
+          Best test metric: 0.9425268373245252
+          耗時: 0.27 秒
+dataset: kaggle_Credit_Card_Approval
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8899470899470899
+          Best test metric: 0.8538423941649749
+          耗時: 0.27 秒
+dataset: kaggle_Bigg_Boss_India
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8525
+          Best test metric: 0.9422843822843824
+          耗時: 0.25 秒
+dataset: kaggle_Campus_Recruitment
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6956521739130435
+          Best test metric: 0.7139045825486503
+          耗時: 0.26 秒
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6850845410628019
+          Best test metric: 0.6907481317934783
+          耗時: 0.28 秒
+dataset: UCI_Heart_failure_clinical_records
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6843317972350231
+          Best test metric: 0.5843359094892837
+          耗時: 0.25 秒
+dataset: openml_analcatdata_creditscore
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7272727272727273
+          Best test metric: 0.7633228840125392
+          耗時: 0.27 秒
+dataset: openml_Heart_disease_classification
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.9107142857142857
+          Best test metric: 0.8941302791696493
+          耗時: 0.26 秒
+dataset: kaggle_Customer_Classification
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6871693121693122
+          Best test metric: 0.6241236714975845
+          耗時: 0.27 秒
+dataset: UCI_Absenteeism_at_work
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5850806451612903
+          Best test metric: 0.5352819729622716
+          耗時: 0.26 秒
+dataset: openml_weather_ankara
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.11 秒
+dataset: openml_HappinessRank_2015
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_disclosure_z
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_echoMonths
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_meta
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_autoPrice
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_Boston_house_price_data
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_Fish_market
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_rmftsa_ladata
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_DEE
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_visualizing_environmental
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_strikes
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_machine_cpu
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_boston_corrected
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_pm10
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_disclosure_x_bias
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_wisconsin
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_Forest_Fire_Area
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_boston
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_auto_price
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_EgyptianSkulls
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_fishcatch
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_forest_fires
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_disclosure_x_noise
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_liver_disorders
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_ELE_1
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_disclosure_x_tampered
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_cpu
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_residential_building
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.14 秒
+dataset: openml_lungcancer_shedden
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_bodyfat
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_no2
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_yacht_hydrodynamics
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_cps_85_wages
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_pharynx
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_The_Office_Dataset
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_lowbwt
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_analcatdata_vineyard
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_cloud
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.09 秒
+dataset: openml_analcatdata_homerun
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_Reading_Hydro
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_cholesterol
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_fruitfly
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: openml_cleveland
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.08 秒
+dataset: MagicTelescope
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8682925327602848
+          Best test metric: 0.8707799572793626
+          耗時: 0.91 秒
+dataset: road_safety
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.7856667171093754
+          Best test metric: 0.7837954115461034
+          耗時: 36.97 秒
+dataset: credit
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8407668485586743
+          Best test metric: 0.8460445115983868
+          耗時: 0.88 秒
+dataset: higgs_small
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.6608046118660615
+          Best test metric: 0.6509660252192742
+          耗時: 19.94 秒
+dataset: binarized_pol
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8305975223645906
+          Best test metric: 0.8317924599150021
+          耗時: 1.07 秒
+dataset: bank_marketing
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.8329590465693204
+          Best test metric: 0.8428204719508856
+          耗時: 0.68 秒
+dataset: eye
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.44789762340036565
+          Best test metric: 0.4592524859983998
+          耗時: 0.71 秒
+dataset: helena
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.002044989775051125
+          Best test metric: 0.00201315259696685
+          耗時: 14.99 秒
+dataset: jannis
+  模型: dgm
+    GNN階段: none
+          Best val metric: 0.5544585987261147
+          Best test metric: 0.5535700956902085
+          耗時: 24.14 秒
+dataset: medical_charges
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 99.06 GiB. GPU 0 has a total capacity of 79.25 GiB of which 53.02 GiB is free. Process 1478383 has 20.85 GiB memory in use. Including non-PyTorch memory, this process has 1.21 GiB memory in use. Process 1483887 has 4.16 GiB memory in use. Of the allocated memory 360.03 MiB is allocated by PyTorch, and 365.97 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 1.39 秒
+dataset: california
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.53 秒
+dataset: sulfur
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.22 秒
+dataset: Brazilian_houses
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.22 秒
+dataset: pol
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.32 秒
+dataset: diamonds
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 2.91 秒
+dataset: nyc_taxi_green_dec_2016
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 1261.13 GiB. GPU 0 has a total capacity of 79.25 GiB of which 55.60 GiB is free. Process 1478383 has 20.85 GiB memory in use. Including non-PyTorch memory, this process has 2.79 GiB memory in use. Of the allocated memory 1.23 GiB is allocated by PyTorch, and 1.07 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 0.47 秒
+dataset: Ailerons
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.28 秒
+dataset: house
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.60 秒
+dataset: house_sales
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: got an unexpected keyword argument 'squared'
+          耗時: 0.56 秒
+dataset: SGEMM_GPU_kernel_performance
+  模型: dgm
+    GNN階段: none
+          Best val metric: inf
+          Best test metric: inf
+          錯誤: CUDA out of memory. Tried to allocate 217.45 GiB. GPU 0 has a total capacity of 79.25 GiB of which 55.60 GiB is free. Process 1478383 has 20.85 GiB memory in use. Including non-PyTorch memory, this process has 2.79 GiB memory in use. Of the allocated memory 530.91 MiB is allocated by PyTorch, and 1.78 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+          耗時: 0.16 秒

@@ -1,0 +1,38 @@
+dataset: kaggle_Audit_Data
+  模型: trompt
+    GNN階段: none
+          Best val metric: 0.9650949239730835
+          Best test metric: 0.9574183225631714
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 1.48 秒
+    GNN階段: start
+          Best val metric: 0.9856092929840088
+          Best test metric: 0.9827912449836731
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.88 秒
+    GNN階段: materialize
+          Best val metric: 0.9742804765701294
+          Best test metric: 0.9719528555870056
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.76 秒
+    GNN階段: encoding
+          Best val metric: 0.9231476187705994
+          Best test metric: 0.9106731414794922
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.56 秒
+    GNN階段: columnwise
+          Best val metric: 0.9816288948059082
+          Best test metric: 0.9694090485572815
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.66 秒
+    GNN階段: decoding
+          Best val metric: 0.9474892616271973
+          Best test metric: 0.9488357305526733
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 0.41 秒

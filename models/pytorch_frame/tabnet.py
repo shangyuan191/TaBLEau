@@ -1173,7 +1173,7 @@ def tabnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         if debug:
             print(f"[TabNet] After batch norm: batch_size={x_norm.shape[0]}, features={x_norm.shape[1]}")
         return x_norm
-# 獲取TabNet的參數
+    # 獲取TabNet的參數
     split_feat_channels = config.get('channels', 128)
     split_attn_channels = config.get('channels', 128)
     num_layers = config.get('num_layers', 6)
@@ -1798,7 +1798,7 @@ def tabnet_core_fn(material_outputs, config, task_type, gnn_stage=None):
         'metric_computer': metric_computer,
         'metric': metric,
         'early_stop_epochs': early_stop_epochs,
-        'gnn_early_stop_epochs': 0,  # No separate GNN stage, integrated into end-to-end training
+        'gnn_early_stop_epochs': material_outputs.get('gnn_early_stop_epochs', 0),
     }
 
 def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
