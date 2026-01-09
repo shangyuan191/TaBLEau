@@ -174,7 +174,7 @@ datasets/
 
 為了實作一致性，額外新增 **start** 作為 dummy stage（不對資料做任何處理，僅作為「在整個 pipeline 最前面插入 GNN」的標記點）。
 
-### 3.2 參考基線模型（6 個，不可拆分）
+### 3.2 參考基線模型（7 個，不可拆分）
 
 這些模型作為對照組，不進行階段拆分與 GNN 插入，僅用於性能比較。
 
@@ -185,16 +185,25 @@ datasets/
 2. **CatBoost** (catboost.py) - 類別特徵優化的梯度提升
 3. **LightGBM** (lightgbm.py) - 輕量級梯度提升機
 
-**原生 GNN 模型（3 個）**：
+**自含式（Self-contained）GNN 模型（4 個）**：
 1. **TabGNN** (tabgnn.py) - 基於圖神經網路的表格學習
 2. **T2G-Former** (t2gformer.py) - Table-to-Graph Transformer
 3. **DGM** (dgm.py) - Differentiable Graph Module，動態圖結構學習
+4. **LAN-GNN** (lan_gnn.py) - Learning Adaptive Neighborhoods（自適應鄰接學習）的表格預測改寫版
 
 **重要區分**：
-- 這裡的「GNN-based 模型」指的是原本架構中就包含 GNN 的 SOTA 表格模型。
+- 這裡的「自含式 GNN（self-contained）」指的是模型本身的主幹就依賴圖結構/訊息傳遞來完成預測（例如 TabGNN/T2G-Former/DGM/LAN-GNN）。
 - 這與「GNN 插入」是完全不同的概念：
   - **GNN 插入**：在現有非 GNN 模型（如 ExcelFormer）中刻意插入 GNN 模組進行聯合訓練。
-  - **GNN-based 模型**：模型本身就是基於 GNN 設計（如 TabGNN），用於驗證「從頭設計的 GNN 模型」vs「插入 GNN 的傳統模型」的性能差異。
+  - **自含式 GNN 模型**：模型本身就是基於 GNN 設計（如 TabGNN），用於驗證「從頭設計的 GNN 模型」vs「插入 GNN 的傳統模型」的性能差異。
+
+**新增 self-contained GNN baselines 的研究目的（ALIGN 對照語境）**：
+在 ALIGN 第一階段（10 個可拆分模型 × 多階段注入）之外，額外引入 DGM 與 LAN-GNN 等「自含式 GNN baseline」主要有三個目的：
+1. **Few-shot 全局對照**：比較「自含式 GNN」與「10 個可拆分模型（含/不含注入）」在 few-shot 下的整體強弱，避免只在同一骨幹內做相對比較。
+2. **對齊 GNN 作用位置（stage mapping）**：將 self-contained 模型內部的 GNN 訊息傳遞，對應回 PyTorch-Frame 五階段（start/materialize/encoding/columnwise/decoding），再與 ALIGN 注入結果的強勢 stage 排序進行對照。
+3. **檢驗『位置對齊』假說**：當某個注入 stage（例如 columnwise）在 ALIGN 中最有效時，檢查「把 GNN 放在等效位置」的可拆分 SOTA 變體，是否能在公平條件下超越 self-contained GNN baseline。
+
+（詳細的 DGM/LAN-GNN stage 對應與資料管線分析，見 [DGM_GNN_Stage_Analysis.md](DGM_GNN_Stage_Analysis.md) 與 [LAN_GNN_Architecture_Analysis.md](LAN_GNN_Architecture_Analysis.md)）
 
 **DGM 模型特色**：
 - **動態圖學習**：不依賴預定義圖結構，而是在訓練過程中自動學習最佳圖連接
@@ -217,9 +226,11 @@ datasets/
 | PyTorch Frame | 6 | ExcelFormer, FT-Transformer, ResNet, TabNet, TabTransformer, Trompt | ✓ | 主實驗對象 |
 | Custom | 4 | SCARF, SubTab, VIME, TabM | ✓ | 主實驗對象 |
 | Tree-Based | 3 | XGBoost, CatBoost, LightGBM | ✗ | 基線對照 |
-| GNN-Based | 3 | TabGNN, T2G-Former, DGM | ✗ | 基線對照 |
+| GNN-Based | 4 | TabGNN, T2G-Former, DGM, LAN-GNN | ✗ | 基線對照 |
 | Pretrained | 1 | TabPFN | ✗ | 基線對照 |
-| **總計** | **17** | - | 10 可拆分 / 7 不可拆分 | - |
+| **總計** | **18（目前）** | - | 10 可拆分 / 8 不可拆分 | - |
+
+> 註：後續預計再新增 1–2 個「自含式（self-contained）GNN」參考基線，使總模型數達到 **20**（不影響 10 個可拆分模型的 GNN stage 注入實驗設計）。
 
 ---
 
@@ -342,6 +353,24 @@ datasets/
    - `pool_query`：注意力池化查詢向量 `[C]`
    - `input_proj/output_proj`：維度投影層
    - `attn_in/attn_out`：自注意力編解碼
+
+### 5.1.1 注入風格統一與關鍵觀察（論文敘事用）
+
+在 TaBLEau 的 10 個可拆分模型中，歷史上曾同時存在兩種主要的 GNN injection 實作風格（詳見 [ALIGN_10Models_GNN_Stage_Rationale.md](ALIGN_10Models_GNN_Stage_Rationale.md)）：
+
+- **Dynamic-Graph + Attention（DGM + Self-Attn）風格**：先在 token/欄位表徵上做自注意力與 pooling 產生 row-level 表徵，再於 row-level 透過 **DGM 動態建圖**學習圖結構，並以 GCN 更新，最後將圖訊息透過 attention decode + 殘差門控回寫到 token 表徵。這個風格的關鍵不在於「屬於哪個 backbone」，而在於 **動態建圖（DGM）+ 注意力式的 pooling/回寫**所形成的端到端管線。
+- **Static kNN Graph（Simple kNN+GCN）風格**：更偏向以 **靜態 kNN** 在某個表示空間上構圖，接著用 GCN 做特徵轉換（離線或 batch-level mixing），或把 GNN 當作最後 head；通常缺少「回寫 token」這種與 backbone 內部 token 幾何強耦合、且以注意力機制調整維度/融合的設計。
+
+本研究的最終目標是將 10 個模型的 GNN injection 統一為 **Dynamic-Graph + Attention（DGM + Self-Attn）**風格，以降低「實作差異」對實驗解釋的干擾，使觀察更聚焦於「插入位置（stage）× 模型本質」本身。
+
+另外，為了在論文中更清楚地討論「建圖策略」本身的影響（而不是混入其他工程差異），我們也保留了兩種風格各自對應的 git branch，使得後續可以在控制其他條件近似不變的前提下，比較 **DGM 動態建圖** vs **靜態 kNN 建圖**是否會帶來可重現的差異與額外發現。
+
+同時，我們也強調一個在實驗中會明確呈現的觀察：**將 GNN 插入既有 SOTA 表格模型並不保證帶來增益**。其成敗高度依賴模型本身的表徵學習目標與幾何特性；例如：
+
+- **對比式自監督（contrastive）模型（如 SCARF 類）**通常需要強烈的 instance discrimination（讓不同樣本可分），而 GNN 的鄰域聚合傾向把相鄰節點表徵拉近，可能與對比目標產生張力，導致性能下降或不穩定。
+- **重建/去噪（reconstruction/denoising）導向的目標**在某些情況下會受益於局部平滑，但也可能因過度混合而抹除細節訊號，使得重建誤差型的學習目標變得更困難。
+
+因此，ALIGN 的分析不僅比較「是否插入 GNN」，也會特別關注：當模型的 pretext/learning objective 與 message passing 的 inductive bias 不相容時，GNN injection 可能反而帶來負效應。
 
 ### 5.2 六種 GNN 插入策略詳解
 
@@ -503,7 +532,7 @@ out = GCN(x_pooled, edge_index)  # [B, out_channels]
 ### 7.1 實驗設計
 
 **實驗規模**：
-- **模型**：10 個可拆分模型 + 6 個參考基線 = 16 個模型
+- **模型**：目前為 18 個（10 可拆分 + 8 基線，含 TabPFN）；後續目標擴展至 20 個（新增 1–2 個自含式 GNN 基線）
 - **資料集**：116 個（涵蓋所有大小/任務/特徵類型組合）
 - **切分策略**：2 種（few-shot 0.05/0.15/0.80 和 full 0.80/0.15/0.05）
 - **GNN 階段**：6 個（none, start, materialize, encoding, columnwise, decoding）
@@ -538,9 +567,9 @@ python main.py --dataset_size all --task_type all --feature_type all \
   - 目的：對比傳統強基線在不同資料量下的表現
   - 特點：樹模型在中小型表格數據上往往很強
 
-**基線類別 3：原生 GNN 基線**
-- **Few-shot GNN models**：TabGNN, T2G-Former（few-shot 切分）
-- **Full-sample GNN models**：TabGNN, T2G-Former（full 切分）
+**基線類別 3：自含式（Self-contained）GNN 基線**
+- **Few-shot GNN models**：TabGNN, T2G-Former, DGM, LAN-GNN（few-shot 切分）
+- **Full-sample GNN models**：TabGNN, T2G-Former, DGM, LAN-GNN（full 切分）
   - 目的：對比「原生設計的 GNN」vs「插入 GNN 的傳統模型」
   - 區別：
     - 原生 GNN：整個架構都圍繞圖結構設計
@@ -1197,13 +1226,13 @@ python main.py --dataset_size all --task_type all --feature_type all \
 # 多個模型
 --models excelformer resnet tabnet fttransformer
 
-# 所有模型（包含 10 可拆分 + 6 基線）
+# 所有模型（目前包含 10 可拆分 + 8 基線；後續規劃擴展到 10 基線，總計 20 模型）
 --models all
 
 # 可用模型列表
 # 可拆分：excelformer, fttransformer, resnet, tabnet, tabtransformer, 
 #         trompt, scarf, subtab, vime, tabm
-# 基線：xgboost, catboost, lightgbm, tabgnn, t2gformer, tabpfn
+# 基線：xgboost, catboost, lightgbm, tabgnn, t2gformer, dgm, lan_gnn, tabpfn
 ```
 
 ### 9.4 GNN 階段參數
@@ -1754,7 +1783,7 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 ### 15.1 當前進度
 
 ✅ **已完成**：
-- TaBLEau 框架建立（116 資料集、16 模型）
+- TaBLEau 框架建立（116 資料集、目前 18 模型；後續擴展到 20 模型）
 - 統一的五階段流水線設計
 - GNN 插入機制實作（6 種策略）
 - 第一階段全面實驗（13,920 次）
@@ -1775,7 +1804,7 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 **主要貢獻**：
 1. 提出 ALIGN：首個系統性分析 GNN 與表格模型整合的框架
 2. 統一的五階段流水線：實現跨模型的公平比較
-3. 全面的實證分析：116 資料集 × 16 模型 × 6 階段
+3. 全面的實證分析：116 資料集 ×（目前 18、目標 20）模型 × 6 階段
 4. 三項消融實驗：揭示 GNN 增益的關鍵因素（樣本量、特徵類型、資料規模）
 
 **實驗章節結構建議**：
@@ -1825,7 +1854,7 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 
 **第一階段（已完成）**：
 - ✅ 116 個資料集已就緒
-- ✅ 16 個模型（10 可拆分 + 6 基線）已實作
+- ✅ 18 個模型（10 可拆分 + 8 基線）已實作；後續擴展到 20（新增 1–2 個自含式 GNN 基線）
 - ✅ 6 種 GNN 插入策略已實作
 - ✅ 13,920 次實驗已執行完成
 - ✅ Per-model 分析報告已生成（位於 gnn_injection_analysis/per_model_result/）

@@ -1,38 +1,38 @@
 dataset: kaggle_Audit_Data
   模型: scarf
     GNN階段: none
-          Best val metric: 0.981322718922229
-          Best test metric: 0.9736161238422404
-          早停輪數: 27
+          Best val metric: 0.9960195958358848
+          Best test metric: 0.986541722833413
+          早停輪數: 278
           GNN早停輪數: 0
-          耗時: 1.74 秒
+          耗時: 6.94 秒
     GNN階段: start
-          Best val metric: 0.9650949173300674
-          Best test metric: 0.9638376744792799
-          早停輪數: 107
-          GNN早停輪數: 0
-          耗時: 3.51 秒
+          Best val metric: 0.9161053276178813
+          Best test metric: 0.9397095273296516
+          早停輪數: 215
+          GNN早停輪數: 67
+          耗時: 8.24 秒
     GNN階段: materialize
-          Best val metric: 0.9589712186160442
-          Best test metric: 0.971550637039614
-          早停輪數: 148
-          GNN早停輪數: 0
-          耗時: 4.28 秒
+          Best val metric: 0.9470300061236987
+          Best test metric: 0.9558746793059965
+          早停輪數: 225
+          GNN早停輪數: 36
+          耗時: 7.37 秒
     GNN階段: encoding
-          Best val metric: 0.9819350887936313
-          Best test metric: 0.953455885550289
-          早停輪數: 46
+          Best val metric: 0.6631965707287202
+          Best test metric: 0.5690361786319955
+          早停輪數: 15
           GNN早停輪數: 0
-          耗時: 1.58 秒
+          耗時: 0.67 秒
     GNN階段: columnwise
-          Best val metric: 0.9615737905695039
-          Best test metric: 0.9267350089142062
-          早停輪數: 47
+          Best val metric: 0.8084813227189223
+          Best test metric: 0.8619874331434535
+          早停輪數: 97
           GNN早停輪數: 0
-          耗時: 1.62 秒
+          耗時: 4.30 秒
     GNN階段: decoding
-          Best val metric: 0.9846907532149419
-          Best test metric: 0.96437578814628
-          早停輪數: 27
-          GNN早停輪數: 66
-          耗時: 1.46 秒
+          Best val metric: 0.8182792406613595
+          Best test metric: 0.8609927381832413
+          早停輪數: 61
+          GNN早停輪數: 0
+          耗時: 2.28 秒

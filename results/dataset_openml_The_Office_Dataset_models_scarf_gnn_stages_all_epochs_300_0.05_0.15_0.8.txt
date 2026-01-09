@@ -1,38 +1,38 @@
 dataset: openml_The_Office_Dataset
   模型: scarf
     GNN階段: none
-          Best val metric: 0.051902659237384796
-          Best test metric: 0.655437171459198
-          早停輪數: 26
+          Best val metric: 1.0231305360794067
+          Best test metric: 0.8878549337387085
+          早停輪數: 77
           GNN早停輪數: 0
-          耗時: 2.05 秒
+          耗時: 1.57 秒
     GNN階段: start
-          Best val metric: 0.12060315161943436
-          Best test metric: 0.8037511110305786
+          Best val metric: 1.1179653406143188
+          Best test metric: 0.9585965275764465
+          早停輪數: 11
+          GNN早停輪數: 31
+          耗時: 0.67 秒
+    GNN階段: materialize
+          Best val metric: 0.9603704214096069
+          Best test metric: 1.0258941650390625
+          早停輪數: 19
+          GNN早停輪數: 49
+          耗時: 0.78 秒
+    GNN階段: encoding
+          Best val metric: 1.0556811094284058
+          Best test metric: 0.956701397895813
+          早停輪數: 32
+          GNN早停輪數: 0
+          耗時: 1.35 秒
+    GNN階段: columnwise
+          Best val metric: 1.0231566429138184
+          Best test metric: 0.9221835136413574
+          早停輪數: 14
+          GNN早停輪數: 0
+          耗時: 0.56 秒
+    GNN階段: decoding
+          Best val metric: 0.9332386255264282
+          Best test metric: 1.0573713779449463
           早停輪數: 36
           GNN早停輪數: 0
-          耗時: 1.13 秒
-    GNN階段: materialize
-          Best val metric: 0.11300651729106903
-          Best test metric: 0.733701765537262
-          早停輪數: 19
-          GNN早停輪數: 0
-          耗時: 0.77 秒
-    GNN階段: encoding
-          Best val metric: 0.29722967743873596
-          Best test metric: 0.7005428075790405
-          早停輪數: 18
-          GNN早停輪數: 0
-          耗時: 0.72 秒
-    GNN階段: columnwise
-          Best val metric: 0.2969560921192169
-          Best test metric: 0.6985141038894653
-          早停輪數: 22
-          GNN早停輪數: 0
-          耗時: 0.53 秒
-    GNN階段: decoding
-          Best val metric: 1.050719141960144
-          Best test metric: 0.9137397408485413
-          早停輪數: 26
-          GNN早停輪數: 11
-          耗時: 0.48 秒
+          耗時: 1.09 秒

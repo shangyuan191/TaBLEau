@@ -1,38 +1,38 @@
 dataset: helena
   模型: scarf
     GNN階段: none
-          Best val metric: 0.18333333333333332
-          Best test metric: 0.1808194489713749
-          早停輪數: 23
+          Best val metric: 0.21901840490797547
+          Best test metric: 0.22225204670514026
+          早停輪數: 277
           GNN早停輪數: 0
-          耗時: 205.08 秒
+          耗時: 119.77 秒
     GNN階段: start
-          Best val metric: 0.16257668711656442
-          Best test metric: 0.151101482063769
-          早停輪數: 18
-          GNN早停輪數: 0
-          耗時: 88.18 秒
+          Best val metric: 0.21380368098159508
+          Best test metric: 0.20950208025768352
+          早停輪數: 206
+          GNN早停輪數: 210
+          耗時: 79.72 秒
     GNN階段: materialize
-          Best val metric: 0.1628834355828221
-          Best test metric: 0.1587706348141189
-          早停輪數: 26
-          GNN早停輪數: 0
-          耗時: 155.38 秒
+          Best val metric: 0.2207566462167689
+          Best test metric: 0.22369001284583084
+          早停輪數: 213
+          GNN早停輪數: 211
+          耗時: 84.38 秒
     GNN階段: encoding
-          Best val metric: 0.16901840490797546
-          Best test metric: 0.16791609946891117
-          早停輪數: 23
+          Best val metric: 0.1572597137014315
+          Best test metric: 0.15645071610713807
+          早停輪數: 138
           GNN早停輪數: 0
-          耗時: 136.98 秒
+          耗時: 94.06 秒
     GNN階段: columnwise
-          Best val metric: 0.1623721881390593
-          Best test metric: 0.16093717046609277
-          早停輪數: 32
+          Best val metric: 0.1408997955010225
+          Best test metric: 0.14368157677780546
+          早停輪數: 126
           GNN早停輪數: 0
-          耗時: 166.37 秒
+          耗時: 86.48 秒
     GNN階段: decoding
-          Best val metric: 0.17699386503067485
-          Best test metric: 0.17660141495868245
-          早停輪數: 23
-          GNN早停輪數: 174
-          耗時: 134.72 秒
+          Best val metric: 0.14120654396728016
+          Best test metric: 0.13825565120693292
+          早停輪數: 77
+          GNN早停輪數: 0
+          耗時: 40.38 秒

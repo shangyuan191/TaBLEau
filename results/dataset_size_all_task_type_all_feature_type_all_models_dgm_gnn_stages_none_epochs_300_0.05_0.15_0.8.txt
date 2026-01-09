@@ -680,10 +680,10 @@ dataset: MagicTelescope
 dataset: road_safety
   模型: dgm
     GNN階段: none
-          Best val metric: -inf
-          Best test metric: -inf
-          錯誤: CUDA out of memory. Tried to allocate 46.53 GiB. GPU 0 has a total capacity of 79.25 GiB of which 26.58 GiB is free. Process 1507485 has 19.68 GiB memory in use. Process 1507627 has 31.21 GiB memory in use. Including non-PyTorch memory, this process has 1.22 GiB memory in use. Process 1523822 has 558.00 MiB memory in use. Of the allocated memory 264.66 MiB is allocated by PyTorch, and 481.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-          耗時: 0.24 秒
+          Best val metric: 0.8264012336730957
+          Best test metric: 0.8264012336730957
+          早停輪數: 73
+          耗時: 10.07 秒
 dataset: credit
   模型: dgm
     GNN階段: none
@@ -694,10 +694,10 @@ dataset: credit
 dataset: higgs_small
   模型: dgm
     GNN階段: none
-          Best val metric: -inf
-          Best test metric: -inf
-          錯誤: CUDA out of memory. Tried to allocate 35.81 GiB. GPU 0 has a total capacity of 79.25 GiB of which 26.58 GiB is free. Process 1507485 has 19.68 GiB memory in use. Process 1507627 has 31.21 GiB memory in use. Including non-PyTorch memory, this process has 1.22 GiB memory in use. Process 1523822 has 558.00 MiB memory in use. Of the allocated memory 232.71 MiB is allocated by PyTorch, and 513.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-          耗時: 0.28 秒
+          Best val metric: 0.7349939346313477
+          Best test metric: 0.7349939346313477
+          早停輪數: 39
+          耗時: 8.05 秒
 dataset: binarized_pol
   模型: dgm
     GNN階段: none
@@ -736,10 +736,10 @@ dataset: jannis
 dataset: medical_charges
   模型: dgm
     GNN階段: none
-          Best val metric: inf
-          Best test metric: inf
-          錯誤: CUDA out of memory. Tried to allocate 99.06 GiB. GPU 0 has a total capacity of 79.25 GiB of which 26.58 GiB is free. Process 1507485 has 19.68 GiB memory in use. Process 1507627 has 31.21 GiB memory in use. Including non-PyTorch memory, this process has 1.22 GiB memory in use. Process 1523822 has 558.00 MiB memory in use. Of the allocated memory 360.03 MiB is allocated by PyTorch, and 385.97 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-          耗時: 0.80 秒
+          Best val metric: 0.14417192537946225
+          Best test metric: 0.14417192537946225
+          早停輪數: 20
+          耗時: 48.94 秒
 dataset: california
   模型: dgm
     GNN階段: none
@@ -778,10 +778,10 @@ dataset: diamonds
 dataset: nyc_taxi_green_dec_2016
   模型: dgm
     GNN階段: none
-          Best val metric: inf
-          Best test metric: inf
-          錯誤: CUDA out of memory. Tried to allocate 1261.13 GiB. GPU 0 has a total capacity of 79.25 GiB of which 5.20 GiB is free. Process 1507485 has 19.68 GiB memory in use. Process 1507627 has 31.21 GiB memory in use. Including non-PyTorch memory, this process has 12.05 GiB memory in use. Process 1523822 has 7.48 GiB memory in use. Process 1525080 has 3.62 GiB memory in use. Of the allocated memory 1.23 GiB is allocated by PyTorch, and 10.32 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-          耗時: 0.20 秒
+          Best val metric: 0.7094878623682292
+          Best test metric: 0.7094878623682292
+          早停輪數: 28
+          耗時: 57.71 秒
 dataset: Ailerons
   模型: dgm
     GNN階段: none
@@ -806,7 +806,7 @@ dataset: house_sales
 dataset: SGEMM_GPU_kernel_performance
   模型: dgm
     GNN階段: none
-          Best val metric: inf
-          Best test metric: inf
-          錯誤: CUDA out of memory. Tried to allocate 217.45 GiB. GPU 0 has a total capacity of 79.25 GiB of which 14.46 GiB is free. Process 1507485 has 19.69 GiB memory in use. Process 1507627 has 31.21 GiB memory in use. Including non-PyTorch memory, this process has 3.14 GiB memory in use. Process 1523822 has 10.74 GiB memory in use. Of the allocated memory 530.91 MiB is allocated by PyTorch, and 2.13 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-          耗時: 0.49 秒
+          Best val metric: 0.01688417847215348
+          Best test metric: 0.01688417847215348
+          早停輪數: 146
+          耗時: 81.84 秒

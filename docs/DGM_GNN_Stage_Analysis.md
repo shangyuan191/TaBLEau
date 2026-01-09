@@ -910,3 +910,69 @@ A: 設置 `DGM_d.debug = True`，可以獲取：
 **最後更新**: 2026-01-04  
 **作者**: TaBLEau Research Team  
 **聯繫**: 如有疑問，請參考代碼註釋或提交 issue
+
+---
+
+## 附錄：用超簡單例子理解「DGM 的 GNN 在哪個階段」
+
+這一節用最直覺的方式，把 **DGM 這種自帶動態建圖的 GNN 模型** 類比到：
+1) PyTorch-Frame 五階段（start/materialize/encoding/columnwise/decoding）
+2) ALIGN 實驗的 `gnn_stages`（start/materialize/encoding/columnwise/decoding/none）
+
+### 一個玩具例子：每一列都是一個節點
+
+假設表格是二分類，每列是一個客戶：
+
+| row | age | income | label |
+|---:|---:|---:|---:|
+| 0 | 25 | 30k | 0 |
+| 1 | 27 | 35k | 0 |
+| 2 | 45 | 90k | 1 |
+| 3 | 43 | 85k | 1 |
+
+如果只用 MLP，row 之間互不相干。
+但 DGM 的核心假設是：**row 之間存在潛在關係**，模型要自己學出「誰該跟誰互相參考」。
+
+### DGM 一層在做什麼（用白話）
+
+每一層 DGM 幾乎都包含兩個緊密耦合的步驟：
+
+1. **Encoding 類比**：`embed_f` 把目前的 row 表徵投影到「更適合算距離」的空間
+2. **Columnwise 類比（建圖）**：用 Gumbel/可微方式選出每個節點的 k 個鄰居（動態 k-NN）
+3. **Columnwise 類比（傳遞）**：在剛建好的圖上做 message passing（GCN/GAT/EdgeConv）
+
+而且這個流程會重複多層：每層都會「重新建一次圖，再傳一次訊息」。
+
+### 對應到 PyTorch-Frame 五階段（「類比」而非外部注入）
+
+| DGM 組件/步驟 | PyTorch-Frame stage 類比 | 為什麼像 |
+|---|---|---|
+| Pre-FC / embed_f | encoding | 特徵投影、讓後續互動更有效 |
+| 動態 k-NN（Gumbel 採樣） | columnwise | 產生 row-to-row 的互動結構 |
+| GNN message passing | columnwise | 真正發生跨 row 資訊聚合 |
+| 最終 FC/MLP | decoding | 輸出預測 |
+
+### 對應到 ALIGN 的 `gnn_stages`
+
+在 ALIGN 實驗裡，`gnn_stages` 表示「把外部 GNN 插入 pipeline 的某個 stage」。
+但 DGM 本身就是 GNN，因此：
+
+1. **跑 DGM 時**：應視為 `gnn_stages=none`（不做外部注入），因為它內部已經完成建圖與 message passing。
+2. **如果要找最像的注入點做概念對照**：DGM 的核心最像 `gnn_stage=columnwise`，且它把「建圖 + 傳遞」這兩件事綁在一起（而不是單純只做固定圖的傳遞）。
+
+一句話總結：DGM 的 GNN 是「內建的 encoding+columnwise(+decoding) 組合」，而其主要創新與效果最像 ALIGN 的 **columnwise 注入**（但更強，因為圖結構也可學）。
+
+### 論文式總結表：LAN-GNN vs DGM vs ALIGN 注入
+
+> 讀法：前兩欄是「自帶 GNN 的 baseline 內建機制」，第三欄是「ALIGN 實驗中外部注入的定義」。
+
+| 對照面向 | LAN-GNN（自帶 GNN baseline） | DGM（自帶 GNN baseline） | ALIGN 外部注入（`gnn_stages`） |
+|---|---|---|---|
+| 模型型態 | comparison baseline；不吃外部注入 | comparison baseline / 原生 GNN；不吃外部注入 | 在既有 tabular 模型管線某一 stage 額外插入 GNN |
+| 節點定義 | 每列資料 = 節點（row-graph） | 每列資料 = 節點（row-graph） | 依 stage 而定（可能是 row graph、或特徵互動後的表徵圖） |
+| 圖是怎麼來的 | 每層從 hidden 表徵生成 kNN 鄰接（DGG；失敗則 LocalTopKAdj / 固定 kNN） | 每層動態採樣 kNN 邊（Gumbel / 可微採樣）；每層重建 | 多數情況是固定圖或由外部流程產生；通常不會每層重建 |
+| message passing 發生在哪 | `DenseGraphConvolution`（密集鄰接上做聚合） | GCN/GAT/EdgeConv 等在動態邊上做聚合 | 插入的那一個 stage：encoding/columnwise/decoding 等 |
+| 最接近的 ALIGN 對照點 | **columnwise**（row-to-row 互動是核心） | **columnwise**（建圖+傳遞緊耦合且可學） | `gnn_stage=columnwise` 表示在 columnwise 做外部 GNN 互動 |
+| 跟 encoding/decoding 的關係 | 內建 `proj`（類比 encoding）+ `head`（類比 decoding） | 內建 pre-fc/embed_f（類比 encoding）+ 最終 FC（類比 decoding） | 可把外部 GNN 插在任意 stage；與模型內部結構無關 |
+| 計算/記憶體特性 | 常見為轉導全圖；鄰接為 [N,N]，記憶體 O(N²)（有閾值降級） | 可轉導或批量/稀疏邊；重建圖成本高，但較可用稀疏邊控記憶體 | 取決於你插入的 GNN 形式與圖大小 |
+| 實驗詮釋建議 | 視為 `gnn_stages=none` 的 baseline（但內部本來就做了 GNN） | 同左；同時強調「圖也可學」是其差異點 | 用來測「把 GNN 插在某一 stage」對既有模型的增益 |

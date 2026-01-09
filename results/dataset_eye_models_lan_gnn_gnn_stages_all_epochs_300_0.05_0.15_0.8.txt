@@ -1,0 +1,7 @@
+dataset: eye
+  模型: lan_gnn
+    GNN階段: none
+          Best val metric: 0.46617915904936014
+          Best test metric: 0.4613098639844554
+          早停輪數: 54
+          耗時: 155.48 秒
