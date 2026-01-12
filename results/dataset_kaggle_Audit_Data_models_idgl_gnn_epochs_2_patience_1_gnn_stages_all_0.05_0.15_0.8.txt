@@ -1,0 +1,7 @@
+dataset: kaggle_Audit_Data
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6971830985915493
+          Best test metric: 0.7805909466452146
+          早停輪數: 2
+          耗時: 1.65 秒

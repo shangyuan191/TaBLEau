@@ -1,0 +1,8 @@
+dataset: kaggle_Audit_Data
+  模型: tabm
+    GNN階段: materialize
+          Best val metric: 0.5759338640538885
+          Best test metric: 0.6854263599599948
+          早停輪數: 35
+          GNN早停輪數: 0
+          耗時: 1.86 秒

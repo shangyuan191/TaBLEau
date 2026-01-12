@@ -1,0 +1,6 @@
+dataset: kaggle_Audit_Data
+  模型: lds_gnn
+    GNN階段: none
+          Best val metric: 0.9999998211860657
+          Best test metric: 0.9243148565292358
+          耗時: 72.18 秒

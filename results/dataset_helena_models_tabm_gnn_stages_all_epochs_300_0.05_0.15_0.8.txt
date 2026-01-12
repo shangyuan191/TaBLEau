@@ -1,38 +1,38 @@
 dataset: helena
   模型: tabm
     GNN階段: none
-          Best val metric: 0.3076687157154083
-          Best test metric: 0.31196194887161255
-          早停輪數: 28
+          Best val metric: 0.29703477025032043
+          Best test metric: 0.3048296272754669
+          早停輪數: 21
           GNN早停輪數: 0
-          耗時: 9.78 秒
+          耗時: 6.65 秒
     GNN階段: start
-          Best val metric: 0.28261759877204895
-          Best test metric: 0.2866729199886322
-          早停輪數: 28
+          Best val metric: 0.1194274052977562
+          Best test metric: 0.11923614889383316
+          早停輪數: 15
           GNN早停輪數: 0
-          耗時: 14.16 秒
+          耗時: 15.76 秒
     GNN階段: materialize
-          Best val metric: 0.28067484498023987
-          Best test metric: 0.28444886207580566
-          早停輪數: 27
+          Best val metric: 0.10685072094202042
+          Best test metric: 0.10499069839715958
+          早停輪數: 18
           GNN早停輪數: 0
-          耗時: 13.17 秒
+          耗時: 13.06 秒
     GNN階段: encoding
-          Best val metric: 0.2710633873939514
-          Best test metric: 0.2741530239582062
-          早停輪數: 62
+          Best val metric: 0.28588956594467163
+          Best test metric: 0.29641273617744446
+          早停輪數: 24
           GNN早停輪數: 0
-          耗時: 247.28 秒
+          耗時: 58.97 秒
     GNN階段: columnwise
-          Best val metric: 0.26584866642951965
-          Best test metric: 0.26978161931037903
-          早停輪數: 99
+          Best val metric: 0.30122700333595276
+          Best test metric: 0.3023371696472168
+          早停輪數: 21
           GNN早停輪數: 0
-          耗時: 431.11 秒
+          耗時: 52.28 秒
     GNN階段: decoding
-          Best val metric: 0.05173824355006218
-          Best test metric: 0.05280211567878723
-          早停輪數: 300
-          GNN早停輪數: 18
-          耗時: 53.22 秒
+          Best val metric: 0.2698363959789276
+          Best test metric: 0.2713537812232971
+          早停輪數: 25
+          GNN早停輪數: 0
+          耗時: 36.09 秒

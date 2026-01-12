@@ -1,0 +1,6 @@
+dataset: openml_Pima_Indians_Diabetes
+  模型: lds_gnn
+    GNN階段: none
+          Best val metric: 1.0000001192092896
+          Best test metric: 0.7333330512046814
+          耗時: 28.68 秒

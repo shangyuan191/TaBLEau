@@ -1,0 +1,8 @@
+dataset: kaggle_Audit_Data
+  模型: subtab
+    GNN階段: decoding
+          Best val metric: 0.8897734231475811
+          Best test metric: 0.8803648301952428
+          早停輪數: 0
+          GNN早停輪數: 0
+          耗時: 2.39 秒

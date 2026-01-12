@@ -1,38 +1,38 @@
 dataset: openml_The_Office_Dataset
   模型: vime
     GNN階段: none
-          Best val metric: 17272796.14340481
-          Best test metric: 21896728.651219126
+          Best val metric: 1.0716572092519268
+          Best test metric: 0.937300002016326
           早停輪數: 17
           GNN早停輪數: 0
-          耗時: 1.08 秒
+          耗時: 1.32 秒
     GNN階段: start
-          Best val metric: 1.4549809029061784
-          Best test metric: 1.3835244130848896
-          早停輪數: 36
-          GNN早停輪數: 72
-          耗時: 2.60 秒
+          Best val metric: 1.1086815832252586
+          Best test metric: 0.9927519063668369
+          早停輪數: 29
+          GNN早停輪數: 11
+          耗時: 2.36 秒
     GNN階段: materialize
-          Best val metric: 27016745.951734994
-          Best test metric: 15961652.885201057
-          早停輪數: 30
-          GNN早停輪數: 13
-          耗時: 0.43 秒
+          Best val metric: 1.1276921846591819
+          Best test metric: 0.9593133844120615
+          早停輪數: 40
+          GNN早停輪數: 17
+          耗時: 4.73 秒
     GNN階段: encoding
-          Best val metric: 11344099.312514449
-          Best test metric: 14380918.232518312
-          早停輪數: 22
+          Best val metric: 1.0651061086402813
+          Best test metric: 0.9329615902244384
+          早停輪數: 16
           GNN早停輪數: 0
-          耗時: 0.57 秒
+          耗時: 3.78 秒
     GNN階段: columnwise
-          Best val metric: 7090351.355561655
-          Best test metric: 8988440.205312964
-          早停輪數: 24
+          Best val metric: 1.0681331802962817
+          Best test metric: 0.9307691749508203
+          早停輪數: 26
           GNN早停輪數: 0
-          耗時: 0.71 秒
+          耗時: 3.49 秒
     GNN階段: decoding
-          Best val metric: 417508.13886198675
-          Best test metric: 255092.8005569738
-          早停輪數: 20
-          GNN早停輪數: 27
-          耗時: 0.71 秒
+          Best val metric: 1.0845671865458395
+          Best test metric: 0.995097091816304
+          早停輪數: 15
+          GNN早停輪數: 0
+          耗時: 1.34 秒

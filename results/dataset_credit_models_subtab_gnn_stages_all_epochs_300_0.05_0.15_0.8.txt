@@ -1,38 +1,38 @@
 dataset: credit
   模型: subtab
     GNN階段: none
-          Best val metric: 0.7300513854468573
-          Best test metric: 0.7275623992843727
+          Best val metric: 0.7299966523724242
+          Best test metric: 0.7275546816117793
           早停輪數: 0
           GNN早停輪數: 0
-          耗時: 17.01 秒
+          耗時: 33.26 秒
     GNN階段: start
-          Best val metric: 0.714218889020418
-          Best test metric: 0.70894437540048
-          早停輪數: 294
-          GNN早停輪數: 0
-          耗時: 17.97 秒
+          Best val metric: 0.6113512577787791
+          Best test metric: 0.598386657454972
+          早停輪數: 82
+          GNN早停輪數: 23
+          耗時: 10.77 秒
     GNN階段: materialize
-          Best val metric: 0.7172661211179294
-          Best test metric: 0.7077957396478719
+          Best val metric: 0.6407231893853476
+          Best test metric: 0.6371544954570424
+          早停輪數: 119
+          GNN早停輪數: 24
+          耗時: 13.53 秒
+    GNN階段: encoding
+          Best val metric: 0.7234891443947604
+          Best test metric: 0.7232403236715826
+          早停輪數: 20
+          GNN早停輪數: 0
+          耗時: 9.83 秒
+    GNN階段: columnwise
+          Best val metric: 0.7234891443947604
+          Best test metric: 0.7232402789314518
+          早停輪數: 20
+          GNN早停輪數: 0
+          耗時: 9.52 秒
+    GNN階段: decoding
+          Best val metric: 0.7312917896569763
+          Best test metric: 0.7361988440223919
           早停輪數: 0
           GNN早停輪數: 0
-          耗時: 23.22 秒
-    GNN階段: encoding
-          Best val metric: 0.7300195638919544
-          Best test metric: 0.7229702722410127
-          早停輪數: 47
-          GNN早停輪數: 0
-          耗時: 53.01 秒
-    GNN階段: columnwise
-          Best val metric: 0.7287549753001091
-          Best test metric: 0.7251423608597585
-          早停輪數: 259
-          GNN早停輪數: 0
-          耗時: 14.26 秒
-    GNN階段: decoding
-          Best val metric: 0.760211218752824
-          Best test metric: 0.7691265513975967
-          早停輪數: 249
-          GNN早停輪數: 0
-          耗時: 17.43 秒
+          耗時: 132.44 秒

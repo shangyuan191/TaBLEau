@@ -1,0 +1,7 @@
+dataset: eye
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.3705057891529555
+          Best test metric: 0.36598468396388156
+          早停輪數: 2
+          耗時: 2.36 秒

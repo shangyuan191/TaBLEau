@@ -3,10 +3,10 @@ TabM (Tabular Model with Multiple predictions) 集成到 TaBLEau 框架
 
 五階段拆分設計：
 - start: dummy stage（為了讓 GNN 能在 materialize 之前插入）
-- materialize: 數據預處理 + 特徵嵌入，GNN 在這裡完整訓練並轉換所有數據
-- encoding: EnsembleView + Backbone 前半部分，GNN 與這些層一起訓練
-- columnwise: Backbone 後半部分，GNN 與這些層一起訓練
-- decoding: 訓練完 encoder+columnwise 後，將所有數據通過並用 GNN 作為 decoder
+- materialize: 數據預處理 + 特徵嵌入（可在此做 precompute GNN，採 train-only 訓練、對 val/test 做 inductive 推論）
+- encoding: EnsembleView + Backbone 前半部分（可在此插入 row-level Dynamic-Graph + Attention，與這些層 joint-train）
+- columnwise: Backbone 後半部分（同上，可插入 row-level Dynamic-Graph + Attention，與這些層 joint-train）
+- decoding: 以 GNN 作為 decoder 的端到端 joint training/推論（row-level self-attn pooling → DGM 動態建圖 → GCN decoder）
 """
 
 import sys
@@ -14,10 +14,22 @@ import os
 import math
 from pathlib import Path
 
-# 添加 TabM 包的路徑
-tabm_path = '/home/shangyuan/ModelComparison/tabm'
-if tabm_path not in sys.path:
-    sys.path.insert(0, tabm_path)
+# 添加 TabM 包的路徑（避免硬編碼到其他使用者目錄）
+# 期望 repo 結構：.../ModelComparison/TaBLEau/models/custom/tabm.py
+#            TabM 原始碼：.../ModelComparison/tabm/tabm.py
+_this_file = Path(__file__).resolve()
+_modelcomparison_root = _this_file.parents[3]  # .../ModelComparison
+_tabm_dir_candidates = [
+    _modelcomparison_root / 'tabm',
+    Path('/home/skyler/ModelComparison/tabm'),
+]
+for _tabm_dir in _tabm_dir_candidates:
+    try:
+        if _tabm_dir.exists() and str(_tabm_dir) not in sys.path:
+            sys.path.insert(0, str(_tabm_dir))
+            break
+    except Exception:
+        continue
 
 import torch
 import torch.nn as nn
@@ -169,22 +181,22 @@ def start_fn(train_df, val_df, test_df):
 def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     """
     在 start 和 materialize 之間插入 GNN
-    GNN 完整訓練並將所有數據轉換為 node embedding，再組回 df 往下游傳遞
+    採 train-only 訓練（val/test 不參與 supervision），並對每個 split 做 inductive 推論後組回 df 往下游傳遞
     """
-    print("[TABM][START-GNN-DGM] Executing ExcelFormer-aligned GNN between start_fn and materialize_fn")
+    print("[TABM][START-GNN-DGM] Executing Dynamic-Graph + Attention (DGM + Self-Attn) between start_fn and materialize_fn")
     device = resolve_device(config)
 
     # Align with excelformer.py: fixed dgm_k default (user override allowed)
     dgm_k = int(config['dgm_k']) if 'dgm_k' in config else 10
     dgm_distance = config.get('dgm_distance', 'euclidean')
 
-    gnn_epochs = int(config.get('gnn_epochs', config.get('epochs', 200)))
+    gnn_epochs = int(config.get('epochs', 200))
     patience = int(config.get('gnn_patience', 10))
     loss_threshold = float(config.get('gnn_loss_threshold', 1e-4))
     attn_dim = int(config.get('gnn_attn_dim', config.get('gnn_hidden', 64)))
     gnn_hidden = int(config.get('gnn_hidden', 64))
     gnn_out_dim = int(config.get('gnn_out_dim', attn_dim))
-    attn_heads = int(config.get('gnn_num_heads', config.get('gnn_attn_heads', 4)))
+    attn_heads = int(config.get('gnn_num_heads', 4))
     lr = float(config.get('gnn_lr', 1e-3))
 
     # Split tensors (train-only training, inductive inference per split)
@@ -208,17 +220,10 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     else:
         out_dim = 1
 
-    # Safety: MultiheadAttention requires embed_dim % num_heads == 0
     if attn_heads <= 0:
         attn_heads = 1
-    if attn_dim % attn_heads != 0:
-        # fallback to a divisor
-        for h in [8, 4, 2, 1]:
-            if attn_dim % h == 0:
-                attn_heads = h
-                break
 
-    # ExcelFormer-aligned token pipeline on features
+    # Dynamic-Graph + Attention token pipeline on features
     input_proj = torch.nn.Linear(1, attn_dim).to(device)
     out_proj = torch.nn.Linear(attn_dim, 1).to(device)
     attn_in = torch.nn.MultiheadAttention(embed_dim=attn_dim, num_heads=attn_heads, batch_first=True).to(device)
@@ -227,13 +232,15 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
     pool_query = torch.nn.Parameter(torch.randn(attn_dim, device=device))
 
     # DGM_d (train-only k cap)
-    dgm_module = None
-    if DGM_AVAILABLE:
-        class DGMEmbedWrapper(torch.nn.Module):
-            def forward(self, x, A=None):
-                return x
-        dgm_k_train = int(min(dgm_k, max(1, int(x_train.shape[0]) - 1)))
-        dgm_module = DGM_d(DGMEmbedWrapper(), k=dgm_k_train, distance=dgm_distance).to(device)
+    if not DGM_AVAILABLE:
+        raise ImportError("DGM is required for the Dynamic-Graph + Attention START-GNN stage, but DGM is not available.")
+
+    class DGMEmbedWrapper(torch.nn.Module):
+        def forward(self, x, A=None):
+            return x
+
+    dgm_k_train = int(min(dgm_k, max(1, int(x_train.shape[0]) - 1)))
+    dgm_module = DGM_d(DGMEmbedWrapper(), k=dgm_k_train, distance=dgm_distance).to(device)
 
     gnn_layers = int(config.get('gnn_layers', 2))
     gnn = SimpleGCN(attn_dim, gnn_hidden, gnn_out_dim, num_layers=gnn_layers).to(device)
@@ -264,16 +271,10 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
         row_emb = (pool_w.unsqueeze(-1) * tokens_attn).sum(dim=1)
         row_emb_std = _standardize(row_emb, dim=0)
 
-        logprobs_dgm = None
-        if dgm_module is not None:
-            row_emb_batched = row_emb_std.unsqueeze(0)
-            row_emb_dgm, edge_index_dgm, logprobs_dgm = dgm_module(row_emb_batched, A=None)
-            row_emb_dgm = row_emb_dgm.squeeze(0)
-            edge_index = _symmetrize_and_self_loop(edge_index_dgm.to(device), Ns)
-        else:
-            edge_index = knn_graph(row_emb_std, k=min(5, max(1, Ns - 1)), directed=False).to(device)
-            edge_index = _symmetrize_and_self_loop(edge_index, Ns)
-            row_emb_dgm = row_emb_std
+        row_emb_batched = row_emb_std.unsqueeze(0)
+        row_emb_dgm, edge_index_dgm, logprobs_dgm = dgm_module(row_emb_batched, A=None)
+        row_emb_dgm = row_emb_dgm.squeeze(0)
+        edge_index = _symmetrize_and_self_loop(edge_index_dgm.to(device), Ns)
 
         gcn_out = gnn(row_emb_dgm, edge_index)
         logits = pred_head(gcn_out)
@@ -296,8 +297,8 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
         else:
             y_train = torch.tensor(y_train_np, dtype=torch.float32, device=device)
             train_loss = F.mse_loss(logits.squeeze(-1), y_train)
-        if logprobs_dgm is not None:
-            train_loss = train_loss + (-logprobs_dgm.mean() * 0.01)
+        # DGM regularizer (aligned with excelformer.py)
+        train_loss = train_loss + (-logprobs_dgm.mean() * 0.01)
         train_loss.backward()
         optimizer.step()
 
@@ -375,21 +376,21 @@ def gnn_after_start_fn(train_df, val_df, test_df, config, task_type):
 def gnn_after_materialize_fn(X_train, y_train, X_val, y_val, X_test, y_test, config, task_type):
     """
     在 materialize 後插入 GNN
-    GNN 完整訓練並將所有數據轉換為 node embedding
+    採 train-only 訓練（val/test 不參與 supervision），並對每個 split 做 inductive 推論
     """
-    print("[TABM][MATERIALIZE-GNN-DGM] Executing ExcelFormer-aligned GNN after materialize_fn")
+    print("[TABM][MATERIALIZE-GNN-DGM] Executing Dynamic-Graph + Attention (DGM + Self-Attn) after materialize_fn")
     device = config.get('device', resolve_device(config))
 
     dgm_k = int(config['dgm_k']) if 'dgm_k' in config else 10
     dgm_distance = config.get('dgm_distance', 'euclidean')
 
-    gnn_epochs = int(config.get('gnn_epochs', config.get('epochs', 200)))
+    gnn_epochs = int(config.get('epochs', 200))
     patience = int(config.get('gnn_patience', 10))
     loss_threshold = float(config.get('gnn_loss_threshold', 1e-4))
     attn_dim = int(config.get('gnn_attn_dim', config.get('gnn_hidden', 64)))
     gnn_hidden = int(config.get('gnn_hidden', 64))
     gnn_out_dim = int(config.get('gnn_out_dim', attn_dim))
-    attn_heads = int(config.get('gnn_num_heads', config.get('gnn_attn_heads', 4)))
+    attn_heads = int(config.get('gnn_num_heads', 4))
     lr = float(config.get('gnn_lr', 1e-3))
 
     # Train-only training, inductive inference per split
@@ -405,11 +406,6 @@ def gnn_after_materialize_fn(X_train, y_train, X_val, y_val, X_test, y_test, con
 
     if attn_heads <= 0:
         attn_heads = 1
-    if attn_dim % attn_heads != 0:
-        for h in [8, 4, 2, 1]:
-            if attn_dim % h == 0:
-                attn_heads = h
-                break
 
     Fcols = int(X_train.shape[1])
     input_proj = torch.nn.Linear(1, attn_dim).to(device)
@@ -419,13 +415,15 @@ def gnn_after_materialize_fn(X_train, y_train, X_val, y_val, X_test, y_test, con
     column_embed = torch.nn.Parameter(torch.randn(Fcols, attn_dim, device=device))
     pool_query = torch.nn.Parameter(torch.randn(attn_dim, device=device))
 
-    dgm_module = None
-    if DGM_AVAILABLE:
-        class DGMEmbedWrapper(torch.nn.Module):
-            def forward(self, x, A=None):
-                return x
-        dgm_k_train = int(min(dgm_k, max(1, int(X_train.shape[0]) - 1)))
-        dgm_module = DGM_d(DGMEmbedWrapper(), k=dgm_k_train, distance=dgm_distance).to(device)
+    if not DGM_AVAILABLE:
+        raise ImportError("DGM is required for the Dynamic-Graph + Attention MATERIALIZE-GNN stage, but DGM is not available.")
+
+    class DGMEmbedWrapper(torch.nn.Module):
+        def forward(self, x, A=None):
+            return x
+
+    dgm_k_train = int(min(dgm_k, max(1, int(X_train.shape[0]) - 1)))
+    dgm_module = DGM_d(DGMEmbedWrapper(), k=dgm_k_train, distance=dgm_distance).to(device)
 
     gnn_layers = int(config.get('gnn_layers', 2))
     gnn = SimpleGCN(attn_dim, gnn_hidden, gnn_out_dim, num_layers=gnn_layers).to(device)
@@ -455,16 +453,10 @@ def gnn_after_materialize_fn(X_train, y_train, X_val, y_val, X_test, y_test, con
         row_emb = (pool_w.unsqueeze(-1) * tokens_attn).sum(dim=1)
         row_emb_std = _standardize(row_emb, dim=0)
 
-        logprobs_dgm = None
-        if dgm_module is not None:
-            row_emb_batched = row_emb_std.unsqueeze(0)
-            row_emb_dgm, edge_index_dgm, logprobs_dgm = dgm_module(row_emb_batched, A=None)
-            row_emb_dgm = row_emb_dgm.squeeze(0)
-            edge_index = _symmetrize_and_self_loop(edge_index_dgm.to(device), Ns)
-        else:
-            edge_index = knn_graph(row_emb_std, k=min(5, max(1, Ns - 1)), directed=False).to(device)
-            edge_index = _symmetrize_and_self_loop(edge_index, Ns)
-            row_emb_dgm = row_emb_std
+        row_emb_batched = row_emb_std.unsqueeze(0)
+        row_emb_dgm, edge_index_dgm, logprobs_dgm = dgm_module(row_emb_batched, A=None)
+        row_emb_dgm = row_emb_dgm.squeeze(0)
+        edge_index = _symmetrize_and_self_loop(edge_index_dgm.to(device), Ns)
 
         gcn_out = gnn(row_emb_dgm, edge_index)
         logits = pred_head(gcn_out)
@@ -484,8 +476,8 @@ def gnn_after_materialize_fn(X_train, y_train, X_val, y_val, X_test, y_test, con
             train_loss = F.cross_entropy(logits, y_train.long())
         else:
             train_loss = F.mse_loss(logits.squeeze(-1), y_train.float())
-        if logprobs_dgm is not None:
-            train_loss = train_loss + (-logprobs_dgm.mean() * 0.01)
+        # DGM regularizer (aligned with excelformer.py)
+        train_loss = train_loss + (-logprobs_dgm.mean() * 0.01)
         train_loss.backward()
         optimizer.step()
 
@@ -658,8 +650,8 @@ def materialize_fn(train_df, val_df, test_df, dataset_results, config):
 
 def tabm_core_fn(material_outputs, config, gnn_stage):
     """TabM 核心訓練（對齊 ExcelFormer）：
-    - encoding/columnwise：row-level self-attn pooling → DGM/kNN → GCN → self-attn decode 回寫 + 殘差融合
-    - decoding：row-level self-attn pooling → DGM/kNN → GCN 作為 decoder（端到端 joint training）
+    - encoding/columnwise：row-level self-attn pooling → DGM 動態建圖 → GCN → self-attn decode 回寫 + 殘差融合
+    - decoding：row-level self-attn pooling → DGM 動態建圖 → GCN 作為 decoder（端到端 joint training）
     - early stopping：基於 val_loss，並恢復最佳權重
     """
 
@@ -712,7 +704,7 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
     output_layer = None if gnn_stage == 'decoding' else LinearEnsemble(d_block, d_out, k=k).to(device)
 
     # ---------------------------
-    # ExcelFormer-aligned row GNN blocks
+    # Dynamic-Graph + Attention row GNN blocks
     # ---------------------------
     use_row_gnn = gnn_stage in ['encoding', 'columnwise', 'decoding']
     gnn = None
@@ -721,33 +713,35 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
     token_embed = None
     pool_query = None
     self_attn = None
+    attn_norm = None
     self_attn_out = None
+    attn_out_norm = None
     gcn_to_attn = None
+    ffn_pre = None
+    ffn_post = None
     fusion_alpha_param = None
 
     if use_row_gnn:
-        attn_heads = int(config.get('gnn_num_heads', config.get('gnn_attn_heads', 8)))
+        attn_heads = int(config.get('gnn_num_heads', 4))
         if attn_heads <= 0:
             attn_heads = 1
-        if d_block % attn_heads != 0:
-            for h in [16, 8, 4, 2, 1]:
-                if d_block % h == 0:
-                    attn_heads = h
-                    break
 
         self_attn = torch.nn.MultiheadAttention(embed_dim=d_block, num_heads=attn_heads, batch_first=True).to(device)
         attn_norm = torch.nn.LayerNorm(d_block).to(device)
         token_embed = torch.nn.Parameter(torch.randn(k, d_block, device=device))
         pool_query = torch.nn.Parameter(torch.randn(d_block, device=device))
 
-        # DGM module is optional; align with ExcelFormer signature and distance
-        if DGM_AVAILABLE:
-            dgm_k = int(config.get('dgm_k', config.get('gnn_knn', 5)))
-            dgm_distance = config.get('dgm_distance', 'euclidean')
-            class DGMEmbedWrapper(torch.nn.Module):
-                def forward(self, x, A=None):
-                    return x
-            dgm_module = DGM_d(DGMEmbedWrapper(), k=max(1, int(dgm_k)), distance=dgm_distance).to(device)
+        if not DGM_AVAILABLE:
+            raise ImportError("DGM is required for the Dynamic-Graph + Attention CORE gnn_stage, but DGM is not available.")
+
+        dgm_k = int(config.get('dgm_k', config.get('gnn_knn', 5)))
+        dgm_distance = config.get('dgm_distance', 'euclidean')
+
+        class DGMEmbedWrapper(torch.nn.Module):
+            def forward(self, x, A=None):
+                return x
+
+        dgm_module = DGM_d(DGMEmbedWrapper(), k=int(dgm_k), distance=dgm_distance).to(device)
 
         gnn_hidden = int(config.get('gnn_hidden', 64))
         gnn_layers = int(config.get('gnn_layers', 2))
@@ -780,24 +774,21 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
         tokens_norm = attn_norm(tokens)
         attn_out1, _ = self_attn(tokens_norm, tokens_norm, tokens_norm)
         tokens_attn = tokens + attn_out1
-        tokens_attn = tokens_attn + ffn_pre(attn_norm(tokens_attn))
+        # Align with excelformer.py: decoding path does not apply FFN before pooling
+        if not decoder:
+            tokens_attn = tokens_attn + ffn_pre(attn_norm(tokens_attn))
 
         pool_logits = (tokens_attn * pool_query).sum(dim=2) / math.sqrt(d_block)
         pool_w = torch.softmax(pool_logits, dim=1)
         x_pooled = (pool_w.unsqueeze(-1) * tokens_attn).sum(dim=1)  # [B, d]
         x_std = _standardize(x_pooled, dim=0)
 
-        if dgm_module is not None:
-            x_batched = x_std.unsqueeze(0)
-            if hasattr(dgm_module, 'k'):
-                dgm_module.k = int(min(int(dgm_module.k), max(1, B - 1)))
-            x_dgm, edge_index_dgm, _ = dgm_module(x_batched, A=None)
-            x_dgm = x_dgm.squeeze(0)
-            edge_index = _symmetrize_and_self_loop(edge_index_dgm.to(device), B)
-        else:
-            edge_index = knn_graph(x_std, k=min(5, max(1, B - 1)), directed=False).to(device)
-            edge_index = _symmetrize_and_self_loop(edge_index, B)
-            x_dgm = x_std
+        x_batched = x_std.unsqueeze(0)
+        if hasattr(dgm_module, 'k'):
+            dgm_module.k = int(min(int(dgm_module.k), max(1, B - 1)))
+        x_dgm, edge_index_dgm, _ = dgm_module(x_batched, A=None)
+        x_dgm = x_dgm.squeeze(0)
+        edge_index = _symmetrize_and_self_loop(edge_index_dgm.to(device), B)
 
         if decoder:
             return gnn_decoder(x_dgm, edge_index)  # [B, d_out]
@@ -972,12 +963,13 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
             output_layer.train()
         if use_row_gnn:
             self_attn.train()
+            attn_norm.train()
             if dgm_module is not None:
                 dgm_module.train()
             if gnn_stage == 'decoding':
                 gnn_decoder.train()
             else:
-                gnn.train(); self_attn_out.train(); gcn_to_attn.train()
+                gnn.train(); self_attn_out.train(); attn_out_norm.train(); gcn_to_attn.train(); ffn_pre.train(); ffn_post.train()
 
         indices = torch.randperm(len(X_train), device=device)
         epoch_loss = 0.0
@@ -1012,12 +1004,13 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
             output_layer.eval()
         if use_row_gnn:
             self_attn.eval()
+            attn_norm.eval()
             if dgm_module is not None:
                 dgm_module.eval()
             if gnn_stage == 'decoding':
                 gnn_decoder.eval()
             else:
-                gnn.eval(); self_attn_out.eval(); gcn_to_attn.eval()
+                gnn.eval(); self_attn_out.eval(); attn_out_norm.eval(); gcn_to_attn.eval(); ffn_pre.eval(); ffn_post.eval()
 
         val_loss, val_metric, test_metric = _eval_metrics()
         improved = val_loss < best_val_loss - loss_threshold
@@ -1034,12 +1027,16 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
                 'output_layer': (output_layer.state_dict() if output_layer is not None else None),
                 'use_row_gnn': use_row_gnn,
                 'self_attn': (self_attn.state_dict() if use_row_gnn else None),
+                'attn_norm': (attn_norm.state_dict() if use_row_gnn and attn_norm is not None else None),
                 'dgm_module': (dgm_module.state_dict() if dgm_module is not None else None),
                 'token_embed': (token_embed.detach().clone() if token_embed is not None else None),
                 'pool_query': (pool_query.detach().clone() if pool_query is not None else None),
                 'gnn': (gnn.state_dict() if gnn is not None else None),
                 'self_attn_out': (self_attn_out.state_dict() if self_attn_out is not None else None),
+                'attn_out_norm': (attn_out_norm.state_dict() if attn_out_norm is not None else None),
                 'gcn_to_attn': (gcn_to_attn.state_dict() if gcn_to_attn is not None else None),
+                'ffn_pre': (ffn_pre.state_dict() if ffn_pre is not None else None),
+                'ffn_post': (ffn_post.state_dict() if ffn_post is not None else None),
                 'fusion_alpha_param': (fusion_alpha_param.detach().clone() if fusion_alpha_param is not None else None),
                 'gnn_decoder': (gnn_decoder.state_dict() if gnn_decoder is not None else None),
             }
@@ -1070,6 +1067,8 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
             output_layer.load_state_dict(best_states['output_layer'])
         if use_row_gnn:
             self_attn.load_state_dict(best_states['self_attn'])
+            if best_states.get('attn_norm') is not None and attn_norm is not None:
+                attn_norm.load_state_dict(best_states['attn_norm'])
             if best_states.get('token_embed') is not None:
                 with torch.no_grad():
                     token_embed.copy_(best_states['token_embed'])
@@ -1085,8 +1084,14 @@ def tabm_core_fn(material_outputs, config, gnn_stage):
                     gnn.load_state_dict(best_states['gnn'])
                 if best_states.get('self_attn_out') is not None:
                     self_attn_out.load_state_dict(best_states['self_attn_out'])
+                if best_states.get('attn_out_norm') is not None and attn_out_norm is not None:
+                    attn_out_norm.load_state_dict(best_states['attn_out_norm'])
                 if best_states.get('gcn_to_attn') is not None:
                     gcn_to_attn.load_state_dict(best_states['gcn_to_attn'])
+                if best_states.get('ffn_pre') is not None and ffn_pre is not None:
+                    ffn_pre.load_state_dict(best_states['ffn_pre'])
+                if best_states.get('ffn_post') is not None and ffn_post is not None:
+                    ffn_post.load_state_dict(best_states['ffn_post'])
                 if best_states.get('fusion_alpha_param') is not None:
                     with torch.no_grad():
                         fusion_alpha_param.copy_(best_states['fusion_alpha_param'])
@@ -1107,7 +1112,10 @@ def tabm_decoding_with_gnn(X_train, y_train, X_val, y_val, X_test, y_test,
                             num_embeddings, ensemble_view, encoding_blocks, columnwise_blocks,
                             forward, task_type, label_stats, k, d_block, config):
     """
-    Decoding 階段：先訓練 encoder+columnwise，然後用 GNN 作為 decoder
+    [Legacy] 舊版 decoding 流程：先訓練 encoder+columnwise，再用（靜態 kNN 圖上的）GNN 作為 decoder。
+
+    注意：目前 `tabm_core_fn` 在 `gnn_stage == 'decoding'` 已改為端到端 joint training（Dynamic-Graph + Attention / DGM + Self-Attn），
+    因此此函式不再是主路徑；保留僅供回溯/對照實驗使用。
     """
     print("TabM Decoding with GNN as decoder...")
     device = config['device']
@@ -1296,6 +1304,27 @@ def main(train_df, val_df, test_df, dataset_results, config, gnn_stage):
             material_outputs['X_train'] = X_train_gnn
             material_outputs['X_val'] = X_val_gnn
             material_outputs['X_test'] = X_test_gnn
+
+            # 重要：TabM 的數值 embedding (PiecewiseLinearEmbeddings) 依賴訓練特徵分佈的 bins。
+            # 如果在 materialize 後重寫了 X，必須用新的 X_train 重新計算 bins，否則會嚴重 mismatch。
+            if material_outputs.get('num_embeddings', None) is not None:
+                try:
+                    device = material_outputs['device']
+                    X_train_for_bins = material_outputs['X_train']
+                    n_bins = min(48, int(X_train_for_bins.shape[0]) - 1)
+                    n_bins = max(n_bins, 2)
+                    material_outputs['num_embeddings'] = PiecewiseLinearEmbeddings(
+                        rtdl_num_embeddings.compute_bins(
+                            X_train_for_bins,
+                            n_bins=n_bins,
+                        ),
+                        d_embedding=16,
+                        activation=False,
+                        version='B',
+                    ).to(device)
+                    print(f"[TABM][MATERIALIZE-GNN-DGM] Recomputed num_embeddings bins with n_bins={n_bins}")
+                except Exception as _e:
+                    print(f"[TABM][MATERIALIZE-GNN-DGM][WARNING] Failed to recompute num_embeddings bins: {_e}")
         
         # 階段 2-4: 核心訓練（encoding, columnwise, decoding 都在這裡處理）
         results = tabm_core_fn(material_outputs, config, gnn_stage)

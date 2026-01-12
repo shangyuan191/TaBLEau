@@ -190,7 +190,7 @@ A: 這些是基於 ALIGN 研究設計的推測，用於幫助規劃章節內容�
 
 ## 📝 相關文檔鏈接 | Related Document Links
 
-- 完整研究說明: [ALIGN_full_overview.md](ALIGN_full_overview.md)
+- 完整研究說明: [SAGE_full_overview.md](SAGE_full_overview.md)
 - 消融實驗計劃: [ablation_study/ABLATION_STUDY_PLAN.md](../ablation_study/ABLATION_STUDY_PLAN.md)
 - 主要論文: [Paper/](../Paper/)
 - 實驗結果: [summary_results/](../summary_results/)

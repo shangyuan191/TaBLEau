@@ -1,0 +1,8 @@
+dataset: kaggle_Audit_Data
+  模型: vime
+    GNN階段: decoding
+          Best val metric: 0.7287201469687693
+          Best test metric: 0.6604230986650433
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 2.45 秒

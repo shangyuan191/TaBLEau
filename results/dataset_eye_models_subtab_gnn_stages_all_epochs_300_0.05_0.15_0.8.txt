@@ -1,0 +1,38 @@
+dataset: eye
+  模型: subtab
+    GNN階段: none
+          Best val metric: 0.44972577696526506
+          Best test metric: 0.4301062978626129
+          早停輪數: 227
+          GNN早停輪數: 0
+          耗時: 20.79 秒
+    GNN階段: start
+          Best val metric: 0.37964655697745275
+          Best test metric: 0.366556177848897
+          早停輪數: 149
+          GNN早停輪數: 25
+          耗時: 14.73 秒
+    GNN階段: materialize
+          Best val metric: 0.36989640463132234
+          Best test metric: 0.371813921591039
+          早停輪數: 150
+          GNN早停輪數: 14
+          耗時: 13.86 秒
+    GNN階段: encoding
+          Best val metric: 0.4302254722730043
+          Best test metric: 0.43124928563264375
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 5.94 秒
+    GNN階段: columnwise
+          Best val metric: 0.4302254722730043
+          Best test metric: 0.43124928563264375
+          早停輪數: 16
+          GNN早停輪數: 0
+          耗時: 5.64 秒
+    GNN階段: decoding
+          Best val metric: 0.40585009140767825
+          Best test metric: 0.4115898959881129
+          早停輪數: 227
+          GNN早停輪數: 0
+          耗時: 29.50 秒

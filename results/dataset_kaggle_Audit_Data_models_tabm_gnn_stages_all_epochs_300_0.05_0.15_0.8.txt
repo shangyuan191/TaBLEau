@@ -1,38 +1,38 @@
 dataset: kaggle_Audit_Data
   模型: tabm
     GNN階段: none
-          Best val metric: 0.9487180113792419
-          Best test metric: 0.9388083815574646
-          早停輪數: 21
+          Best val metric: 0.9990814451928965
+          Best test metric: 0.9951080575727269
+          早停輪數: 42
           GNN早停輪數: 0
-          耗時: 2.23 秒
+          耗時: 1.40 秒
     GNN階段: start
-          Best val metric: 0.9316239953041077
-          Best test metric: 0.9146537780761719
-          早停輪數: 33
+          Best val metric: 0.7999081445192896
+          Best test metric: 0.8770980997521416
+          早停輪數: 27
           GNN早停輪數: 0
-          耗時: 1.71 秒
+          耗時: 0.85 秒
     GNN階段: materialize
-          Best val metric: 0.9316239953041077
-          Best test metric: 0.9243156313896179
-          早停輪數: 20
-          GNN早停輪數: 0
-          耗時: 0.95 秒
-    GNN階段: encoding
-          Best val metric: 0.9658120274543762
-          Best test metric: 0.9388083815574646
-          早停輪數: 39
-          GNN早停輪數: 0
-          耗時: 7.31 秒
-    GNN階段: columnwise
-          Best val metric: 0.9572650194168091
-          Best test metric: 0.9468598961830139
+          Best val metric: 0.5704225352112677
+          Best test metric: 0.5998934643649172
           早停輪數: 23
           GNN早停輪數: 0
-          耗時: 4.78 秒
+          耗時: 1.48 秒
+    GNN階段: encoding
+          Best val metric: 0.9993876301285977
+          Best test metric: 0.9948254120102622
+          早停輪數: 43
+          GNN早停輪數: 0
+          耗時: 2.51 秒
+    GNN階段: columnwise
+          Best val metric: 0.9954072259644825
+          Best test metric: 0.9932491194503631
+          早停輪數: 30
+          GNN早停輪數: 0
+          耗時: 1.76 秒
     GNN階段: decoding
-          Best val metric: 0.9743590354919434
-          Best test metric: 0.9404186606407166
-          早停輪數: 300
-          GNN早停輪數: 27
-          耗時: 3.66 秒
+          Best val metric: 0.9954072259644825
+          Best test metric: 0.991401052311171
+          早停輪數: 31
+          GNN早停輪數: 0
+          耗時: 1.14 秒

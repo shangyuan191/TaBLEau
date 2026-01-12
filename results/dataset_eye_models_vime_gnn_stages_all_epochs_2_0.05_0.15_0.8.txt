@@ -1,0 +1,38 @@
+dataset: eye
+  模型: vime
+    GNN階段: none
+          Best val metric: 0.4887263863497867
+          Best test metric: 0.4824551377300263
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 1.64 秒
+    GNN階段: start
+          Best val metric: 0.4125533211456429
+          Best test metric: 0.39821693907875183
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 1.56 秒
+    GNN階段: materialize
+          Best val metric: 0.4369287020109689
+          Best test metric: 0.4162761458452395
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 1.02 秒
+    GNN階段: encoding
+          Best val metric: 0.4990859232175503
+          Best test metric: 0.48291233283803864
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 1.91 秒
+    GNN階段: columnwise
+          Best val metric: 0.4996953077391834
+          Best test metric: 0.47971196708195224
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 2.50 秒
+    GNN階段: decoding
+          Best val metric: 0.3717245581962218
+          Best test metric: 0.3842724882843754
+          早停輪數: 2
+          GNN早停輪數: 0
+          耗時: 8.89 秒

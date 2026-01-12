@@ -152,6 +152,28 @@ def expand_all_option(option_list, all_options):
         return all_options
     return option_list
 
+def resolve_model_aliases(models, available_models):
+    """Resolve user-friendly model aliases into concrete model names."""
+    alias_map = {
+        'idgl': 'idgl_gnn',
+        'lds': 'lds_gnn',
+    }
+
+    resolved = []
+    for name in models:
+        if name in alias_map and alias_map[name] in available_models:
+            resolved.append(alias_map[name])
+        else:
+            resolved.append(name)
+
+    unknown = [m for m in resolved if m not in available_models]
+    if unknown:
+        raise ValueError(
+            f"Unknown model(s): {unknown}. Available models: {sorted(available_models)}"
+        )
+
+    return resolved
+
 def run_experiment(args):
     """
     運行實驗
@@ -209,6 +231,7 @@ def run_experiment(args):
 
     # 確定要測試的模型列表
     models_to_test = expand_all_option(args.models, available_models)
+    models_to_test = resolve_model_aliases(models_to_test, available_models)
     print(f"models_to_test: {models_to_test}")
     # 確定要測試的GNN階段列表
     valid_stages = ['none'] + list(STAGE_TO_FUNCTION.keys())

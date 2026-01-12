@@ -1,0 +1,6 @@
+dataset: openml_The_Office_Dataset
+  模型: lds_gnn
+    GNN階段: none
+          Best val metric: 1.0360549688339233
+          Best test metric: 0.8750377893447876
+          耗時: 2.38 秒
