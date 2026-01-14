@@ -1,8 +1,8 @@
-# 自帶 GNN（Self-contained）Baseline 全面比較：TabGNN / T2G-Former / DGM / LAN-GNN / IDGL-GNN
+# 自帶 GNN（Self-contained）Baseline 全面比較：TabGNN / T2G-Former / DGM / LAN-GNN / IDGL-GNN / GLCN / LDS-GNN
 
 ## 摘要（Abstract）
 
-本文檔以 SAGE 的研究問題「Where to Graph-ify tabular deep learning？」為主軸，將 TaBLEau 中（或可對接到 TaBLEau 的）五個 **self-contained（自帶 GNN / 圖式交互）**baseline：TabGNN、T2G-Former、DGM、LAN-GNN、IDGL-GNN，統一到同一個分析框架，回答三件事：
+本文檔以 SAGE 的研究問題「Where to Graph-ify tabular deep learning？」為主軸，將 TaBLEau 中 7 個 **self-contained（自帶 GNN / 圖式交互）** baseline：TabGNN、T2G-Former、DGM、LAN-GNN、IDGL-GNN、GLCN、LDS-GNN，統一到同一個分析框架，回答三件事：
 1) 這些模型的「圖」到底是什麼（row graph vs feature/token graph）？
 2) 從 DataFrame 到訓練/評估的資料管線如何落地（transductive vs inductive；mask/indices 怎麼用）？
 3) 它們內部的「圖化/消息傳遞/交互」可類比到 PyTorch-Frame 五階段中的哪個 stage，從而與 SAGE 的 GNN 注入實驗形成可比對照。
@@ -11,7 +11,7 @@
 
 - 提供跨模型一致的座標系：PyTorch-Frame 五階段（start/materialize/encoding/columnwise/decoding）。
 - 提供一致的符號化描述：把「節點是 row 還是 feature」明確化，避免比較時偷換概念。
-- 提供工程視角的可比性備註：哪些模型在 TaBLEau 內已完整落地、哪些目前仍是 stub；哪些路徑是 dense/sparse fallback。
+- 提供工程視角的可比性備註：哪些模型在 TaBLEau 內已完整落地、哪些路徑是 dense/sparse fallback（以及大 N 時的降級策略）。
 - 產出可直接寫進論文的內容：taxononomy、比較表、複雜度與威脅效度（Threats to Validity）、以及可落地設計指引（Actionable Guidelines）。
 
 延伸閱讀（更細節的單模型剖析）：
@@ -81,10 +81,12 @@
 | 模型 | Graph domain | 圖如何來（概念） | 圖是否可學習 | Interaction / MP 核心算子 | 訓練型態 | 實作狀態（TaBLEau） | 主要風險 |
 |---|---|---|---|---|---|---|---|
 | TabGNN（本專案 wrapper） | row graph | 固定 kNN（sklearn） | 否 | GCNConv（PyG）或 Linear fallback | transductive | 已落地 | 這是「kNN+GCN baseline」，不等於所有 TabGNN 文獻版本 |
-| T2G-Former（上游） | feature/token graph | FR-Graph：learnable topology + threshold | 是（topology+weights） | FR-Graph attention（帶 topology mask 的 softmax） | inductive（mini-batch） | wrapper 目前為 stub（上游可跑） | 與 row-graph 完全不同；比較時需先定義可比問題 |
+| T2G-Former（本專案 wrapper） | feature/token graph | FR-Graph：learnable topology + threshold | 是（topology+weights） | FR-Graph attention（帶 topology mask 的 softmax） | inductive（mini-batch） | 已落地 | 與 row-graph 完全不同；比較時需先定義可比問題 |
 | DGM | row graph | 每層動態 kNN（Gumbel/KeOps） | 是（可微分採樣） | (learn edges) + GCN/GAT/EdgeConv | transductive | 已落地（含降級路徑） | 大 N 計算重；KeOps 依賴；動態邊穩定性 |
 | LAN-GNN | row graph | 每層 learnable adjacency（DGG/top-k） | 是（straight-through/top-k） | Dense GCN（$\tilde{A}XW$）或 PyG fallback | transductive | 已落地 | 小 N dense adjacency；大 N 需走稀疏 fallback |
 | IDGL-GNN | row graph | GraphLearner attention/topk（小 N）；大 N 固定 kNN | 小 N 是 / 大 N 否 | DenseGCN 或 PyG GCNConv | transductive | 已落地 | dense adjacency 記憶體；IDGL 依賴可用性 |
+| GLCN | row graph | 可學習稀疏圖（structure learning + graph regularization） | 是（learned adjacency） | GCN + 可學習鄰接（TF1） | transductive | 已落地（TF1 subprocess） | 大 N 容易踩到 dense $N\times N$；需確保 loss/regularizer 為 sparse-safe |
+| LDS-GNN | row graph | 邊/結構視為超參數（離散結構學習 + 超梯度） | 是（結構作為超參數） | GCN + FAR-HO/implicit gradient（TF1） | transductive | 已落地（TF1 subprocess） | 訓練非常慢；依賴鏈複雜；超參數/收斂敏感 |
 
 ### 計算複雜度與記憶體（paper-style 粗估）
 
@@ -109,6 +111,8 @@
 | DGM | 轉導式 whole-graph | embed_f / pre_fc | 動態圖構建 + message passing（每層） | MLP head |
 | LAN-GNN | 轉導式 whole-graph + scaler/label | 投影層（Linear→ReLU） | learnable adjacency + dense GCN（每層） | MLP head |
 | IDGL-GNN | 轉導式 whole-graph + scaler/label | StandardScaler + label one-hot | GraphLearner adjacency + DenseGCN（或固定 kNN + SparseGCN） | logits out_dim |
+| GLCN | 轉導式 whole-graph + mask | 特徵標準化/投影（依 wrapper） | learned adjacency + GCN + graph regularization | logits/regression head |
+| LDS-GNN | 轉導式 whole-graph + mask | StandardScaler / one-hot label（依 wrapper） | 結構學習（離散/超參數）+ GCN | logits/regression head |
 
 ### Stage mapping 的方法論（Methodology for mapping）
 
@@ -118,7 +122,15 @@
 3. **decoding**：最後把表徵轉成 logits/回歸值的 readout/head。
 4. **start/materialize**：以 TaBLEau wrapper 的資料處理語義為準（split 合併、mask、DataFrame→np/tensor）。
 
-> 特別提醒：T2G-Former 的 columnwise 是 **feature interaction**；而其他四個 row-graph baseline 的 columnwise 是 **row-level message passing**。兩者共享 stage 名字，但不是同一個 object。
+> 特別提醒：T2G-Former 的 columnwise 是 **feature interaction**；而其他 row-graph baselines（TabGNN、DGM、LAN-GNN、IDGL-GNN、GLCN、LDS-GNN）的 columnwise 是 **row-level message passing**。兩者共享 stage 名字，但不是同一個 object。
+
+**在本專案的 7 個 self-contained baselines 中，分類如下**：
+- **Row-graph baselines（row-level message passing / graph learning）**：TabGNN、DGM、LAN-GNN、IDGL-GNN、GLCN、LDS-GNN
+- **Feature/token-graph baseline（feature interaction）**：T2G-Former
+
+因此，當你在文件或論文中寫「columnwise 階段最有效」時，請先交代你指的是：
+- row-level 的 message passing（樣本圖），還是
+- feature interaction（特徵/欄位圖）。
 
 ---
 
@@ -153,7 +165,7 @@
 
 ---
 
-### 4.2 T2G-Former（上游 repo：`t2g-former/`）
+### 4.2 T2G-Former（本專案 `t2gformer.py` wrapper）
 
 **上游位置**：`ModelComparison/t2g-former/`
 - 核心模型：`bin/t2g_former.py`（AAAI 2023 oral）
@@ -190,10 +202,8 @@ T2G-Former 的 MultiheadGEAttention（FR-Graph integrated attention）在每層�
 - feature-graph：在欄位之間建模交互，偏 tabular transformer 的 feature interaction
 
 #### 重要現況（對 TaBLEau）
-- TaBLEau 的 `models/comparison/t2gformer.py` 目前是 **stub**（只印 log，尚未接上 split 訓練流程）。
-- 上游 repo 有完整訓練腳本（例如 `run_t2g.py`），且能讀 TaBLEau datasets；因此在論文中若要納入 T2G-Former，建議明確區分：
-  - 「上游可重現的 T2G-Former 成果」
-  - 「TaBLEau 內一致介面下的比較（目前未完全落地）」
+- TaBLEau 的 `models/comparison/t2gformer.py` 已接上 split 訓練/評估流程（可在 116 datasets 的兩種切分下產生 summary_results）。
+- 由於其 graph domain 為 feature/token graph，與 row-graph baselines 的 inductive/transductive 假設不同，寫論文時建議在比較段落先明確聲明「可比的任務定義」。
 
 ---
 
@@ -241,34 +251,35 @@ T2G-Former 的 MultiheadGEAttention（FR-Graph integrated attention）在每層�
 
 ---
 
-## 5. 如何新增第 6 個 self-contained GNN baseline（建議模板）
+### 4.6 GLCN（Graph Learning Convolutional Network）
 
-> 你說「可能還會新增一個自帶 GNN 的模型」：建議直接把下面模板複製一份填空，確保比較維度一致。
+**程式位置**：`models/comparison/glcn.py`
 
-### 模型模板（請複製）
-- **模型名稱**：
-- **程式位置**：
-- **圖的節點是什麼（row / feature / 混合）**：
-- **圖構建方式**：
-  - 固定 / 可學習
-  - kNN / attention / gumbel / 其他
-  - dense / sparse
-- **message passing / interaction 算子**：
-- **訓練型態**：transductive / inductive
-- **資料管線**：
-  1) 目標欄位與前處理
-  2) 建圖時機
-  3) 訓練/評估與 mask
-- **PyTorch-Frame stage 類比**：
-  - start/materialize：
-  - encoding：
-  - columnwise：
-  - decoding：
-- **已知工程風險**：
+#### 核心一句話
+- 透過可學習的鄰接（sparse structure learning）與圖正則項，把「建圖 + message passing」合成一個 end-to-end 的 row-graph baseline（TF1）。
+
+#### stage 類比
+- encoding：特徵前處理/投影
+- columnwise：learned adjacency + GCN + graph regularization
+- decoding：head 輸出
 
 ---
 
-## 6. 討論：對 SAGE 的可落地洞察（Discussion & Actionable Guidelines）
+### 4.7 LDS-GNN（Learning Discrete Structures）
+
+**程式位置**：`models/comparison/lds_gnn.py`
+
+#### 核心一句話
+- 把圖結構（離散的鄰接/選邊）當成可優化目標的一部分，透過超梯度/implicit gradient 做結構學習的 row-graph baseline（TF1）。
+
+#### stage 類比
+- encoding：特徵前處理
+- columnwise：結構學習（離散/超參數）+ GCN
+- decoding：head 輸出
+
+---
+
+## 5. 討論：對 SAGE 的可落地洞察（Discussion & Actionable Guidelines）
 
 ### 6.1 你其實在比較兩個問題，而不是一個
 

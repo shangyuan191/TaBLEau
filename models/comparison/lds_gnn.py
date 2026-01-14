@@ -26,9 +26,12 @@ from __future__ import annotations
 import json
 import logging
 import os
+import sys
 import subprocess
 import tempfile
+import threading
 import time
+from collections import deque
 from typing import Any, Dict, Tuple
 
 import numpy as np
@@ -39,6 +42,88 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 logger = logging.getLogger(__name__)
 
 LDS_GNN_REPO = "/home/skyler/ModelComparison/LDS-GNN"
+
+
+_THREAD_LIMIT_ENV_VARS = [
+    "OMP_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+    "VECLIB_MAXIMUM_THREADS",
+]
+
+
+def _run_subprocess_streaming(
+    cmd: list[str],
+    *,
+    env: Dict[str, str],
+    heartbeat_sec: float = 30.0,
+    output_tail_lines: int = 2000,
+) -> subprocess.CompletedProcess[str]:
+    """Run a subprocess while streaming stdout/stderr to the parent terminal.
+
+    Why: capturing output with PIPE can make long TF1 runs look "stuck".
+    We still keep a tail buffer for error reporting.
+    """
+
+    stdout_tail: deque[str] = deque(maxlen=output_tail_lines)
+    stderr_tail: deque[str] = deque(maxlen=output_tail_lines)
+    last_output_ts = time.time()
+    last_heartbeat_ts = last_output_ts
+    lock = threading.Lock()
+
+    def _reader(stream, sink, tail: deque[str]):
+        nonlocal last_output_ts
+        try:
+            for line in iter(stream.readline, ""):
+                with lock:
+                    last_output_ts = time.time()
+                    tail.append(line)
+                sink.write(line)
+                sink.flush()
+        finally:
+            try:
+                stream.close()
+            except Exception:
+                pass
+
+    proc = subprocess.Popen(
+        cmd,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1,
+    )
+    assert proc.stdout is not None
+    assert proc.stderr is not None
+
+    t_out = threading.Thread(target=_reader, args=(proc.stdout, sys.stdout, stdout_tail), daemon=True)
+    t_err = threading.Thread(target=_reader, args=(proc.stderr, sys.stderr, stderr_tail), daemon=True)
+    t_out.start()
+    t_err.start()
+
+    while True:
+        rc = proc.poll()
+        if rc is not None:
+            break
+
+        time.sleep(1.0)
+        now = time.time()
+        with lock:
+            since_output = now - last_output_ts
+
+        if since_output >= heartbeat_sec and (now - last_heartbeat_ts) >= heartbeat_sec:
+            elapsed = now - last_output_ts
+            print(f"[LDS-GNN] still running (no output for {elapsed:.0f}s)...", file=sys.stderr, flush=True)
+            last_heartbeat_ts = now
+
+    t_out.join(timeout=5.0)
+    t_err.join(timeout=5.0)
+
+    stdout_str = "".join(stdout_tail)
+    stderr_str = "".join(stderr_tail)
+    return subprocess.CompletedProcess(cmd, proc.returncode or 0, stdout_str, stderr_str)
 
 
 def _detect_target_column(df: pd.DataFrame) -> str:
@@ -401,6 +486,9 @@ if __name__ == "__main__":
         env = os.environ.copy()
         env.setdefault("LDS_GNN_REPO", LDS_GNN_REPO)
         env.setdefault("LDS_GCN_REPO", os.path.join(LDS_GNN_REPO, "deps", "gcn"))
+        env.setdefault("PYTHONUNBUFFERED", "1")
+        for k in _THREAD_LIMIT_ENV_VARS:
+            env.setdefault(k, "1")
 
         method = str(payload.get("method", "knnlds"))
         seed = int(payload.get("seed", 1))
@@ -413,6 +501,7 @@ if __name__ == "__main__":
 
         cmd = [
             python_exe,
+            "-u",
             driver_path,
             data_path,
             out_path,
@@ -426,11 +515,18 @@ if __name__ == "__main__":
             str(keep_prob),
         ]
 
-        proc = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        print(
+            "[LDS-GNN] launching TF1 subprocess: "
+            f"method={method} k={k} metric={metric} pat={pat} n_sample={n_sample} io_steps={io_steps} keep_prob={keep_prob}",
+            flush=True,
+        )
+
+        proc = _run_subprocess_streaming(cmd, env=env)
         if proc.returncode != 0:
             raise RuntimeError(
                 "LDS-GNN subprocess failed.\n"
                 f"cmd: {cmd}\n"
+                f"returncode: {proc.returncode}\n"
                 f"stdout:\n{proc.stdout}\n"
                 f"stderr:\n{proc.stderr}\n"
             )
@@ -461,6 +557,12 @@ def main(
     task_type = str(dataset_results.get("info", {}).get("task_type", "binclass")).lower()
     is_classification = task_type in ["binclass", "multiclass"]
 
+    # TaBLEau passes a global `--epochs` flag. The official LDS-GNN classification implementation
+    # does not have a direct `epochs` argument (it uses outer iterations with inner optimization
+    # steps). To avoid surprise multi-hour runs when users set `--epochs 1` for a sanity check,
+    # we interpret `epochs` as a *budget hint* for LDS-GNN unless explicit LDS params are provided.
+    epochs_budget = int(config.get("epochs", 200))
+
     X_train, y_train, X_val, y_val, X_test, y_test = _preprocess_splits(train_df, val_df, test_df)
 
     n_train, n_val, n_test = len(y_train), len(y_val), len(y_test)
@@ -486,6 +588,28 @@ def main(
         y_all_int = y_all.astype(np.int64)
         ys = _onehot_labels(y_all_int)
 
+        # Derive LDS hyperparams with a "quick budget" behavior:
+        # - If the user did not explicitly set LDS knobs, keep defaults for normal runs.
+        # - If the user sets a small `--epochs`, shrink io_steps/pat/n_sample accordingly.
+        #   This makes `--epochs 1` finish quickly instead of silently running for hours.
+        lds_k = int(config.get("lds_k", 10))
+        lds_metric = str(config.get("lds_metric", "cosine"))
+
+        if "lds_io_steps" in config:
+            lds_io_steps = int(config.get("lds_io_steps"))
+        else:
+            lds_io_steps = int(min(5, max(1, epochs_budget)))
+
+        if "lds_n_sample" in config:
+            lds_n_sample = int(config.get("lds_n_sample"))
+        else:
+            lds_n_sample = int(min(4, max(1, epochs_budget)))
+
+        if "lds_patience" in config:
+            lds_pat = int(config.get("lds_patience"))
+        else:
+            lds_pat = int(min(int(config.get("patience", 10)), max(1, epochs_budget)))
+
         payload = {
             "features": features,
             "ys": ys,
@@ -495,11 +619,11 @@ def main(
             "test_mask": test_mask,
             "method": config.get("lds_method", "knnlds"),
             "seed": int(config.get("seed", 1)),
-            "k": int(config.get("lds_k", 10)),
-            "pat": int(config.get("patience", 10)),
-            "n_sample": int(config.get("lds_n_sample", 4)),
-            "metric": str(config.get("lds_metric", "cosine")),
-            "io_steps": int(config.get("lds_io_steps", 5)),
+            "k": lds_k,
+            "pat": lds_pat,
+            "n_sample": lds_n_sample,
+            "metric": lds_metric,
+            "io_steps": lds_io_steps,
             "keep_prob": float(config.get("lds_keep_prob", 0.5)),
         }
     else:

@@ -1,0 +1,696 @@
+dataset: openml_Diabetes_Data_Set
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.68
+          Best test metric: 0.6716744186046512
+          耗時: 23.54 秒
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7644444444444445
+          Best test metric: 0.905625
+          耗時: 7.01 秒
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8926886792452831
+          Best test metric: 0.8483751542575072
+          耗時: 20.56 秒
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8940615835777126
+          Best test metric: 0.9009155383623468
+          耗時: 12.23 秒
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5206451612903226
+          Best test metric: 0.6036036036036037
+          耗時: 12.77 秒
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5696022727272727
+          Best test metric: 0.5974648168479888
+          耗時: 9.52 秒
+dataset: openml_nki70.arff
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.2755102040816326
+          Best test metric: 0.40825840825840826
+          耗時: 6.14 秒
+dataset: kaggle_Penguins_Classified
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9937304075235109
+          Best test metric: 0.9846178411752182
+          耗時: 10.25 秒
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.0
+          Best test metric: 0.6553030303030303
+          耗時: 3.45 秒
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.41505791505791506
+          Best test metric: 0.5245980157372563
+          耗時: 10.53 秒
+dataset: UCI_Audit_Data
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8827311696264544
+          Best test metric: 0.8476757837978867
+          耗時: 23.14 秒
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7469135802469136
+          Best test metric: 0.6853298611111112
+          耗時: 9.30 秒
+dataset: openml_Pima_Indians_Diabetes
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6626666666666666
+          Best test metric: 0.6674883720930233
+          耗時: 21.17 秒
+dataset: UCI_User_Knowledge_Modeling
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6982248520710059
+          Best test metric: 0.6192004971002486
+          耗時: 10.95 秒
+dataset: kaggle_Real_Estate_DataSet
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7854166666666667
+          Best test metric: 0.8524052121093367
+          耗時: 16.28 秒
+dataset: kaggle_fitbit_dataset
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5957264957264957
+          Best test metric: 0.5252198615854211
+          耗時: 8.35 秒
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5754132231404959
+          Best test metric: 0.4736674678354305
+          耗時: 30.94 秒
+dataset: openml_analcatdata_lawsuit
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.46296296296296297
+          Best test metric: 0.667005076142132
+          耗時: 7.45 秒
+dataset: kaggle_Development_Index
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8178571428571428
+          Best test metric: 0.819098074686652
+          耗時: 11.00 秒
+dataset: openml_hungarian
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6205357142857143
+          Best test metric: 0.7715621347876899
+          耗時: 7.96 秒
+dataset: openml_Pokmon_Legendary_Data
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7263636363636363
+          Best test metric: 0.7355311355311356
+          耗時: 15.07 秒
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.4533333333333333
+          Best test metric: 0.5261627906976745
+          耗時: 24.00 秒
+dataset: kaggle_Audit_Data
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8591549295774648
+          Best test metric: 0.8100839239900857
+          耗時: 15.47 秒
+dataset: kaggle_chronic_kidney_disease
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9545454545454546
+          Best test metric: 0.957375
+          耗時: 16.65 秒
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.4625
+          Best test metric: 0.599906629318394
+          耗時: 3.81 秒
+dataset: openml_tokyo1
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7362040133779264
+          Best test metric: 0.7099928680141463
+          耗時: 19.80 秒
+dataset: kaggle_Compositions_of_Glass
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.670995670995671
+          Best test metric: 0.3878304534042239
+          耗時: 4.72 秒
+dataset: UCI_HCV_data
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7078189300411523
+          Best test metric: 0.6530800967420686
+          耗時: 15.56 秒
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.676953125
+          Best test metric: 0.6195681151692882
+          耗時: 9.51 秒
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8076388888888889
+          Best test metric: 0.8558837890625
+          耗時: 5.95 秒
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.61171875
+          Best test metric: 0.6035990402559318
+          耗時: 20.11 秒
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6069958847736625
+          Best test metric: 0.7173960060557999
+          耗時: 13.55 秒
+dataset: kaggle_Startup_Success_Prediction
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6198119697317129
+          Best test metric: 0.5502973757193927
+          耗時: 10.05 秒
+dataset: openml_DiabeticMellitus
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6345679012345679
+          Best test metric: 0.5845326859719091
+          耗時: 6.76 秒
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.645
+          Best test metric: 0.6604680696661829
+          耗時: 6.22 秒
+dataset: kaggle_Automobiles
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6577777777777778
+          Best test metric: 0.5690454124189064
+          耗時: 11.60 秒
+dataset: UCI_Z_Alizadeh_Sani
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6778846153846154
+          Best test metric: 0.6614368290668868
+          耗時: 5.17 秒
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5500821018062397
+          Best test metric: 0.6002843310535618
+          耗時: 20.63 秒
+dataset: kaggle_Store_Data_Performance
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.4777777777777778
+          Best test metric: 0.5290598290598291
+          耗時: 5.83 秒
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8389423076923077
+          Best test metric: 0.7970272502064409
+          耗時: 14.57 秒
+dataset: kaggle_Credit_Card_Approval
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6851851851851852
+          Best test metric: 0.7616550116550117
+          耗時: 7.30 秒
+dataset: kaggle_Bigg_Boss_India
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.875
+          Best test metric: 0.8021445221445221
+          耗時: 20.42 秒
+dataset: kaggle_Campus_Recruitment
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6173913043478261
+          Best test metric: 0.6721594475831764
+          耗時: 11.96 秒
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.46618357487922707
+          Best test metric: 0.49851392663043476
+          耗時: 22.27 秒
+dataset: UCI_Heart_failure_clinical_records
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6797235023041475
+          Best test metric: 0.5307146840889172
+          耗時: 9.55 秒
+dataset: openml_analcatdata_creditscore
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.4090909090909091
+          Best test metric: 0.49608150470219436
+          耗時: 6.17 秒
+dataset: openml_Heart_disease_classification
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6527777777777778
+          Best test metric: 0.7122405153901217
+          耗時: 6.25 秒
+dataset: kaggle_Customer_Classification
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6459435626102292
+          Best test metric: 0.5822917874396135
+          耗時: 17.04 秒
+dataset: UCI_Absenteeism_at_work
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.4536290322580645
+          Best test metric: 0.5560693478137904
+          耗時: 25.93 秒
+dataset: openml_weather_ankara
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0615074634552002
+          Best test metric: 1.0222749710083008
+          耗時: 3.97 秒
+dataset: openml_HappinessRank_2015
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1400524377822876
+          Best test metric: 1.1060585975646973
+          耗時: 2.66 秒
+dataset: openml_disclosure_z
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0312656164169312
+          Best test metric: 0.989387571811676
+          耗時: 3.67 秒
+dataset: openml_echoMonths
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.3434523344039917
+          Best test metric: 1.2009613513946533
+          耗時: 2.64 秒
+dataset: openml_meta
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5340343117713928
+          Best test metric: 1.0768709182739258
+          耗時: 2.85 秒
+dataset: openml_autoPrice
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9680061340332031
+          Best test metric: 1.0186223983764648
+          耗時: 2.84 秒
+dataset: openml_Boston_house_price_data
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.053512692451477
+          Best test metric: 1.162205457687378
+          耗時: 8.43 秒
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.909638524055481
+          Best test metric: 1.0202606916427612
+          耗時: 3.36 秒
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.062343716621399
+          Best test metric: 1.0217738151550293
+          耗時: 3.13 秒
+dataset: openml_Fish_market
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6880413293838501
+          Best test metric: 0.9954362511634827
+          耗時: 2.92 秒
+dataset: openml_rmftsa_ladata
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8927481174468994
+          Best test metric: 1.1985447406768799
+          耗時: 3.13 秒
+dataset: openml_DEE
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0862386226654053
+          Best test metric: 1.041788935661316
+          耗時: 2.86 秒
+dataset: openml_visualizing_environmental
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1742746829986572
+          Best test metric: 1.1117689609527588
+          耗時: 3.60 秒
+dataset: openml_strikes
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.6699650287628174
+          Best test metric: 2.8280704021453857
+          耗時: 3.12 秒
+dataset: openml_machine_cpu
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.890729546546936
+          Best test metric: 0.8621280789375305
+          耗時: 2.72 秒
+dataset: openml_boston_corrected
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9500956535339355
+          Best test metric: 0.9959855675697327
+          耗時: 3.57 秒
+dataset: openml_pm10
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0960770845413208
+          Best test metric: 1.073265790939331
+          耗時: 8.24 秒
+dataset: openml_disclosure_x_bias
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0052000284194946
+          Best test metric: 1.0144236087799072
+          耗時: 4.64 秒
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.96751469373703
+          Best test metric: 1.0462201833724976
+          耗時: 3.12 秒
+dataset: openml_wisconsin
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.060667634010315
+          Best test metric: 1.0594221353530884
+          耗時: 2.77 秒
+dataset: openml_Forest_Fire_Area
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.26621538400650024
+          Best test metric: 1.4200937747955322
+          耗時: 4.25 秒
+dataset: openml_boston
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0380899906158447
+          Best test metric: 1.1665064096450806
+          耗時: 3.92 秒
+dataset: openml_auto_price
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8309434652328491
+          Best test metric: 0.952379584312439
+          耗時: 2.58 秒
+dataset: openml_EgyptianSkulls
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.2289159297943115
+          Best test metric: 1.3136780261993408
+          耗時: 2.24 秒
+dataset: openml_fishcatch
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0243698358535767
+          Best test metric: 0.9284946322441101
+          耗時: 2.52 秒
+dataset: openml_forest_fires
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.2680776119232178
+          Best test metric: 1.420296311378479
+          耗時: 3.30 秒
+dataset: openml_disclosure_x_noise
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0464450120925903
+          Best test metric: 1.0088543891906738
+          耗時: 5.77 秒
+dataset: openml_liver_disorders
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.175561785697937
+          Best test metric: 0.9716725945472717
+          耗時: 6.64 秒
+dataset: openml_ELE_1
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.750807762145996
+          Best test metric: 5.3815202713012695
+          耗時: 2.73 秒
+dataset: openml_disclosure_x_tampered
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0729618072509766
+          Best test metric: 0.9716167449951172
+          耗時: 2.77 秒
+dataset: openml_cpu
+  模型: glcn
+    GNN階段: none
+          Best val metric: 2.0230836868286133
+          Best test metric: 0.9477769136428833
+          耗時: 2.68 秒
+dataset: openml_residential_building
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1074655055999756
+          Best test metric: 1.023245930671692
+          耗時: 7.13 秒
+dataset: openml_lungcancer_shedden
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9995790719985962
+          Best test metric: 1.029780626296997
+          耗時: 2.83 秒
+dataset: openml_bodyfat
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0553491115570068
+          Best test metric: 0.9391391277313232
+          耗時: 2.83 秒
+dataset: openml_no2
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0742881298065186
+          Best test metric: 0.9933110475540161
+          耗時: 3.64 秒
+dataset: openml_yacht_hydrodynamics
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.8853490948677063
+          Best test metric: 1.1055022478103638
+          耗時: 2.51 秒
+dataset: openml_cps_85_wages
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0854700803756714
+          Best test metric: 1.0656243562698364
+          耗時: 3.40 秒
+dataset: openml_pharynx
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.3031107187271118
+          Best test metric: 1.606557846069336
+          耗時: 3.18 秒
+dataset: openml_The_Office_Dataset
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9892816543579102
+          Best test metric: 0.8318434953689575
+          耗時: 5.37 秒
+dataset: openml_lowbwt
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0140655040740967
+          Best test metric: 0.9619404673576355
+          耗時: 2.45 秒
+dataset: openml_analcatdata_vineyard
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9553328156471252
+          Best test metric: 1.039451003074646
+          耗時: 2.65 秒
+dataset: openml_cloud
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1932032108306885
+          Best test metric: 1.0449267625808716
+          耗時: 3.27 秒
+dataset: openml_analcatdata_homerun
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1491161584854126
+          Best test metric: 1.4611115455627441
+          耗時: 2.37 秒
+dataset: openml_Reading_Hydro
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9376593232154846
+          Best test metric: 1.0413427352905273
+          耗時: 6.60 秒
+dataset: openml_cholesterol
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.9711096286773682
+          Best test metric: 1.1020715236663818
+          耗時: 3.91 秒
+dataset: openml_fruitfly
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1149650812149048
+          Best test metric: 0.9688429832458496
+          耗時: 2.25 秒
+dataset: openml_cleveland
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1728689670562744
+          Best test metric: 0.9849003553390503
+          耗時: 3.18 秒
+dataset: MagicTelescope
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6875548652846242
+          Best test metric: 0.6922338561924839
+          耗時: 308.52 秒
+dataset: road_safety
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.643828047068399
+          Best test metric: 0.6492827372062322
+          耗時: 2102.01 秒
+dataset: credit
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5661137353286722
+          Best test metric: 0.545137602299428
+          耗時: 97.29 秒
+dataset: higgs_small
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.5225586915165187
+          Best test metric: 0.523653124901123
+          耗時: 653.00 秒
+dataset: binarized_pol
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.7043969528909287
+          Best test metric: 0.7213493261986876
+          耗時: 102.60 秒
+dataset: bank_marketing
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.6537794492743495
+          Best test metric: 0.6647995218476999
+          耗時: 101.15 秒
+dataset: eye
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.3826934795856185
+          Best test metric: 0.3841581895073723
+          耗時: 260.51 秒
+dataset: helena
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.033026584867075666
+          Best test metric: 0.031060068638917117
+          耗時: 234.80 秒
+dataset: jannis
+  模型: glcn
+    GNN階段: none
+          Best val metric: 0.4714968152866242
+          Best test metric: 0.4728230850762088
+          耗時: 584.02 秒
+dataset: medical_charges
+  模型: glcn
+    GNN階段: none
+          Best val metric: 2.5456044673919678
+          Best test metric: 2.6709656715393066
+          耗時: 213.95 秒
+dataset: california
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.6778770685195923
+          Best test metric: 2.0747358798980713
+          耗時: 33.91 秒
+dataset: sulfur
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.192637324333191
+          Best test metric: 1.0565992593765259
+          耗時: 68.65 秒
+dataset: Brazilian_houses
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.0048577785491943
+          Best test metric: 1.0247137546539307
+          耗時: 38.06 秒
+dataset: pol
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1573030948638916
+          Best test metric: 1.105353593826294
+          耗時: 48.10 秒
+dataset: diamonds
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.2399256229400635
+          Best test metric: 1.817448616027832
+          耗時: 67.27 秒
+dataset: nyc_taxi_green_dec_2016
+  模型: glcn
+    GNN階段: none
+          Best val metric: 3.7436630725860596
+          Best test metric: 3.1135714054107666
+          耗時: 1682.93 秒
+dataset: Ailerons
+  模型: glcn
+    GNN階段: none
+          Best val metric: 2.8540146350860596
+          Best test metric: 2.8261280059814453
+          耗時: 33.05 秒
+dataset: house
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.3343297243118286
+          Best test metric: 1.257826805114746
+          耗時: 49.16 秒
+dataset: house_sales
+  模型: glcn
+    GNN階段: none
+          Best val metric: 1.1337454319000244
+          Best test metric: 1.1384968757629395
+          耗時: 84.77 秒
+dataset: SGEMM_GPU_kernel_performance
+  模型: glcn
+    GNN階段: none
+          Best val metric: 36.265682220458984
+          Best test metric: 33.03355407714844
+          耗時: 537.11 秒

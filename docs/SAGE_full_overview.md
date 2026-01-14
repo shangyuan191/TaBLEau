@@ -179,7 +179,7 @@ datasets/
 
 為了實作一致性，額外新增 **start** 作為 dummy stage（不對資料做任何處理，僅作為「在整個 pipeline 最前面插入 GNN」的標記點）。
 
-### 3.2 參考基線模型（10 個，不可拆分）
+### 3.2 參考基線模型（11 個，不可拆分）
 
 這些模型作為對照組，不進行階段拆分與 GNN 插入，僅用於性能比較。
 
@@ -190,13 +190,24 @@ datasets/
 2. **CatBoost** (catboost.py) - 類別特徵優化的梯度提升
 3. **LightGBM** (lightgbm.py) - 輕量級梯度提升機
 
-**自含式（Self-contained）GNN 模型（6 個）**：
+**自含式（Self-contained）GNN 模型（7 個）**：
 1. **TabGNN** (tabgnn.py) - 基於圖神經網路的表格學習
 2. **T2G-Former** (t2gformer.py) - Table-to-Graph Transformer
 3. **DGM** (dgm.py) - Differentiable Graph Module，動態圖結構學習
 4. **LAN-GNN** (lan_gnn.py) - Learning Adaptive Neighborhoods（自適應鄰接學習）的表格預測改寫版
 5. **IDGL-GNN** (idgl_gnn.py) - Iterative Deep Graph Learning（可學習圖構建）風格的表格預測 baseline
-6. **LDS-GNN** (lds_gnn.py) - Learning Discrete Structures（圖結構作為可學習超參數）的表格預測 baseline
+6. **GLCN** (glcn.py) - Graph Learning Convolutional Network（TF1；可學習稀疏圖結構）的表格預測 baseline
+7. **LDS-GNN** (lds_gnn.py) - Learning Discrete Structures（圖結構作為可學習超參數）的表格預測 baseline
+
+**Graph domain / interaction type（重要，避免混淆）**：
+- **Row-graph baseline（row-level message passing / graph learning）**：TabGNN、DGM、LAN-GNN、IDGL-GNN、GLCN、LDS-GNN
+  - 節點是「樣本（row）」；`columnwise` 類比的是在樣本圖上做 message passing。
+- **Feature/token-graph baseline（feature interaction）**：T2G-Former
+  - 節點是「欄位/feature tokens」；`columnwise` 類比的是欄位交互（feature interaction），而非樣本間傳遞。
+
+**實驗狀態（重要）**：
+- 以上 7 個 self-contained GNN baseline 已在 116 個資料集上完成兩種切分（0.05/0.15/0.80 與 0.80/0.15/0.05）的 runs。
+- 匯總結果檔位於：`/home/skyler/ModelComparison/TaBLEau/summary_results/`
 
 **重要區分**：
 - 這裡的「自含式 GNN（self-contained）」指的是模型本身的主幹就依賴圖結構/訊息傳遞來完成預測（例如 TabGNN/T2G-Former/DGM/LAN-GNN）。
@@ -233,11 +244,9 @@ datasets/
 | PyTorch Frame | 6 | ExcelFormer, FT-Transformer, ResNet, TabNet, TabTransformer, Trompt | ✓ | 主實驗對象 |
 | Custom | 4 | SCARF, SubTab, VIME, TabM | ✓ | 主實驗對象 |
 | Tree-Based | 3 | XGBoost, CatBoost, LightGBM | ✗ | 基線對照 |
-| GNN-Based | 5 | TabGNN, T2G-Former, DGM, LAN-GNN, IDGL-GNN | ✗ | 基線對照 |
+| GNN-Based | 7 | TabGNN, T2G-Former, DGM, LAN-GNN, IDGL-GNN, GLCN, LDS-GNN | ✗ | 基線對照 |
 | Pretrained | 1 | TabPFN | ✗ | 基線對照 |
-| **總計** | **19（目前）** | - | 10 可拆分 / 9 不可拆分 | - |
-
-> 註：後續預計再新增 1 個「自含式（self-contained）GNN」參考基線，使總模型數達到 **20**（不影響 10 個可拆分模型的 GNN stage 注入實驗設計）。
+| **總計** | **21** | - | 10 可拆分 / 11 不可拆分 | - |
 
 ---
 
@@ -539,11 +548,11 @@ out = GCN(x_pooled, edge_index)  # [B, out_channels]
 ### 7.1 實驗設計
 
 **實驗規模**：
-- **模型**：目前為 19 個（10 可拆分 + 9 基線，含 TabPFN）；後續目標擴展至 20 個（再新增 1 個自含式 GNN 基線）
+- **模型**：目前為 21 個（10 可拆分 + 11 基線，含 TabPFN；self-contained GNN baselines 共 7 個）
 - **資料集**：116 個（涵蓋所有大小/任務/特徵類型組合）
 - **切分策略**：2 種（few-shot 0.05/0.15/0.80 和 full 0.80/0.15/0.05）
 - **GNN 階段**：6 個（none, start, materialize, encoding, columnwise, decoding）
-- **總實驗次數**：10 models × 116 datasets × 2 splits × 6 stages = 13,920 次
+- **總實驗次數**：僅針對「10 個可拆分模型 × 116 datasets × 2 splits × 6 stages」的注入變體為 13,920 次（基線模型不做 stage 注入）。
 
 **實驗流程**：
 ```bash
@@ -575,12 +584,15 @@ python main.py --dataset_size all --task_type all --feature_type all \
   - 特點：樹模型在中小型表格數據上往往很強
 
 **基線類別 3：自含式（Self-contained）GNN 基線**
-- **Few-shot GNN models**：TabGNN, T2G-Former, DGM, LAN-GNN（few-shot 切分）
-- **Full-sample GNN models**：TabGNN, T2G-Former, DGM, LAN-GNN（full 切分）
+- **Few-shot GNN models**：TabGNN, T2G-Former, DGM, LAN-GNN, IDGL-GNN, GLCN, LDS-GNN（few-shot 切分）
+- **Full-sample GNN models**：TabGNN, T2G-Former, DGM, LAN-GNN, IDGL-GNN, GLCN, LDS-GNN（full 切分）
   - 目的：對比「原生設計的 GNN」vs「插入 GNN 的傳統模型」
   - 區別：
     - 原生 GNN：整個架構都圍繞圖結構設計
     - GNN 插入：在現有架構中加入圖模組
+  - 特別提醒（可比性聲明）：
+    - TabGNN/DGM/LAN-GNN/IDGL-GNN/GLCN/LDS-GNN 屬於 **row-graph**，核心是 **row-level message passing**（transductive whole-graph 常見）。
+    - T2G-Former 屬於 **feature/token-graph**，核心是 **feature interaction**（更接近 Transformer 的 columnwise interaction）。
 
 **基線類別 4：預訓練基線**
 - **Few-shot TabPFN**：TabPFN（few-shot 切分）
@@ -1233,13 +1245,13 @@ python main.py --dataset_size all --task_type all --feature_type all \
 # 多個模型
 --models excelformer resnet tabnet fttransformer
 
-# 所有模型（目前包含 10 可拆分 + 9 基線；後續規劃擴展到 10 基線，總計 20 模型）
+# 所有模型（目前包含 10 可拆分 + 11 基線，總計 21 模型）
 --models all
 
 # 可用模型列表
 # 可拆分：excelformer, fttransformer, resnet, tabnet, tabtransformer, 
 #         trompt, scarf, subtab, vime, tabm
-# 基線：xgboost, catboost, lightgbm, tabgnn, t2gformer, dgm, lan_gnn, idgl_gnn, tabpfn
+# 基線：xgboost, catboost, lightgbm, tabgnn, t2gformer, dgm, lan_gnn, idgl_gnn, glcn, lds_gnn, tabpfn
 ```
 
 ### 9.4 GNN 階段參數
@@ -1790,7 +1802,7 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 ### 15.1 當前進度
 
 ✅ **已完成**：
-- TaBLEau 框架建立（116 資料集、目前 19 模型；後續擴展到 20 模型）
+- TaBLEau 框架建立（116 資料集、21 個模型：10 可拆分 + 11 基線）
 - 統一的五階段流水線設計
 - GNN 插入機制實作（6 種策略）
 - 第一階段全面實驗（13,920 次）
@@ -1811,7 +1823,7 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 **主要貢獻**：
 1. 提出 SAGE：首個系統性分析 GNN 與表格模型整合的框架
 2. 統一的五階段流水線：實現跨模型的公平比較
-3. 全面的實證分析：116 資料集 ×（目前 19、目標 20）模型 × 6 階段
+3. 全面的實證分析：116 資料集 × 10 個可拆分模型 × 6 階段（並提供 11 個基線模型作為對照）
 4. 三項消融實驗：揭示 GNN 增益的關鍵因素（樣本量、特徵類型、資料規模）
 
 **實驗章節結構建議**：
@@ -1829,8 +1841,8 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 ### 15.3 未來擴展方向
 
 **模型擴展**：
-- 增加更多 GNN-based 基線（GraphFormers, HAN 等）
-- 納入最新的表格學習模型（2024-2025）
+- 本研究的 self-contained GNN baselines 已定稿為 7 個（TabGNN/T2G-Former/DGM/LAN-GNN/IDGL-GNN/GLCN/LDS-GNN），目前不再規劃新增。
+- 如需擴展，建議另開「延伸研究」章節，以避免與第一階段的可重現結果混淆。
 
 **實驗擴展**：
 - 多模態表格數據（文字 + 數值）
@@ -1861,7 +1873,7 @@ python ablation_study/run_ablation.py --stages all --seeds 20 --datasets 20
 
 **第一階段（已完成）**：
 - ✅ 116 個資料集已就緒
-- ✅ 19 個模型（10 可拆分 + 9 基線）已實作；後續擴展到 20（再新增 1 個自含式 GNN 基線）
+- ✅ 21 個模型（10 可拆分 + 11 基線）已實作（self-contained GNN baselines 共 7 個）
 - ✅ 6 種 GNN 插入策略已實作
 - ✅ 13,920 次實驗已執行完成
 - ✅ Per-model 分析報告已生成（位於 gnn_injection_analysis/per_model_result/）

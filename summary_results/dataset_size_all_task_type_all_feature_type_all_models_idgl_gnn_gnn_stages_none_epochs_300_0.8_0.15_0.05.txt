@@ -1,0 +1,812 @@
+dataset: openml_Diabetes_Data_Set
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7809210526315788
+          Best test metric: 0.8714285714285714
+          早停輪數: 88
+          耗時: 14.84 秒
+dataset: openml_Swiss_banknote_conterfeit_detection
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          早停輪數: 28
+          耗時: 4.52 秒
+dataset: kaggle_Breast_Cancer_Dataset
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.998263888888889
+          Best test metric: 0.9292929292929293
+          早停輪數: 12
+          耗時: 1.89 秒
+dataset: openml_Intersectional_Bias_Assessment__Testing_Data_
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9957844574780059
+          Best test metric: 0.9720853858784894
+          早停輪數: 104
+          耗時: 16.66 秒
+dataset: openml_Indian_Liver_Patient_Patient_Records_KFolds_5folds
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.714920634920635
+          Best test metric: 0.8306878306878307
+          早停輪數: 22
+          耗時: 3.54 秒
+dataset: kaggle_Collection_of_Classification___Regression_Datasets_House_Price_
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8267045454545454
+          Best test metric: 0.8545454545454546
+          早停輪數: 31
+          耗時: 4.99 秒
+dataset: openml_nki70.arff
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9142857142857144
+          Best test metric: 0.6666666666666666
+          早停輪數: 42
+          耗時: 6.55 秒
+dataset: kaggle_Penguins_Classified
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          早停輪數: 33
+          耗時: 5.24 秒
+dataset: UCI_Quality_Assessment_of_Digital_Colposcopies
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8846153846153846
+          Best test metric: 1.0
+          早停輪數: 16
+          耗時: 2.60 秒
+dataset: UCI_Climate_Model_Simulation_Crashes
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9478764478764479
+          Best test metric: 0.42000000000000004
+          早停輪數: 119
+          耗時: 18.54 秒
+dataset: UCI_Audit_Data
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9898958971218617
+          Best test metric: 1.0
+          早停輪數: 116
+          耗時: 18.07 秒
+dataset: UCI_Parkinson_Dataset_with_replicated_acoustic_features
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9074074074074073
+          Best test metric: 0.9444444444444445
+          早停輪數: 32
+          耗時: 4.19 秒
+dataset: openml_Pima_Indians_Diabetes
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7809210526315788
+          Best test metric: 0.8714285714285714
+          早停輪數: 88
+          耗時: 13.74 秒
+dataset: UCI_User_Knowledge_Modeling
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5029585798816568
+          Best test metric: 0.6944444444444444
+          早停輪數: 24
+          耗時: 3.95 秒
+dataset: kaggle_Real_Estate_DataSet
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9022038567493113
+          Best test metric: 0.896969696969697
+          早停輪數: 31
+          耗時: 4.86 秒
+dataset: kaggle_fitbit_dataset
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7661290322580646
+          Best test metric: 0.7307692307692308
+          早停輪數: 78
+          耗時: 12.06 秒
+dataset: UCI_Cervical_cancer__Risk_Factors_
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7530991735537189
+          Best test metric: 0.6083333333333333
+          早停輪數: 12
+          耗時: 2.01 秒
+dataset: openml_analcatdata_lawsuit
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.2342342342342342
+          Best test metric: 0.6923076923076923
+          早停輪數: 11
+          耗時: 1.89 秒
+dataset: kaggle_Development_Index
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7802197802197802
+          Best test metric: 0.7428571428571429
+          早停輪數: 14
+          耗時: 2.36 秒
+dataset: openml_hungarian
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8426724137931034
+          Best test metric: 1.0
+          早停輪數: 61
+          耗時: 9.73 秒
+dataset: openml_Pokmon_Legendary_Data
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7909090909090909
+          Best test metric: 0.858108108108108
+          早停輪數: 62
+          耗時: 9.92 秒
+dataset: kaggle_Pima_Indians_Diabetes_with_null_values
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7605263157894737
+          Best test metric: 0.9285714285714286
+          早停輪數: 51
+          耗時: 8.09 秒
+dataset: kaggle_Audit_Data
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9898958971218617
+          Best test metric: 1.0
+          早停輪數: 116
+          耗時: 18.28 秒
+dataset: kaggle_chronic_kidney_disease
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.9120879120879121
+          早停輪數: 24
+          耗時: 3.85 秒
+dataset: UCI_Breast_Cancer_Coimbra
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5625
+          Best test metric: 0.7777777777777778
+          早停輪數: 11
+          耗時: 1.84 秒
+dataset: openml_tokyo1
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.943561872909699
+          Best test metric: 0.9127134724857686
+          早停輪數: 16
+          耗時: 2.61 秒
+dataset: kaggle_Compositions_of_Glass
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7857142857142857
+          Best test metric: 0.5714285714285714
+          早停輪數: 20
+          耗時: 3.23 秒
+dataset: UCI_HCV_data
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7592592592592593
+          Best test metric: 0.7222222222222223
+          早停輪數: 30
+          耗時: 3.87 秒
+dataset: kaggle_The_Estonia_Disaster_Passenger_List
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8234747023809523
+          Best test metric: 0.5913621262458472
+          早停輪數: 138
+          耗時: 21.65 秒
+dataset: UCI_Early_stage_diabetes_risk_prediction_dataset
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 1.0
+          早停輪數: 184
+          耗時: 28.60 秒
+dataset: openml_The_Estonia_Disaster_Passenger_List
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8234747023809523
+          Best test metric: 0.5913621262458472
+          早停輪數: 138
+          耗時: 21.54 秒
+dataset: kaggle_Horse_Colic_Dataset__with_test_file_
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8518518518518519
+          Best test metric: 0.7037037037037037
+          早停輪數: 63
+          耗時: 9.87 秒
+dataset: kaggle_Startup_Success_Prediction
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7766439909297052
+          Best test metric: 0.7
+          早停輪數: 26
+          耗時: 4.19 秒
+dataset: openml_DiabeticMellitus
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9185185185185185
+          Best test metric: 0.8200000000000001
+          早停輪數: 55
+          耗時: 8.62 秒
+dataset: openml_student_grade_pass_or_fail_prediction
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9325
+          Best test metric: 0.9780219780219781
+          早停輪數: 32
+          耗時: 5.06 秒
+dataset: kaggle_Automobiles
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8844444444444444
+          Best test metric: 0.8
+          早停輪數: 18
+          耗時: 2.94 秒
+dataset: UCI_Z_Alizadeh_Sani
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8951048951048951
+          Best test metric: 0.9818181818181818
+          早停輪數: 26
+          耗時: 4.11 秒
+dataset: kaggle_Analytics_Vidhya_Loan_Prediction
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6578663793103449
+          Best test metric: 0.5333333333333333
+          早停輪數: 32
+          耗時: 5.06 秒
+dataset: kaggle_Store_Data_Performance
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6666666666666667
+          Best test metric: 1.0
+          早停輪數: 54
+          耗時: 8.45 秒
+dataset: UCI_extention_of_Z_Alizadeh_sani_dataset
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9324009324009324
+          Best test metric: 1.0
+          早停輪數: 17
+          耗時: 2.68 秒
+dataset: kaggle_Credit_Card_Approval
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8402116402116402
+          Best test metric: 0.962962962962963
+          早停輪數: 118
+          耗時: 18.27 秒
+dataset: kaggle_Bigg_Boss_India
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.98
+          Best test metric: 1.0
+          早停輪數: 20
+          耗時: 3.28 秒
+dataset: kaggle_Campus_Recruitment
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9217391304347827
+          Best test metric: 0.8333333333333334
+          早停輪數: 44
+          耗時: 6.62 秒
+dataset: UCI_QSAR_Bioconcentration_classes_dataset
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6639492753623188
+          Best test metric: 0.6739130434782609
+          早停輪數: 11
+          耗時: 1.80 秒
+dataset: UCI_Heart_failure_clinical_records
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7419354838709677
+          Best test metric: 0.94
+          早停輪數: 50
+          耗時: 7.93 秒
+dataset: openml_analcatdata_creditscore
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0
+          Best test metric: 0.75
+          早停輪數: 25
+          耗時: 3.96 秒
+dataset: openml_Heart_disease_classification
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8373015873015872
+          Best test metric: 0.625
+          早停輪數: 45
+          耗時: 7.10 秒
+dataset: kaggle_Customer_Classification
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6097883597883598
+          Best test metric: 0.5793650793650793
+          早停輪數: 11
+          耗時: 1.91 秒
+dataset: UCI_Absenteeism_at_work
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6413306451612903
+          Best test metric: 0.5444444444444445
+          早停輪數: 28
+          耗時: 4.53 秒
+dataset: openml_weather_ankara
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.4112667490786303
+          Best test metric: 0.5045742368416306
+          早停輪數: 65
+          耗時: 10.16 秒
+dataset: openml_HappinessRank_2015
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.4512068664721154
+          Best test metric: 0.5723500368531669
+          早停輪數: 42
+          耗時: 6.73 秒
+dataset: openml_disclosure_z
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9206986114430162
+          Best test metric: 0.876380410550541
+          早停輪數: 14
+          耗時: 2.27 秒
+dataset: openml_echoMonths
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6785105457456198
+          Best test metric: 0.412319419088071
+          早停輪數: 30
+          耗時: 4.78 秒
+dataset: openml_meta
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.2199062121625583
+          Best test metric: 0.2281919534620083
+          早停輪數: 20
+          耗時: 3.25 秒
+dataset: openml_autoPrice
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6696164516510756
+          Best test metric: 1.0284456790678815
+          早停輪數: 75
+          耗時: 11.73 秒
+dataset: openml_Boston_house_price_data
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.4378448387526154
+          Best test metric: 0.9471050637623852
+          早停輪數: 48
+          耗時: 7.63 秒
+dataset: openml_AAPL_stock_price_2021_2022_1
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.3813491801721111
+          Best test metric: 0.4041023707946393
+          早停輪數: 79
+          耗時: 12.43 秒
+dataset: openml_AAPL_stock_price_2021_2022_2
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.4221491982220287
+          Best test metric: 0.5230992206251187
+          早停輪數: 22
+          耗時: 3.53 秒
+dataset: openml_Fish_market
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.48639085663805853
+          Best test metric: 0.5710047870442003
+          早停輪數: 39
+          耗時: 6.14 秒
+dataset: openml_rmftsa_ladata
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8368775260721931
+          Best test metric: 1.0428773647090874
+          早停輪數: 22
+          耗時: 3.58 秒
+dataset: openml_DEE
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5583535324779508
+          Best test metric: 0.39197640304071024
+          早停輪數: 46
+          耗時: 6.25 秒
+dataset: openml_visualizing_environmental
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0064793129968144
+          Best test metric: 1.2193810711997426
+          早停輪數: 13
+          耗時: 2.15 秒
+dataset: openml_strikes
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8819239034955648
+          Best test metric: 2.8539326889772454
+          早停輪數: 38
+          耗時: 6.02 秒
+dataset: openml_machine_cpu
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.2653156420479557
+          Best test metric: 1.0485160832297147
+          早停輪數: 18
+          耗時: 2.92 秒
+dataset: openml_boston_corrected
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5957893934476182
+          Best test metric: 0.628196813738824
+          早停輪數: 26
+          耗時: 4.13 秒
+dataset: openml_pm10
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9896001044742835
+          Best test metric: 0.6601714183261095
+          早停輪數: 36
+          耗時: 5.80 秒
+dataset: openml_disclosure_x_bias
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8691385676327475
+          Best test metric: 0.8253959457002105
+          早停輪數: 47
+          耗時: 7.46 秒
+dataset: openml_AAPL_stock_price_2021_2022
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5157628308658829
+          Best test metric: 0.5249267004705055
+          早停輪數: 21
+          耗時: 3.37 秒
+dataset: openml_wisconsin
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7916175718309856
+          Best test metric: 0.8476934820339718
+          早停輪數: 14
+          耗時: 2.35 秒
+dataset: openml_Forest_Fire_Area
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5314704213349669
+          Best test metric: 0.6987100807483688
+          早停輪數: 19
+          耗時: 3.10 秒
+dataset: openml_boston
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.4378448387526154
+          Best test metric: 0.9471050637623852
+          早停輪數: 48
+          耗時: 7.58 秒
+dataset: openml_auto_price
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.852585309534135
+          Best test metric: 1.0631875450219932
+          早停輪數: 28
+          耗時: 4.50 秒
+dataset: openml_EgyptianSkulls
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8842369335763294
+          Best test metric: 1.0430441839820448
+          早停輪數: 20
+          耗時: 3.19 秒
+dataset: openml_fishcatch
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.4519516452774974
+          Best test metric: 0.2685511640837757
+          早停輪數: 34
+          耗時: 5.40 秒
+dataset: openml_forest_fires
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5314704213349669
+          Best test metric: 0.6987100807483688
+          早停輪數: 19
+          耗時: 3.11 秒
+dataset: openml_disclosure_x_noise
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9128347449120828
+          Best test metric: 0.9317779439815107
+          早停輪數: 13
+          耗時: 2.10 秒
+dataset: openml_liver_disorders
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.793150406498923
+          Best test metric: 1.2070342622490984
+          早停輪數: 57
+          耗時: 9.05 秒
+dataset: openml_ELE_1
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9023375407744292
+          Best test metric: 0.6451244052410433
+          早停輪數: 45
+          耗時: 7.20 秒
+dataset: openml_disclosure_x_tampered
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8954115954244112
+          Best test metric: 0.9389237401320076
+          早停輪數: 13
+          耗時: 2.11 秒
+dataset: openml_cpu
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.4760411063520524
+          Best test metric: 0.3962326566167834
+          早停輪數: 37
+          耗時: 5.81 秒
+dataset: openml_residential_building
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9707939059446997
+          Best test metric: 0.6618872300802052
+          早停輪數: 40
+          耗時: 6.39 秒
+dataset: openml_lungcancer_shedden
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0559158518960687
+          Best test metric: 0.8700951638736533
+          早停輪數: 32
+          耗時: 5.10 秒
+dataset: openml_bodyfat
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7417489613370498
+          Best test metric: 0.6705630378859652
+          早停輪數: 22
+          耗時: 3.59 秒
+dataset: openml_no2
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8955584296478027
+          Best test metric: 0.64565805138243
+          早停輪數: 58
+          耗時: 9.14 秒
+dataset: openml_yacht_hydrodynamics
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.2123852163841454
+          Best test metric: 0.48823124438766746
+          早停輪數: 86
+          耗時: 13.50 秒
+dataset: openml_cps_85_wages
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8154460973858737
+          Best test metric: 0.757513557539373
+          早停輪數: 89
+          耗時: 13.91 秒
+dataset: openml_pharynx
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6300592456313929
+          Best test metric: 0.6282353109789722
+          早停輪數: 71
+          耗時: 11.17 秒
+dataset: openml_The_Office_Dataset
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5784704877204836
+          Best test metric: 0.6743175111577887
+          早停輪數: 15
+          耗時: 2.51 秒
+dataset: openml_lowbwt
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.6797902917414501
+          Best test metric: 0.992441280078878
+          早停輪數: 56
+          耗時: 8.78 秒
+dataset: openml_analcatdata_vineyard
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0027937012239134
+          Best test metric: 0.8791665941994684
+          早停輪數: 11
+          耗時: 1.79 秒
+dataset: openml_cloud
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.46764405438255063
+          Best test metric: 0.406533674087587
+          早停輪數: 12
+          耗時: 2.05 秒
+dataset: openml_analcatdata_homerun
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0048447315351852
+          Best test metric: 1.3611777180098155
+          早停輪數: 14
+          耗時: 2.28 秒
+dataset: openml_Reading_Hydro
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.2857272297404955
+          Best test metric: 0.32355210121426314
+          早停輪數: 235
+          耗時: 36.27 秒
+dataset: openml_cholesterol
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.1541875022540735
+          Best test metric: 0.9276227381948149
+          早停輪數: 63
+          耗時: 9.84 秒
+dataset: openml_fruitfly
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.1016887294870417
+          Best test metric: 1.0988136244439877
+          早停輪數: 15
+          耗時: 2.44 秒
+dataset: openml_cleveland
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.7631052163673767
+          Best test metric: 1.190745085820436
+          早停輪數: 52
+          耗時: 8.29 秒
+dataset: MagicTelescope
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9080408177856869
+          Best test metric: 0.8897846098847082
+          早停輪數: 211
+          耗時: 2058.14 秒
+dataset: road_safety
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.512425414821152
+          Best test metric: 0.538211769918417
+          早停輪數: 22
+          耗時: 81.73 秒
+dataset: credit
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8412035235253569
+          Best test metric: 0.8347336370504338
+          早停輪數: 106
+          耗時: 1966.66 秒
+dataset: higgs_small
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5245783056224409
+          Best test metric: 0.5223671944698196
+          早停輪數: 16
+          耗時: 59.26 秒
+dataset: binarized_pol
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9792228880247623
+          Best test metric: 0.9736963727927583
+          早停輪數: 204
+          耗時: 2549.51 秒
+dataset: bank_marketing
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8457488541107486
+          Best test metric: 0.8386649514008004
+          早停輪數: 96
+          耗時: 505.00 秒
+dataset: eye
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.49238269347958563
+          Best test metric: 0.4954296160877514
+          早停輪數: 45
+          耗時: 259.02 秒
+dataset: helena
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.005521472392638037
+          Best test metric: 0.003987730061349694
+          早停輪數: 11
+          耗時: 29.04 秒
+dataset: jannis
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.3060509554140127
+          Best test metric: 0.28851206114162886
+          早停輪數: 11
+          耗時: 54.23 秒
+dataset: medical_charges
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.9441747202337559
+          Best test metric: 0.9521062440571084
+          早停輪數: 11
+          耗時: 4.79 秒
+dataset: california
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5607397565054872
+          Best test metric: 0.5339074426134748
+          早停輪數: 300
+          耗時: 10205.88 秒
+dataset: sulfur
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.775545734102254
+          Best test metric: 0.5042503128599256
+          早停輪數: 300
+          耗時: 928.49 秒
+dataset: Brazilian_houses
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.43197905102683715
+          Best test metric: 0.4095086935003183
+          早停輪數: 70
+          耗時: 266.90 秒
+dataset: pol
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5513269953684392
+          Best test metric: 0.47406324511012427
+          早停輪數: 199
+          耗時: 1903.86 秒
+dataset: diamonds
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8097648064866371
+          Best test metric: 0.8050221238146721
+          早停輪數: 11
+          耗時: 1.62 秒
+dataset: nyc_taxi_green_dec_2016
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0652406351697985
+          Best test metric: 1.0640215917669513
+          早停輪數: 11
+          耗時: 338.22 秒
+dataset: Ailerons
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.8302682097958475
+          Best test metric: 0.8258233744434279
+          早停輪數: 39
+          耗時: 284.15 秒
+dataset: house
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.125011285089476
+          Best test metric: 1.1867080356498458
+          早停輪數: 20
+          耗時: 553.25 秒
+dataset: house_sales
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 0.5044315173168075
+          Best test metric: 0.5399664886990666
+          早停輪數: 300
+          耗時: 5010.27 秒
+dataset: SGEMM_GPU_kernel_performance
+  模型: idgl_gnn
+    GNN階段: none
+          Best val metric: 1.0294554731161738
+          Best test metric: 1.0298770666369086
+          早停輪數: 11
+          耗時: 29.92 秒

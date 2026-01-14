@@ -179,10 +179,16 @@ class _GlcnRunResult:
 def _run_glcn_subprocess(payload: Dict[str, Any]) -> _GlcnRunResult:
     python_exe = os.environ.get("GLCN_PYTHON")
     if not python_exe:
-        raise ImportError(
-            "GLCN requires TensorFlow 1.x. Set env var GLCN_PYTHON to a python executable "
-            "in an environment where TensorFlow 1.x is importable."
-        )
+        # Convenience: many setups already have a TF1 env for LDS-GNN.
+        python_exe = os.environ.get("LDS_GNN_PYTHON")
+        if python_exe:
+            logger.warning("GLCN_PYTHON is not set; falling back to LDS_GNN_PYTHON=%s", python_exe)
+        else:
+            raise ImportError(
+                "GLCN requires TensorFlow 1.x. Set env var GLCN_PYTHON to a python executable "
+                "in an environment where TensorFlow 1.x is importable. "
+                "Tip: you can run `source scripts/glcn_env.sh` before launching TaBLEau."
+            )
 
     with tempfile.TemporaryDirectory(prefix="glcn_") as td:
         data_path = os.path.join(td, "data.npz")
@@ -199,8 +205,15 @@ import time
 
 import numpy as np
 
-# Force CPU unless the caller overrides.
-os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+# Limit BLAS/OMP threads to avoid OpenBLAS "too many memory regions" / segfault on large datasets.
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
+os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
+os.environ.setdefault("VECLIB_MAXIMUM_THREADS", "1")
+
+# Force CPU for stability (parent process may be using CUDA).
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
 os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
 
 import scipy.sparse as sp
@@ -263,7 +276,14 @@ def _metric_from_probs(y_onehot: np.ndarray, probs: np.ndarray, mask: np.ndarray
 def _preprocess_adj_sparse(adj: sp.spmatrix):
     """Normalize adjacency and produce (tuple, edge) without densifying."""
     adj = sp.coo_matrix(adj)
-    adj = adj + sp.eye(adj.shape[0], dtype=adj.dtype, format="coo")
+    # SciPy may return CSR/CSC for sparse addition; force COO for .row/.col.
+    adj = (adj + sp.eye(adj.shape[0], dtype=adj.dtype, format="coo")).tocoo()
+
+    # TF1 SparseTensor ops (used inside upstream GLCN) require lexicographically sorted indices.
+    # Ensure COO entries are sorted (row-major) and merged.
+    adj.sum_duplicates()
+    order0 = np.lexsort((adj.col, adj.row))
+    adj = sp.coo_matrix((adj.data[order0], (adj.row[order0], adj.col[order0])), shape=adj.shape)
 
     rowsum = np.array(adj.sum(1)).flatten()
     d_inv_sqrt = np.power(rowsum, -0.5, where=rowsum != 0)
@@ -271,6 +291,14 @@ def _preprocess_adj_sparse(adj: sp.spmatrix):
     d_mat_inv_sqrt = sp.diags(d_inv_sqrt)
 
     adj_norm = adj.dot(d_mat_inv_sqrt).transpose().dot(d_mat_inv_sqrt).tocoo()
+
+    # Sort normalized adjacency indices as well.
+    adj_norm.sum_duplicates()
+    order1 = np.lexsort((adj_norm.col, adj_norm.row))
+    adj_norm = sp.coo_matrix(
+        (adj_norm.data[order1], (adj_norm.row[order1], adj_norm.col[order1])),
+        shape=adj_norm.shape,
+    )
 
     coords = np.vstack((adj_norm.row, adj_norm.col)).transpose().astype(np.int64)
     values = adj_norm.data.astype(np.float32)
@@ -285,7 +313,22 @@ def run(data_path: str, out_path: str):
     arr = np.load(data_path)
 
     features_dense = arr["features"].astype(np.float32)
-    y_onehot = arr["y_onehot"].astype(np.float32)
+    task_type = str(arr.get("task_type", "binclass")).lower()
+    is_classification = task_type in ["binclass", "multiclass"]
+    is_regression = task_type == "regression"
+    if not (is_classification or is_regression):
+        raise ValueError("Unsupported task_type: %r" % task_type)
+
+    y_onehot = None
+    y_reg = None
+    y_mean = None
+    y_std = None
+    if is_classification:
+        y_onehot = arr["y_onehot"].astype(np.float32)
+    else:
+        y_reg = arr["y_reg"].astype(np.float32)
+        y_mean = float(arr.get("y_mean", 0.0))
+        y_std = float(arr.get("y_std", 1.0))
 
     train_mask = arr["train_mask"].astype(np.int32)
     val_mask = arr["val_mask"].astype(np.int32)
@@ -331,6 +374,163 @@ def run(data_path: str, out_path: str):
 
     from utils import preprocess_features, sparse_to_tuple, construct_feed_dict  # noqa
     from models import SGLCN  # noqa
+    from layers import SparseGraphLearn, GraphConvolution  # noqa
+
+    # --- Scalability hotfix for large N ---
+    # Upstream GLCN loss uses tf.matrix_diag(...) and tf.sparse_tensor_to_dense(S),
+    # which densifies an NxN matrix and will OOM / segfault on large datasets (e.g., helena).
+    # Replace graph-regularizer terms with sparse-safe equivalents:
+    # - trace(S^T S) == sum(S.values^2)
+    # - trace(X^T (D - S) X) == sum(X * ((D - S)X)) with D = diag(sum_j S_ij)
+    try:
+        import models as _glcn_models  # noqa
+
+        def _sglcn_loss_sparse(self):
+            self.loss1 = 0.0
+            self.loss2 = 0.0
+
+            # Weight decay
+            for var in self.layers0.vars.values():
+                self.loss1 += FLAGS.weight_decay * tf.nn.l2_loss(var)
+            for var in self.layers1.vars.values():
+                self.loss2 += FLAGS.weight_decay * tf.nn.l2_loss(var)
+
+            # Graph Learning loss (sparse-safe)
+            deg = tf.sparse_reduce_sum(self.S, axis=1)  # [N]
+            Dx = tf.expand_dims(deg, 1) * self.x
+            Sx = tf.sparse_tensor_dense_matmul(self.S, self.x)
+            Lx = Dx - Sx
+            self.loss1 += tf.reduce_sum(self.x * Lx) * FLAGS.losslr1
+            self.loss1 -= tf.reduce_sum(tf.square(self.S.values)) * FLAGS.losslr2
+
+            # Cross entropy error
+            self.loss2 += _glcn_models.masked_softmax_cross_entropy(
+                self.outputs, self.placeholders["labels"], self.placeholders["labels_mask"]
+            )
+            self.loss = self.loss1 + self.loss2
+
+        _glcn_models.SGLCN._loss = _sglcn_loss_sparse
+    except Exception:
+        pass
+
+    def masked_mse(preds, labels, mask):
+        mask = tf.cast(mask, dtype=tf.float32)
+        mask /= tf.maximum(tf.reduce_mean(mask), 1e-12)
+        mask = tf.expand_dims(mask, axis=1)
+        return tf.reduce_mean(tf.square(preds - labels) * mask)
+
+    class SGLCNReg(object):
+        def __init__(self, placeholders, edge, input_dim, **kwargs):
+            self.inputs = placeholders["features"]
+            self.edge = edge
+            self.input_dim = int(input_dim)
+            self.output_dim = 1
+            self.placeholders = placeholders
+            self.loss1 = 0.0
+            self.loss2 = 0.0
+
+            learning_rate1 = tf.train.exponential_decay(
+                learning_rate=FLAGS.lr1,
+                global_step=placeholders["step"],
+                decay_steps=100,
+                decay_rate=0.9,
+                staircase=True,
+            )
+            learning_rate2 = tf.train.exponential_decay(
+                learning_rate=FLAGS.lr2,
+                global_step=placeholders["step"],
+                decay_steps=100,
+                decay_rate=0.9,
+                staircase=True,
+            )
+            self.optimizer1 = tf.train.AdamOptimizer(learning_rate=learning_rate1)
+            self.optimizer2 = tf.train.AdamOptimizer(learning_rate=learning_rate2)
+
+            self.layers0 = SparseGraphLearn(
+                input_dim=self.input_dim,
+                output_dim=FLAGS.hidden_gl,
+                edge=self.edge,
+                placeholders=self.placeholders,
+                act=tf.nn.relu,
+                dropout=True,
+                sparse_inputs=True,
+            )
+            self.layers1 = GraphConvolution(
+                input_dim=self.input_dim,
+                output_dim=FLAGS.hidden_gcn,
+                placeholders=self.placeholders,
+                act=tf.nn.relu,
+                dropout=True,
+                sparse_inputs=True,
+                logging=False,
+            )
+            self.layers2 = GraphConvolution(
+                input_dim=FLAGS.hidden_gcn,
+                output_dim=self.output_dim,
+                placeholders=self.placeholders,
+                act=lambda x: x,
+                dropout=True,
+                logging=False,
+            )
+            self.build()
+
+        def _loss(self):
+            # Weight decay
+            for var in self.layers0.vars.values():
+                self.loss1 += FLAGS.weight_decay * tf.nn.l2_loss(var)
+            for var in self.layers1.vars.values():
+                self.loss2 += FLAGS.weight_decay * tf.nn.l2_loss(var)
+
+            # Graph learning loss (sparse-safe, same objective as upstream)
+            deg = tf.sparse_reduce_sum(self.S, axis=1)  # [N]
+            Dx = tf.expand_dims(deg, 1) * self.x
+            Sx = tf.sparse_tensor_dense_matmul(self.S, self.x)
+            Lx = Dx - Sx
+            self.loss1 += tf.reduce_sum(self.x * Lx) * FLAGS.losslr1
+            self.loss1 -= tf.reduce_sum(tf.square(self.S.values)) * FLAGS.losslr2
+
+            # Regression loss (masked MSE)
+            self.loss2 += masked_mse(self.outputs, self.placeholders["labels"], self.placeholders["labels_mask"])
+            self.loss = self.loss1 + self.loss2
+
+        def build(self):
+            self.x, self.S = self.layers0(self.inputs)
+            x1 = self.layers1(self.inputs, self.S)
+            self.outputs = self.layers2(x1, self.S)
+
+            # Variable split (matches upstream assumption)
+            self.vars1 = tf.trainable_variables()[0:2]
+            self.vars2 = tf.trainable_variables()[2:]
+
+            self._loss()
+            self.opt_op1 = self.optimizer1.minimize(self.loss1, var_list=self.vars1)
+            self.opt_op2 = self.optimizer2.minimize(self.loss2, var_list=self.vars2)
+            self.opt_op = tf.group(self.opt_op1, self.opt_op2)
+
+    # --- Hotfix for TF1 SparseTensor ordering ---
+    # The upstream implementation builds a SparseTensor for the learned graph `S`.
+    # Depending on the edge list order, TF1 ops like SparseToDense can error with:
+    #   "indices[...] is out of order"
+    # Reordering fixes this and is a no-op for already-sorted indices.
+    try:
+        import layers as _glcn_layers  # noqa
+
+        _old_call = _glcn_layers.SparseGraphLearn.__call__
+
+        def _reordered_call(self, inputs):
+            h, sgraph = _old_call(self, inputs)
+            try:
+                sgraph = tf.sparse_reorder(sgraph)
+            except Exception:
+                try:
+                    sgraph = tf.sparse.reorder(sgraph)
+                except Exception:
+                    pass
+            return h, sgraph
+
+        _glcn_layers.SparseGraphLearn.__call__ = _reordered_call
+    except Exception:
+        pass
 
     # Build sparse features
     X_sp = sp.csr_matrix(features_dense)
@@ -342,19 +542,33 @@ def run(data_path: str, out_path: str):
     adj, edge = _preprocess_adj_sparse(adj)
 
     # Build split label matrices (zeros for non-masked rows)
-    y_train = np.zeros_like(y_onehot)
-    y_val = np.zeros_like(y_onehot)
-    y_test = np.zeros_like(y_onehot)
-    y_train[train_mask.astype(bool)] = y_onehot[train_mask.astype(bool)]
-    y_val[val_mask.astype(bool)] = y_onehot[val_mask.astype(bool)]
-    y_test[test_mask.astype(bool)] = y_onehot[test_mask.astype(bool)]
+    if is_classification:
+        y_train = np.zeros_like(y_onehot)
+        y_val = np.zeros_like(y_onehot)
+        y_test = np.zeros_like(y_onehot)
+        y_train[train_mask.astype(bool)] = y_onehot[train_mask.astype(bool)]
+        y_val[val_mask.astype(bool)] = y_onehot[val_mask.astype(bool)]
+        y_test[test_mask.astype(bool)] = y_onehot[test_mask.astype(bool)]
+        label_dim = int(y_onehot.shape[1])
+        y_true_full = y_onehot
+    else:
+        # Train on standardized y, but evaluate RMSE in original units.
+        y_scaled = (y_reg - float(y_mean)) / float(y_std)
+        y_train = np.zeros_like(y_scaled)
+        y_val = np.zeros_like(y_scaled)
+        y_test = np.zeros_like(y_scaled)
+        y_train[train_mask.astype(bool)] = y_scaled[train_mask.astype(bool)]
+        y_val[val_mask.astype(bool)] = y_scaled[val_mask.astype(bool)]
+        y_test[test_mask.astype(bool)] = y_scaled[test_mask.astype(bool)]
+        label_dim = 1
+        y_true_full = y_reg
 
     tf.reset_default_graph()
 
     placeholders = {
         "adj": tf.sparse_placeholder(tf.float32),
         "features": tf.sparse_placeholder(tf.float32, shape=tf.constant(features[2], dtype=tf.int64)),
-        "labels": tf.placeholder(tf.float32, shape=(None, y_onehot.shape[1])),
+        "labels": tf.placeholder(tf.float32, shape=(None, label_dim)),
         "labels_mask": tf.placeholder(tf.int32),
         "dropout": tf.placeholder_with_default(0.0, shape=()),
         "num_nodes": tf.placeholder(tf.int32),
@@ -362,7 +576,10 @@ def run(data_path: str, out_path: str):
         "num_features_nonzero": tf.placeholder(tf.int32),
     }
 
-    model = SGLCN(placeholders, edge, input_dim=features[2][1], logging=False)
+    if is_classification:
+        model = SGLCN(placeholders, edge, input_dim=features[2][1], logging=False)
+    else:
+        model = SGLCNReg(placeholders, edge, input_dim=features[2][1])
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
@@ -375,10 +592,27 @@ def run(data_path: str, out_path: str):
         loss_val, acc_val = sess.run([model.loss, model.accuracy], feed_dict=feed)
         return probs, float(loss_val), float(acc_val)
 
+    def _eval_reg(labels_mat, mask_vec, epoch):
+        feed = construct_feed_dict(features, adj, labels_mat, mask_vec, epoch, placeholders)
+        feed.update({placeholders["dropout"]: 0.0})
+        preds_scaled = sess.run(model.outputs, feed_dict=feed).reshape(-1)
+        loss_val = sess.run(model.loss, feed_dict=feed)
+        preds = preds_scaled * float(y_std) + float(y_mean)
+        idx = np.where(mask_vec.astype(bool))[0]
+        if idx.size == 0:
+            return float("nan"), float(loss_val)
+        y_true = y_true_full[idx].reshape(-1)
+        y_pred = preds[idx]
+        rmse = float(np.sqrt(np.mean((y_true - y_pred) ** 2)))
+        return rmse, float(loss_val)
+
     start = time.time()
     sess.run(tf.global_variables_initializer())
 
+    # For classification: select best by val_loss (stable).
+    # For regression: select best by val_rmse (what TaBLEau reports), and use that for patience.
     best_val_loss = float("inf")
+    best_val_rmse = float("inf")
     best_epoch = 0
     best_val_metric = float("nan")
     best_test_metric = float("nan")
@@ -393,20 +627,35 @@ def run(data_path: str, out_path: str):
         _ = sess.run(model.opt_op, feed_dict=feed)
 
         # Validate and test (dropout disabled)
-        probs_val, val_loss, _val_acc = _eval_probs(y_val, val_mask, epoch)
-        probs_test, _test_loss, _test_acc = _eval_probs(y_test, test_mask, epoch)
+        if is_classification:
+            probs_val, val_loss, _val_acc = _eval_probs(y_val, val_mask, epoch)
+            probs_test, _test_loss, _test_acc = _eval_probs(y_test, test_mask, epoch)
 
-        val_metric = _metric_from_probs(y_onehot, probs_val, val_mask, metric_name)
-        test_metric = _metric_from_probs(y_onehot, probs_test, test_mask, metric_name)
-
-        if val_loss < best_val_loss - 1e-12:
-            best_val_loss = val_loss
-            best_epoch = int(epoch)
-            best_val_metric = float(val_metric)
-            best_test_metric = float(test_metric)
-            patience = 0
+            val_metric = _metric_from_probs(y_onehot, probs_val, val_mask, metric_name)
+            test_metric = _metric_from_probs(y_onehot, probs_test, test_mask, metric_name)
         else:
-            patience += 1
+            val_metric, val_loss = _eval_reg(y_val, val_mask, epoch)
+            test_metric, _ = _eval_reg(y_test, test_mask, epoch)
+
+        if is_classification:
+            if val_loss < best_val_loss - 1e-12:
+                best_val_loss = val_loss
+                best_epoch = int(epoch)
+                best_val_metric = float(val_metric)
+                best_test_metric = float(test_metric)
+                patience = 0
+            else:
+                patience += 1
+        else:
+            # RMSE: smaller is better
+            if float(val_metric) < best_val_rmse - 1e-12:
+                best_val_rmse = float(val_metric)
+                best_epoch = int(epoch)
+                best_val_metric = float(val_metric)
+                best_test_metric = float(test_metric)
+                patience = 0
+            else:
+                patience += 1
 
         stopped_epoch = int(epoch)
         if patience >= early_stopping:
@@ -435,12 +684,18 @@ if __name__ == "__main__":
 
         env = os.environ.copy()
         env.setdefault("GLCN_TF_REPO", GLCN_TF_REPO)
+        env.setdefault("OMP_NUM_THREADS", "1")
+        env.setdefault("OPENBLAS_NUM_THREADS", "1")
+        env.setdefault("MKL_NUM_THREADS", "1")
+        env.setdefault("NUMEXPR_NUM_THREADS", "1")
+        env.setdefault("VECLIB_MAXIMUM_THREADS", "1")
 
         cmd = [python_exe, driver_path, data_path, out_path]
         proc = subprocess.run(cmd, env=env, capture_output=True, text=True)
         if proc.returncode != 0:
             raise RuntimeError(
                 "GLCN subprocess failed. "
+                f"returncode={proc.returncode}\n"
                 f"stdout:\n{proc.stdout}\n\n"
                 f"stderr:\n{proc.stderr}\n"
             )
@@ -471,11 +726,9 @@ def main(
 
     task_type = str(dataset_results.get("info", {}).get("task_type", "binclass")).lower()
     is_classification = task_type in ["binclass", "multiclass"]
-    if not is_classification:
-        raise ValueError(
-            f"GLCN wrapper currently supports classification only; got task_type={task_type!r}. "
-            "(Upstream GLCN is a node classification model.)"
-        )
+    is_regression = task_type == "regression"
+    if not (is_classification or is_regression):
+        raise ValueError(f"Unsupported task_type={task_type!r} for GLCN wrapper")
 
     X_train, y_train, X_val, y_val, X_test, y_test = _preprocess_splits(train_df, val_df, test_df)
 
@@ -484,12 +737,26 @@ def main(
 
     features = np.concatenate([X_train, X_val, X_test], axis=0).astype(np.float32)
 
-    y_all = np.concatenate([y_train, y_val, y_test], axis=0)
-    y_all_int = y_all.astype(np.int64)
-    y_onehot, num_classes = _onehot_labels(y_all_int)
+    metric_name = "RMSE" if is_regression else "Acc"
+    num_classes = None
+    y_onehot = None
+    y_reg = None
+    y_mean = None
+    y_std = None
 
-    # Metric naming convention matches other wrappers: AUC for binclass, Acc for multiclass.
-    metric_name = "AUC" if num_classes == 2 else "Acc"
+    if is_classification:
+        y_all = np.concatenate([y_train, y_val, y_test], axis=0)
+        y_all_int = y_all.astype(np.int64)
+        y_onehot, num_classes = _onehot_labels(y_all_int)
+        metric_name = "AUC" if int(num_classes) == 2 else "Acc"
+    else:
+        # Regression: train on standardized y (train split stats), report RMSE in original units.
+        y_all = np.concatenate([y_train, y_val, y_test], axis=0).astype(np.float32).reshape(-1, 1)
+        tr = np.zeros((y_all.shape[0],), dtype=bool)
+        tr[: len(y_train)] = True
+        y_mean = float(np.mean(y_all[tr]))
+        y_std = float(np.std(y_all[tr]) + 1e-12)
+        y_reg = y_all
 
     # Build initial kNN adjacency: this defines the candidate edge set for GLCN graph learning.
     knn_k = int(config.get("glcn_k", config.get("knn_k", 10)))
@@ -501,9 +768,9 @@ def main(
     # LDS-style note: gnn_stage is ignored because this is self-contained.
     _ = gnn_stage
 
-    payload = {
+    payload: Dict[str, Any] = {
+        "task_type": task_type,
         "features": features,
-        "y_onehot": y_onehot,
         "train_mask": train_mask,
         "val_mask": val_mask,
         "test_mask": test_mask,
@@ -525,9 +792,35 @@ def main(
         "metric_name": metric_name,
     }
 
+    if is_classification:
+        assert y_onehot is not None
+        payload["y_onehot"] = y_onehot
+        payload["num_classes"] = int(num_classes) if num_classes is not None else 0
+    else:
+        assert y_reg is not None
+        payload["y_reg"] = y_reg
+        payload["y_mean"] = float(y_mean)
+        payload["y_std"] = float(y_std)
+
     result = _run_glcn_subprocess(payload)
 
     elapsed = time.time() - start
+
+    # Regression sanity check: naive mean predictor RMSE (to interpret absolute RMSE scale)
+    notes_extra: Dict[str, Any] = {}
+    if is_regression:
+        y_train_f = np.asarray(y_train, dtype=np.float32)
+        y_val_f = np.asarray(y_val, dtype=np.float32)
+        y_test_f = np.asarray(y_test, dtype=np.float32)
+        y_mean_tr = float(np.mean(y_train_f))
+        notes_extra.update(
+            {
+                "naive_mean_rmse_val": float(np.sqrt(np.mean((y_val_f - y_mean_tr) ** 2))),
+                "naive_mean_rmse_test": float(np.sqrt(np.mean((y_test_f - y_mean_tr) ** 2))),
+                "target_mean_train": y_mean_tr,
+                "target_std_train": float(np.std(y_train_f) + 1e-12),
+            }
+        )
 
     return {
         "best_val_metric": float(result.best_val_metric),
@@ -546,5 +839,19 @@ def main(
             "gnn_stage_ignored": True,
             "env_required": "Set GLCN_PYTHON to a TF1-compatible interpreter; optionally set GLCN_TF_REPO.",
             "glcn_repo": GLCN_TF_REPO,
+            **notes_extra,
         },
     }
+
+#  small+binclass
+#  source scripts/glcn_env.sh && conda run -n tableau python main.py --dataset kaggle_Audit_Data --models glcn --gnn_stages all --epochs 2
+#  small+regression
+#  source scripts/glcn_env.sh && conda run -n tableau python main.py --dataset openml_The_Office_Dataset --models glcn --gnn_stages all --epochs 2
+#  large+binclsas
+#  source scripts/glcn_env.sh && conda run -n tableau python main.py --dataset credit --models glcn --gnn_stages all --epochs 2
+#  large+multiclass
+#  source scripts/glcn_env.sh && conda run -n tableau python main.py --dataset eye --models glcn --gnn_stages all --epochs 2
+#  source scripts/glcn_env.sh && conda run -n tableau python main.py --dataset helena --models glcn --gnn_stages all --epochs 2
+#  large+regression
+#  source scripts/glcn_env.sh && conda run -n tableau python main.py --dataset house --models glcn --gnn_stages all --epochs 2
+
